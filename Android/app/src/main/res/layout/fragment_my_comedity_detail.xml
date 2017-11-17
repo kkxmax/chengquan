@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    tools:context="com.beijing.chengxin.ui.activity.MainActivity">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+    <ScrollView
+        style="@style/layout_m0">
+        <LinearLayout
+            style="@style/layout_mm"
+            android:orientation="vertical">
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/comedity_detail_image_height"
+                android:fitsSystemWindows="true"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:contentScrim="?attr/colorPrimary"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <com.beijing.chengxin.ui.widget.AutoScrollViewPager
+                            android:id="@+id/autoScrollViewPager"
+                            style="@style/layout_mm"
+                            android:clickable="true"/>
+                        <com.beijing.chengxin.ui.widget.PageIndicator
+                            android:id="@+id/pageIndicator"
+                            style="@style/layout_ww"
+                            android:layout_marginRight="@dimen/margin_small"
+                            android:layout_marginBottom="@dimen/margin_small"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+
+                </android.support.design.widget.CollapsingToolbarLayout>
+            </android.support.design.widget.AppBarLayout>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout"
+                android:padding="@dimen/margin_normal">
+
+                <LinearLayout
+                    style="@style/layout_ww">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:text="@string/comedity_main"
+                        android:textSize="@dimen/text_size_12"
+                        android:textColor="@color/color_main_blue"
+                        android:paddingLeft="@dimen/margin_small"
+                        android:paddingRight="@dimen/margin_small"
+                        android:background="@drawable/round_rect_blue_white"/>
+
+                    <TextView
+                        android:id="@+id/txt_comedity_name"
+                        style="@style/layout_ww"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:text="@string/str_sample"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    style="@style/layout_mw">
+                    <TextView
+                        android:id="@+id/txt_comedity_price"
+                        style="@style/layout_ww"
+                        android:paddingTop="@dimen/margin_normal"
+                        android:text="@string/str_sample"
+                        android:textColor="@color/color_orange_dark"/>
+
+                    <TextView
+                        android:id="@+id/txt_comedity_status"
+                        style="@style/layout_ww"
+                        android:paddingTop="@dimen/margin_normal"
+                        android:text="@string/str_sample"
+                        android:textColor="@color/txt_dark"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="vertical">
+
+                <View style="@style/splite_line_gray_8"/>
+
+                <RelativeLayout
+                    style="@style/layout_mw"
+                    android:paddingRight="@dimen/margin_normal">
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:orientation="horizontal">
+                        <View style="@style/blue_prefix" />
+                        <TextView
+                            style="@style/layout_ww"
+                            android:padding="@dimen/margin_normal"
+                            android:text="@string/comedity_comment"
+                            android:textSize="@dimen/text_size_12"
+                            android:textColor="@color/txt_dark"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/layout_ww"
+                        android:layout_alignParentRight="true">
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:paddingRight="@dimen/margin_small"
+                            android:paddingTop="@dimen/margin_normal"
+                            android:text="@string/comedity_number"
+                            android:textSize="@dimen/text_size_10"
+                            android:textColor="@color/txt_gray_light"/>
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:text="@string/str_sample"
+                            android:textSize="@dimen/text_size_10"
+                            android:textColor="@color/txt_gray_light"/>
+                    </LinearLayout>
+                </RelativeLayout>
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/margin_normal"
+                    android:paddingRight="@dimen/margin_normal">
+
+                    <TextView
+                        android:id="@+id/txt_comment"
+                        style="@style/layout_ww"
+                        android:text="@string/str_sample"
+                        android:paddingTop="@dimen/margin_normal"
+                        android:paddingBottom="@dimen/margin_normal"
+                        android:textColor="@color/txt_dark"
+                        android:textSize="@dimen/text_size_12"/>
+
+                    <View style="@style/splite_line_gray"/>
+
+                    <RelativeLayout
+                        style="@style/layout_ww"
+                        android:paddingTop="@dimen/margin_normal"
+                        android:paddingBottom="@dimen/margin_normal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/text_size_12"
+                                android:text="@string/item_net"/>
+
+                            <TextView
+                                android:id="@+id/txt_item_net"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:text="@string/str_sample"
+                                android:textSize="@dimen/text_size_12"
+                                android:textColor="@color/color_main_blue"/>
+
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:layout_width="@dimen/margin_large_bellow"
+                            android:layout_height="@dimen/margin_large"
+                            android:src="@drawable/more"
+                            android:background="@color/color_transparent"
+                            android:layout_alignParentRight="true"/>
+                    </RelativeLayout>
+
+                    <View style="@style/splite_line_gray"/>
+
+                    <LinearLayout
+                        style="@style/layout_ww">
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:text="@string/comedity_market"
+                            android:paddingTop="@dimen/margin_normal"
+                            android:paddingBottom="@dimen/margin_normal"
+                            android:textSize="@dimen/text_size_12"/>
+
+                        <TextView
+                            android:id="@+id/txt_comedity_market"
+                            style="@style/layout_ww"
+                            android:text="@string/str_sample"
+                            android:paddingTop="@dimen/margin_normal"
+                            android:paddingBottom="@dimen/margin_normal"
+                            android:layout_marginLeft="@dimen/margin_normal"
+                            android:textColor="@color/txt_dark"
+                            android:textSize="@dimen/text_size_12"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray_8"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="horizontal"
+        android:background="@color/color_gray_f5">
+
+        <Button
+            android:id="@+id/btn_buy"
+            android:layout_height="@dimen/row_height_small"
+            style="@style/layout_0w"
+            android:background="@color/color_white"
+            android:textColor="@color/txt_dark"
+            android:textSize="@dimen/text_size_14"
+            android:text="@string/edit"/>
+        <Button
+            android:id="@+id/btn_"
+            android:layout_height="@dimen/row_height_small"
+            style="@style/layout_0w"
+            android:background="@color/color_white"
+            android:textColor="@color/txt_dark"
+            android:textSize="@dimen/text_size_14"
+            android:text="@string/delete"/>
+        <Button
+            android:id="@+id/btn_bu"
+            android:layout_height="@dimen/row_height_small"
+            style="@style/layout_0w"
+            android:background="@color/color_orange_light"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_14"
+            android:text="@string/raise_comedity"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

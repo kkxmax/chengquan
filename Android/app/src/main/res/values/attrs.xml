@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--PageIndicator-->
+    <declare-styleable name="PageIndicator">
+        <attr name="drawableActive" format="reference" />
+        <attr name="drawableInactive" format="reference" />
+        <attr name="indicatorGap" format="dimension" />
+    </declare-styleable>
+
+    <!-- circle Image view-->
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/view_body_part"
+        style="@style/layout_mw"
+        android:orientation="vertical"
+        android:background="@color/color_gray_f5">
+
+        <com.beijing.chengxin.ui.widget.GridView
+            android:id="@+id/grid_view"
+            style="@style/layout_mw"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/margin_normal"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="2"
+            android:scrollingCache="true"
+            android:verticalSpacing="@dimen/margin_normal"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_blank_part"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/video_height"
+        android:background="@color/color_gray_f5"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <ImageView
+            style="@style/layout_ww"
+            android:src="@drawable/blank"/>
+        <TextView
+            style="@style/layout_ww"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:textColor="@color/txt_gray_light"
+            android:text="@string/empty_comedity"/>
+    </LinearLayout>
+</LinearLayout>

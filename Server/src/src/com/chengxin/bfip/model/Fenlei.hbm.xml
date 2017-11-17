@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="Fenlei" table="FENLEIS">
+    <id column="ID" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="TITLE" name="title"/>
+    <property column="LEIXING" name="leixing" type="int"/>
+    <property column="WRITE_TIME" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>

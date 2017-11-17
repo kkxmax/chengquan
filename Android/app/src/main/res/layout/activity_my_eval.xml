@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/btn_person"
+            style="@style/layout_0w"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/txt_orange_gray"
+            android:background="@drawable/btn_person_tab"
+            android:checked="true"
+            android:textOn="@string/str_person"
+            android:textOff="@string/str_person"/>
+        <ToggleButton
+            android:id="@+id/btn_enterprise"
+            style="@style/layout_0w"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/txt_orange_gray"
+            android:background="@drawable/btn_person_tab"
+            android:textOn="@string/str_enterprise"
+            android:textOff="@string/str_enterprise"/>
+
+        <!--<View-->
+            <!--style="@style/vertical_splite_line"-->
+            <!--android:layout_margin="@dimen/margin_normal"/>-->
+
+        <com.beijing.chengxin.ui.widget.SimpleSortSpinnerEval
+            android:id="@+id/btn_sort_set"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="@string/sort_set"
+            android:textSize="@dimen/text_size_14"
+            android:fadingEdgeLength="0dp"
+            android:drawableRight="@drawable/drop_down"
+            android:gravity="center"
+            android:paddingEnd="@dimen/margin_small"/>
+        <!--<Button-->
+            <!--android:id="@+id/btn_condition_set"-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/color_white"-->
+            <!--android:fadingEdgeLength="0dp"-->
+            <!--android:text="@string/condition_set"-->
+            <!--android:textSize="@dimen/text_size_14"-->
+            <!--android:drawableLeft="@drawable/line"-->
+            <!--android:drawableRight="@drawable/drop_down"-->
+            <!--android:paddingEnd="@dimen/margin_small"/>-->
+    </LinearLayout>
+
+    <FrameLayout
+        style="@style/layout_m0">
+
+        <LinearLayout
+            android:id="@+id/view_blank_part"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_gray_e5"
+            android:gravity="center"
+            android:visibility="visible"
+            android:orientation="vertical">
+            <ImageView
+                style="@style/layout_ww"
+                android:src="@drawable/blank"/>
+            <TextView
+                style="@style/layout_ww"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:textColor="@color/txt_gray_light"
+                android:text="@string/empty_evaluate"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView1"
+            style="@style/layout_mm"
+            android:background="@color/color_gray_e5"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView2"
+            style="@style/layout_mm"
+            android:background="@color/color_gray_e5"
+            android:visibility="gone"/>
+
+        <ImageButton
+            android:id="@+id/btn_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_gravity="right|bottom"
+            android:background="@drawable/write_evaluation"/>
+    </FrameLayout>
+
+</LinearLayout>

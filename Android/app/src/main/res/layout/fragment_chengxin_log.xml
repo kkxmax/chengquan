@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_white"
+    tools:context="com.beijing.chengxin.ui.activity.LoginActivity"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_scroll_view_height"
+        android:padding="@dimen/margin_normal"
+        android:background="@drawable/rect_blue_gradient">
+
+        <Button
+            android:id="@+id/btn_rule"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_12"
+            android:text="@string/chengxin_rule"
+            android:background="@color/color_transparent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <com.beijing.chengxin.ui.view.ChengXinRateView
+            android:id="@+id/rate_view"
+            android:layout_width="@dimen/image_scroll_view_height"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        style="@style/layout_m0"
+        android:paddingRight="@dimen/margin_normal"
+        android:paddingLeft="@dimen/margin_normal"
+        android:scrollbars="none"
+        android:divider="@color/color_gray_f0"
+        android:dividerHeight="1dp"/>
+
+</LinearLayout>

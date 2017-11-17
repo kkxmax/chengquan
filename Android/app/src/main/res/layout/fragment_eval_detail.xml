@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <ListView
+        android:id="@+id/listView"
+        style="@style/layout_m0"
+        android:divider="@color/color_transparent"
+        android:dividerHeight="0dp">
+    </ListView>
+
+    <View style="@style/splite_line_gray"/>
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:background="@drawable/round_gray_white"
+        android:gravity="center_vertical">
+        <EditText
+            android:id="@+id/edit_msg"
+            style="@style/layout_0w"
+            android:layout_centerVertical="true"
+            android:maxLines="5"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:background="@color/color_transparent"
+            android:drawableLeft="@drawable/icon_input"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small"
+            android:drawablePadding="@dimen/margin_normal"
+            android:textColor="@color/txt_gray"
+            android:textColorHint="@color/txt_gray_light"
+            android:textSize="@dimen/text_size_14"
+            android:hint="@string/think" />
+
+        <View style="@style/vertical_splite_line"
+            android:background="@color/color_gray_e5"/>
+        <Button
+            android:id="@+id/btn_send"
+            style="@style/layout_ww"
+            android:layout_width="@dimen/btn_width_small"
+            android:text="@string/btn_send"
+            android:background="@color/color_transparent"/>
+    </LinearLayout>
+</LinearLayout>

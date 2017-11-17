@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/topbar_height"
+    android:background="@drawable/rect_blue_gradient">
+
+    <TextView
+        android:id="@+id/txt_nav_title"
+        style="@style/layout_wm"
+        android:text="@string/str_sample"
+        android:textSize="@dimen/text_size_16"
+        android:textColor="@color/color_white"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_centerInParent="true"/>
+
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="@dimen/topbar_height"
+        android:layout_height="@dimen/topbar_height"
+        android:src="@drawable/nav_back"
+        android:background="@color/color_transparent"/>
+
+    <ImageButton
+        android:id="@+id/btn_share"
+        android:layout_width="@dimen/topbar_height"
+        android:layout_height="@dimen/topbar_height"
+        android:src="@drawable/nav_share"
+        android:layout_alignParentEnd="true"
+        android:background="@color/color_transparent"
+        android:visibility="gone"/>
+
+</RelativeLayout>

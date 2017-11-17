@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="ClickHistory" table="CLICK_HISTORY">
+    <id column="ID" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="OWNER_ID" name="ownerId" type="int"/>
+    <property column="TYPE" name="type" type="int"/>
+    <property column="SHARE_KIND" name="shareKind" type="int"/>
+    <property column="ACCOUNT_ID" name="accountId" type="int"/>
+    <property column="PRODUCT_ID" name="productId" type="int"/>
+    <property column="ITEM_ID" name="itemId" type="int"/>
+    <property column="SERVICE_ID" name="serviceId" type="int"/>
+    <property column="WRITE_TIME" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>

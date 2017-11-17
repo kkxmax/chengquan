@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+    android:background="@color/color_white">
+
+	<ImageView
+		android:id="@+id/imgPhoto"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/image_fabu_height"
+		android:scaleType="centerInside"
+        android:layout_margin="@dimen/margin_normal_below"
+        android:background="@color/color_gray_f5"
+		android:contentDescription="@string/img_descript"/>
+
+    <ImageButton
+        android:id="@+id/btn_delete"
+        style="@style/layout_ww"
+        android:background="@drawable/fabu_delete"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/txt_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_fabu_height"
+        android:layout_margin="@dimen/margin_normal_below"
+        android:background="@color/color_gray_f5"
+        android:drawableTop="@drawable/fabu_add_small"
+        android:paddingTop="@dimen/margin_large_top"
+        android:text="@string/make_comedity_max_image_count"
+        android:textSize="@dimen/text_size_10"/>
+</FrameLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.beijing.chengxin" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <application
+        android:name=".ChengxinApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:screenOrientation="sensorPortrait"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".ui.activity.LoginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity
+            android:name=".ui.activity.DetailActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity
+            android:name=".ui.activity.MakeEvaluationActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <!-- Me relation activities -->
+        <activity
+            android:name=".ui.activity.BuyCertActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.ChengxinLogActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.MyEvalActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.EvalMeActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.MyErrorCorrectActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.MyErrorCorrectDetailActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.MyWriteActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.MakeComedityActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.VideoPlayActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".ui.activity.SearchActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity
+            android:name=".ui.activity.MyRealnameCertActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity
+            android:name=".ui.activity.ChengxinReportActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity
+            android:name=".ui.activity.MakeItemActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity
+            android:name=".ui.activity.MakeServeActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity android:name=".ui.activity.MyCollectActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity android:name=".ui.activity.OpinionReturnActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".ui.activity.MySettingActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity android:name=".ui.activity.SystemNewsActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity android:name=".ui.activity.FollowAccountActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity android:name=".ui.activity.FollowTabAccountActivity"
+            android:screenOrientation="sensorPortrait" />
+
+    </application>
+
+</manifest>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="Hot" table="HOTS">
+    <id column="ID" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="TITLE" name="title"/>
+    <property column="XYLEIXING_ID" name="xyleixingId"/>
+    <property column="VISIT_CNT" name="visitCnt" type="int"/>
+    <property column="SHARE_CNT" name="shareCnt" type="int"/>
+    <property column="UP_TIME" name="upTime" type="timestamp"/>
+    <property column="DOWN_TIME" name="downTime" type="timestamp"/>
+    <property column="CONTENT" name="content"/>
+    <property column="IMG_PATH1" name="imgPath1"/>
+    <property column="IMG_PATH2" name="imgPath2"/>
+    <property column="IMG_PATH3" name="imgPath3"/>
+    <property column="IMG_PATH4" name="imgPath4"/>
+    <property column="IMG_PATH5" name="imgPath5"/>
+    <property column="IMG_PATH6" name="imgPath6"/>
+    <property column="IMG_PATH7" name="imgPath7"/>
+    <property column="IMG_PATH8" name="imgPath8"/>
+    <property column="IMG_PATH9" name="imgPath9"/>
+    <property column="IMG_PATH10" name="imgPath10"/>
+    <property column="IMG_PATH11" name="imgPath11"/>
+    <property column="IMG_PATH12" name="imgPath12"/>
+    <property column="IMG_PATH13" name="imgPath13"/>
+    <property column="IMG_PATH14" name="imgPath14"/>
+    <property column="IMG_PATH15" name="imgPath15"/>
+    <property column="STATUS" name="status"/>
+    <property column="WRITE_TIME" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>

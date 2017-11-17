@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/margin_small">
+
+        <TextView
+            android:id="@+id/txt_hot_title"
+            style="@style/layout_mw"
+            android:padding="@dimen/margin_normal"
+            android:text="@string/str_sample_title"
+            android:textColor="@color/txt_dark"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            style="@style/layout_mw"
+            android:padding="@dimen/margin_normal">
+
+            <TextView
+                style="@style/layout_ww"
+                android:textColor="@color/txt_gray_light"
+                android:textSize="@dimen/text_size_10"
+                android:text="@string/hot_detail_read_count"/>
+
+            <TextView
+                android:id="@+id/txt_read_count"
+                style="@style/layout_0w"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:textColor="@color/color_main_blue"
+                android:textSize="@dimen/text_size_10"
+                android:text="@string/str_sample"/>
+
+            <TextView
+                android:id="@+id/txt_write_time"
+                style="@style/layout_ww"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/txt_gray_light"
+                android:textSize="@dimen/text_size_10"
+                android:text="@string/str_sample_datetime"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        style="@style/layout_m0">
+
+        <LinearLayout
+            style="@style/layout_mw"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_normal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_scroll_view_height">
+                    <com.beijing.chengxin.ui.widget.AutoScrollViewPager
+                        android:id="@+id/autoScrollViewPager"
+                        style="@style/layout_mm"
+                        android:background="@color/color_gray_f0"
+                        android:clickable="true"/>
+                    <com.beijing.chengxin.ui.widget.PageIndicator
+                        android:id="@+id/pageIndicator"
+                        style="@style/layout_ww"
+                        android:layout_marginRight="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txt_content"
+                    style="@style/layout_mw"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:textColor="@color/txt_gray"
+                    android:textSize="@dimen/text_size_14"/>
+
+            </LinearLayout>
+
+            <View style="@style/splite_line_gray_8"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_tab_height"
+                android:orientation="horizontal">
+                <ToggleButton
+                    android:id="@+id/btn_eval"
+                    style="@style/person_tab_button"
+                    android:checked="true"
+                    android:textOn="@string/tab_eval"
+                    android:textOff="@string/tab_eval"/>
+                <ToggleButton
+                    android:id="@+id/btn_enterprise"
+                    style="@style/person_tab_button"
+                    android:textOn="@string/hot_detail_profession"
+                    android:textOff="@string/hot_detail_profession"/>
+            </LinearLayout>
+
+            <View style="@style/splite_line_gray_8" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                style="@style/layout_mw"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="vertical">
+        <View style="@style/splite_line_gray"/>
+        <LinearLayout
+            style="@style/layout_mw"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/margin_normal"
+            android:paddingRight="@dimen/margin_normal"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingBottom="@dimen/margin_small">
+
+            <View style="@style/layout_0m" />
+
+            <TextView
+                android:id="@+id/txt_comment_count"
+                style="@style/layout_ww"
+                android:layout_width="@dimen/btn_width_small"
+                android:drawableTop="@drawable/hot_evaluate"
+                android:lines="1"
+                android:gravity="center"
+                android:text="@string/str_sample"/>
+
+            <TextView
+                android:id="@+id/btn_elect_count"
+                style="@style/layout_ww"
+                android:layout_width="@dimen/btn_width_small"
+                android:drawableTop="@drawable/hot_zan"
+                android:background="@color/color_transparent"
+                android:lines="1"
+                android:gravity="center"
+                android:text="@string/str_sample"/>
+
+            <ToggleButton
+                android:id="@+id/btn_favorite"
+                style="@style/layout_ww"
+                android:layout_width="@dimen/btn_width_small"
+                android:drawableTop="@drawable/hot_collection"
+                android:background="@color/color_transparent"
+                android:gravity="center"
+                android:textOn="@string/str_collect"
+                android:textOff="@string/str_collect"/>
+
+            <Button
+                android:id="@+id/btn_share_content"
+                style="@style/layout_ww"
+                android:layout_width="@dimen/btn_width_small"
+                android:drawableTop="@drawable/hot_share"
+                android:background="@color/color_transparent"
+                android:gravity="center"
+                android:text="@string/str_share"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

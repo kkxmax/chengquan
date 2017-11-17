@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_white"
+    tools:context="com.beijing.chengxin.ui.activity.MainActivity"
+    android:gravity="center">
+
+    <LinearLayout
+        style="@style/layout_mm"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_tab_height"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:id="@+id/btn_familiar"
+                style="@style/top_tab_button"
+                android:checked="true"
+                android:textOn="@string/familiar"
+                android:textOff="@string/familiar"/>
+            <ToggleButton
+                android:id="@+id/btn_enterprise"
+                style="@style/top_tab_button"
+                android:textOn="@string/enterprise"
+                android:textOff="@string/enterprise"/>
+            <ToggleButton
+                android:id="@+id/btn_comedity"
+                style="@style/top_tab_button"
+                android:textOn="@string/comedity"
+                android:textOff="@string/comedity"/>
+            <ToggleButton
+                android:id="@+id/btn_item"
+                style="@style/top_tab_button"
+                android:textOn="@string/item"
+                android:textOff="@string/item"/>
+            <ToggleButton
+                android:id="@+id/btn_serve"
+                style="@style/top_tab_button"
+                android:textOn="@string/serve"
+                android:textOff="@string/serve"/>
+            <com.beijing.chengxin.ui.widget.SimpleSortSpinner
+                android:id="@+id/btn_sort_set"
+                style="@style/top_tab_button"
+                android:text="@string/sort_set"
+                android:drawableRight="@drawable/drop_down"/>
+            <TextView
+                android:id="@+id/btn_condition_set"
+                style="@style/top_tab_button"
+                android:text="@string/condition_set"
+                android:drawableRight="@drawable/drop_down"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_scroll_view_height">
+            <com.beijing.chengxin.ui.widget.AutoScrollViewPager
+                android:id="@+id/autoScrollViewPager"
+                style="@style/layout_mm"
+                android:background="@color/color_gray_f0"
+                android:clickable="true"/>
+            <com.beijing.chengxin.ui.widget.PageIndicator
+                android:id="@+id/pageIndicator"
+                style="@style/layout_ww"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            style="@style/layout_m0" />
+
+    </LinearLayout>
+</RelativeLayout>

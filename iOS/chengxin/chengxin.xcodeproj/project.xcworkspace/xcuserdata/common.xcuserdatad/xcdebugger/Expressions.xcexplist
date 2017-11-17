@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "__65-[RealNameAuthenticationViewController getBusinessListFromServer]_block_invoke:RealNameAuthenticationViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "aryData[i]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__41-[FavouriteViewController viewDidAppear:]_block_invoke:FavouriteViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[dicRes objectForKey:@&quot;friend1Cnt&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "self.lblFriend1Count.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ImageChooseViewController imagePickerController:didFinishPickingMediaWithInfo:]:ImageChooseViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[info objectForKey:UIImagePickerControllerOriginalImage]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__pthread_kill:(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "[dicRes objectForKey:@&quot;enterCnt&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ImageChooseViewController onGallery:]:ImageChooseViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navController">
+            </PersistentString>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[WebAPI sendPostRequest:Parameters::]:WebAPI.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "request.dictPermValues[@&quot;pAct&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[ForgotPasswordViewController onCompletion:]:ForgotPasswordViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[CommonData sharedInstance].tokenName">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[RealNameAuthenticationViewController setUI]:RealNameAuthenticationViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.personalAuthView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.scrollContentView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeChoiceAllCityViewController selectAction:]:HomeChoiceAllCityViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[BusinessSubcategoryViewController viewDidLoad]:BusinessSubcategoryViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "((UIButton*)aryCategoryButtons[i]).titleLabel.text">
+            </PersistentString>
+            <PersistentString
+               value = "self.aryBusiness">
+            </PersistentString>
+            <PersistentString
+               value = "[aryChildren[i] objectForKey:@&quot;title&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

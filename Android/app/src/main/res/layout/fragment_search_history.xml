@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        android:gravity="center_vertical"
+        android:background="@drawable/rect_blue_gradient">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/topbar_height"
+            android:layout_height="@dimen/topbar_height"
+            android:src="@drawable/nav_back"
+            android:background="@color/color_transparent"/>
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/topbar_height"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/btn_width_small"
+            android:lines="1"
+            style="@style/search_view"
+            android:hint="@string/search_query" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="@dimen/btn_width_small"
+            android:layout_height="wrap_content"
+            android:background="@color/color_transparent"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_alignParentRight="true"
+            android:text="@string/str_search"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:padding="@dimen/margin_large">
+        <TextView
+            style="@style/layout_0w"
+            android:textColor="@color/txt_gray_light"
+            android:textSize="@dimen/text_size_14"
+            android:text="@string/search_history" />
+        <ImageButton
+            android:id="@+id/btn_search_delete"
+            style="@style/layout_ww"
+            android:background="@drawable/search_delete"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        style="@style/layout_m0"
+        android:paddingLeft="@dimen/margin_large"
+        android:paddingRight="@dimen/margin_large"
+        android:background="@color/color_white"
+        android:dividerHeight="2dp"
+        android:divider="@color/color_transparent"/>
+
+
+</LinearLayout>

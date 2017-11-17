@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:padding="@dimen/margin_normal"
+        android:gravity="center">
+
+        <ToggleButton
+            android:id="@+id/btn_eval_person"
+            android:layout_width="@dimen/item_descript_height"
+            android:layout_height="@dimen/margin_extra"
+            android:background="@drawable/btn_make_eval"
+            android:textOn="@string/make_eval_person"
+            android:textOff="@string/make_eval_person"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/txt_white_gray"
+            android:checked="true"/>
+
+        <ToggleButton
+            android:id="@+id/btn_eval_enterprise"
+            android:layout_width="@dimen/item_descript_height"
+            android:layout_height="@dimen/margin_extra"
+            android:background="@drawable/btn_make_eval"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:textOn="@string/make_eval_enterprise"
+            android:textOff="@string/make_eval_enterprise"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/txt_white_gray"/>
+
+    </LinearLayout>
+
+    <View style="@style/splite_line_gray_8"/>
+
+    <LinearLayout
+        style="@style/layout_m0"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/margin_normal"
+        android:paddingRight="@dimen/margin_normal"
+        android:paddingTop="@dimen/margin_large">
+
+        <RelativeLayout
+            style="@style/layout_ww"
+            android:paddingBottom="@dimen/margin_large">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_14"
+                    android:text="@string/make_eval_person_name"/>
+
+                <TextView
+                    android:id="@+id/txt_eval_person_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_small"
+                    android:text="@string/str_sample"
+                    android:textSize="@dimen/text_size_14"
+                    android:textColor="@color/txt_gray_light"/>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="@dimen/margin_large_bellow"
+                android:layout_height="@dimen/margin_large"
+                android:src="@drawable/more"
+                android:background="@color/color_transparent"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <View style="@style/splite_line_gray"/>
+
+        <LinearLayout
+            style="@style/layout_mw"
+            android:paddingTop="@dimen/margin_normal"
+            android:paddingBottom="@dimen/margin_normal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_14"
+                android:text="@string/make_eval_type"/>
+
+            <ToggleButton
+                android:id="@+id/btn_make_eval_type_front"
+                android:paddingLeft="@dimen/margin_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_extra"
+                android:background="@color/color_transparent"
+                android:drawableLeft="@drawable/btn_radio"
+                android:checked="true"
+                android:textOn="@string/front_eval"
+                android:textOff="@string/front_eval"/>
+
+            <ToggleButton
+                android:id="@+id/btn_make_eval_type_back"
+                android:paddingLeft="@dimen/margin_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_extra"
+                android:background="@color/color_transparent"
+                android:drawableLeft="@drawable/btn_radio"
+                android:textOn="@string/back_eval"
+                android:textOff="@string/back_eval"/>
+
+
+        </LinearLayout>
+
+        <View style="@style/splite_line_gray"/>
+
+        <LinearLayout
+            style="@style/layout_mw"
+            android:paddingTop="@dimen/margin_normal"
+            android:paddingBottom="@dimen/margin_normal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_14"
+                android:text="@string/make_eval_mode"/>
+
+            <ToggleButton
+                android:id="@+id/btn_make_eval_mode_front"
+                android:paddingLeft="@dimen/margin_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_extra"
+                android:background="@color/color_transparent"
+                android:drawableLeft="@drawable/btn_radio"
+                android:checked="true"
+                android:textOn="@string/front_eval"
+                android:textOff="@string/front_eval"/>
+
+            <ToggleButton
+                android:id="@+id/btn_make_eval_mode_back"
+                android:paddingLeft="@dimen/margin_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/margin_extra"
+                android:background="@color/color_transparent"
+                android:drawableLeft="@drawable/btn_radio"
+                android:textOn="@string/back_eval"
+                android:textOff="@string/back_eval"/>
+
+
+        </LinearLayout>
+
+        <View style="@style/splite_line_gray"/>
+
+        <LinearLayout
+            android:id="@+id/layout_eval_reason"
+            style="@style/layout_mw"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/margin_normal_most"
+                android:layout_gravity="left"
+                android:textSize="@dimen/text_size_14"
+                android:text="@string/make_eval_reason"/>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edit_eval_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/image_hot_item_width"
+                    android:ems="10"
+                    android:layout_marginLeft="@dimen/margin_normal"
+                    android:background="@color/color_white"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:gravity="top"
+                    android:inputType="textMultiLine">
+                </EditText>
+
+                <TextView
+                    android:id="@+id/txt_eval_reason"
+                    style="@style/layout_mw"
+                    android:gravity="right"
+                    android:text="0/100"
+                    android:textColor="@color/txt_gray_light"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View style="@style/splite_line_gray"/>
+
+        <LinearLayout
+            style="@style/layout_mw"
+            android:paddingBottom="@dimen/margin_normal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:paddingTop="@dimen/margin_normal_most"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_14"
+                android:text="@string/make_eval_content"/>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/edit_eval_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/image_hot_item_width"
+                        android:ems="10"
+                        android:background="@color/color_white"
+                        android:paddingTop="@dimen/margin_large"
+                        android:gravity="top"
+                        android:inputType="textMultiLine">
+                    </EditText>
+
+                    <TextView
+                        android:id="@+id/txt_eval_content"
+                        style="@style/layout_mw"
+                        android:gravity="right"
+                        android:text="0/100"
+                        android:textColor="@color/txt_gray_light"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"
+                    android:layout_marginBottom="@dimen/margin_normal"/>
+
+                <Button
+                    android:id="@+id/btn_eval_picture_add"
+                    android:layout_width="@dimen/image_avatar_width"
+                    android:layout_height="@dimen/image_avatar_height"
+                    android:background="@color/color_gray_f5"
+                    android:paddingTop="@dimen/margin_normal_top"
+                    android:drawableTop="@drawable/fabu_add_small"
+                    android:text="@string/make_eval_img_upload"
+                    android:textSize="@dimen/text_size_10"/>
+
+                <TextView
+                    style="@style/layout_ww"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:text="@string/make_eval_max_img_size"
+                    android:textSize="@dimen/text_size_10"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="horizontal"
+        android:background="@color/color_gray_f5"
+        android:padding="@dimen/margin_normal">
+
+        <Button
+            android:id="@+id/btn_make_eval"
+            style="@style/layout_mw"
+            android:layout_marginStart="@dimen/margin_small"
+            android:background="@drawable/round_rect_orange_gradient"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_18"
+            android:text="@string/make_eval"/>
+
+    </LinearLayout>
+
+</LinearLayout>
