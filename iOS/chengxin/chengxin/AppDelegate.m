@@ -18,18 +18,13 @@
 #import "Global.h"
 
 @interface AppDelegate ()
-{
-    NSTimer *notificationTimer;
-}
+
 @end
 
 @implementation AppDelegate
-@synthesize notificationDelegate;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Keyboard show under textfield.
-    [IQKeyboardManager sharedManager].enable = YES;
-
     UINavigationController *navVC = [[UINavigationController alloc] init];
     // Override point for customization after application launch.
     LoginViewController *loginVC;
@@ -41,14 +36,12 @@
         loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     }
     
-    notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIFICATION_SECOND target:self selector:@selector(GetNotificationFromServer) userInfo:nil repeats:YES];
+    
     //MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     [navVC pushViewController:loginVC animated:NO];
     self.window.rootViewController = navVC;
     [self.window addSubview:navVC.view];
     [self.window makeKeyAndVisible];
-
-
     return YES;
 }
 
@@ -76,28 +69,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)GetNotificationFromServer {
-    if([[CommonData sharedInstance].tokenName isEqualToString:@""])
-        return;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
-        NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
-        [dicParams setObject:@"getNoticeCount" forKey:@"pAct"];
-        [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[WebAPI sharedInstance] sendPostRequest:ACTION_GETNOTICECOUNT Parameters:dicParams :^(NSObject *resObj) {
-                NSDictionary *dicRes = (NSDictionary *)resObj;
-                if (dicRes != nil ) {
-                    if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
-                        long noticeCount = [dicRes[@"noticeCnt"] longValue];
-                        [CommonData sharedInstance].notificationCount = noticeCount;
-                        [notificationDelegate updateNotification];
-                    }
-                }
-            }];
-        });
-    });
 }
 
 @end

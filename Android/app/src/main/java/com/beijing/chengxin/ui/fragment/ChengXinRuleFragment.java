@@ -25,7 +25,7 @@ public class ChengXinRuleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	rootView = inflater.inflate(R.layout.fragment_chengxin_rule, container, false);
 
-        ((TextView)rootView.findViewById(R.id.txt_nav_title)).setText(getString(R.string.chengxin_rule_title));
+        ((TextView)rootView.findViewById(R.id.txt_nav_title)).setText(getString(R.string.chengxin_rule));
         rootView.findViewById(R.id.btn_back).setOnClickListener(mButtonClickListener);
 
         return rootView;

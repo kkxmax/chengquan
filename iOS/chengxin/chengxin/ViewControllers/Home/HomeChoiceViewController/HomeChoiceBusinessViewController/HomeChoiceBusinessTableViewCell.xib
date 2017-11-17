@@ -38,6 +38,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="extendAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aDm-hG-FMg"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9M-Cv-0gi">
                                 <frame key="frameInset" height="1"/>
@@ -53,15 +56,56 @@
                     <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EQU-4c-OZg">
                         <frame key="frameInset" minY="45" height="101.85%"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJh-5o-qC8">
+                                <frame key="frameInset" minX="12" minY="10" width="29.24%" height="36"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="贸易">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Fba-lk-uVV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yu-yp-gGp">
+                                <frame key="frameInset" minX="35.78%" minY="10" width="28.12%" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="教育培训">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fWl-48-6yz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8w-Hd-BEB">
+                                <frame key="frameInset" minY="10" width="29.33%" height="36" maxX="13"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="传媒娱乐">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pTV-7C-Bb7"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
-                <outlet property="btnContent" destination="XV3-E3-rYG" id="z6W-RB-dJ0"/>
+                <outlet property="centerButton" destination="4yu-yp-gGp" id="rpy-i0-Kuh"/>
                 <outlet property="extendButton" destination="Bjx-dw-mrG" id="Bgb-7o-hWc"/>
-                <outlet property="lblName" destination="cKU-HS-0J2" id="cLb-yL-kOS"/>
-                <outlet property="viewContent" destination="EQU-4c-OZg" id="r82-fO-On6"/>
+                <outlet property="leftButton" destination="NJh-5o-qC8" id="KZ7-f7-LaG"/>
+                <outlet property="networkContentButton" destination="XV3-E3-rYG" id="e96-fH-FZh"/>
+                <outlet property="networkContentView" destination="EQU-4c-OZg" id="dN0-Nv-3sw"/>
+                <outlet property="networkNameLabel" destination="cKU-HS-0J2" id="uvZ-P8-f1E"/>
+                <outlet property="rightButton" destination="N8w-Hd-BEB" id="J0u-pv-RMc"/>
             </connections>
         </tableViewCell>
     </objects>

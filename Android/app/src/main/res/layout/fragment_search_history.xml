@@ -9,7 +9,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/topbar_height"
-        android:gravity="center_vertical"
         android:background="@drawable/rect_blue_gradient">
 
         <ImageButton
@@ -26,19 +25,9 @@
             android:layout_marginStart="@dimen/topbar_height"
             android:layout_marginEnd="@dimen/margin_normal"
             android:layout_centerVertical="true"
-            android:paddingRight="@dimen/btn_width_small"
             android:lines="1"
             style="@style/search_view"
             android:hint="@string/search_query" />
-
-        <Button
-            android:id="@+id/btn_search"
-            android:layout_width="@dimen/btn_width_small"
-            android:layout_height="wrap_content"
-            android:background="@color/color_transparent"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:layout_alignParentRight="true"
-            android:text="@string/str_search"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -55,14 +44,13 @@
             android:background="@drawable/search_delete"/>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/listView"
+    <ScrollView
         style="@style/layout_m0"
         android:paddingLeft="@dimen/margin_large"
         android:paddingRight="@dimen/margin_large"
-        android:background="@color/color_white"
-        android:dividerHeight="2dp"
-        android:divider="@color/color_transparent"/>
+        android:orientation="horizontal">
+
+    </ScrollView>
 
 
 </LinearLayout>

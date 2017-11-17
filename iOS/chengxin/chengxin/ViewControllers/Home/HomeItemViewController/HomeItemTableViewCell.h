@@ -10,10 +10,4 @@
 
 @interface HomeItemTableViewCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (nonatomic, weak) IBOutlet UIButton *fenleiButton;
-@property (nonatomic, weak) IBOutlet UITextView *commentTextView;
-@property (nonatomic, weak) IBOutlet UILabel *noImageLabel;
-
 @end

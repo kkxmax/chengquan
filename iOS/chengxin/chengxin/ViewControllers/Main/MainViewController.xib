@@ -9,7 +9,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="homeChoiceBackgroundView" destination="Qck-Q0-TXM" id="tXC-t4-hhJ"/>
-                <outlet property="homeChoiceTransView" destination="aUI-9c-60g" id="mdQ-qN-LM4"/>
                 <outlet property="homeChoiceView" destination="AjP-wn-SMQ" id="V8K-w3-geB"/>
                 <outlet property="mainTabBar" destination="rBK-rf-4qz" id="NIk-ym-gQ1"/>
                 <outlet property="mainView" destination="MTN-8E-KVP" id="skl-d1-FLq"/>
@@ -43,15 +42,15 @@
                     </connections>
                 </tabBar>
                 <view hidden="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAz-8h-geM">
-                    <frame key="frameInset" minY="218"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <frame key="frameInset" height="49"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qck-Q0-TXM">
                     <frame key="frameInset" minY="64"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <view hidden="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUI-9c-60g">
+                        <view alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUI-9c-60g">
                             <frame key="frameInset"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>

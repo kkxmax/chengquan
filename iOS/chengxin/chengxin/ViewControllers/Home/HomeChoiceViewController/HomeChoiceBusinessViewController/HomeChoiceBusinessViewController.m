@@ -8,50 +8,19 @@
 
 #import "HomeChoiceBusinessViewController.h"
 #import "HomeChoiceBusinessTableViewCell.h"
-#import "Global.h"
 
 @interface HomeChoiceBusinessViewController ()
 {
-    NSMutableArray *aryCategory;
-    NSMutableArray *aryCategorySelect;
-    HomeChoiceBusinessTableViewCell *selectCell;
-    NSMutableArray *aryEvalChoice;
+    UIView *extendView;
 }
 @end
 
 @implementation HomeChoiceBusinessViewController
-@synthesize businessTableView, mChoice;
-
+@synthesize businessTableView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [businessTableView registerNib:[UINib nibWithNibName:@"HomeChoiceBusinessTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeChoiceBusinessCellIdentifier"];
-    
-    aryCategory = [[NSMutableArray alloc] init];
-    aryCategorySelect = [[NSMutableArray alloc] init];
-    
-    NSString *strChoice = @"";
-    if (mChoice == CHOICE_HOME_COMMERCE)
-        strChoice = [CommonData sharedInstance].choicePleixingIds;
-    else
-        strChoice = [CommonData sharedInstance].choiceXyleixingIds;
-    
-    if (strChoice.length == 0)
-        aryEvalChoice = [[NSMutableArray alloc] init];
-    else
-        aryEvalChoice = [[NSMutableArray alloc] initWithArray:[strChoice componentsSeparatedByString:@","]];
-    
-    if (mChoice == CHOICE_HOME_COMMERCE) {
-        [self getCommerceListFromServer];
-    }
-    else
-        [self getBusinessListFromServer];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,243 +28,43 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) getBusinessListFromServer {
-    
-    NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
-    
-    [dicParams setObject:@"getXyleixingList" forKey:@"pAct"];
-    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
-    
-    [[WebAPI sharedInstance] sendPostRequest:ACTION_GETXYLEIXINGLIST Parameters:dicParams :^(NSObject *resObj) {
-        
-        NSDictionary *dicRes = (NSDictionary *)resObj;
-        
-        if (dicRes != nil ) {
-            if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
-                NSArray *aryData = dicRes[@"data"];
-                
-                [aryCategory removeAllObjects];
-                [aryCategorySelect removeAllObjects];
-                
-                for (int i = 0; i < aryData.count; i++) {
-                    [aryCategory addObject:aryData[i]];
-                    [aryCategorySelect addObject:@"0"];
-                }
-                
-                if ( aryCategory.count > 0 )
-                {
-                    [businessTableView reloadData];
-                    
-                }
-            }
-        }
-    }];
-}
-
-- (void) getCommerceListFromServer {
-    
-    NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
-    
-    [dicParams setObject:@"getPleixingList" forKey:@"pAct"];
-    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
-    
-    [[WebAPI sharedInstance] sendPostRequest:ACTION_GETXYLEIXINGLIST Parameters:dicParams :^(NSObject *resObj) {
-        
-        NSDictionary *dicRes = (NSDictionary *)resObj;
-        
-        if (dicRes != nil ) {
-            if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
-                NSArray *aryData = dicRes[@"data"];
-                
-                [aryCategory removeAllObjects];
-                [aryCategorySelect removeAllObjects];
-                
-                for (int i = 0; i < aryData.count; i++) {
-                    [aryCategory addObject:aryData[i]];
-                    [aryCategorySelect addObject:@"0"];
-                }
-                
-                if ( aryCategory.count > 0 )
-                {
-                    [businessTableView reloadData];
-                    
-                }
-            }
-        }
-    }];
-}
 #pragma mark - IBAction
 - (IBAction)cancelAction:(id)sender {
-    if (mChoice == CHOICE_HOME_PERSONAL || mChoice == CHOICE_HOME_COMMERCE)
-        [self.navigationController popViewControllerAnimated:YES];
-    else if (mChoice == CHOICE_EVAL)
-    {
-        for (int i = 0; i < aryCategorySelect.count; i++) {
-            [aryCategorySelect replaceObjectAtIndex:i withObject:@"0"];
-        }
-        [aryEvalChoice removeAllObjects];
-        [businessTableView reloadData];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:HIDE_REALNAME_CHOICE_VIEW_NOTIFICATION object:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)selectAction:(id)sender {
-    
-    if (aryEvalChoice.count > 0) {
-        NSString *strChoice = @"";
-        for (int i = 0; i < aryEvalChoice.count; i++) {
-            NSString *choice = aryEvalChoice[i];
-            if (i == 0)
-                strChoice = choice;
-            else
-                strChoice = [NSString stringWithFormat:@"%@,%@", strChoice, choice];
-        }
-        if (mChoice == CHOICE_HOME_PERSONAL || mChoice == CHOICE_EVAL)
-            [CommonData sharedInstance].choiceXyleixingIds = strChoice;
-        else if (mChoice == CHOICE_HOME_COMMERCE)
-            [CommonData sharedInstance].choicePleixingIds = strChoice;
-    }
-    else {
-        if (mChoice == CHOICE_HOME_PERSONAL || mChoice == CHOICE_EVAL)
-            [CommonData sharedInstance].choiceXyleixingIds = @"";
-        else if (mChoice == CHOICE_HOME_COMMERCE)
-            [CommonData sharedInstance].choicePleixingIds = @"";
-    }
-
-    if (mChoice == CHOICE_HOME_PERSONAL || mChoice == CHOICE_HOME_COMMERCE)
-        [self.navigationController popViewControllerAnimated:YES];
-    else if (mChoice == CHOICE_EVAL) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:SET_EVALCHOICE_VIEW_NOTIFICATION object:nil];
-    }
-    [[NSNotificationCenter defaultCenter] postNotificationName:HIDE_REALNAME_CHOICE_VIEW_NOTIFICATION object:nil];
-}
-
--(void) onClickContentButton:(UIButton*) button {
-    int index = (int)button.tag;
-    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:0];
-    HomeChoiceBusinessTableViewCell *cell = [businessTableView cellForRowAtIndexPath:path];
-    if(cell.extendButton.isSelected) {
-        cell.extendButton.selected = NO;
-        cell.viewContent.hidden = YES;
-        [aryCategorySelect replaceObjectAtIndex:index withObject:@"0"];
-    }else{
-        cell.extendButton.selected = YES;
-        cell.viewContent.hidden = NO;
-        [aryCategorySelect replaceObjectAtIndex:index withObject:@"1"];
-    }
-    //[businessTableView reloadData];
-    
-    [businessTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:path, nil] withRowAnimation:UITableViewRowAnimationNone];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDelegate, UITableViewDataSource
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat homeTableCellHeight = 45.f;
-
-    NSString *show = aryCategorySelect[indexPath.row];
-    if ([show integerValue] == 1) {
-        NSDictionary *dic = aryCategory[indexPath.row];
-        if (dic == nil)
-            return homeTableCellHeight;
-        
-        NSArray *childBussiness = dic[@"children"];
-        
-        homeTableCellHeight += 55.f * ceil(childBussiness.count / 3.f);
-    }
-
-    
-    return homeTableCellHeight;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HomeChoiceBusinessTableViewCell *cell = (HomeChoiceBusinessTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"HomeChoiceBusinessCellIdentifier" forIndexPath:indexPath];
-
-    NSDictionary *dic = aryCategory[indexPath.row];
-    cell.lblName.text = dic[@"title"];
-    cell.btnContent.tag = indexPath.row;
-    [cell.btnContent addTarget:self action:@selector(onClickContentButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    if ([aryCategorySelect[indexPath.row] integerValue] == 1)
-    {
-        NSArray *aryChild = dic[@"children"];
-        CGRect frame = cell.viewContent.frame;
-        frame.size.height = 55.f * ceil(aryChild.count / 3.f);
-        int count = (int)aryChild.count;
-        float width = frame.size.width / 3.f;
-        
-        for (UIView *view in cell.viewContent.subviews)
-             [view removeFromSuperview];
-        
-        for (int i = 0; i < count; i++) {
-            
-            NSDictionary *dicChild = aryChild[i];
-            int x = (i % 3) * width;
-            int y = (i / 3) * 55;
-            
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x + 12, y + 10, width - 24, 36)];
-            button.tag = [dicChild[@"id"] integerValue];
-            [button setBackgroundColor:WHITE_COLOR];
-            [button setTitle:dicChild[@"title"] forState:UIControlStateNormal];
-            [button setTitleColor:BLACK_COLOR_51 forState:UIControlStateNormal];
-            [button.titleLabel setFont:FONT_12];
-            [button addTarget:self action:@selector(onClickBusinessButton:) forControlEvents:UIControlEventTouchUpInside];
-            
-            NSString *strId = [NSString stringWithFormat:@"%d", (int)button.tag];
-            if ([aryEvalChoice containsObject:strId])
-            {
-                [button setTitleColor:SELECTED_BUTTON_TITLE_COLOR forState:UIControlStateNormal];
-                [button setBackgroundColor:SELECTED_BUTTON_BACKGROUND_COLOR];
-            }
-            [cell.viewContent addSubview:button];
+    HomeChoiceBusinessTableViewCell *homeChoiceBusinessTableCell = (HomeChoiceBusinessTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"HomeChoiceBusinessCellIdentifier" forIndexPath:indexPath];
+    if(indexPath.row == 0) {
+        homeChoiceBusinessTableCell.extendButton.hidden = YES;
+        homeChoiceBusinessTableCell.networkContentButton.hidden = YES;
+        homeChoiceBusinessTableCell.networkNameLabel.text = @"不限";
+    }else{
+        if(homeChoiceBusinessTableCell.extendButton.isSelected) {
+            extendView = homeChoiceBusinessTableCell.networkContentView;
+        } else {
+            extendView = nil;
         }
-        
-        cell.viewContent.hidden = NO;
-        cell.extendButton.selected = YES;
     }
-    else
-    {
-        cell.viewContent.hidden = YES;
-        cell.extendButton.selected = NO;
-    }
-    
-    return cell;
+    homeChoiceBusinessTableCell.contentTableView = businessTableView;
+    return homeChoiceBusinessTableCell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return aryCategory.count;
+    return 5;
 }
 
-- (void) onClickBusinessButton:(UIButton*) button {
-    
-    NSString *strId = [NSString stringWithFormat:@"%d", (int)button.tag];
-    
-    if([button.currentTitleColor isEqual:SELECTED_BUTTON_TITLE_COLOR])
-    {
-        [button setTitleColor:BLACK_COLOR_51 forState:UIControlStateNormal];
-        [button setBackgroundColor:WHITE_COLOR];
-        if (self.isSingleSelectionMode)
-            [aryEvalChoice removeAllObjects];
-        else
-            [aryEvalChoice removeObject:strId];
-    }
-    else
-    {
-        [button setTitleColor:SELECTED_BUTTON_TITLE_COLOR forState:UIControlStateNormal];
-        [button setBackgroundColor:SELECTED_BUTTON_BACKGROUND_COLOR];
-        
-        if (self.isSingleSelectionMode) {
-            [aryEvalChoice removeAllObjects];
-            [aryEvalChoice addObject:strId];
-        }
-        else
-            [aryEvalChoice addObject:strId];
-    }
-    
-    if (self.isSingleSelectionMode)
-        [businessTableView reloadData];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat homeTableCellHeight = 45.f;
+    if(extendView)
+        homeTableCellHeight += 55.f;
+    return homeTableCellHeight;
 }
-
 /*
 #pragma mark - Navigation
 

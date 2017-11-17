@@ -10,10 +10,10 @@
 
 @interface HomeEnterpriseViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 {
+    NSTimer *slideEnterprisePageTimer;
 }
+@property (nonatomic, strong) IBOutlet UIScrollView *slideEnterpriseScrollView;
+@property (nonatomic, strong) IBOutlet UIPageControl *slideEnterprisePageCtrl;
 @property (nonatomic, strong) IBOutlet UITableView *homeEnterpriseTableView;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *indicatorView;
 
-- (void)getEnterFromServer:cityName EnterKind:(NSString*)enterKind XyleixingIds:(NSString*)xyleixingIds Start:(NSString*)start Length:(NSString*)length Keyword:(NSString*)keyword;
-@property (nonatomic) NSInteger currentSortOrderIndex;
 @end

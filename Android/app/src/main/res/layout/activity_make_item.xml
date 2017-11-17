@@ -11,396 +11,347 @@
         android:layout_height="@dimen/topbar_height"
         layout="@layout/nav_bar" />
 
-    <FrameLayout
+    <ScrollView
         style="@style/layout_m0">
         <LinearLayout
-            style="@style/layout_mm"
+            style="@style/layout_wm"
             android:orientation="vertical">
-            <ScrollView
-                style="@style/layout_m0">
+            <LinearLayout
+                style="@style/layout_mw"
+                android:paddingTop="@dimen/margin_normal_most"
+                android:paddingLeft="@dimen/margin_normal"
+                android:paddingRight="@dimen/margin_normal"
+                android:orientation="vertical">
+
+
                 <LinearLayout
-                    style="@style/layout_wm"
-                    android:orientation="vertical">
+                    style="@style/layout_mw"
+                    android:paddingBottom="@dimen/margin_normal_most">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/make_item_logo"/>
+
+                    <ImageView
+                        android:id="@+id/make_item_logo"
+                        android:layout_width="@dimen/image_avatar_width"
+                        android:layout_height="@dimen/image_avatar_height"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:background="@color/color_gray_f0"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/margin_normal_most"
+                    android:paddingBottom="@dimen/margin_normal_most">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/make_item_name"/>
+
+                    <EditText
+                        android:id="@+id/edit_item_name"
+                        style="@style/layout_mw"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:outlineProvider="none"
+                        android:background="@color/color_white"
+                        android:maxLength="100"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <RelativeLayout
+                    style="@style/layout_mw"
+                    android:paddingBottom="@dimen/margin_normal_most">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/margin_normal_most"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/make_item_type"/>
+
+                    <ImageView
+                        android:id="@+id/make_item_type"
+                        style="@style/layout_ww"
+                        android:background="@color/color_transparent"
+                        android:src="@drawable/more"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingBottom="@dimen/margin_normal_most">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/margin_normal_most"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/make_item_city"/>
+
                     <LinearLayout
                         style="@style/layout_mw"
-                        android:paddingTop="@dimen/margin_normal_most"
-                        android:paddingLeft="@dimen/margin_normal"
-                        android:paddingRight="@dimen/margin_normal"
-                        android:orientation="vertical">
-
-
-                        <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/margin_normal">
+                        <RelativeLayout
                             style="@style/layout_mw"
                             android:paddingBottom="@dimen/margin_normal_most">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:paddingTop="@dimen/margin_normal_most"
                                 android:textSize="@dimen/text_size_14"
-                                android:text="@string/make_item_logo"/>
+                                android:text="@string/str_sample"
+                                android:textColor="@color/txt_dark"/>
 
                             <ImageView
-                                android:id="@+id/img_logo"
-                                android:layout_width="@dimen/image_avatar_height"
-                                android:layout_height="@dimen/image_avatar_height"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:background="@color/color_gray_f0"/>
-
-                        </LinearLayout>
-
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:layout_height="@dimen/row_height_normal"
-                            android:gravity="center">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/make_item_name"
-                                android:id="@+id/textView3" />
-
-                            <EditText
-                                android:id="@+id/edit_name"
-                                style="@style/layout_0m"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:outlineProvider="none"
-                                android:textColor="@color/txt_dark"
-                                android:textSize="@dimen/text_size_14"
-                                android:background="@color/color_white"
-                                android:gravity="center_vertical"
-                                android:maxLength="100"/>
-
-                        </LinearLayout>
-
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:layout_height="@dimen/row_height_normal"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/make_item_type"/>
-
-                            <TextView
-                                android:id="@+id/txt_fenlei"
-                                style="@style/layout_0m"
-                                android:background="@color/color_transparent"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:gravity="center_vertical"
-                                android:textSize="@dimen/text_size_14"
-                                android:textColor="@color/txt_dark" />
-
-                            <ImageView
-                                android:id="@+id/make_item_type"
+                                android:id="@+id/make_item_city"
                                 style="@style/layout_ww"
                                 android:background="@color/color_transparent"
                                 android:src="@drawable/more"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentRight="true"/>
 
-                        </LinearLayout>
+                        </RelativeLayout>
 
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:paddingTop="@dimen/margin_normal_most"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/make_item_city"/>
-
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:orientation="vertical"
-                                android:layout_marginLeft="@dimen/margin_normal">
-
-                                <LinearLayout
-                                    style="@style/layout_mw"
-                                    android:layout_height="@dimen/row_height_normal"
-                                    android:gravity="center">
-
-                                    <TextView
-                                        android:id="@+id/txt_city"
-                                        style="@style/layout_0m"
-                                        android:gravity="center_vertical"
-                                        android:textSize="@dimen/text_size_14"
-                                        android:textColor="@color/txt_dark"/>
-
-                                    <ImageView
-                                        style="@style/layout_ww"
-                                        android:background="@color/color_transparent"
-                                        android:src="@drawable/more"
-                                        android:layout_centerVertical="true"
-                                        android:layout_alignParentRight="true"/>
-
-                                </LinearLayout>
-
-                                <EditText
-                                    android:id="@+id/edit_address_detail"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/row_height_normal"
-                                    android:layout_marginLeft="@dimen/margin_normal"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:textColor="@color/txt_dark"
-                                    android:hint="@string/address_detail"
-                                    android:background="@color/color_white"
-                                    android:gravity="center_vertical"
-                                    android:maxLength="100"/>
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:paddingBottom="@dimen/margin_normal_most"
-                            android:background="@color/color_white"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="@dimen/margin_normal_most"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/make_item_comment"/>
-
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:orientation="vertical"
-                                android:paddingTop="@dimen/margin_normal_top">
-
-                                <EditText
-                                    android:id="@+id/edit_comment"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/image_hot_item_width"
-                                    android:ems="10"
-                                    android:gravity="top"
-                                    android:background="@color/color_white"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:layout_marginLeft="@dimen/margin_normal"
-                                    android:inputType="textMultiLine">
-                                </EditText>
-
-                                <TextView
-                                    android:id="@+id/txt_letter_count"
-                                    style="@style/layout_mw"
-                                    android:gravity="right"
-                                    android:text="0/100"
-                                    android:textColor="@color/txt_gray_light"/>
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:layout_height="@dimen/row_height_normal"
-                            android:gravity="center">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/make_item_place"/>
-
-                            <EditText
-                                android:id="@+id/edit_resource"
-                                style="@style/layout_0m"
-                                android:gravity="center_vertical"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:lines="1"
-                                android:textSize="@dimen/text_size_14"
-                                android:background="@color/color_white"
-                                android:maxLength="100"/>
-
-                        </LinearLayout>
-
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:layout_height="@dimen/row_height_normal"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/make_item_net"/>
-
-                            <EditText
-                                android:id="@+id/edit_net"
-                                style="@style/layout_0m"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:lines="1"
-                                android:textSize="@dimen/text_size_14"
-                                android:gravity="center_vertical"
-                                android:background="@color/color_white"
-                                android:maxLength="100"/>
-
-                        </LinearLayout>
-
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:gravity="right">
-
-                            <ToggleButton
-                                android:id="@+id/btn_first_show"
-                                android:paddingLeft="@dimen/margin_normal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/margin_extra"
-                                android:background="@color/color_transparent"
-                                android:drawableLeft="@drawable/btn_check"
-                                android:drawablePadding="@dimen/margin_small"
-                                android:textSize="@dimen/text_size_12"
-                                android:textOn="@string/make_item_check"
-                                android:textOff="@string/make_item_check"/>
-
-                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/str_sample"
+                            android:textColor="@color/txt_gray_light"/>
 
                     </LinearLayout>
 
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingBottom="@dimen/margin_normal_most"
+                    android:background="@color/color_white"
+                    android:orientation="horizontal">
+
                     <TextView
-                        style="@style/layout_mw"
-                        android:padding="@dimen/margin_normal"
-                        android:background="@color/color_gray_f0"
-                        android:textColor="@color/txt_gray_light"
-                        android:text="@string/make_item_connect_me"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/margin_normal_most"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/make_item_comment"/>
 
                     <LinearLayout
                         style="@style/layout_mw"
                         android:orientation="vertical"
-                        android:paddingLeft="@dimen/margin_normal"
-                        android:paddingRight="@dimen/margin_normal"
-                        android:paddingBottom="@dimen/margin_normal">
+                        android:paddingTop="@dimen/margin_normal_top">
 
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/edit_item_comment"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/image_hot_item_width"
+                            android:ems="10"
+                            android:gravity="top"
+                            android:background="@color/color_white"
+
+                            android:layout_marginLeft="@dimen/margin_normal"
+                            android:inputType="textMultiLine">
+                        </EditText>
+
+                        <TextView
+                            android:id="@+id/txt_letter_count"
                             style="@style/layout_mw"
-                            android:layout_height="@dimen/row_height_normal"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/person_name_comma"/>
-
-                            <EditText
-                                android:id="@+id/edit_person_name"
-                                style="@style/layout_mw"
-                                android:textSize="@dimen/text_size_14"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:outlineProvider="none"
-                                android:background="@color/color_white"
-                                android:maxLength="100"/>
-
-                        </LinearLayout>
-
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:layout_height="@dimen/row_height_normal"
-                            android:gravity="center_vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/phone_number_comma"/>
-
-                            <EditText
-                                android:id="@+id/edit_phone_number"
-                                style="@style/layout_mw"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:background="@color/color_white"
-                                android:inputType="phone"
-                                android:textSize="@dimen/text_size_14"
-                                android:maxLength="11"/>
-
-                        </LinearLayout>
-
-                        <View style="@style/splite_line_gray"/>
-
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:layout_height="@dimen/row_height_normal"
-                            android:gravity="center_vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/make_item_weixin"/>
-
-                            <EditText
-                                android:id="@+id/edit_weixin"
-                                style="@style/layout_mw"
-                                android:textSize="@dimen/text_size_14"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:backgroundTint="@color/color_white"
-                                android:maxLength="100"/>
-
-                        </LinearLayout>
+                            android:gravity="right"
+                            android:text="0/100"
+                            android:textColor="@color/txt_gray_light"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
-            </ScrollView>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/margin_normal_most"
+                    android:paddingBottom="@dimen/margin_normal_most">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/make_item_place"/>
+
+                    <EditText
+                        android:id="@+id/edit_item_place"
+                        style="@style/layout_mw"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:outlineProvider="none"
+                        android:background="@color/color_white"
+                        android:maxLength="100"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/margin_normal_most"
+                    android:paddingBottom="@dimen/margin_normal_most">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/make_item_net"/>
+
+                    <EditText
+                        android:id="@+id/edit_item_net"
+                        style="@style/layout_mw"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:outlineProvider="none"
+                        android:background="@color/color_white"
+                        android:maxLength="100"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:gravity="right">
+
+                    <ToggleButton
+                        android:id="@+id/btn_yes"
+                        android:paddingLeft="@dimen/margin_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/margin_extra"
+                        android:background="@color/color_transparent"
+                        android:drawableLeft="@drawable/btn_check"
+                        android:drawablePadding="@dimen/margin_small"
+                        android:textSize="@dimen/text_size_12"
+                        android:textOn="@string/make_item_check"
+                        android:textOff="@string/make_item_check"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/layout_mw"
+                android:padding="@dimen/margin_normal"
+                android:background="@color/color_gray_f0"
+                android:textColor="@color/txt_gray_light"
+                android:text="@string/make_item_connect_me"/>
 
             <LinearLayout
                 style="@style/layout_mw"
-                android:orientation="horizontal"
-                android:background="@color/color_gray_f5"
-                android:padding="@dimen/margin_normal">
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/margin_normal"
+                android:paddingRight="@dimen/margin_normal"
+                android:paddingBottom="@dimen/margin_normal">
 
-                <Button
-                    android:id="@+id/btn_publish"
+                <LinearLayout
                     style="@style/layout_mw"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:background="@drawable/round_rect_orange_gradient"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/text_size_18"
-                    android:text="@string/make"/>
+                    android:gravity="center_vertical"
+                    android:paddingTop="@dimen/margin_normal_most"
+                    android:paddingBottom="@dimen/margin_normal_most">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/person_name_comma"/>
+
+                    <EditText
+                        android:id="@+id/edit_person_name"
+                        style="@style/layout_mw"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:outlineProvider="none"
+                        android:background="@color/color_white"
+                        android:maxLength="100"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/phone_number_comma"/>
+
+                    <EditText
+                        android:id="@+id/edit_phone_number"
+                        style="@style/layout_mw"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:backgroundTint="@color/color_white"
+                        android:maxLength="100"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/make_item_weixin"/>
+
+                    <EditText
+                        android:id="@+id/edit_weixin"
+                        style="@style/layout_mw"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:backgroundTint="@color/color_white"
+                        android:maxLength="100"/>
+
+                </LinearLayout>
 
             </LinearLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/view_condition"
-            style="@style/layout_mm"
-            android:background="@color/color_black_trans"
-            android:visibility="gone"
-            android:clickable="true">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-            </LinearLayout>
-            <FrameLayout
-                android:id="@+id/view_condition_body"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="5">
-            </FrameLayout>
         </LinearLayout>
-    </FrameLayout>
+    </ScrollView>
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="horizontal"
+        android:background="@color/color_gray_f5"
+        android:padding="@dimen/margin_normal">
+
+        <Button
+            android:id="@+id/btn_make_comedity"
+            style="@style/layout_mw"
+            android:layout_marginStart="@dimen/margin_small"
+            android:background="@drawable/round_rect_orange_gradient"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_18"
+            android:text="@string/make"/>
+
+    </LinearLayout>
+
 </LinearLayout>

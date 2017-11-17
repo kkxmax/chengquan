@@ -7,26 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AppDelegate.h"
-@interface MineViewController : UIViewController<NotificationDelegate>
 
-@property (nonatomic, retain) IBOutlet UIImageView* logoImageView;
-@property (nonatomic, retain) IBOutlet UILabel* lblCodeNumber;
-@property (nonatomic, retain) IBOutlet UILabel* lblChengHuDu;
-@property (nonatomic, retain) IBOutlet UILabel* lblDianZan;
-@property (nonatomic, retain) IBOutlet UILabel* lblPingJia;
-@property (nonatomic, retain) IBOutlet UILabel* lblName;
-@property (nonatomic, strong) IBOutlet UILabel *messageNumberLabel;
+@interface MineViewController : UIViewController
 
-
--(IBAction)onRealNameAuthentication:(id)sender;
--(IBAction)onChengXinReport:(id)sender;
--(IBAction)onChengXinRecord:(id)sender;
--(IBAction)onMyRating:(id)sender;
--(IBAction)onRatingToMe:(id)sender;
--(IBAction)onMine:(id)sender;
--(IBAction)onMyPublication:(id)sender;
--(IBAction)onOpinion:(id)sender;
--(IBAction)onSetting:(id)sender;
 @end
-

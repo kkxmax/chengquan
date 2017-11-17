@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:com/chengxin/bfip/model/*.hbm.xml</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">com.chengxin.bfip.model.BaseMySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.jdbc.batch_size">0</prop>
+			</props>
+		</property>
+
+
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate"
+		p:sessionFactory-ref="sessionFactory" />
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory" />
+
+	<bean id="userDao" class="com.chengxin.bfip.model.UserDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="itemDao" class="com.chengxin.bfip.model.ItemDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="noticeDao" class="com.chengxin.bfip.model.NoticeDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="accountDao" class="com.chengxin.bfip.model.AccountDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="fenleiDao" class="com.chengxin.bfip.model.FenleiDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="servicesDao" class="com.chengxin.bfip.model.ServicesDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="carouselDao" class="com.chengxin.bfip.model.CarouselDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="videosDao" class="com.chengxin.bfip.model.VideosDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="hotsDao" class="com.chengxin.bfip.model.HotsDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="pleixingDao" class="com.chengxin.bfip.model.PleixingDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="xyleixingDao" class="com.chengxin.bfip.model.XyleixingDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="estimatesDao" class="com.chengxin.bfip.model.EstimatesDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="errorsDao" class="com.chengxin.bfip.model.ErrorsDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="productsDao" class="com.chengxin.bfip.model.ProductsDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="opinionsDao" class="com.chengxin.bfip.model.OpinionsDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="clickhistoryDao" class="com.chengxin.bfip.model.ClickHistoryDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="roleDao" class="com.chengxin.bfip.model.RoleDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="provinceDao" class="com.chengxin.bfip.model.ProvinceDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="cityDao" class="com.chengxin.bfip.model.CityDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="reqCodeDao" class="com.chengxin.bfip.model.ReqCodeDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="interestDao" class="com.chengxin.bfip.model.InterestDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="electDao" class="com.chengxin.bfip.model.ElectDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="verifyCodeDao" class="com.chengxin.bfip.model.VerifyCodeDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+</beans>

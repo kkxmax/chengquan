@@ -65,30 +65,9 @@
                 android:textOff="@string/serve"/>
         </LinearLayout>
 
-        <FrameLayout
-            style="@style/layout_m0">
-
-            <LinearLayout
-                android:id="@+id/view_blank_part"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_gray_e5"
-                android:gravity="center"
-                android:visibility="visible"
-                android:orientation="vertical">
-                <ImageView
-                    style="@style/layout_ww"
-                    android:src="@drawable/blank"/>
-                <TextView
-                    style="@style/layout_ww"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:textColor="@color/txt_gray_light"
-                    android:text="@string/empty_evaluate"/>
-            </LinearLayout>
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewPager"
-                style="@style/layout_mm" />
-        </FrameLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            style="@style/layout_m0" />
     </LinearLayout>
 
     <ImageButton

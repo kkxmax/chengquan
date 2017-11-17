@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_white"
+    android:padding="@dimen/margin_normal"
     android:orientation="vertical">
 
     <LinearLayout
         style="@style/layout_mw"
-        android:padding="@dimen/margin_normal"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/img_logo"
+            android:id="@+id/img_avatar"
             android:layout_width="@dimen/image_hot_item_width"
-            android:layout_height="@dimen/image_hot_item_height"
+            android:layout_height="@dimen/image_hot_item_width"
             android:scaleType="centerInside"
             android:src="@drawable/no_image"/>
 
@@ -31,28 +31,28 @@
                     android:text="@string/str_sample"
                     android:textSize="@dimen/text_size_16"
                     android:textStyle="bold"
-                    android:textColor="@color/txt_gray"
-                    android:layout_gravity="center_vertical"/>
-                <TextView
-                    android:id="@+id/txt_fenlei"
-                    style="@style/layout_ww"
-                    android:layout_marginStart="@dimen/margin_normal"
-                    android:padding="@dimen/margin_small"
+                    android:textColor="@color/txt_gray"/>
+
+                <Button
+                    android:id="@+id/btn_state"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="@dimen/margin_small"
                     android:background="@drawable/round_rect_bg_no_border_blue"
                     android:textColor="@color/color_main_blue"
-                    android:textSize="@dimen/text_size_10"
-                    android:text="互联网"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="center_vertical"/>
+                    android:textSize="@dimen/text_size_12"
+                    android:text="互联网"/>
             </LinearLayout>
+
             <TextView
-                android:id="@+id/txt_comment"
+                android:id="@+id/txt_descript"
                 style="@style/layout_mw"
                 android:layout_marginTop="@dimen/margin_normal_below"
                 android:text="@string/str_sample"
                 android:textSize="@dimen/text_size_14"
                 android:textColor="@color/txt_gray"/>
         </LinearLayout>
+
     </LinearLayout>
 
     <View
@@ -64,7 +64,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/txt_status"
+            android:id="@+id/txt_state"
             style="@style/layout_ww"
             android:text="@string/already_down_comedity"
             android:textSize="@dimen/text_size_14"
@@ -88,7 +88,7 @@
             android:textColor="@color/txt_gray"
             android:text="@string/delete"/>
         <Button
-            android:id="@+id/btn_action"
+            android:id="@+id/btn_raise"
             android:layout_width="60dp"
             android:layout_height="24dp"
             android:layout_marginStart="@dimen/margin_normal_below"
@@ -96,6 +96,17 @@
             android:textSize="@dimen/text_size_12"
             android:textColor="@color/color_orange"
             android:text="@string/raise_comedity"/>
+        <Button
+            android:id="@+id/btn_down"
+            android:layout_width="60dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/margin_normal_below"
+            android:background="@drawable/round_bg_no_border_gray"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/txt_gray"
+            android:text="@string/down_comedity"
+            android:visibility="gone"/>
     </LinearLayout>
+
 
 </LinearLayout>

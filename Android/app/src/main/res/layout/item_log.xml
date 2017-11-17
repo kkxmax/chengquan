@@ -9,14 +9,15 @@
     android:orientation="horizontal">
 
     <LinearLayout
-        style="@style/layout_0w"
+        style="@style/layout_ww"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_msg"
+            android:id="@+id/txt_name"
             style="@style/layout_ww"
             android:text="@string/app_name"
             android:textSize="@dimen/text_size_16"
+            android:textStyle="bold"
             android:textColor="@color/txt_gray"/>
 
         <TextView
@@ -30,8 +31,8 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txt_eval_cnt"
-        style="@style/layout_ww"
+        android:id="@+id/txt_count_eval"
+        style="@style/layout_0m"
         android:gravity="right"
         android:text="@string/str_sample"
         android:textSize="@dimen/text_size_14"

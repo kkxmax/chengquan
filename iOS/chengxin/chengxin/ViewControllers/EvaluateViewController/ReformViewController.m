@@ -14,7 +14,7 @@
 @end
 
 @implementation ReformViewController
-@synthesize editPictureView;
+@synthesize scrollPictureView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,11 +28,11 @@
     [aryPic addObject:img2];
     
     if ( IS_IPHONE_5_OR_LESS )
-        editPictureView = [[EditPictureView alloc] initWithFrame:CGRectMake(28, 395, 262, 84) :aryPic];
+        scrollPictureView = [[ScrollPictureView alloc] initWithFrame:CGRectMake(28, 395, 262, 84) :aryPic];
     else
-        editPictureView = [[EditPictureView alloc] initWithFrame:CGRectMake(83, 395, 262, 84) :aryPic];
+        scrollPictureView = [[ScrollPictureView alloc] initWithFrame:CGRectMake(83, 395, 262, 84) :aryPic];
     
-    [self.viewContent addSubview:editPictureView];
+    [self.viewContent addSubview:scrollPictureView];
     
 }
 

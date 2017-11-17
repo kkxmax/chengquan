@@ -11,932 +11,526 @@
         android:layout_height="@dimen/topbar_height"
         layout="@layout/nav_bar" />
 
-    <FrameLayout
-        style="@style/layout_mm"
-        android:background="@color/color_transparent">
-        <LinearLayout
-            style="@style/layout_mm"
-            android:orientation="vertical">
-            <ScrollView
-                style="@style/layout_m0">
+    <ScrollView
+        style="@style/layout_m0">
+        <RelativeLayout
+            style="@style/layout_mw"
+            android:paddingStart="@dimen/margin_normal"
+            android:paddingEnd="@dimen/margin_normal">
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_type"/>
+
+                    <ToggleButton
+                        android:id="@+id/btn_make_eval_type_front"
+                        android:paddingLeft="@dimen/margin_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/row_height_normal"
+                        android:background="@color/color_transparent"
+                        android:drawableLeft="@drawable/btn_radio"
+                        android:checked="true"
+                        android:textColor="@color/txt_dark"
+                        android:textOn="@string/realname_cert_type_person"
+                        android:textOff="@string/realname_cert_type_person"/>
+
+                    <ToggleButton
+                        android:id="@+id/btn_make_eval_type_back"
+                        android:layout_marginStart="@dimen/margin_normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/row_height_normal"
+                        android:background="@color/color_transparent"
+                        android:drawableLeft="@drawable/btn_radio"
+                        android:textColor="@color/txt_dark"
+                        android:textOn="@string/realname_cert_type_enterprise"
+                        android:textOff="@string/realname_cert_type_enterprise"/>
+
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_normal">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_half_photo"/>
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/image_avatar_height"
+                        android:layout_height="@dimen/image_avatar_height">
+                        <ImageButton
+                            android:id="@+id/btn_touxiang"
+                            style="@style/layout_mm"
+                            android:background="@color/color_gray_f5"/>
+                        <ImageView
+                            style="@style/layout_ww"
+                            android:src="@drawable/add_touxiang"
+                            android:layout_centerInParent="true"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_name"
+                        android:layout_gravity="center_vertical"/>
+
+                    <EditText
+                        android:id="@+id/edit_name"
+                        style="@style/layout_0m"
+                        android:background="@color/color_transparent"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/txt_dark"
+                        android:textSize="@dimen/text_size_14" />
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_body_order"
+                        android:layout_gravity="center_vertical"/>
+
+                    <EditText
+                        android:id="@+id/edit_cert_number"
+                        style="@style/layout_0m"
+                        android:background="@color/color_transparent"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/txt_dark"
+                        android:textSize="@dimen/text_size_14" />
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_normal">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_body"
+                        android:layout_gravity="left"/>
+
+                    <Button
+                        android:layout_width="@dimen/image_cert_width"
+                        android:layout_height="@dimen/image_cert_height"
+                        android:paddingTop="@dimen/margin_large_top"
+                        android:drawableTop="@drawable/add_shenfenzheng"
+                        android:gravity="center"
+                        android:text="@string/add_cert"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/text_size_14"
+                        android:background="@color/color_blue_light"/>
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
                 <RelativeLayout
-                    style="@style/layout_mw">
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textColor="@color/txt_gray"
+                            android:text="@string/realname_cert_company"/>
+
+                        <TextView
+                            android:id="@+id/txt_enterprise"
+                            style="@style/layout_0w"
+                            android:lines="1"
+                            android:layout_marginLeft="@dimen/margin_small"
+                            android:text="@string/str_sample"
+                            android:textColor="@color/txt_gray_light"/>
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="@dimen/margin_large_bellow"
+                        android:layout_height="@dimen/margin_large"
+                        android:src="@drawable/more"
+                        android:background="@color/color_transparent"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <RelativeLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textColor="@color/txt_gray"
+                            android:text="@string/realname_cert_job"/>
+
+                        <TextView
+                            android:id="@+id/txt_job_type"
+                            style="@style/layout_0w"
+                            android:lines="1"
+                            android:layout_marginLeft="@dimen/margin_small"
+                            android:text="@string/str_sample"
+                            android:textColor="@color/txt_gray_light"/>
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="@dimen/margin_large_bellow"
+                        android:layout_height="@dimen/margin_large"
+                        android:src="@drawable/more"
+                        android:background="@color/color_transparent"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <RelativeLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textColor="@color/txt_gray"
+                            android:text="@string/realname_cert_place"/>
+
+                        <TextView
+                            android:id="@+id/txt_place"
+                            style="@style/layout_0w"
+                            android:lines="1"
+                            android:layout_marginLeft="@dimen/margin_small"
+                            android:text="@string/str_sample"
+                            android:textColor="@color/txt_gray_light"/>
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:layout_width="@dimen/margin_large_bellow"
+                        android:layout_height="@dimen/margin_large"
+                        android:src="@drawable/more"
+                        android:background="@color/color_transparent"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_position"
+                        android:layout_gravity="center_vertical"/>
+
+                    <EditText
+                        android:id="@+id/edit_job"
+                        style="@style/layout_0m"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:background="@color/color_transparent"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/txt_dark"
+                        android:textSize="@dimen/text_size_14" />
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_weixin"
+                        android:layout_gravity="center_vertical"/>
+
+                    <EditText
+                        android:id="@+id/edit_weixin_number"
+                        style="@style/layout_0m"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:background="@color/color_transparent"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/txt_dark"
+                        android:textSize="@dimen/text_size_14" />
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/Image_message">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:layout_gravity="top"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_experience"/>
+
+                    <EditText
+                        android:id="@+id/edit_experiemce"
+                        style="@style/layout_0m"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:background="@color/color_transparent"
+                        android:textColor="@color/txt_dark"
+                        android:textSize="@dimen/text_size_14" />
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/Image_message">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:layout_gravity="top"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@string/realname_cert_history"/>
+
+                    <EditText
+                        android:id="@+id/edit_history"
+                        style="@style/layout_0m"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:background="@color/color_transparent"
+                        android:textColor="@color/txt_dark"
+                        android:textSize="@dimen/text_size_14" />
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray_8"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingBottom="@dimen/margin_normal_top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/layout_mw"
+                        android:paddingTop="@dimen/margin_normal_most"
+                        android:paddingBottom="@dimen/margin_normal_most"
+                        android:text="@string/realname_cert_explain1"/>
 
                     <LinearLayout
-                        style="@style/layout_mw"
-                        android:orientation="vertical">
+                        style="@style/layout_mw">
 
-                        <LinearLayout
-                            style="@style/layout_mw"
-                            android:layout_height="@dimen/row_height_normal"
-                            android:gravity="center_vertical"
-                            android:padding="@dimen/margin_normal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/text_size_14"
-                                android:text="@string/realname_cert_type"/>
-                            <ToggleButton
-                                android:id="@+id/btn_person"
-                                android:paddingLeft="@dimen/margin_normal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:background="@color/color_transparent"
-                                android:drawableLeft="@drawable/btn_radio"
-                                android:checked="true"
-                                android:textColor="@color/txt_dark"
-                                android:textOn="@string/realname_cert_type_person"
-                                android:textOff="@string/realname_cert_type_person"/>
-                            <ToggleButton
-                                android:id="@+id/btn_enterprise"
-                                android:layout_marginStart="@dimen/margin_normal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:background="@color/color_transparent"
-                                android:drawableLeft="@drawable/btn_radio"
-                                android:textColor="@color/txt_dark"
-                                android:textOn="@string/realname_cert_type_enterprise"
-                                android:textOff="@string/realname_cert_type_enterprise"/>
-                        </LinearLayout>
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
 
-                        <View
-                            style="@style/splite_line_gray"
-                            android:layout_marginLeft="@dimen/margin_normal"
-                            android:layout_marginRight="@dimen/margin_normal"/>
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
 
-                        <!-- Enterprise Part -->
-                        <LinearLayout
-                            android:id="@+id/view_enterprise"
-                            style="@style/layout_mw"
-                            android:orientation="vertical"
-                            android:visibility="visible">
-                            <TextView
-                                style="@style/layout_mw"
-                                android:background="@color/color_gray_f5"
-                                android:padding="@dimen/margin_normal"
-                                android:text="@string/enterprise_detail"
-                                android:textSize="@dimen/text_size_10"
-                                android:textColor="@color/color_main_blue"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:padding="@dimen/margin_normal">
-
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_half_photo_enter"
-                                    android:id="@+id/textView2" />
-
-                                <RelativeLayout
-                                    android:layout_width="@dimen/image_avatar_height"
-                                    android:layout_height="@dimen/image_avatar_height">
-                                    <ImageButton
-                                        style="@style/layout_mm"
-                                        android:background="@color/color_gray_f5"/>
-                                    <ImageView
-                                        android:id="@+id/img_logo_enter"
-                                        style="@style/layout_ww"
-                                        android:src="@drawable/add_touxiang"
-                                        android:layout_centerInParent="true"
-                                        android:scaleType="fitCenter"/>
-                                </RelativeLayout>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_enter_kind"/>
-                                <ToggleButton
-                                    android:id="@+id/btn_enter_1"
-                                    android:paddingLeft="@dimen/margin_normal"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/row_height_normal"
-                                    android:background="@color/color_transparent"
-                                    android:drawableLeft="@drawable/btn_radio"
-                                    android:checked="true"
-                                    android:textColor="@color/txt_dark"
-                                    android:textOn="@string/enterprise"
-                                    android:textOff="@string/enterprise"/>
-                                <ToggleButton
-                                    android:id="@+id/btn_enter_2"
-                                    android:layout_marginStart="@dimen/margin_normal"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="@dimen/row_height_normal"
-                                    android:background="@color/color_transparent"
-                                    android:drawableLeft="@drawable/btn_radio"
-                                    android:textColor="@color/txt_dark"
-                                    android:textOn="@string/enterprise_single"
-                                    android:textOff="@string/enterprise_single"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_enter_fullname"/>
-                                <EditText
-                                    android:id="@+id/edit_name_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:lines="1"
-                                    android:maxLength="30"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_job"/>
-                                <TextView
-                                    android:id="@+id/txt_select_hangye_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:hint="@string/realname_cert_job_select"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:drawableRight="@drawable/more"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_place_enter"/>
-                                <TextView
-                                    android:id="@+id/txt_select_city_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:hint="@string/realname_cert_place_select"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:drawableRight="@drawable/more"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_place_detail_enter"/>
-
-                                <EditText
-                                    android:id="@+id/edit_addr_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:hint="@string/realname_cert_place_detail_select"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:lines="1"
-                                    android:maxLength="30"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/enterprise_net"/>
-                                <EditText
-                                    android:id="@+id/edit_weburl_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14" />
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/weixin"/>
-                                <EditText
-                                    android:id="@+id/edit_weixin_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:lines="1"
-                                    android:gravity="center_vertical"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14" />
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:gravity="top"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/business"/>
-                                <EditText
-                                    android:id="@+id/edit_mainjob_enter"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/row_height_multi_input"
-                                    android:ems="10"
-                                    android:gravity="top"
-                                    android:inputType="textMultiLine"
-                                    android:background="@color/color_transparent"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="100"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_business_code_enter"/>
-                                <EditText
-                                    android:id="@+id/edit_cert_num_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14" />
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:gravity="top"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:layout_gravity="left"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_business_img_enter"/>
-                                <RelativeLayout
-                                    android:layout_width="@dimen/image_cert_width"
-                                    android:layout_height="@dimen/image_cert_height"
-                                    android:background="@color/color_blue_light">
-
-                                    <TextView
-                                        android:id="@+id/txt_cert_photo_add_enter"
-                                        style="@style/layout_ww"
-                                        android:layout_centerInParent="true"
-                                        android:text="@string/add_cert"
-                                        android:textColor="@color/color_white"
-                                        android:drawableTop="@drawable/cert_add_small"
-                                        android:drawablePadding="@dimen/margin_small"/>
-
-                                    <ImageView
-                                        android:id="@+id/img_cert_photo_enter"
-                                        style="@style/layout_mm"
-                                        android:scaleType="fitCenter"
-                                        android:layout_alignParentTop="true"
-                                        android:layout_alignParentStart="true" />
-                                </RelativeLayout>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:gravity="top"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_intro_enter"/>
-                                <EditText
-                                    android:id="@+id/edit_comment_enter"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/row_height_multi_input"
-                                    android:ems="10"
-                                    android:gravity="top"
-                                    android:inputType="textMultiLine"
-                                    android:background="@color/color_transparent"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="300"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:gravity="top"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_decide_enter"/>
-                                <EditText
-                                    android:id="@+id/edit_recommend_enter"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/row_height_multi_input"
-                                    android:ems="10"
-                                    android:gravity="top"
-                                    android:inputType="textMultiLine"
-                                    android:background="@color/color_transparent"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="50"/>
-                            </LinearLayout>
-
-                            <!-- Boss Info Part Start -->
-                            <TextView
-                                style="@style/layout_mw"
-                                android:background="@color/color_gray_f5"
-                                android:padding="@dimen/margin_normal"
-                                android:text="@string/realname_cert_boss_info_enter"
-                                android:textSize="@dimen/text_size_10"
-                                android:textColor="@color/color_main_blue"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/person_name_comma"/>
-                                <EditText
-                                    android:id="@+id/edit_boss_name_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:textColor="@color/txt_dark"
-                                    android:lines="1"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="6"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_position"/>
-                                <EditText
-                                    android:id="@+id/edit_boss_job_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="10"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/phone_number_comma"/>
-                                <EditText
-                                    android:id="@+id/edit_boss_mobile_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_weixin"/>
-                                <EditText
-                                    android:id="@+id/edit_boss_weixin_enter"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="20"/>
-                            </LinearLayout>
-                            <!-- Boss Info Part End -->
-
-                            <View
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/margin_normal"
-                                android:background="@color/color_gray_f5"/>
-
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:padding="@dimen/margin_normal"
-                                android:paddingBottom="@dimen/margin_normal_top"
-                                android:orientation="vertical">
-                                <TextView
-                                    style="@style/layout_mw"
-                                    android:text="@string/realname_cert_explain1"
-                                    android:paddingBottom="@dimen/margin_normal"/>
-                                <com.beijing.chengxin.ui.widget.GridView
-                                    android:id="@+id/grid_view1_enter"
-                                    style="@style/layout_mm"
-                                    android:paddingLeft="@dimen/margin_normal"
-                                    android:paddingRight="@dimen/margin_normal"
-                                    android:gravity="center"
-                                    android:horizontalSpacing="@dimen/margin_normal"
-                                    android:listSelector="@android:color/transparent"
-                                    android:numColumns="3"
-                                    android:scrollingCache="true"
-                                    android:verticalSpacing="@dimen/margin_normal"/>
-                                <View style="@style/splite_line_gray"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:padding="@dimen/margin_normal"
-                                android:paddingBottom="@dimen/margin_normal_top"
-                                android:orientation="vertical">
-                                <TextView
-                                    style="@style/layout_mw"
-                                    android:paddingBottom="@dimen/margin_normal"
-                                    android:text="@string/realname_cert_explain2"/>
-                                <com.beijing.chengxin.ui.widget.GridView
-                                    android:id="@+id/grid_view2_enter"
-                                    style="@style/layout_mm"
-                                    android:paddingLeft="@dimen/margin_normal"
-                                    android:paddingRight="@dimen/margin_normal"
-                                    android:gravity="center"
-                                    android:horizontalSpacing="@dimen/margin_normal"
-                                    android:listSelector="@android:color/transparent"
-                                    android:numColumns="3"
-                                    android:scrollingCache="true"
-                                    android:verticalSpacing="@dimen/margin_normal"/>
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <!-- Person Part -->
-                        <LinearLayout
-                            android:id="@+id/view_person"
-                            style="@style/layout_mw"
-                            android:orientation="vertical"
-                            android:visibility="gone">
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_half_photo"/>
-                                <RelativeLayout
-                                    android:layout_width="@dimen/image_avatar_height"
-                                    android:layout_height="@dimen/image_avatar_height">
-                                    <ImageButton
-                                        style="@style/layout_mm"
-                                        android:background="@color/color_gray_f5"/>
-                                    <ImageView
-                                        android:id="@+id/img_logo"
-                                        style="@style/layout_ww"
-                                        android:src="@drawable/add_touxiang"
-                                        android:layout_centerInParent="true"
-                                        android:scaleType="fitCenter"/>
-                                </RelativeLayout>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_name"
-                                    android:layout_gravity="center_vertical"/>
-                                <EditText
-                                    android:id="@+id/edit_realname"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="6"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_body_order"
-                                    android:layout_gravity="center_vertical"/>
-                                <EditText
-                                    android:id="@+id/edit_cert_num"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14" />
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_body"
-                                    android:layout_gravity="left"/>
-                                <RelativeLayout
-                                    android:layout_width="@dimen/image_cert_width"
-                                    android:layout_height="@dimen/image_cert_height"
-                                    android:background="@color/color_blue_light">
-                                    <TextView
-                                        android:id="@+id/txt_cert_photo_add"
-                                        style="@style/layout_ww"
-                                        android:layout_centerInParent="true"
-                                        android:text="@string/add_cert"
-                                        android:textColor="@color/color_white"
-                                        android:drawableTop="@drawable/cert_add_small"
-                                        android:drawablePadding="@dimen/margin_small"/>
-                                    <ImageView
-                                        android:id="@+id/img_cert_photo"
-                                        style="@style/layout_mm"
-                                        android:scaleType="fitCenter"/>
-                                </RelativeLayout>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <RelativeLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-                                    <TextView
-                                        style="@style/layout_ww"
-                                        android:textColor="@color/txt_gray"
-                                        android:text="@string/realname_cert_company"/>
-                                    <EditText
-                                        android:id="@+id/txt_select_enterprise"
-                                        style="@style/layout_0m"
-                                        android:background="@color/color_transparent"
-                                        android:gravity="center_vertical"
-                                        android:hint="@string/realname_cert_enterprise_input"
-                                        android:textColor="@color/txt_dark"
-                                        android:textSize="@dimen/text_size_14"
-                                        android:drawableRight="@drawable/more"/>/>
-                                </LinearLayout>
-                            </RelativeLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <RelativeLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-                                    <TextView
-                                        style="@style/layout_ww"
-                                        android:textColor="@color/txt_gray"
-                                        android:text="@string/realname_cert_job"/>
-                                    <TextView
-                                        android:id="@+id/txt_select_hangye"
-                                        style="@style/layout_0m"
-                                        android:background="@color/color_transparent"
-                                        android:gravity="center_vertical"
-                                        android:hint="@string/realname_cert_job_select"
-                                        android:textColor="@color/txt_dark"
-                                        android:textSize="@dimen/text_size_14"
-                                        android:drawableRight="@drawable/more"/>/>
-                                </LinearLayout>
-                            </RelativeLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <RelativeLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-                                    <TextView
-                                        style="@style/layout_ww"
-                                        android:textColor="@color/txt_gray"
-                                        android:text="@string/realname_cert_place"/>
-                                    <TextView
-                                        android:id="@+id/txt_select_city"
-                                        style="@style/layout_0m"
-                                        android:background="@color/color_transparent"
-                                        android:gravity="center_vertical"
-                                        android:hint="@string/realname_cert_place_select"
-                                        android:textColor="@color/txt_dark"
-                                        android:textSize="@dimen/text_size_14"
-                                        android:drawableRight="@drawable/more"/>/>
-                                </LinearLayout>
-                            </RelativeLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_position"
-                                    android:layout_gravity="center_vertical"/>
-                                <EditText
-                                    android:id="@+id/edit_job"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="10"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:layout_height="@dimen/row_height_normal"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_weixin"
-                                    android:layout_gravity="center_vertical"/>
-                                <EditText
-                                    android:id="@+id/edit_weixin"
-                                    style="@style/layout_0m"
-                                    android:background="@color/color_transparent"
-                                    android:gravity="center_vertical"
-                                    android:lines="1"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="20"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:gravity="top"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_experience"/>
-                                <EditText
-                                    android:id="@+id/edit_experience"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/row_height_multi_input"
-                                    android:ems="10"
-                                    android:gravity="top"
-                                    android:inputType="textMultiLine"
-                                    android:background="@color/color_transparent"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="300"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:gravity="top"
-                                android:padding="@dimen/margin_normal">
-                                <TextView
-                                    style="@style/layout_ww"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:text="@string/realname_cert_history"/>
-                                <EditText
-                                    android:id="@+id/edit_history"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/row_height_multi_input"
-                                    android:ems="10"
-                                    android:gravity="top"
-                                    android:inputType="textMultiLine"
-                                    android:background="@color/color_transparent"
-                                    android:textColor="@color/txt_dark"
-                                    android:textSize="@dimen/text_size_14"
-                                    android:maxLength="300"/>
-                            </LinearLayout>
-                            <View
-                                style="@style/splite_line_gray"
-                                android:layout_marginLeft="@dimen/margin_normal"
-                                android:layout_marginRight="@dimen/margin_normal"/>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:padding="@dimen/margin_normal"
-                                android:paddingBottom="@dimen/margin_normal_top"
-                                android:orientation="vertical">
-                                <TextView
-                                    style="@style/layout_mw"
-                                    android:text="@string/realname_cert_explain1"
-                                    android:paddingBottom="@dimen/margin_normal"/>
-                                <com.beijing.chengxin.ui.widget.GridView
-                                    android:id="@+id/grid_view1"
-                                    style="@style/layout_mm"
-                                    android:paddingLeft="@dimen/margin_normal"
-                                    android:paddingRight="@dimen/margin_normal"
-                                    android:gravity="center"
-                                    android:horizontalSpacing="@dimen/margin_normal"
-                                    android:listSelector="@android:color/transparent"
-                                    android:numColumns="3"
-                                    android:scrollingCache="true"
-                                    android:verticalSpacing="@dimen/margin_normal"/>
-                                <View style="@style/splite_line_gray"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                style="@style/layout_mw"
-                                android:padding="@dimen/margin_normal"
-                                android:paddingBottom="@dimen/margin_normal_top"
-                                android:orientation="vertical">
-                                <TextView
-                                    style="@style/layout_mw"
-                                    android:paddingBottom="@dimen/margin_normal"
-                                    android:text="@string/realname_cert_explain2"/>
-                                <com.beijing.chengxin.ui.widget.GridView
-                                    android:id="@+id/grid_view2"
-                                    style="@style/layout_mm"
-                                    android:paddingLeft="@dimen/margin_normal"
-                                    android:paddingRight="@dimen/margin_normal"
-                                    android:gravity="center"
-                                    android:horizontalSpacing="@dimen/margin_normal"
-                                    android:listSelector="@android:color/transparent"
-                                    android:numColumns="3"
-                                    android:scrollingCache="true"
-                                    android:verticalSpacing="@dimen/margin_normal"/>
-                            </LinearLayout>
-                        </LinearLayout>
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
 
                     </LinearLayout>
 
-                    <ImageView
-                        android:id="@+id/img_status"
-                        style="@style/layout_ww"
-                        android:src="@drawable/label_status_reject"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/margin_normal_top"/>
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:paddingBottom="@dimen/margin_normal_top">
 
-                </RelativeLayout>
-            </ScrollView>
-            <LinearLayout
-                android:id="@+id/view_submit"
-                style="@style/layout_mw"
-                android:background="@color/color_gray_f5"
-                android:padding="@dimen/margin_normal">
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
 
-                <Button
-                    android:id="@+id/btn_submit"
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
+
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
+
+                    </LinearLayout>
+
+                    <View style="@style/splite_line_gray"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     style="@style/layout_mw"
-                    android:layout_height="@dimen/login_button_height"
-                    android:background="@drawable/round_rect_orange_gradient"
-                    android:textColor="@color/color_white"
-                    android:textSize="@dimen/text_size_16"
-                    android:text="@string/realname_cert_button"/>
+                    android:paddingBottom="@dimen/margin_normal_top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/layout_mw"
+                        android:paddingTop="@dimen/margin_normal"
+                        android:paddingBottom="@dimen/margin_normal"
+                        android:text="@string/realname_cert_explain2"/>
+
+                    <LinearLayout
+                        style="@style/layout_mw">
+
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
+
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
+
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/layout_mw">
+
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
+
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
+
+                        <ToggleButton
+                            android:layout_width="@dimen/image_scroll_view_height"
+                            android:layout_height="@dimen/margin_extra"
+                            android:paddingRight="@dimen/margin_extra"
+                            android:drawableLeft="@drawable/btn_check"
+                            android:background="@color/color_transparent"
+                            android:textOn="@string/realname_cert_mutual"
+                            android:textOff="@string/realname_cert_mutual"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/view_condition"
-            style="@style/layout_mm"
-            android:background="@color/color_black_trans"
-            android:visibility="gone"
-            android:clickable="true">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-            </LinearLayout>
-            <FrameLayout
-                android:id="@+id/view_condition_body"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="5">
-            </FrameLayout>
-        </LinearLayout>
-    </FrameLayout>
+            <ImageView
+                style="@style/layout_ww"
+                android:src="@drawable/label_yijujue"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_normal_top"/>
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_buy"
+        style="@style/layout_mw"
+        android:background="@color/color_gray_f5"
+        android:padding="@dimen/margin_normal">
+
+        <Button
+            android:id="@+id/btn_make_comedity"
+            style="@style/layout_mw"
+            android:layout_height="@dimen/login_button_height"
+            android:background="@drawable/round_rect_orange_gradient"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_16"
+            android:text="@string/realname_cert_button"/>
+
+    </LinearLayout>
 
 </LinearLayout>

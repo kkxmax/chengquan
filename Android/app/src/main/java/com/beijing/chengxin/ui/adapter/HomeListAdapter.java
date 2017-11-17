@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.beijing.chengxin.R;
-import com.beijing.chengxin.config.Constants;
+import com.beijing.chengxin.ui.fragment.MainHomeFragment;
 import java.util.List;
 
 public class HomeListAdapter extends BaseAdapter {
@@ -55,7 +55,7 @@ public class HomeListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, final ViewGroup parent) {
 //        final PlayingItemResponse data = (PlayingItemResponse) listBoxs.get(position);
         if (convertView == null) {
-            if (listType == Constants.INDEX_FAMILIAR) {
+            if (listType == MainHomeFragment.INDEX_FAMILIAR) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail, parent, false);
                 ImageView imgBlank = (ImageView)convertView.findViewById(R.id.img_blank);
                 if (position % 2 == 0)
@@ -63,11 +63,11 @@ public class HomeListAdapter extends BaseAdapter {
                 else
                     imgBlank.setImageResource(R.drawable.blank_person);
             }
-            else if (listType == Constants.INDEX_ENTERPRISE)
+            else if (listType == MainHomeFragment.INDEX_ENTERPRISE)
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_enterprise, parent, false);
-            else if (listType == Constants.INDEX_ITEM || listType == Constants.INDEX_SERVE )
+            else if (listType == MainHomeFragment.INDEX_ITEM || listType == MainHomeFragment.INDEX_SERVE )
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_item_serve, parent, false);
-            else if (listType == Constants.INDEX_COMEDITY)
+            else if (listType == MainHomeFragment.INDEX_COMEDITY)
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comedity, parent, false);
         }
 

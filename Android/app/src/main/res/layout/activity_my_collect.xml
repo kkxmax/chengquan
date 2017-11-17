@@ -19,6 +19,8 @@
         <ToggleButton
             android:id="@+id/btn_comedity"
             style="@style/layout_0m"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_normal"
             android:textSize="@dimen/text_size_14"
             android:textColor="@color/txt_orange_gray"
             android:background="@drawable/btn_person_tab"
@@ -28,6 +30,8 @@
         <ToggleButton
             android:id="@+id/btn_hot"
             style="@style/layout_0m"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginRight="@dimen/margin_large"
             android:textSize="@dimen/text_size_14"
             android:textColor="@color/txt_orange_gray"
             android:background="@drawable/btn_person_tab"
@@ -37,27 +41,16 @@
 
     <FrameLayout
         style="@style/layout_m0">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView1"
+            style="@style/layout_mm"
+            android:background="@color/color_gray_e5"/>
 
-        <LinearLayout
-            android:id="@+id/view_blank_part"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView2"
+            style="@style/layout_mm"
             android:background="@color/color_gray_e5"
-            android:gravity="center"
-            android:visibility="visible"
-            android:orientation="vertical">
-            <ImageView
-                style="@style/layout_ww"
-                android:src="@drawable/blank"/>
-            <TextView
-                style="@style/layout_ww"
-                android:layout_marginTop="@dimen/margin_normal"
-                android:textColor="@color/txt_gray_light"
-                android:text="@string/empty_evaluate"/>
-        </LinearLayout>
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            style="@style/layout_mm"/>
+            android:visibility="gone"/>
     </FrameLayout>
 
 </LinearLayout>

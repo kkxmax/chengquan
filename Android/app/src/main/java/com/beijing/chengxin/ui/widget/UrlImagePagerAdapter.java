@@ -68,11 +68,11 @@ public class UrlImagePagerAdapter extends RecyclingPagerAdapter {
     public View getView(final int position, View view, ViewGroup container) {
         if (view == null) {
             view = new ImageView(container.getContext());
-            ((ImageView) view).setScaleType(ImageView.ScaleType.FIT_CENTER);
+            ((ImageView) view).setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         Picasso.with(container.getContext())
                 .load(String.valueOf(imageUrlList.get(getPosition(position))))
-                .placeholder(R.drawable.no_image)
+                .placeholder(R.drawable.sample_1)
                 .skipMemoryCache()
                 .into((ImageView) view);
         if (itemClickListener != null) {

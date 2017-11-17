@@ -4,18 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_white"
+    android:padding="@dimen/margin_normal"
     android:orientation="vertical">
 
     <LinearLayout
         style="@style/layout_mw"
-        android:padding="@dimen/margin_normal"
         android:orientation="horizontal">
         <ImageView
-            android:id="@+id/img_logo"
+            android:id="@+id/img_avatar"
             android:layout_width="@dimen/image_hot_item_width"
-            android:layout_height="@dimen/image_hot_item_height"
+            android:layout_height="@dimen/image_hot_item_width"
             android:background="@drawable/no_image"
-            android:scaleType="fitCenter" />
+            android:scaleType="centerInside" />
 
         <LinearLayout
             style="@style/layout_0w"
@@ -25,6 +25,7 @@
             <TextView
                 android:id="@+id/txt_title"
                 style="@style/layout_mw"
+                android:layout_marginStart="@dimen/margin_small"
                 android:text="@string/str_sample"
                 android:textSize="@dimen/text_size_14"
                 android:textColor="@color/txt_gray"/>
@@ -32,7 +33,7 @@
             <TextView
                 android:id="@+id/txt_price"
                 style="@style/layout_mw"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_normal_below"
                 android:text="@string/str_sample"
                 android:textSize="@dimen/text_size_14"
                 android:textColor="@color/color_orange"/>
@@ -49,7 +50,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/txt_status"
+            android:id="@+id/txt_state"
             style="@style/layout_ww"
             android:text="@string/already_down_comedity"
             android:textSize="@dimen/text_size_14"
@@ -73,7 +74,7 @@
             android:textColor="@color/txt_gray"
             android:text="@string/delete"/>
         <Button
-            android:id="@+id/btn_action"
+            android:id="@+id/btn_raise"
             android:layout_width="60dp"
             android:layout_height="24dp"
             android:layout_marginStart="@dimen/margin_normal_below"
@@ -81,6 +82,17 @@
             android:textSize="@dimen/text_size_12"
             android:textColor="@color/color_orange"
             android:text="@string/raise_comedity"/>
+        <Button
+            android:id="@+id/btn_down"
+            android:layout_width="60dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="@dimen/margin_normal_below"
+            android:background="@drawable/round_bg_no_border_gray"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/txt_gray"
+            android:text="@string/down_comedity"
+            android:visibility="gone"/>
     </LinearLayout>
+
 
 </LinearLayout>

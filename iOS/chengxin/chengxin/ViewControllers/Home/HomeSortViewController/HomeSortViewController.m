@@ -23,11 +23,6 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    nSelectedIndex = [CommonData sharedInstance].sortOrderIndex - 1;
-    [self updateTable];
-}
 - (void) DownloadNewsItem:(NSNotification *) notification
 {
 }
@@ -52,9 +47,7 @@
 - (IBAction)setSelected:(id)sender {
     UIButton *button = (UIButton *)sender;
     nSelectedIndex = button.tag;
-    [CommonData sharedInstance].sortOrderIndex = nSelectedIndex + 1;
     [self updateTable];
-    [[NSNotificationCenter defaultCenter] postNotificationName:HIDE_SORT_VIEW_NOTIFICATION object:nil];
 }
 
 /*

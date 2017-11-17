@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.beijing.chengxin.R;
-import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.ui.listener.OnItemClickListener;
 
 import java.util.List;
@@ -74,8 +73,7 @@ public class BuyCertActivity extends ParentFragmentActivity {
     OnItemClickListener listItemClickListener = new OnItemClickListener() {
         @Override
         public void onListItemClick(int position, View view) {
-//            Intent intent = new Intent(this, DetailActivity.class);
-//            intent.putExtra("type", Constants.INDEX_ENTERPRISE);
+//            Intent intent = new Intent(this, EnterpriseDetailActivity.class);
 //            startActivity(intent);
         }
     };

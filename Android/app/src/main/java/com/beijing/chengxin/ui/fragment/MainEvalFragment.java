@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,12 +17,9 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.beijing.chengxin.R;
-import com.beijing.chengxin.ui.activity.DetailActivity;
-import com.beijing.chengxin.ui.activity.MainActivity;
+import com.beijing.chengxin.ui.activity.EvalDetailActivity;
 import com.beijing.chengxin.ui.activity.MakeEvaluationActivity;
 import com.beijing.chengxin.ui.listener.OnItemClickListener;
-import com.beijing.chengxin.ui.view.HangyeListView;
-import com.beijing.chengxin.utils.CommonUtils;
 
 import java.util.List;
 
@@ -31,11 +27,9 @@ public class MainEvalFragment extends Fragment {
 
 	public final String TAG = MainEvalFragment.class.getName();
     private View rootView;
-    public HangyeListView conditionEvalView;
 
     ToggleButton btnPerson, btnEnterprise;
     ImageButton btnWrite;
-    Button btnConditionSet;
 
     RecyclerView mRecyclerView1, mRecyclerView2;
     RecyclerView.Adapter mAdapter1, mAdapter2;
@@ -52,12 +46,10 @@ public class MainEvalFragment extends Fragment {
         btnPerson = (ToggleButton)rootView.findViewById(R.id.btn_person);
         btnEnterprise = (ToggleButton)rootView.findViewById(R.id.btn_enterprise);
         btnWrite = (ImageButton)rootView.findViewById(R.id.btn_write);
-        btnConditionSet = (Button) rootView.findViewById(R.id.btn_condition_set);
 
         btnPerson.setOnClickListener(mButtonClickListener);
         btnEnterprise.setOnClickListener(mButtonClickListener);
         btnWrite.setOnClickListener(mButtonClickListener);
-        btnConditionSet.setOnClickListener(mButtonClickListener);
 
         mRecyclerView1 = (RecyclerView)rootView.findViewById(R.id.recyclerView1);
         mAdapter1 = new ItemDetailAdapter(getActivity(), null, listItemClickListener);
@@ -87,9 +79,7 @@ public class MainEvalFragment extends Fragment {
     OnItemClickListener listItemClickListener = new OnItemClickListener() {
         @Override
         public void onListItemClick(int position, View view) {
-
-            Intent intent = new Intent(getActivity(), DetailActivity.class);
-//            intent.putExtra("id", )
+            Intent intent = new Intent(getActivity(), EvalDetailActivity.class);
             startActivity(intent);
         }
     };
@@ -119,9 +109,6 @@ public class MainEvalFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), MakeEvaluationActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    break;
-                case R.id.btn_condition_set:
-                    onClickedConditionSet();
                     break;
             }
         }
@@ -188,32 +175,4 @@ public class MainEvalFragment extends Fragment {
             }
         }
     }
-
-    private void onClickedConditionSet() {
-        int visibility = MainActivity.mainActivity.layoutCondition.getVisibility();
-        if (visibility == View.GONE) {
-            MainActivity.mainActivity.layoutCondition.setVisibility(View.VISIBLE);
-            if (conditionEvalView == null) {
-                conditionEvalView = new HangyeListView(getContext(), hyListener);
-                MainActivity.mainActivity.layoutConditionBody.addView(conditionEvalView);
-                conditionEvalView.setVisibility(View.VISIBLE);
-            }
-            if (conditionEvalView.getVisibility() == View.GONE) {
-                conditionEvalView.setVisibility(View.VISIBLE);
-            }
-            CommonUtils.animationShowFromRight(conditionEvalView);
-        } else {
-            MainActivity.mainActivity.layoutCondition.setVisibility(View.GONE);
-            if (conditionEvalView != null && conditionEvalView.getVisibility() == View.VISIBLE) {
-                conditionEvalView.setVisibility(View.GONE);
-            }
-        }
-    }
-
-    HangyeListView.OnHangyeSelectListener hyListener = new HangyeListView.OnHangyeSelectListener() {
-        @Override
-        public void OnHangyeSelected(List<Integer> list) {
-        }
-    };
-
 }

@@ -22,22 +22,39 @@
             <LinearLayout
                 style="@style/layout_mw"
                 android:orientation="vertical">
-
-                <RelativeLayout
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/app_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/comedity_detail_image_height">
-                    <com.beijing.chengxin.ui.widget.AutoScrollViewPager
-                        android:id="@+id/autoScrollViewPager"
-                        style="@style/layout_mm"
-                        android:clickable="true"/>
-                    <com.beijing.chengxin.ui.widget.PageIndicator
-                        android:id="@+id/pageIndicator"
-                        style="@style/layout_ww"
-                        android:layout_marginRight="@dimen/margin_small"
-                        android:layout_marginBottom="@dimen/margin_small"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentEnd="true"/>
-                </RelativeLayout>
+                    android:layout_height="@dimen/comedity_detail_image_height"
+                    android:fitsSystemWindows="true"
+                    android:theme="@style/AppTheme.AppBarOverlay">
+
+                    <android.support.design.widget.CollapsingToolbarLayout
+                        android:id="@+id/toolbar_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fitsSystemWindows="true"
+                        app:contentScrim="?attr/colorPrimary"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <com.beijing.chengxin.ui.widget.AutoScrollViewPager
+                                android:id="@+id/autoScrollViewPager"
+                                style="@style/layout_mm"
+                                android:clickable="true"/>
+                            <com.beijing.chengxin.ui.widget.PageIndicator
+                                android:id="@+id/pageIndicator"
+                                style="@style/layout_ww"
+                                android:layout_marginRight="@dimen/margin_small"
+                                android:layout_marginBottom="@dimen/margin_small"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"/>
+                        </RelativeLayout>
+
+                    </android.support.design.widget.CollapsingToolbarLayout>
+                </android.support.design.widget.AppBarLayout>
 
                 <RelativeLayout
                     style="@style/layout_mw"
@@ -61,7 +78,7 @@
                                 android:background="@drawable/round_rect_blue_white"/>
 
                             <TextView
-                                android:id="@+id/txt_name"
+                                android:id="@+id/txt_comedity_name"
                                 style="@style/layout_ww"
                                 android:layout_marginLeft="@dimen/margin_normal"
                                 android:textSize="@dimen/text_size_14"
@@ -71,7 +88,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/txt_price"
+                            android:id="@+id/txt_comedity_price"
                             style="@style/layout_ww"
                             android:paddingTop="@dimen/margin_normal"
                             android:textColor="@color/color_orange_dark"
@@ -81,15 +98,22 @@
 
                     </LinearLayout>
 
-                    <ToggleButton
-                        android:id="@+id/btn_favorite"
-                        android:layout_width="30dp"
-                        android:layout_height="29dp"
-                        android:background="@drawable/hot_collection"
+                    <ImageButton
+                        android:id="@+id/btn_no_rating"
+                        style="@style/layout_ww"
+                        android:src="@drawable/hot_collection_nor"
+                        android:background="@color/color_transparent"
                         android:layout_alignParentRight="true"
-                        android:textOn=""
-                        android:textOff=""/>
+                        android:layout_marginTop="@dimen/margin_normal_top"/>
 
+                    <ImageButton
+                        android:id="@+id/btn_rating"
+                        style="@style/layout_ww"
+                        android:src="@drawable/hot_collection_sel"
+                        android:background="@color/color_transparent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="@dimen/margin_normal_top"
+                        android:visibility="invisible"/>
                 </RelativeLayout>
 
 
@@ -117,7 +141,6 @@
                         android:text="@string/comedity_number"/>
 
                     <TextView
-                        android:id="@+id/txt_code"
                         style="@style/layout_ww"
                         android:layout_marginEnd="@dimen/margin_normal"
                         android:textSize="@dimen/text_size_10"
@@ -159,9 +182,8 @@
                             android:text="@string/item_net"/>
 
                         <TextView
-                            android:id="@+id/txt_weburl"
-                            style="@style/layout_0m"
-                            android:gravity="center_vertical"
+                            android:id="@+id/txt_item_net"
+                            style="@style/layout_0w"
                             android:lines="1"
                             android:layout_marginLeft="@dimen/margin_small"
                             android:textSize="@dimen/text_size_12"
@@ -190,7 +212,7 @@
                             android:text="@string/comedity_market"/>
 
                         <TextView
-                            android:id="@+id/txt_place"
+                            android:id="@+id/txt_comedity_market"
                             style="@style/layout_0w"
                             android:lines="1"
                             android:layout_marginLeft="@dimen/margin_small"
@@ -212,7 +234,6 @@
                         android:layout_height="match_parent"/>
 
                     <LinearLayout
-                        android:id="@+id/layout_account"
                         style="@style/layout_mw"
                         android:padding="@dimen/margin_normal">
 
@@ -244,9 +265,7 @@
                             android:layout_marginLeft="@dimen/margin_normal">
 
                             <TextView
-                                android:id="@+id/txt_enter_name"
-                                style="@style/layout_mw"
-                                android:lines="1"
+                                style="@style/layout_ww"
                                 android:text="@string/company_name"
                                 android:textSize="@dimen/text_size_14"
                                 android:textStyle="bold"
@@ -264,10 +283,9 @@
                                         android:textSize="@dimen/text_size_12"/>
 
                                     <TextView
-                                        android:id="@+id/txt_enter_code"
-                                        style="@style/layout_mw"
+                                        android:id="@+id/txt_instead_num"
+                                        style="@style/layout_ww"
                                         android:layout_marginLeft="@dimen/margin_small"
-                                        android:lines="1"
                                         android:text="@string/str_sample"
                                         android:textSize="@dimen/text_size_12"/>
 
@@ -292,7 +310,7 @@
                                     android:textSize="@dimen/text_size_10"/>
 
                                 <TextView
-                                    android:id="@+id/txt_enter_rate"
+                                    android:id="@+id/txt_instead_rate"
                                     style="@style/layout_ww"
                                     android:layout_marginLeft="@dimen/margin_small"
                                     android:text="@string/str_sample"
@@ -308,7 +326,7 @@
         </ScrollView>
 
         <ImageButton
-            android:id="@+id/btn_call"
+            android:id="@+id/btn_phone"
             style="@style/layout_ww"
             android:src="@drawable/call"
             android:background="@color/color_transparent"

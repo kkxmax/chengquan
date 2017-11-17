@@ -12,7 +12,5 @@
 {
 }
 @property (nonatomic, strong) IBOutlet UITableView *businessTableView;
-@property (nonatomic, assign) NSInteger mChoice;
-@property (nonatomic, assign) BOOL isSingleSelectionMode;
 
 @end

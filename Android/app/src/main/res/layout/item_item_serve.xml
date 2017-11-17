@@ -20,7 +20,7 @@
                 android:layout_width="@dimen/image_avatar_height"
                 android:layout_height="@dimen/image_avatar_height"
                 android:background="@drawable/no_image"
-                android:scaleType="centerCrop"/>
+                android:scaleType="center"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -38,28 +38,22 @@
                     android:textSize="@dimen/text_size_16"
                     android:textStyle="bold"
                     android:textColor="@color/txt_dark"/>
-                <TextView
-                    android:id="@+id/txt_type"
-                    style="@style/layout_ww"
-                    android:paddingStart="@dimen/margin_normal"
-                    android:paddingEnd="@dimen/margin_normal"
-                    android:paddingTop="@dimen/margin_small"
-                    android:paddingBottom="@dimen/margin_small"
-                    android:layout_marginStart="@dimen/margin_small"
+                <Button
+                    android:id="@+id/btn_state"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="@dimen/margin_normal"
                     android:background="@drawable/round_rect_bg_no_border_blue"
-                    android:gravity="center"
                     android:textColor="@color/color_main_blue"
                     android:textSize="@dimen/text_size_12"
-                    android:text="互联网"/>
+                    android:text="教育"/>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/txt_descript"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/item_descript_height"
                 android:layout_marginTop="@dimen/margin_normal"
-                android:maxLines="3"
-                android:ellipsize="end"
                 android:text="@string/str_sample_item"
                 android:textSize="@dimen/text_size_14"
                 android:textColor="@color/txt_dark"/>

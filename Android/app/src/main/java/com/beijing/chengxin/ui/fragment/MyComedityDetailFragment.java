@@ -5,12 +5,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.beijing.chengxin.R;
+import com.beijing.chengxin.ui.activity.LoginActivity;
 import com.beijing.chengxin.ui.activity.MyWriteActivity;
-import com.beijing.chengxin.config.Constants;
+import com.beijing.chengxin.ui.config.Constants;
 import com.beijing.chengxin.ui.widget.AutoScrollViewPager;
 import com.beijing.chengxin.ui.widget.PageIndicator;
 import com.beijing.chengxin.ui.widget.UrlImagePagerAdapter;
@@ -40,9 +43,9 @@ public class MyComedityDetailFragment extends Fragment {
         ((TextView)rootView.findViewById(R.id.txt_nav_title)).setText(getString(R.string.comedity_detail));
 
         listRecommendImageUrl = new ArrayList<String>();
-        listRecommendImageUrl.add(Constants.API_ADDR);
-        listRecommendImageUrl.add(Constants.API_ADDR);
-        listRecommendImageUrl.add(Constants.API_ADDR);
+        listRecommendImageUrl.add(Constants.WEB_HOST_ADDRESS);
+        listRecommendImageUrl.add(Constants.WEB_HOST_ADDRESS);
+        listRecommendImageUrl.add(Constants.WEB_HOST_ADDRESS);
         recommendImageAdapter = new UrlImagePagerAdapter(listRecommendImageUrl).setInfiniteLoop(true);
         recommendViewPager = (AutoScrollViewPager) rootView.findViewById(R.id.autoScrollViewPager);
         recommendViewPager.setAdapter(recommendImageAdapter);

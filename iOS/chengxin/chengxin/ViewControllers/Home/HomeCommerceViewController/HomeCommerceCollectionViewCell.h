@@ -10,8 +10,4 @@
 
 @interface HomeCommerceCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *produceNameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *producePriceLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *produceImageView;
-
 @end

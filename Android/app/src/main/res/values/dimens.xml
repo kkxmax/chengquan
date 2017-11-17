@@ -32,7 +32,6 @@
 
     <!--main screen-->
     <dimen name="top_tab_height">40dp</dimen>
-    <dimen name="name_max_width">150dp</dimen>
     <dimen name="image_scroll_view_height">120dp</dimen>
     <dimen name="comedity_image_height">180dp</dimen>
     <dimen name="video_height">200dp</dimen>
@@ -42,25 +41,13 @@
     <dimen name="Image_message">64dp</dimen>
     <dimen name="item_descript_height">90dp</dimen>
     <dimen name="image_hot_item_width">80dp</dimen>
-    <dimen name="image_hot_item_height">84dp</dimen>
-    <dimen name="image_cert_width">140dp</dimen>
+    <dimen name="image_cert_width">120dp</dimen>
     <dimen name="image_cert_height">80dp</dimen>
-    <dimen name="image_fabu_height">80dp</dimen>
 
     <dimen name="row_height_tiny">20dp</dimen>
     <dimen name="row_height_smaller">28dp</dimen>
     <dimen name="row_height_small">32dp</dimen>
     <dimen name="row_height_normal">40dp</dimen>
     <dimen name="row_height_large">48dp</dimen>
-    <dimen name="row_height_multi_input">100dp</dimen>
-
-    <dimen name="btn_width_large">120dp</dimen>
-    <dimen name="btn_width_normal">100dp</dimen>
-    <dimen name="btn_width_small">60dp</dimen>
-
-    <!-- sort, select screen -->
-    <dimen name="sort_title_height">40dp</dimen>
-    <dimen name="sort_btn_height">55dp</dimen>
-    <dimen name="sort_item_height">35dp</dimen>
 
 </resources>

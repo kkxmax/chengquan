@@ -9,8 +9,8 @@
 		android:id="@+id/imgPhoto"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/comedity_image_height"
-		android:src="@drawable/no_image"
-		android:scaleType="centerInside"
+		android:background="@drawable/no_image"
+		android:scaleType="center"
 		android:contentDescription="@string/img_descript"/>
 
     <LinearLayout
@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="1"
-			android:ellipsize="end"
             android:text="@string/str_sample"
             android:textColor="@color/txt_gray"
             android:textSize="@dimen/text_size_14"/>

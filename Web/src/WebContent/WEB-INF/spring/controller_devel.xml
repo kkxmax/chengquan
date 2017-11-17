@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="commonControllerMethodNameResolver"
+		class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/api.html">init</prop>
+				<prop key="/testApi.html">init</prop>
+				<prop key="/manage/login.html">init</prop>
+				<prop key="/manage/profile.html">init</prop>
+				<prop key="/manage/notice.html">init</prop>
+				<prop key="/manage/user.html">init</prop>
+				<prop key="/manage/fenlei.html">init</prop>
+				<prop key="/manage/pleixing.html">init</prop>
+				<prop key="/manage/xyleixing.html">init</prop>
+				<prop key="/manage/personal_account.html">init</prop>
+				<prop key="/manage/enterprise_account.html">init</prop>
+				<prop key="/manage/product.html">init</prop>
+				<prop key="/manage/item.html">init</prop>
+				<prop key="/manage/service.html">init</prop>
+				<prop key="/manage/carousel.html">init</prop>
+				<prop key="/manage/video.html">init</prop>
+				<prop key="/manage/hots.html">init</prop>
+				<prop key="/manage/estimate.html">init</prop>
+				<prop key="/manage/error.html">init</prop>
+				<prop key="/manage/opinion.html">init</prop>
+				<prop key="/manage/link_statis.html">init</prop>
+				<prop key="/manage/item_statis.html">init</prop>
+				<prop key="/manage/etc_statis.html">init</prop>
+				<prop key="/manage/buy_statis.html">init</prop>
+				<prop key="/manage/request_statis.html">init</prop>
+				<prop key="/manage/role.html">init</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<bean id="manageLoginedUrlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="controllerAdvice" />
+			</list>
+		</property>
+		<property name="mappings">
+			<props>
+				<prop key="/api.html">apiController</prop>
+				<prop key="/testApi.html">testApiController</prop>
+				<prop key="/manage/login.html">loginController</prop>
+				<prop key="/manage/profile.html">profileController</prop>
+				<prop key="/manage/notice.html">noticeController</prop>
+				<prop key="/manage/user.html">userController</prop>
+				<prop key="/manage/fenlei.html">fenleiController</prop>
+				<prop key="/manage/pleixing.html">pleixingController</prop>
+				<prop key="/manage/xyleixing.html">xyleixingController</prop>
+				<prop key="/manage/personal_account.html">personalAccountController</prop>
+				<prop key="/manage/enterprise_account.html">enterpriseAccountController</prop>
+				<prop key="/manage/product.html">productController</prop>
+				<prop key="/manage/item.html">itemController</prop>
+				<prop key="/manage/service.html">serviceController</prop>
+				<prop key="/manage/carousel.html">carouselController</prop>
+				<prop key="/manage/video.html">videoController</prop>
+				<prop key="/manage/hots.html">hotsController</prop>
+				<prop key="/manage/estimate.html">estimateController</prop>
+				<prop key="/manage/error.html">errorController</prop>
+				<prop key="/manage/opinion.html">opinionController</prop>
+				<prop key="/manage/link_statis.html">linkstatisController</prop>
+				<prop key="/manage/item_statis.html">itemstatisController</prop>
+				<prop key="/manage/etc_statis.html">etcstatisController</prop>
+				<prop key="/manage/buy_statis.html">buystatisController</prop>
+				<prop key="/manage/request_statis.html">requeststatisController</prop>
+				<prop key="/manage/role.html">roleController</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:viewClass="org.springframework.web.servlet.view.JstlView" p:cache="true"
+		p:prefix="/WEB-INF/template/" p:suffix=".jsp" />
+
+	<bean id="apiController" class="com.chengxin.bfip.api.ApiController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:accountDao-ref="accountDao"
+		p:carouselDao-ref="carouselDao"
+		p:clickHistoryDao-ref="clickhistoryDao"
+		p:errorDao-ref="errorsDao"
+		p:estimateDao-ref="estimatesDao"
+		p:fenleiDao-ref="fenleiDao"
+		p:hotDao-ref="hotsDao"
+		p:itemDao-ref="itemDao"
+		p:noticeDao-ref="noticeDao"
+		p:opinionDao-ref="opinionsDao"
+		p:pleixingDao-ref="pleixingDao"
+		p:productDao-ref="productsDao"
+		p:roleDao-ref="roleDao"
+		p:serviceDao-ref="servicesDao"
+		p:userDao-ref="userDao"
+		p:xyleixingDao-ref="xyleixingDao"
+		p:videoDao-ref="videosDao"
+		p:provinceDao-ref="provinceDao"
+		p:cityDao-ref="cityDao"
+		p:reqCodeDao-ref="reqCodeDao"
+		p:interestDao-ref="interestDao"
+		p:electDao-ref="electDao"
+		p:verifyCodeDao-ref="verifyCodeDao"
+		p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="testApiController" class="com.chengxin.bfip.api.TestApiController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="loginController" class="com.chengxin.bfip.manage.LoginController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:userDao-ref="userDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="profileController" class="com.chengxin.bfip.manage.ProfileController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:userDao-ref="userDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="noticeController" class="com.chengxin.bfip.manage.NoticeController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:noticeDao-ref="noticeDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="userController" class="com.chengxin.bfip.manage.UserController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="userDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="fenleiController" class="com.chengxin.bfip.manage.FenleiController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:fenleiDao-ref="fenleiDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="pleixingController" class="com.chengxin.bfip.manage.PleixingController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:pleixingDao-ref="pleixingDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="xyleixingController" class="com.chengxin.bfip.manage.XyleixingController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:xyleixingDao-ref="xyleixingDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="personalAccountController" class="com.chengxin.bfip.manage.PersonalAccountController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="accountDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="enterpriseAccountController" class="com.chengxin.bfip.manage.EnterpriseAccountController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="accountDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="productController" class="com.chengxin.bfip.manage.ProductController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="productsDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="itemController" class="com.chengxin.bfip.manage.ItemController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:itemDao-ref="itemDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="serviceController" class="com.chengxin.bfip.manage.ServiceController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="servicesDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="carouselController" class="com.chengxin.bfip.manage.CarouselController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="carouselDao" p:videosDao-ref="videosDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="videoController" class="com.chengxin.bfip.manage.VideoController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="videosDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="hotsController" class="com.chengxin.bfip.manage.HotsController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:hotDao-ref="hotsDao" p:xyleixingDao-ref="xyleixingDao"
+		p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="estimateController" class="com.chengxin.bfip.manage.EstimateController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="estimatesDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="errorController" class="com.chengxin.bfip.manage.ErrorController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="errorsDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="opinionController" class="com.chengxin.bfip.manage.OpinionController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="opinionsDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="linkstatisController" class="com.chengxin.bfip.manage.LinkStatisController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="clickhistoryDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="itemstatisController" class="com.chengxin.bfip.manage.ItemStatisController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="clickhistoryDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="buystatisController" class="com.chengxin.bfip.manage.BuyStatisController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="clickhistoryDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="requeststatisController" class="com.chengxin.bfip.manage.RequestStatisController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="clickhistoryDao" p:cachedObjectService-ref="cachedObjectService" />
+
+	<bean id="etcstatisController" class="com.chengxin.bfip.manage.EtcStatisController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="clickhistoryDao" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="roleController" class="com.chengxin.bfip.manage.RoleController"
+		p:methodNameResolver-ref="commonControllerMethodNameResolver"
+		p:memberDao-ref="roleDao" p:cachedObjectService-ref="cachedObjectService" />
+</beans>

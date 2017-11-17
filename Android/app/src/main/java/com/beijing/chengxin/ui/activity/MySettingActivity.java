@@ -1,7 +1,7 @@
 package com.beijing.chengxin.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.ui.fragment.BaseFragmentActivity;
@@ -17,13 +17,5 @@ public class MySettingActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_login);
 
         showFragment(new SettingFragment(), false, false);
-    }
-
-    public void logout() {
-        MainActivity.mainActivity.finish();
-        finish();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 }

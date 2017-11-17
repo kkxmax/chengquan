@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MGSwipeTableCell.h"
 
-@interface FavouritesTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MGSwipeTableCellDelegate>
+@interface FavouritesTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, retain) IBOutlet UITableView* tblInterView;
-@property (nonatomic, assign) NSInteger selectType;
-@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
--(IBAction)onBack:(id)sender;
-
+@property (nonatomic, retain) IBOutlet UITableView* tableView;
 @end
