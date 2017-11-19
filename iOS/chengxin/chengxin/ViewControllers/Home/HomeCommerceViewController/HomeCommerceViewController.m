@@ -9,18 +9,23 @@
 #import "HomeCommerceViewController.h"
 #import "HomeCommerceCollectionViewCell.h"
 #import "Global.h"
+#import "UIImageView+WebCache.h"
 
 @interface HomeCommerceViewController ()
-
+{
+    NSMutableArray *productArray;
+}
 @end
 
 @implementation HomeCommerceViewController
-@synthesize slideCommerceScrollView, slideCommercePageCtrl, commerceCollectionView;
+@synthesize commerceCollectionView, indicatorView, currentSortOrderIndex;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    productArray = [NSMutableArray array];
     [self.commerceCollectionView registerNib:[UINib nibWithNibName:@"HomeCommerceCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HomeCommerceCellIdentifier"];
+    currentSortOrderIndex = 1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,50 +35,66 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    int nTestStatus = [[CommonData sharedInstance].userInfo[@"testStatus"] intValue];
+    if(nTestStatus != 2) {
+        self.addButton.hidden = YES;
+    }else{
+        self.addButton.hidden = NO;
+        int aKind = [[CommonData sharedInstance].userInfo[@"akind"] intValue];
+        if(aKind == 1) {
+            self.addButton.hidden = YES;
+        }
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // Set slide page time
-    [self showSlideShow];
-    slideCommercePageTimer = [NSTimer scheduledTimerWithTimeInterval:SLIDE_SECOND target:self selector:@selector(PageMove) userInfo:nil repeats:YES];
 }
 
-#pragma mark - Page Slide
-- (void)showSlideShow {
-    slideCommerceScrollView.contentSize = CGSizeMake(slideCommerceScrollView.frame.size.width * NUMBER_OF_SLIDE_IMAGES, slideCommerceScrollView.frame.size.height);
-    CGRect ViewSize = slideCommerceScrollView.bounds;
-    for(int i = 0; i <= NUMBER_OF_SLIDE_IMAGES; i++)
-    {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:ViewSize];
-        imageView.contentMode = UIViewContentModeScaleToFill;
-        [imageView setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png", (COMMERCE_IMAGE_START + i)]]];
-        [slideCommerceScrollView addSubview:imageView];
-        ViewSize = CGRectOffset(ViewSize, slideCommerceScrollView.bounds.size.width, 0);
-    }
-}
-- (void)PageMove {
-    CGFloat pageSize = slideCommerceScrollView.frame.size.width;
-    NSInteger nCurrentPage = 0;
-    // if this is the last page return
-    if(slideCommerceScrollView.contentOffset.x >= slideCommerceScrollView.frame.size.width * NUMBER_OF_SLIDE_IMAGES) {
-        [slideCommerceScrollView setContentOffset:CGPointMake(0.0, slideCommerceScrollView.contentOffset.y) animated:YES];
-    } else {
-        [slideCommerceScrollView setContentOffset:CGPointMake(slideCommerceScrollView.contentOffset.x + pageSize, slideCommerceScrollView.contentOffset.y) animated:YES];
-        nCurrentPage = (NSInteger)(slideCommerceScrollView.contentOffset.x / slideCommerceScrollView.frame.size.width) + 1;
-    }
-    [slideCommercePageCtrl setCurrentPage:nCurrentPage];
+- (void)getProductFromServer:cityName PleixingIds:(NSString*)pleixingIds Start:(NSString*)start Length:(NSString*)length Keyword:(NSString*)keyword  {
+    indicatorView.hidden = NO;
+    [indicatorView startAnimating];
+    [productArray removeAllObjects];
+    NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
+    [dicParams setObject:@"getProductList" forKey:@"pAct"];
+    [dicParams setObject:start forKey:@"start"];
+    [dicParams setObject:length forKey:@"length"];
+    [dicParams setObject:pleixingIds forKey:@"pleixingIds"];
+    [dicParams setObject:[NSString stringWithFormat:@"%ld", (long)currentSortOrderIndex] forKey:@"order"];
+    [dicParams setObject:cityName forKey:@"cityName"];
+    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
+    
+    [[WebAPI sharedInstance] sendPostRequest:ACTION_GETPRODUCTLIST Parameters:dicParams :^(NSObject *resObj) {
+        
+        NSDictionary *dicRes = (NSDictionary *)resObj;
+        
+        if (dicRes != nil ) {
+            if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
+                NSArray *productList = (NSArray *)(dicRes[@"data"]);
+                for(int i = 0; i < productList.count; i++) {
+                    NSDictionary *productDic = (NSDictionary *)(productList[i]);
+                    [productArray addObject:productDic];
+                }
+                [self.commerceCollectionView reloadData];
+                [indicatorView stopAnimating];
+            }
+        }
+    }];
 }
 
 #pragma mark - UICollectionView Delegate, DataSource
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    HomeCommerceCollectionViewCell *homeCommerceCollectionCell = (HomeCommerceCollectionViewCell *)[[[NSBundle mainBundle] loadNibNamed:@"HomeCommerceCollectionViewCell" owner:self options:nil] objectAtIndex:0];
     HomeCommerceCollectionViewCell *homeCommerceCollectionCell = (HomeCommerceCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"HomeCommerceCellIdentifier" forIndexPath:indexPath];
+    NSDictionary *productDic = (NSDictionary *)[productArray objectAtIndex:indexPath.row];
+    NSString *productImageName = productDic[@"imgPath1"];
+    [homeCommerceCollectionCell.produceImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, productImageName]]];
+    homeCommerceCollectionCell.produceNameLabel.text = productDic[@"name"];
+    homeCommerceCollectionCell.producePriceLabel.text = [NSString stringWithFormat:@"%ld", (long)[productDic[@"price"] longValue]];
     return homeCommerceCollectionCell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return productArray.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,6 +120,21 @@
     }
     return CGSizeMake(184.f, 244);
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    int nTestStatus = [[CommonData sharedInstance].userInfo[@"testStatus"] intValue];
+    if(nTestStatus != 2)
+        return;
+    NSDictionary *productDic = (NSDictionary *)[productArray objectAtIndex:indexPath.row];
+    [CommonData sharedInstance].selectedProductID = [NSString stringWithFormat:@"%ld", [productDic[@"id"] longValue]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SHOW_HOMECOMMERCEDETAIL_VIEW_NOTIFICATION object:indexPath];
+}
+
+- (IBAction)addAction:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SHOW_HOMEPRODUCTADD_VIEW_NOTIFICATION object:nil];
+}
+
+
 /*
 #pragma mark - Navigation
 

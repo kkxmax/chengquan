@@ -39,7 +39,7 @@
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>用户账号:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="account">
+								class="form-control form-like-filter input-small" name="mobile">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
@@ -105,7 +105,7 @@
 								"url" : "opinion.html?pAct=search"
 							},
 							"columns" : [ {
-								"name" : "account",
+								"name" : "mobile",
 								"orderable" : true
 							}, {
 								"name" : "content",

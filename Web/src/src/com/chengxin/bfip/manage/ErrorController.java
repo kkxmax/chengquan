@@ -12,9 +12,15 @@ import net.sf.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
+import com.chengxin.bfip.CommonUtil;
 import com.chengxin.bfip.Constants;
+import com.chengxin.bfip.model.Account;
+import com.chengxin.bfip.model.AccountDAO;
+import com.chengxin.bfip.model.ErrorDAO;
 import com.chengxin.bfip.model.Errors;
-import com.chengxin.bfip.model.ErrorsDAO;
+import com.chengxin.bfip.model.EstimateDAO;
+import com.chengxin.bfip.model.MarkLogDAO;
+import com.chengxin.bfip.model.NoticeDAO;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.DateTimeUtil;
 import com.chengxin.common.JavascriptUtil;
@@ -26,15 +32,13 @@ import com.chengxin.common.KeyValueString;
  */
 public class ErrorController extends BaseController {
 
-	private ErrorsDAO memberDao = null;
+	private ErrorDAO memberDao = null;
+	private NoticeDAO noticeDao = null;
+	private MarkLogDAO markLogDao = null;
 
-	public ErrorsDAO getMemberDao() {
-		return memberDao;
-	}
-
-	public void setMemberDao(ErrorsDAO value) {
-		this.memberDao = value;
-	}
+	public void setNoticeDao(NoticeDAO value) {this.noticeDao = value;}
+	public void setMarkLogDao(MarkLogDAO value) {this.markLogDao = value;}
+	public void setMemberDao(ErrorDAO value) {this.memberDao = value;}
 
 	public ErrorController() throws Exception {
 
@@ -65,10 +69,10 @@ public class ErrorController extends BaseController {
 			return this.search(request, response, session);
 		} else if (action.equals("viewDetail")) {
 			return this.viewDetail(request, response, session);
-		} else if (action.equals("delete")) {
-			return this.delete_record(request, response, session);
-		} else if (action.equals("pass")) {
-			return this.pass(request, response, session);
+		} else if (action.equals("showTestModal")) {
+            return this.showTestModal(request, response, session);
+        } else if (action.equals("changeTestStatus")) {
+			return this.changeTestStatus(request, response, session);
 		} 
 
 		return null;
@@ -120,8 +124,7 @@ public class ErrorController extends BaseController {
 		filterParamObject.put("order_dir", orderDir);
 
 		String extraWhere = "";
-		List<Errors> ErrorsList = memberDao.search(filterParamObject,
-				extraWhere);
+		List<Errors> ErrorsList = memberDao.search(filterParamObject, extraWhere);
 		int count = memberDao.count(filterParamObject, extraWhere);
 
 		ArrayList<String[]> data = new ArrayList<String[]>();
@@ -129,19 +132,20 @@ public class ErrorController extends BaseController {
 		for (int i = 0; i < ErrorsList.size(); i++) {
 			Errors row = ErrorsList.get(i);
 
-			String opHtml = "<a href='error.html?pAct=viewDetail&id="
-					+ String.valueOf(row.getId())
-					+ "' class='btn btn-xs purple' data-target='#global-modal' data-toggle='modal'><i class='fa fa-edit'></i> 查看</a>";
+			String opHtml = "<a href='error.html?pAct=viewDetail&id=" + row.getId() + "' class='btn btn-xs purple' data-target='#global-modal' data-toggle='modal'><i class='fa fa-edit'></i> 查看</a>";
+			if(row.getStatus() == ErrorDAO.ERROR_ST_PROCESSING) {
+				opHtml += "<a href='error.html?pAct=showTestModal&id=" + row.getId() + "' class='btn btn-xs purple' data-target='#global-modal' data-toggle='modal'><i class='fa fa-edit'></i> 审核</a>";	
+			}
+			
 			String[] dataItem = new String[] {
-					row.getBooknum(), 
-					row.getName(),
-					DateTimeUtil.dateFormat(row.getWriteTime()),
-					row.getNoName(),
-					row.getRealName(),
-					row.getContent(),
+					row.getOwnerMobile(), 
+					row.getOwnerAkind() == AccountDAO.ACCOUNT_TYPE_PERSONAL ? row.getOwnerRealname() : row.getOwnerEnterName(),
+					row.getEstimateeAkind() == AccountDAO.ACCOUNT_TYPE_PERSONAL ? row.getEstimateeRealname() : row.getEstimateeEnterName(),
+					row.getEstimaterAkind() == AccountDAO.ACCOUNT_TYPE_PERSONAL ? row.getEstimaterRealname() : row.getEstimaterEnterName(),
+					row.getEstimateContent(),
 					row.getReason(),
 					row.getStatusName(),
-					row.getUpdateTime(), 
+					DateTimeUtil.dateFormat(row.getWriteTime()),
 					opHtml 
 			};
 			data.add(dataItem);
@@ -158,8 +162,6 @@ public class ErrorController extends BaseController {
 
 	public ModelAndView viewDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
-		JSONObject result = new JSONObject();
-
 		String id = this.getBlankParameter(request, "id", "");
 
 		Errors record = memberDao.getDetail(Integer.valueOf(id));
@@ -168,37 +170,64 @@ public class ErrorController extends BaseController {
 
 		return new ModelAndView("manage/error/detail");
 	}
-
-	public ModelAndView delete_record(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-
-		JSONObject result = new JSONObject();
-
-		String id = this.getBlankParameter(request, "id", "");
-
-		Errors record = memberDao.get(Integer.valueOf(id));
-
-		memberDao.delete(record);
-
-		result.put("retcode", 200);
-		result.put("msg", "操作成功");
-
-		request.setAttribute("JSON", result);
-
-		return new ModelAndView("json_result");
-
-
-	}
 	
-	public ModelAndView pass(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+	public ModelAndView showTestModal(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+    	
+    	String id = this.getBlankParameter(request, "id", "");
+
+    	Errors record = memberDao.getDetail(Integer.valueOf(id));
+    	
+    	request.setAttribute("record", record);
+    	
+    	return new ModelAndView("manage/error/test_modal");
+    }
+
+	public ModelAndView changeTestStatus(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
 		JSONObject result = new JSONObject();
 
 		String id = this.getBlankParameter(request, "id", "");
+		String targetStatus = this.getBlankParameter(request, "targetStatus", String.valueOf(ErrorDAO.ERROR_ST_PASS));
 
-		Errors record = memberDao.get(Integer.valueOf(id));
-		record.setStatus(2);
+		Errors record = memberDao.getDetail("id=" + id);
+		record.setStatus(Integer.valueOf(targetStatus));
 		memberDao.update(record);
-
+		
+		if(targetStatus.equals(String.valueOf(ErrorDAO.ERROR_ST_PASS))) {
+			
+			CommonUtil.insertMarkLog(markLogDao, record.getOwnerId(), MarkLogDAO.LOG_KIND_CORRECT_GIVE, null, null, record.getKind(), MarkLogDAO.PMARK_CORRECT_GIVE, null, null);
+			CommonUtil.insertMarkLog(markLogDao, record.getEstimaterId(), MarkLogDAO.LOG_KIND_CORRECT_RECEIVE, null, null, record.getKind(), null
+					, record.getKind() == ErrorDAO.ERROR_KIND_OVER ? MarkLogDAO.NMARK_CORRECT_RECEIVE_OVER : MarkLogDAO.NMARK_CORRECT_RECEIVE_FALSE
+					, record.getOwnerId());
+			
+			CommonUtil.insertNotice(noticeDao, NoticeDAO.NOTICE_TYPE_USER, record.getOwnerId(), NoticeDAO.NOTICE_KIND_CORRECTION
+					, NoticeDAO.NOTICE_SUBKIND_CORRECTION_GIVE
+					, CommonUtil.getNoticeMsgTitle(NoticeDAO.NOTICE_KIND_CORRECTION)
+					, CommonUtil.getNoticeMsgContent(NoticeDAO.NOTICE_KIND_CORRECTION, NoticeDAO.NOTICE_SUBKIND_CORRECTION_GIVE
+							, ErrorDAO.ERROR_ST_PASS
+							, MarkLogDAO.PMARK_CORRECT_GIVE
+					)
+					, null, null, record.getId());
+			CommonUtil.insertNotice(noticeDao, NoticeDAO.NOTICE_TYPE_USER, record.getEstimaterId(), NoticeDAO.NOTICE_KIND_CORRECTION
+					, NoticeDAO.NOTICE_SUBKIND_CORRECTION_RECEIVE
+					, CommonUtil.getNoticeMsgTitle(NoticeDAO.NOTICE_KIND_CORRECTION)
+					, CommonUtil.getNoticeMsgContent(NoticeDAO.NOTICE_KIND_CORRECTION, NoticeDAO.NOTICE_SUBKIND_CORRECTION_RECEIVE
+							, record.getKind()
+							, null
+					)
+					, null, null, record.getId());
+		}
+		else if(targetStatus.equals(String.valueOf(ErrorDAO.ERROR_ST_NOPASS))) {
+			CommonUtil.insertNotice(noticeDao, NoticeDAO.NOTICE_TYPE_USER, record.getOwnerId(), NoticeDAO.NOTICE_KIND_CORRECTION
+					, NoticeDAO.NOTICE_SUBKIND_CORRECTION_GIVE
+					, CommonUtil.getNoticeMsgTitle(NoticeDAO.NOTICE_KIND_CORRECTION)
+					, CommonUtil.getNoticeMsgContent(NoticeDAO.NOTICE_KIND_CORRECTION, NoticeDAO.NOTICE_SUBKIND_CORRECTION_GIVE
+							, ErrorDAO.ERROR_ST_NOPASS
+							, null
+					)
+					, null, null, record.getId());
+		}
+		
 		result.put("retcode", 200);
 		result.put("msg", "操作成功");
 

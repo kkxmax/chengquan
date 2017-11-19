@@ -1,21 +1,30 @@
 package com.beijing.chengxin.ui.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.beijing.chengxin.ChengxinApplication;
 import com.beijing.chengxin.R;
+import com.beijing.chengxin.network.SessionInstance;
+import com.beijing.chengxin.network.SyncInfo;
+import com.beijing.chengxin.network.model.LoginModel;
 import com.beijing.chengxin.ui.activity.LoginActivity;
+import com.beijing.chengxin.ui.widget.Utils;
 
-import static com.beijing.chengxin.ui.config.Constants.DEBUG_MODE;
+import static com.beijing.chengxin.config.Constants.DEBUG_MODE;
+import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
 public class LoginFragment extends Fragment {
 
@@ -27,6 +36,8 @@ public class LoginFragment extends Fragment {
     private View rootView;
 
     String mPhoneNumber, mPassword;
+
+    SyncInfo info;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,11 +63,17 @@ public class LoginFragment extends Fragment {
 
         // test code
         if (DEBUG_MODE) {
-            etPhoneNumber.setText("12345678910");
-            etPw.setText("12345678910");
+            etPhoneNumber.setText("19135411632");
+            etPw.setText("123456");
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        info = new SyncInfo(getActivity());
     }
 
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {
@@ -75,13 +92,15 @@ public class LoginFragment extends Fragment {
                         Toast.makeText(getActivity(), getString(R.string.err_password_length), Toast.LENGTH_LONG).show();
                         return;
                     }
-                    ((LoginActivity)getActivity()).toMainActivity();
+                    new LoginAsync().execute(mPhoneNumber, mPassword);
                     break;
                 case R.id.btn_register:
                     ((LoginActivity)getActivity()).showFragment(new RegisterFragment(), true, true);
                     break;
                 case R.id.btn_forgot_pw:
-                    ((LoginActivity)getActivity()).showFragment(new ForgotPasswordFragment(), true, true);
+                    ForgotPasswordFragment fragment = new ForgotPasswordFragment();
+                    fragment.setMobile(etPhoneNumber.getText().toString().trim());
+                    ((LoginActivity)getActivity()).showFragment(fragment, true, true);
                     break;
                 case R.id.btn_eye:
                     if (etPw.getInputType() == InputType.TYPE_CLASS_TEXT) {
@@ -95,4 +114,38 @@ public class LoginFragment extends Fragment {
             }
         }
     };
+
+    class LoginAsync extends AsyncTask<String, String, LoginModel> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Utils.displayProgressDialog(getActivity());
+        }
+        @Override
+        protected LoginModel doInBackground(String... strs) {
+            return info.syncLogin(strs[0], strs[1]);
+        }
+        @Override
+        protected void onPostExecute(LoginModel result) {
+            super.onPostExecute(result);
+            if (result .isValid()) {
+                if(result.getRetCode() == ERROR_OK) {
+                    ChengxinApplication.LOGIN_MOBILE = mPhoneNumber;
+                    ChengxinApplication.LOGIN_PASSWORD = mPassword;
+                    SessionInstance.initialize(getActivity(), result);
+                    ((LoginActivity)getActivity()).toMainActivity();
+                } else {
+                    Toast.makeText(getActivity(), result.getMsg(), Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(getActivity(), getString(R.string.error_login_failed), Toast.LENGTH_LONG).show();
+            }
+            Utils.disappearProgressDialog();
+        }
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            Utils.disappearProgressDialog();
+        }
+    }
 }

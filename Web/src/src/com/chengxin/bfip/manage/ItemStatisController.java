@@ -78,7 +78,7 @@ public class ItemStatisController extends BaseController {
 		String to = this.getBlankParameter(request, "to", "");
 
 //		String where = " ";
-		List<ClickHistory> records = memberDao.item_statis(2 , from , to);
+		List<ClickHistory> records = memberDao.item_statis(ClickHistoryDAO.HISTORY_TYPE_SHARE , from , to);
 
 		result.put("retcode", 200);
 		result.put("records", records);

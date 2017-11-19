@@ -54,16 +54,16 @@
 	<bean id="fenleiDao" class="com.chengxin.bfip.model.FenleiDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
-	<bean id="servicesDao" class="com.chengxin.bfip.model.ServicesDAO"
+	<bean id="serviceDao" class="com.chengxin.bfip.model.ServiceDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
 	<bean id="carouselDao" class="com.chengxin.bfip.model.CarouselDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
-	<bean id="videosDao" class="com.chengxin.bfip.model.VideosDAO"
+	<bean id="videoDao" class="com.chengxin.bfip.model.VideoDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
-	<bean id="hotsDao" class="com.chengxin.bfip.model.HotsDAO"
+	<bean id="hotDao" class="com.chengxin.bfip.model.HotDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
 	<bean id="pleixingDao" class="com.chengxin.bfip.model.PleixingDAO"
@@ -72,16 +72,16 @@
 	<bean id="xyleixingDao" class="com.chengxin.bfip.model.XyleixingDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
-	<bean id="estimatesDao" class="com.chengxin.bfip.model.EstimatesDAO"
+	<bean id="estimateDao" class="com.chengxin.bfip.model.EstimateDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
-	<bean id="errorsDao" class="com.chengxin.bfip.model.ErrorsDAO"
+	<bean id="errorDao" class="com.chengxin.bfip.model.ErrorDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
-	<bean id="productsDao" class="com.chengxin.bfip.model.ProductsDAO"
+	<bean id="productDao" class="com.chengxin.bfip.model.ProductDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
-	<bean id="opinionsDao" class="com.chengxin.bfip.model.OpinionsDAO"
+	<bean id="opinionDao" class="com.chengxin.bfip.model.OpinionDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 
 	<bean id="clickhistoryDao" class="com.chengxin.bfip.model.ClickHistoryDAO"
@@ -106,5 +106,17 @@
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 		
 	<bean id="verifyCodeDao" class="com.chengxin.bfip.model.VerifyCodeDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="xingyeWatchDao" class="com.chengxin.bfip.model.XingyeWatchDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="xingyeWatchedDao" class="com.chengxin.bfip.model.XingyeWatchedDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="favouriteDao" class="com.chengxin.bfip.model.FavouriteDAO"
+		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
+		
+	<bean id="markLogDao" class="com.chengxin.bfip.model.MarkLogDAO"
 		p:hibernateTemplate-ref="hibernateTemplate" p:cachedObjectService-ref="cachedObjectService" />
 </beans>

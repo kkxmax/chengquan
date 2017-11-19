@@ -135,6 +135,7 @@ function refreshNoticeCnt() {
 			error : function(xhr, ajaxOptions, thrownError) {
 				/* bootbox.alert("发生错误！请您确认网络状态"); */
 				/*console.log("发生错误！请您确认网络状态");*/
+				location.href = "login.html";
 			}
 		});
 	  

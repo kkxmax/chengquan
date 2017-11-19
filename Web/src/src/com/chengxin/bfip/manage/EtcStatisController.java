@@ -79,7 +79,7 @@ public class EtcStatisController extends BaseController {
 		String to = this.getBlankParameter(request, "to", "");
 
 //		String where = " ";
-		List<ClickHistory> records = memberDao.etc_statis(10 , from , to);
+		List<ClickHistory> records = memberDao.etc_statis(ClickHistoryDAO.HISTORY_TYPE_SHARE , from , to);
 
 		result.put("retcode", 200);
 		result.put("records", records);

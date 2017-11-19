@@ -39,12 +39,12 @@
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>账号:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="booknum">
+								class="form-control form-like-filter input-small" name="owner_mobile">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>纠错人:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="name">
+								class="form-control form-like-filter input-small" name="owner_name">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
@@ -67,7 +67,6 @@
 						<tr>
 							<th>账号</th>
 							<th>纠错人</th>
-							<th>write_time</th>
 							<th>被评价人</th>
 							<th>评价人</th>
 							<th>评价内容</th>
@@ -114,23 +113,19 @@
 								"url" : "error.html?pAct=search"
 							},
 							"columns" : [ {
-								"name" : "booknum",
+								"name" : "owner_mobile",
 								"orderable" : true
 							}, {
-								"name" : "name",
+								"name" : "owner_name",
 								"orderable" : true
 							}, {
-								"name" : "write_time",
-								"orderable" : true,
-								"visible" : false
-							}, {
-								"name" : "no_name",
+								"name" : "estimatee_name",
 								"orderable" : true
 							}, {
-								"name" : "real_name",
+								"name" : "estimater_name",
 								"orderable" : true
 							}, {
-								"name" : "content",
+								"name" : "estimate_content",
 								"orderable" : true
 							}, {
 								"name" : "reason",
@@ -139,7 +134,7 @@
 								"name" : "status_name",
 								"orderable" : true
 							}, {
-								"name" : "update_time",
+								"name" : "write_time",
 								"orderable" : true
 							}, {
 								"orderable" : false
@@ -147,7 +142,7 @@
 							"bFilter" : false,
 							"bInfo" : true,
 							"bPaginate" : true,
-							"order" : [ [ 2, "desc" ] ]
+							"order" : [ [ 7, "desc" ] ]
 						});
 
 				$('select.form-filter, select.form-like-filter',
@@ -163,37 +158,6 @@
 
 			});
 
-	function delete_record(id) {
-
-		bootbox.confirm("是否删除？", function(result) {
-			if (result) {
-				Metronic.blockUI({
-					target : '#content-div',
-					animate : true
-				});
-				$.ajax({
-					type : "POST",
-					url : "hots.html?pAct=delete",
-					data : {
-						'id' : id
-					},
-					success : function(resp) {
-						Metronic.unblockUI('#content-div');
-						if (resp.retcode == 200) {
-							toastr['success'](resp.msg);
-							loadTable();
-						} else {
-							toastr['error'](resp.msg);
-						}
-					},
-					error : function(xhr, ajaxOptions, thrownError) {
-						Metronic.unblockUI('#content-div');
-						bootbox.alert("发生错误！");
-					}
-				});
-			}
-		});
-	}
 </script>
 <!-- END PAGE LEVEL SCRIPT -->
 <!-- END BODY -->

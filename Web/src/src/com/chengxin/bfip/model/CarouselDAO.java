@@ -33,7 +33,7 @@ public class CarouselDAO extends BaseDataAccessObject {
 
 	// Status Type
 	public static final int ST_ON = 1;     // On
-	public static final int ST_OFF = 2;    // Off
+	public static final int ST_OFF = 0;    // Off
 
 	public void insert(Carousel member) {
 		DBModelUtil.processSecure(Carousel.class.getName(), member, DBModelUtil.C_SECURE_TYPE_ENCRYPT);
@@ -259,14 +259,15 @@ public class CarouselDAO extends BaseDataAccessObject {
 				Carousel row = new Carousel();
 
 				row.setId(CommonUtil.toIntDefault(objectArray[0]));
-				row.setImgName(CommonUtil.toStringDefault(objectArray[1]));
-				row.setKind(CommonUtil.toIntDefault(objectArray[2]));
-				row.setOrd(CommonUtil.toIntDefault(objectArray[3]));
-				row.setStatus(CommonUtil.toIntDefault(objectArray[4]));
-				row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[5])));
-				row.setImgSize(CommonUtil.toDoubleDefault(objectArray[6]));
+				row.setKind(CommonUtil.toIntDefault(objectArray[1]));
+				row.setOrd(CommonUtil.toIntDefault(objectArray[2]));
+				row.setStatus(CommonUtil.toIntDefault(objectArray[3]));
+				row.setImgName(CommonUtil.toStringDefault(objectArray[4]));
+				row.setImgSize(CommonUtil.toDoubleDefault(objectArray[5]));
+				row.setImgUrl(CommonUtil.toStringDefault(objectArray[6]));
 				row.setVideoId(CommonUtil.toIntDefault(objectArray[7]));
-				row.setImgUrl(CommonUtil.toStringDefault(objectArray[8]));
+				row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[8])));
+				row.setWriteTimeString(DateTimeUtil.dateFormat(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[8]))));
 				row.setVideoUrl(CommonUtil.toStringDefault(objectArray[9]));
 				row.setVideoTitle(CommonUtil.toStringDefault(objectArray[10]));
 				row.setVideoComment(CommonUtil.toStringDefault(objectArray[11]));

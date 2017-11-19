@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface HomeServiceViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 {
-    NSTimer *slideServicePageTimer;
 }
-@property (nonatomic, strong) IBOutlet UIScrollView *slideServiceScrollView;
-@property (nonatomic, strong) IBOutlet UIPageControl *slideServicePageCtrl;
 @property (nonatomic, strong) IBOutlet UITableView *homeServiceTableView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
 
+- (void)getServiceFromServer:cityName AKind:(NSString*)akind FenleiIds:(NSString*)fenleiIds Start:(NSString*)start Length:(NSString*)length Keyword:(NSString*)keyword;
+@property (nonatomic) NSInteger currentSortOrderIndex;
+
+@property (nonatomic, strong) IBOutlet UIButton *addButton;
 
 @end

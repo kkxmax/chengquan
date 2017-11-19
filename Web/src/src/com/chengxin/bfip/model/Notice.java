@@ -8,11 +8,18 @@ public class Notice extends BaseModel {
 	
     private int id;
     private int type;
+    private int accountId;
     private int kind;
-    private String content;
-    private int status;
+    private int subKind;
+    private String msgTitle;
+    private String msgContent;
+    private int inviteeId;
+    private int estimateId;
+    private int errorId;
+    private int status = NoticeDAO.NOTICE_ST_NEW;
     private Date writeTime = new Date();
     
+    private String writeTimeString;
     private String kindName;
     private String statusName;
     
@@ -35,11 +42,17 @@ public class Notice extends BaseModel {
 	public void setKind(int kind) {
 		this.kind = kind;
 	}
-	public String getContent() {
-		return content;
+	public String getMsgTitle() {
+		return msgTitle;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setMsgTitle(String msgTitle) {
+		this.msgTitle = msgTitle;
+	}
+	public String getMsgContent() {
+		return msgContent;
+	}
+	public void setMsgContent(String msgContent) {
+		this.msgContent = msgContent;
 	}
 	public int getStatus() {
 		return status;
@@ -64,6 +77,42 @@ public class Notice extends BaseModel {
 	}
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
+	}
+	public String getWriteTimeString() {
+		return writeTimeString;
+	}
+	public void setWriteTimeString(String writeTimeString) {
+		this.writeTimeString = writeTimeString;
+	}
+	public int getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
+	public int getSubKind() {
+		return subKind;
+	}
+	public void setSubKind(int subKind) {
+		this.subKind = subKind;
+	}
+	public int getInviteeId() {
+		return inviteeId;
+	}
+	public void setInviteeId(int inviteeId) {
+		this.inviteeId = inviteeId;
+	}
+	public int getEstimateId() {
+		return estimateId;
+	}
+	public void setEstimateId(int estimateId) {
+		this.estimateId = estimateId;
+	}
+	public int getErrorId() {
+		return errorId;
+	}
+	public void setErrorId(int errorId) {
+		this.errorId = errorId;
 	}
 
 }

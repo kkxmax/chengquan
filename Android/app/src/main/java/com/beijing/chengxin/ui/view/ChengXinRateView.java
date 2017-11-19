@@ -117,9 +117,9 @@ public class ChengXinRateView extends View {
         canvas.drawCircle(cx, cy, radius3, paint);
 
 		/* Draw remain time */
-        paint.setColor(Color.WHITE);
-        paint.setTextSize(70);
         int intPercent = (int) (percent  * 100.0f);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(intPercent == 100 ? 55 : 70);
         String number = String.format("%02d", intPercent);
         canvas.drawText(number, center.x, center.y + 20, paint);
 

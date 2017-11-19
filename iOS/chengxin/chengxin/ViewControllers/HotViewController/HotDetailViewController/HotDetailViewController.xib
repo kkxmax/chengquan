@@ -11,9 +11,14 @@
                 <outlet property="btnOffice" destination="Rh7-zz-JQO" id="A4F-md-Pwx"/>
                 <outlet property="btnPersonal" destination="NEm-FP-7F3" id="Deu-j7-U6M"/>
                 <outlet property="lblContent" destination="eMb-RR-c0C" id="jtJ-bO-71e"/>
+                <outlet property="lblDate" destination="XZ6-fF-0PF" id="esB-tM-emi"/>
+                <outlet property="lblRead" destination="DqU-0k-wax" id="Mhi-JW-bsy"/>
+                <outlet property="lblTitle" destination="0pg-Lj-kT9" id="YkV-fu-UgF"/>
                 <outlet property="officeSeparator" destination="1dH-wL-R3x" id="9NR-6k-i4h"/>
+                <outlet property="pageControl" destination="XeG-eB-aEX" id="8Hp-QL-otu"/>
                 <outlet property="personalSeparator" destination="3Mk-3Y-usp" id="mHY-Yn-7wK"/>
                 <outlet property="scrollInfoView" destination="upv-vH-w17" id="tHf-BD-cVx"/>
+                <outlet property="scrollPicView" destination="Myv-Wx-5b0" id="9bY-ue-hCT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,10 +27,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-Z1-RRd">
-                    <frame key="frameInset" minX="-1" height="64" maxX="1"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-Z1-RRd" userLabel="Nav View">
+                    <frame key="frameInset" height="64"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nav_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Kw-O3-vux">
+                            <frame key="frameInset" height="64"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="热点详情" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pue-IM-1wv">
                             <frame key="frameInset" minX="50.17%" minY="33" width="80" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -63,31 +72,37 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DqU-0k-wax">
-                                    <frame key="frameInset" minX="47" minY="51" width="15" height="15"/>
+                                    <frame key="frameInset" minX="47" minY="51" width="29" height="15"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.090196078430000007" green="0.52156862749999999" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2017-02-03 12:29" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZ6-fF-0PF">
-                                    <frame key="frameInset" minY="51" width="88" height="15" maxX="13"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2017-02-03 12:29" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZ6-fF-0PF">
+                                    <frame key="frameInset" minY="51" width="105" height="15" maxX="13"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWF-cX-Hng">
-                                    <frame key="frameInset" minX="11" minY="83" height="160" maxX="13"/>
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myv-Wx-5b0">
+                                    <frame key="frameInset" minX="11" minY="83" height="160" maxX="11"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                </imageView>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="tF5-e5-SzO"/>
+                                    </connections>
+                                </scrollView>
+                                <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="XeG-eB-aEX">
+                                    <frame key="frameInset" minY="213" width="71" height="37" maxX="14"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                </pageControl>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将暮未暮  ：   对数组操作中出现空指针，很多情况下是" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="200" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMb-RR-c0C">
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tjN-6w-8Ia">
-                                    <frame key="frameInset" minX="-1" height="386" maxY="1"/>
+                                    <frame key="frameInset" height="386" maxX="-1" maxY="1.5"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wuz-jY-CYe">
@@ -208,7 +223,7 @@ CQ
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="zan.png" translatesAutoresizingMaskIntoConstraints="NO" id="iVU-wp-p2l">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hot_zan.png" translatesAutoresizingMaskIntoConstraints="NO" id="iVU-wp-p2l">
                             <frame key="frameInset" minX="66.95%" minY="9" width="21" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             <string key="userLabel" base64-UTF8="YES">
@@ -274,8 +289,9 @@ CQ
         <image name="hot_collection_nor.png" width="23" height="22"/>
         <image name="hot_evaluate.png" width="22" height="22"/>
         <image name="hot_share.png" width="20" height="20"/>
+        <image name="hot_zan.png" width="15" height="15"/>
         <image name="icon_input.png" width="16" height="14"/>
         <image name="nav_back.png" width="10" height="19"/>
-        <image name="zan.png" width="15" height="15"/>
+        <image name="nav_bg.png" width="375" height="1"/>
     </resources>
 </document>

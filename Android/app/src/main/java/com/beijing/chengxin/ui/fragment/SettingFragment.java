@@ -1,22 +1,21 @@
 package com.beijing.chengxin.ui.fragment;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.beijing.chengxin.R;
-import com.beijing.chengxin.ui.activity.LoginActivity;
 import com.beijing.chengxin.ui.activity.MySettingActivity;
+import com.beijing.chengxin.ui.dialog.UpgradeVersionDialog;
 
-import static com.beijing.chengxin.ui.config.Constants.DEBUG_MODE;
+import static com.beijing.chengxin.config.Constants.DEBUG_MODE;
 
 public class SettingFragment extends Fragment {
 
@@ -24,6 +23,8 @@ public class SettingFragment extends Fragment {
 
     private View rootView;
     TextView txtAgreement, txtAboutMe, txtChangePassword, txtUpgrade, txtLogout;
+
+    UpgradeVersionDialog dlg;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,8 +69,25 @@ public class SettingFragment extends Fragment {
                     parent.showFragment(new ChangePasswordFragment(), true);
                     break;
                 case R.id.txt_upgrade:
+                    dlg = new UpgradeVersionDialog(getActivity());
+                    dlg.setCancelable(false);
+                    dlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dlg.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dlg.setOnUpgradeVersionClickListener(new UpgradeVersionDialog.OnUpgradeVersionClickListener() {
+                        @Override
+                        public void onUpgradeVersion() {
+                            dlg.cancel();
+                            Toast.makeText(getContext(), "Application was upgraded!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    try {
+                        dlg.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case R.id.txt_logout:
+                    parent.logout();
                     break;
                 case R.id.btn_back:
                     parent.onBackActivity();

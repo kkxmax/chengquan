@@ -15,5 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblEval;
 @property (weak, nonatomic) IBOutlet UILabel *lblFrontEval;
 @property (weak, nonatomic) IBOutlet UILabel *lblBackEval;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblMobile;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constrainLeftTitle;
 
 @end

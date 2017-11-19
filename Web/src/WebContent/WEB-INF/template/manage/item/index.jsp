@@ -40,7 +40,7 @@
             &nbsp;&nbsp;
             <div class="form-group">
               <label>账号:</label>
-              <input type="text" class="form-control form-like-filter input-small" name="account">
+              <input type="text" class="form-control form-like-filter input-small" name="account_mobile">
             </div>
             &nbsp;&nbsp;
             <div class="form-group">
@@ -50,7 +50,7 @@
             &nbsp;&nbsp;
             <div class="form-group">
               <label>发布方:</label>
-              <input type="text" class="form-control form-like-filter input-small" name="enter_name">
+              <input type="text" class="form-control form-like-filter input-small" name="account_name">
             </div>
             &nbsp;&nbsp;
             <div class="form-group">
@@ -67,7 +67,7 @@
             <div class="form-group">
               <label>发布时间:
               </label>
-              <div name="down_time" class="form-date-filter input-group input-large date-picker input-daterange" data-date-format="yyyy-mm-dd">
+              <div name="write_time" class="form-date-filter input-group input-large date-picker input-daterange" data-date-format="yyyy-mm-dd">
               	<input type="text" class="form-control" name="from">
               	<span class="input-group-addon">至</span>
               	<input type="text" class="form-control" name="to">
@@ -84,7 +84,6 @@
           <thead>
           <tr>
             <th>序号</th>
-            <th>创造时间</th>
             <th>项目编号</th>
             <th>账号</th>
             <th>项目名称</th>
@@ -131,23 +130,22 @@
 							},
 							"columns" : [ 
 											{"orderable": false},
-											{"name": "write_time", "orderable": true, "visible": false},
 											{"name": "code", "orderable": true},
 											{"name": "account_mobile", "orderable": true},
 											{"name": "name", "orderable": true},
 											{"name": "contact_name", "orderable": true},
 											{"name": "contact_mobile", "orderable": true},
 											{"name": "contact_weixin", "orderable": true},
-											{"name": "enter_name", "orderable": true},
+											{"name": "account_name", "orderable": true},
 											{"name": "akind_name", "orderable": true},
-											{"name": "up_time", "orderable": true},
+											{"name": "write_time", "orderable": true},
 											{"name": "status", "orderable": true},
 											{"orderable": false},
 							            ],
 							"bFilter" : false,
 							"bInfo" : true,
 							"bPaginate" : true,
-							"order" : [ [ 1, "desc" ] ]
+							"order" : [ [ 9, "desc" ] ]
 						});
 
 				$('select.form-filter, select.form-like-filter',

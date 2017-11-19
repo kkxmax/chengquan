@@ -20,11 +20,13 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/edit_opinion"
             style="@style/layout_m0"
             android:background="@color/color_white"
+            android:textSize="@dimen/text_size_14"
             android:ems="10"
             android:inputType="textMultiLine"
+            android:hint="@string/hint_opinion"
             android:gravity="left|top">
             <requestFocus />
         </EditText>

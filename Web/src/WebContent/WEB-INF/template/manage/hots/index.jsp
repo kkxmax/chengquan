@@ -58,7 +58,7 @@
                 	<option value="${item.id}">${item.title}</option>
                   </c:forEach>
               </select>
-              <select class="form-control form-filter select2me input-small" id="kind" name="kind">
+              <select class="form-control form-filter select2me input-small" id="xyleixing_id" name="xyleixing_id" onchange="xyleixing_id_changed();">
                 <option value="">全部</option>
               </select>
             </div>
@@ -72,7 +72,6 @@
           <tr>
             <th>文章标题</th>
             <th>行业</th>
-            <th>write_time</th>
             <th>阅读量</th>
             <th>评价数</th>
             <th>点赞数</th>
@@ -100,7 +99,6 @@ function loadTable() {
 }
 
 jQuery(document).ready(function () {
-	$(".date-picker").datepicker($.extend({}, {language: "zh_TW"}));
 
 	$('#table-data').dataTable({
 		"ajax": {
@@ -112,21 +110,20 @@ jQuery(document).ready(function () {
 		},
         "columns": [
                     {"name": "title", "orderable": true},
-                    {"name": "kind_name", "orderable": true},
-                    {"name": "write_time", "orderable": true, "visible": false},
+                    {"name": "xyleixing_name", "orderable": true},
                     {"name": "visit_cnt", "orderable": true},
                     {"name": "comment_cnt", "orderable": true},
-                    {"name": "remark_cnt", "orderable": true},
+                    {"name": "elect_cnt", "orderable": true},
                     {"name": "share_cnt", "orderable": true},
-                    {"name": "st_name", "orderable": true},
-                    {"name": "up_time", "orderable": true},
+                    {"name": "status_name", "orderable": true},
+                    {"name": "write_time", "orderable": true},
                     {"orderable": false},
                    ],
         "bFilter": false,
         "bInfo": true,
         "bPaginate": true,
         "order": [
-                  [2, "desc"]
+                  [7, "desc"]
         ]
 	});
 
@@ -153,18 +150,23 @@ function xyleixing_level1_id_changed() {
 					if (resp.retcode == 200) {
 						records = resp.records;
 						html = "<option value=''>全部</option>";
-						for(i=0; i<records.length; i++) {
+						for(var i=0; i<records.length; i++) {
 							record = records[i];
 							html += "<option value=" + record.id + ">" + record.title + "</option>";
 						}
-						$('#kind').html(html);
-						$('#kind').select2();
+						$('#xyleixing_id').html(html);
+						$('#xyleixing_id').select2();
+						xyleixing_id_changed();
 					}
 				},
 				error: function (xhr, ajaxOptions, thrownError) {
 					bootbox.alert("发生错误！");
 				}
 			});
+}
+
+function xyleixing_id_changed() {
+	$('#table-data').DataTable().ajax.reload();
 }
 
 function delete_record(id) {
@@ -175,6 +177,60 @@ function delete_record(id) {
 			$.ajax({
 				type: "POST",
 				url: "hots.html?pAct=delete",
+						data: {'id': id},
+						success: function (resp) {
+							Metronic.unblockUI('#content-div');
+							if (resp.retcode == 200) {
+								toastr['success'](resp.msg);
+								loadTable();
+							} else {
+								toastr['error'](resp.msg);
+							}
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+							Metronic.unblockUI('#content-div');
+							bootbox.alert("发生错误！");
+						}
+					});
+		}
+	});
+}
+
+function up(id) {
+	
+	bootbox.confirm("确定要上架？", function (result) {
+		if (result) {
+			Metronic.blockUI({target: '#content-div', animate: true});
+			$.ajax({
+				type: "POST",
+				url: "hots.html?pAct=up",
+						data: {'id': id},
+						success: function (resp) {
+							Metronic.unblockUI('#content-div');
+							if (resp.retcode == 200) {
+								toastr['success'](resp.msg);
+								loadTable();
+							} else {
+								toastr['error'](resp.msg);
+							}
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+							Metronic.unblockUI('#content-div');
+							bootbox.alert("发生错误！");
+						}
+					});
+		}
+	});
+}
+
+function down(id) {
+	
+	bootbox.confirm("确定要下架？", function (result) {
+		if (result) {
+			Metronic.blockUI({target: '#content-div', animate: true});
+			$.ajax({
+				type: "POST",
+				url: "hots.html?pAct=down",
 						data: {'id': id},
 						success: function (resp) {
 							Metronic.unblockUI('#content-div');

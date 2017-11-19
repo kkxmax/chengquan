@@ -17,10 +17,11 @@
 <select id="sel_func">
 	<option value="authPersonal">authPersonal</option>
 	<option value="authEnter">authEnter</option>
+	<option value="leaveEstimate">leaveEstimate</option>
+	<option value="makeCorrect">makeCorrect</option>
 </select>
 <div class="form" id="authPersonal" style="display:none">
 	<form action="api.html?pAct=authPersonal" method="post" enctype="multipart/form-data" accept-charset="utf-8">
-		<div><label>token :</label><input type="text" name="token" value=""></div>
 		<div><label>logo :</label><input type="file" name="logo"></div>
 		<div><label>realname :</label><input type="text" name="realname" value="崔光浩"></div>
 		<div><label>certNum :</label><input type="text" name="certNum" value="34534234"></div>
@@ -32,13 +33,14 @@
 		<div><label>weixin :</label><input type="text" name="weixin" value="435345"></div>
 		<div><label>experience :</label><input type="text" name="experience" value="工作经验"></div>
 		<div><label>history :</label><input type="text" name="history" value="个人经历"></div>
+		<div><label>xyWatch :</label><input type="text" name="xyWatch" value="1,2,4"></div>
+		<div><label>xyWatched :</label><input type="text" name="xyWatched" value="2,3,5"></div>
 		<input type="submit" value="Submit">
 	</form>
 </div>
 
 <div class="form" id="authEnter" style="display:none">
 	<form action="api.html?pAct=authEnter" method="post" enctype="multipart/form-data" accept-charset="utf-8">
-		<div><label>token :</label><input type="text" name="token" value=""></div>
 		<div><label>logo :</label><input type="file" name="logo"></div>
 		<div>
 			<label>enterKind :</label>
@@ -65,6 +67,58 @@
 		<input type="submit" value="Submit">
 	</form>
 </div>
+
+<div class="form" id="leaveEstimate" style="display:none">
+	<form action="api.html?pAct=leaveEstimate" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+		<div>
+			<label>type :</label>
+			<select name="type">
+				<option value="1">个人或企业</option>
+				<option value="2">热点</option>
+			</select>
+		</div>
+		<div><label>accountId :</label><input type="text" name="accountId" value="1"></div>
+		<div><label>hotId :</label><input type="text" name="hotId" value="2"></div>
+		<div>
+			<label>kind :</label>
+			<select name="kind">
+				<option value="1">正面评价</option>
+				<option value="2">负面评价</option>
+			</select>
+		</div>
+		<div>
+			<label>method :</label>
+			<select name="method">
+				<option value="1">完全评价</option>
+				<option value="2">快捷评价</option>
+			</select>
+		</div>
+		<div><label>reason :</label><input type="text" name="reason" value="原因"></div>
+		<div><label>content :</label><input type="text" name="content" value="内容"></div>
+		<div><label>images :</label><input type="file" name="images" multiple></div>
+		<input type="submit" value="Submit">
+	</form>
+</div>
+<div class="form" id="makeCorrect" style="display:none">
+	<form action="api.html?pAct=makeCorrect" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+		<div><label>token :</label><input type="text" name="token" value=""></div>
+		<div>
+			<label>kind :</label>
+			<select name="kind">
+				<option value="1">夸大评价</option>
+				<option value="2">虚假评价</option>
+			</select>
+		</div>
+		<div><label>estimateId :</label><input type="text" name="estimateId" value=""></div>
+		<div><label>reason :</label><input type="text" name="reason" value="原因"></div>
+		<div><label>whyis :</label><input type="text" name="whyis" value="内容"></div>
+		<div><label>images :</label><input type="file" name="images" multiple></div>
+		<input type="submit" value="Submit">
+	</form>
+</div>
+<div>
+	<!-- <input type="button" value="testJson" onclick="testJson();"> -->
+</div>
 </body>
 <script>
 	$(document).ready(function() {
@@ -74,5 +128,12 @@
 			$('#'+func).show();
 		}).change();
 	});
+	
+	function testJson() {
+		var obj = {"pAct": "authPersonal", "mobile":"19135411631","xyWatch":JSON.stringify([{"id":"5"}, {"id":"7"}, {"id":"9"}])};
+		$.post('api.html', obj).done(function(resp) {
+			console.log(resp);
+		});
+	}
 </script>
 </html>

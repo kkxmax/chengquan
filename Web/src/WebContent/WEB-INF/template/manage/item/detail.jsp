@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <modal_width val="70%"></modal_width>
 <div class="modal-header">
@@ -13,15 +16,15 @@
 				<div class="form-body col-xs-12">
 					<div class="form-group">
 						<label class="col-xs-2 align-right">项目编号:</label> 
-						<label class="col-xs-4 align-left">${record.num}</label>
+						<label class="col-xs-4 align-left">${record.code}</label>
 						<label class="col-xs-2 align-right">账号:</label> 
-						<label class="col-xs-4 align-left">${record.account}</label>
+						<label class="col-xs-4 align-left">${record.accountMobile}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-2 align-right">项目名称:</label> 
 						<label class="col-xs-4 align-left">${record.name}</label>
 						<label class="col-xs-2 align-right">地址:</label> 
-						<label class="col-xs-4 align-left">${record.addr}</label>
+						<label class="col-xs-4 align-left">${record.cityName} ${record.addr}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-2 align-right">项目介绍:</label> 
@@ -49,11 +52,10 @@
 					<div class="form-group">
 						<label class="col-xs-4 align-right">项目图片:</label>
 						<div class="col-xs-10">
-							<img class="avatar-small" src="${C_UPLOAD_PATH}${record.imgPath1}" alt="项目图片1" style="height: 80px;"> 
-							<img class="avatar-small" src="${C_UPLOAD_PATH}${record.imgPath2}" alt="项目图片2" style="height: 80px;"> 
-							<img class="avatar-small" src="${C_UPLOAD_PATH}${record.imgPath3}" alt="项目图片3" style="height: 80px;">
-							<img class="avatar-small" src="${C_UPLOAD_PATH}${record.imgPath4}" alt="项目图片4" style="height: 80px;"> 
-							<img class="avatar-small" src="${C_UPLOAD_PATH}${record.imgPath5}" alt="项目图片5" style="height: 80px;">
+							<img class="avatar-small" src="${C_UPLOAD_PATH}${record.logo}" alt="logo图像" style="width:18%">
+							<c:forEach items="${record.imgPaths}" var="imgPath">
+								<img class="avatar-small" src="${C_UPLOAD_PATH}${imgPath}" alt="项目图像" style="width:18%">
+							</c:forEach>
 						</div>
 					</div>
 				</div>

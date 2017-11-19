@@ -82,7 +82,7 @@
 						</div>
 						<div class="col-md-3">
 							<div id="preview-pane">
-								<div class="preview-container">
+								<div class="preview-container" style="width: 175px; height: 58px">
 									<img src="/BFIP/Upload/image/carousel/bg.png" class="jcrop-preview" />
 									<label id="lbl_img_preview" style="position: absolute; top: 46%; left: 60px; font-size: 18px; font-weight: bold;">暂无图片</label>
 									<input type="hidden" id="screen_w" name="sw"/>
@@ -175,7 +175,7 @@
 		$('#img').Jcrop({
 			onChange: updatePreview,
 			onSelect: updatePreview,
-			aspectRatio: xsize / ysize
+			aspectRatio: 3
 		}, function() {
 			// Use the API to get the real image size
 			var bounds = this.getBounds();

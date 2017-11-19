@@ -1,6 +1,8 @@
 package com.chengxin.bfip.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.chengxin.common.BaseModel;
 
@@ -12,6 +14,7 @@ public class Item extends BaseModel {
     private String name;
     private int fenleiId;
     private int cityId;
+    private String addr;
     private String comment;
     private String need;
     private String weburl;
@@ -30,18 +33,25 @@ public class Item extends BaseModel {
     private String imgPath5;
     private Date writeTime = new Date();
     
+    private String writeTimeString;
+    List<String> imgPaths = new ArrayList<String>();
     private String fenleiName;
     private String cityName;
     private int provinceId;
     private String provinceName;
     private String statusName;
+    private String accountLogo;
     private int akind;
     private String akindName;
     private int enterKind;
     private String enterKindName;
     private String realname;
     private String enterName;
+    private String accountName;
     private String accountMobile;
+    private String accountCode;
+    private int accountViewCnt;
+    private int accountCredit;
     
     
 	public int getId() {
@@ -253,6 +263,54 @@ public class Item extends BaseModel {
 	}
 	public void setAccountMobile(String accountMobile) {
 		this.accountMobile = accountMobile;
+	}
+	public int getAccountViewCnt() {
+		return accountViewCnt;
+	}
+	public void setAccountViewCnt(int accountViewCnt) {
+		this.accountViewCnt = accountViewCnt;
+	}
+	public int getAccountCredit() {
+		return accountCredit;
+	}
+	public void setAccountCredit(int accountCredit) {
+		this.accountCredit = accountCredit;
+	}
+	public String getAccountCode() {
+		return accountCode;
+	}
+	public void setAccountCode(String accountCode) {
+		this.accountCode = accountCode;
+	}
+	public String getWriteTimeString() {
+		return writeTimeString;
+	}
+	public void setWriteTimeString(String writeTimeString) {
+		this.writeTimeString = writeTimeString;
+	}
+	public List<String> getImgPaths() {
+		return imgPaths;
+	}
+	public void setImgPaths(List<String> imgPaths) {
+		this.imgPaths = imgPaths;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public String getAccountLogo() {
+		return accountLogo;
+	}
+	public void setAccountLogo(String accountLogo) {
+		this.accountLogo = accountLogo;
+	}
+	public String getAccountName() {
+		return accountName;
+	}
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 
 }

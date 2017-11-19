@@ -9,7 +9,7 @@
     <div class="page-logo">
       <a class="logo" href="personal_account.html">
         <%-- <img src="${C_ASSETS_PATH}/admin/layout/img/logo.png" alt="logo" class="logo-default"/> --%>
-        <span>诚全后台</span>
+        <span>诚乎后台</span>
       </a>
       <div class="menu-toggler sidebar-toggler hide">
       </div>

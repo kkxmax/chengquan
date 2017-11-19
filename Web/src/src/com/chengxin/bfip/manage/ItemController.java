@@ -109,27 +109,22 @@ public class ItemController extends BaseController {
 		for (int i = 0; i < itemList.size(); i++) {
 			Item row = itemList.get(i);
 
-			String opHtml = "<a href='item.html?pAct=viewDetail&id="
-					+ row.getId()
-					+ "' class='btn btn-xs purple' data-target='#global-modal' data-toggle='modal'><i class='fa fa-edit'></i> 查看</a>"
-					+ "<a href='javascript:remove("
-					+ row.getId()
-					+ ")' class='btn btn-xs red'><i class='fa fa-trash-o'></i> 删除</a>";
+			String opHtml = "<a href='item.html?pAct=viewDetail&id=" + row.getId() + "' class='btn btn-xs purple' data-target='#global-modal' data-toggle='modal'><i class='fa fa-edit'></i> 查看</a>"
+					+ "<a href='javascript:remove(" + row.getId() + ")' class='btn btn-xs default'><i class='fa fa-trash-o'></i> 删除</a>";
 
-			String status = "已上架";
 			String[] dataItem = new String[] { 
 					String.valueOf(i + 1),
-					DateTimeUtil.dateFormat(row.getWriteTime()), 
 					row.getCode(), 
 					row.getAccountMobile(),
 					row.getName(), 
 					row.getContactName(),
 					row.getContactMobile(), 
 					row.getContactWeixin(),
-					row.getAkindName().equals(AccountDAO.ACCOUNT_TYPE_PERSONAL) ? row.getRealname() : row.getEnterName(),
+					row.getAkind() == AccountDAO.ACCOUNT_TYPE_PERSONAL ? row.getRealname() : row.getEnterName(),
 					row.getAkindName(), 
-					row.getDownTime(),
-					status, opHtml 
+					DateTimeUtil.dateFormat(row.getWriteTime()), 
+					row.getStatusName(), 
+					opHtml 
 			};
 			data.add(dataItem);
 		}

@@ -14,8 +14,8 @@ import org.springframework.web.util.HtmlUtils;
 
 import com.chengxin.bfip.Constants;
 import com.chengxin.bfip.model.Account;
-import com.chengxin.bfip.model.Products;
-import com.chengxin.bfip.model.ProductsDAO;
+import com.chengxin.bfip.model.Product;
+import com.chengxin.bfip.model.ProductDAO;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.DateTimeUtil;
 import com.chengxin.common.JavascriptUtil;
@@ -27,9 +27,9 @@ import com.chengxin.common.KeyValueString;
  */
 public class ProductController extends BaseController {
 
-	private ProductsDAO memberDao = null;
+	private ProductDAO memberDao = null;
 
-	public void setMemberDao(ProductsDAO value) {
+	public void setMemberDao(ProductDAO value) {
 		this.memberDao = value;
 	}
 
@@ -73,6 +73,7 @@ public class ProductController extends BaseController {
 	public ModelAndView index(HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws Exception {
 
+		request.setAttribute("C_ACCOUNT_ENTER_TYPE", Constants.C_ACCOUNT_ENTER_TYPE);
 		request.setAttribute("C_SERVICE_BOOKTYPE_NAME", Constants.C_ACCOUNT_ACCOUNT_TYPE);
 		return new ModelAndView("manage/product/index");
 	}
@@ -103,14 +104,14 @@ public class ProductController extends BaseController {
 		filterParamObject.put("order_dir", orderDir);
 
 		String extraWhere = "";
-		List<Products> ProductsList = memberDao.search(filterParamObject,
+		List<Product> ProductList = memberDao.search(filterParamObject,
 				extraWhere);
 		int count = memberDao.count(filterParamObject, extraWhere);
 
 		ArrayList<String[]> data = new ArrayList<String[]>();
 
-		for (int i = 0; i < ProductsList.size(); i++) {
-			Products row = ProductsList.get(i);
+		for (int i = 0; i < ProductList.size(); i++) {
+			Product row = ProductList.get(i);
 
 			String opHtml = "<a href='product.html?pAct=viewDetail&id="
 					+ String.valueOf(row.getId())
@@ -119,13 +120,12 @@ public class ProductController extends BaseController {
 			String[] dataItem = new String[] {
 					String.valueOf(i+1),
 					row.getCode(), 
-					DateTimeUtil.dateFormat(row.getWriteTime()),
 					row.getAccountMobile(),  
 					row.getName(),
 					String.valueOf(row.getPrice()), 
 					row.getEnterName(),
 					row.getEnterKindName(),
-					DateTimeUtil.dateFormat(row.getUpTime()),
+					DateTimeUtil.dateFormat(row.getWriteTime()),
 					row.getStatusName(), 
 					opHtml 
 			};
@@ -143,11 +143,9 @@ public class ProductController extends BaseController {
 
 	public ModelAndView viewDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
-		JSONObject result = new JSONObject();
-
 		String id = this.getBlankParameter(request, "id", "");
 
-		Products record = memberDao.getDetail(Integer.valueOf(id));
+		Product record = memberDao.getDetail(Integer.valueOf(id));
 
 		request.setAttribute("record", record);
 
@@ -160,7 +158,14 @@ public class ProductController extends BaseController {
 
 		String id = this.getBlankParameter(request, "id", "");
 
-		Products record = memberDao.get(Integer.valueOf(id));
+		Product record = memberDao.get(Integer.valueOf(id));
+		
+		if(record == null) {
+			result.put("retcode", 201);
+			result.put("msg", "该产品不存在。");
+
+			request.setAttribute("JSON", result);
+		}
 
 		memberDao.delete(record);
 

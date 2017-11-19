@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
 import com.chengxin.bfip.Constants;
-import com.chengxin.bfip.model.Opinions;
-import com.chengxin.bfip.model.OpinionsDAO;
+import com.chengxin.bfip.model.Opinion;
+import com.chengxin.bfip.model.OpinionDAO;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.DateTimeUtil;
 import com.chengxin.common.JavascriptUtil;
@@ -26,9 +26,9 @@ import com.chengxin.common.KeyValueString;
  */
 public class OpinionController extends BaseController {
 
-	private OpinionsDAO memberDao = null;
+	private OpinionDAO memberDao = null;
 
-	public void setMemberDao(OpinionsDAO value) {
+	public void setMemberDao(OpinionDAO value) {
 		this.memberDao = value;
 	}
 
@@ -100,14 +100,14 @@ public class OpinionController extends BaseController {
 		filterParamObject.put("order_dir", orderDir);
 
 		String extraWhere = "";
-		List<Opinions> OpinionsList = memberDao.search(filterParamObject,
+		List<Opinion> OpinionList = memberDao.search(filterParamObject,
 				extraWhere);
 		int count = memberDao.count(filterParamObject, extraWhere);
 
 		ArrayList<String[]> data = new ArrayList<String[]>();
 
-		for (int i = 0; i < OpinionsList.size(); i++) {
-			Opinions row = OpinionsList.get(i);
+		for (int i = 0; i < OpinionList.size(); i++) {
+			Opinion row = OpinionList.get(i);
 			String opHtml = " ";
 
 			if(row.getStatus() == 1){
@@ -115,7 +115,7 @@ public class OpinionController extends BaseController {
 						+ "' class='btn btn-xs green'><i class='fa fa-edit'></i> 处理</a>";
 			}
 			String[] dataItem = new String[] {
-					row.getAccount(), 
+					row.getMobile(), 
 					row.getContent(), 
 					DateTimeUtil.dateFormat(row.getWriteTime()), 
 					row.getStatusName(),
@@ -139,7 +139,7 @@ public class OpinionController extends BaseController {
 
 		String id = this.getBlankParameter(request, "id", "");
 
-		Opinions record = memberDao.get(Integer.valueOf(id));
+		Opinion record = memberDao.get(Integer.valueOf(id));
 		record.setStatus(2);
 		memberDao.update(record);
 

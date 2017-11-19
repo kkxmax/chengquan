@@ -19,10 +19,51 @@
         android:padding="@dimen/margin_normal"
         android:scrollbars="none">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/large_text"/>
+        <LinearLayout
+            style="@style/layout_mm"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:text="@string/chengxin_rule_eval_title"
+                android:textColor="@color/txt_dark"
+                android:textSize="@dimen/text_size_16"/>
+            <TextView
+                style="@style/layout_mw"
+                android:text="@string/chengxin_rule_eval_content"
+                android:textColor="@color/txt_gray"
+                android:textSize="@dimen/text_size_14"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:text="@string/chengxin_rule_update_title"
+                android:textColor="@color/txt_dark"
+                android:textSize="@dimen/text_size_16"/>
+            <TextView
+                style="@style/layout_mw"
+                android:text="@string/chengxin_rule_update_content"
+                android:textColor="@color/txt_gray"
+                android:textSize="@dimen/text_size_14"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:text="@string/chengxin_rule_receive_title"
+                android:textColor="@color/txt_dark"
+                android:textSize="@dimen/text_size_16"/>
+            <TextView
+                style="@style/layout_mw"
+                android:text="@string/chengxin_rule_receive_content"
+                android:textColor="@color/txt_gray"
+                android:textSize="@dimen/text_size_14"/>
+
+
+        </LinearLayout>
 
     </ScrollView>
 

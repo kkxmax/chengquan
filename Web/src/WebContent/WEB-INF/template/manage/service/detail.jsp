@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <modal_width val="60%"></modal_width>
 <div class="modal-header">
@@ -13,11 +16,11 @@
 				<div class="form-body col-xs-12">
 					<div class="form-group">
 						<label class="col-xs-3 text-right">服务编号:</label> <label
-							class="col-xs-9 text-left">${record.num}</label>
+							class="col-xs-9 text-left">${record.code}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">账号:</label> <label
-							class="col-xs-9 text-left">${record.booknum}</label>
+							class="col-xs-9 text-left">${record.accountMobile}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">服务名称:</label> <label
@@ -41,30 +44,23 @@
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">姓名:</label> <label
-							class="col-xs-9 text-left">${record.contact_name}</label>
+							class="col-xs-9 text-left">${record.contactName}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">手机号:</label> <label
-							class="col-xs-9 text-left">${record.contact_mobile}</label>
+							class="col-xs-9 text-left">${record.contactMobile}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">微信号:</label> <label
-							class="col-xs-9 text-left">${record.contact_weixin}</label>
+							class="col-xs-9 text-left">${record.contactWeixin}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">服务图片:</label>
 						<div class="col-xs-9 text-left">
-							<img class="avatar-small"
-								src="${C_UPLOAD_PATH}${record.img_path1}" alt="身份证图像"
-								style="width: 18%"> <img class="avatar-small"
-								src="${C_UPLOAD_PATH}${record.img_path2}" alt="身份证图像"
-								style="width: 18%"> <img class="avatar-small"
-								src="${C_UPLOAD_PATH}${record.img_path3}" alt="身份证图像"
-								style="width: 18%"> <img class="avatar-small"
-								src="${C_UPLOAD_PATH}${record.img_path4}" alt="身份证图像"
-								style="width: 18%"> <img class="avatar-small"
-								src="${C_UPLOAD_PATH}${record.img_path5}" alt="身份证图像"
-								style="width: 18%">
+							<img class="avatar-small" src="${C_UPLOAD_PATH}${record.logo}" alt="logo图像" style="width:18%">
+							<c:forEach items="${record.imgPaths}" var="imgPath">
+								<img class="avatar-small" src="${C_UPLOAD_PATH}${imgPath}" alt="项目图像" style="width:18%">
+							</c:forEach>
 						</div>
 					</div>
 				</div>

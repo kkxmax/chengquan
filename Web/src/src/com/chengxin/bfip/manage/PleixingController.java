@@ -97,7 +97,7 @@ public class PleixingController extends BaseController {
 
 		String id = this.getBlankParameter(request, "id", "");
 		String title = this.getBlankParameter(request, "title", "");
-		String upper_id = this.getBlankParameter(request, "upper_id", "");
+		String upperId = this.getBlankParameter(request, "upperId", "");
 
 		Pleixing object;
 		if(id.isEmpty()) {
@@ -108,7 +108,7 @@ public class PleixingController extends BaseController {
 		}
 		
 		object.setTitle(title);
-		object.setUpperId(CommonUtil.toIntDefault(upper_id));
+		object.setUpperId(CommonUtil.toIntDefault(upperId));
 
 		if(id.isEmpty()) {
 			pleixingDao.insert(object);

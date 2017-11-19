@@ -18,5 +18,6 @@ public class AppSettings {
     
     public static final String C_ASSETS_PATH = "C_ASSETS_PATH";
     public static final String C_UPLOAD_PATH = "C_UPLOAD_PATH";
+    public static final String C_EMPTY_HOT_IMAGE = "C_EMPTY_HOT_IMAGE";
     
 }

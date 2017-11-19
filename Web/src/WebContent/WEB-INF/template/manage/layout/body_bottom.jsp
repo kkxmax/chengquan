@@ -8,7 +8,7 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
   <div class="page-footer-inner">
-    2017 &copy; 诚全信息发布平台
+    2017 &copy; 诚乎信息发布平台
   </div>
   <div class="scroll-to-top">
     <i class="icon-arrow-up"></i>
@@ -68,7 +68,7 @@
     }
     
     refreshNoticeCnt();
-//    setTimer();
+    setTimer();
   });
   
 </script>

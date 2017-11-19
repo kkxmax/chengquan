@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,9 +36,11 @@
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kb-06-ymb">
-                        <frame key="frameInset" minX="160" minY="20" width="50" height="16"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kb-06-ymb">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="8xu-oC-GPu"/>
+                            <constraint firstAttribute="width" constant="50" id="EcT-Pp-gkz"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="餐饮" backgroundImage="blue_button.png">
                             <color key="titleColor" red="0.090196078431372548" green="0.52156862745098043" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
@@ -114,14 +117,21 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="9kb-06-ymb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="ocs-yL-ffA"/>
+                    <constraint firstItem="9kb-06-ymb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="152" id="x9S-QE-DEe"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="constrainLeftTitle" destination="x9S-QE-DEe" id="1y3-2f-rJk"/>
                 <outlet property="imgPhoto" destination="yUl-Jm-bfe" id="AUj-R1-lfz"/>
                 <outlet property="imgType" destination="Cb7-ks-pJU" id="jNH-Kv-2YB"/>
                 <outlet property="lblBackEval" destination="h77-kH-1E2" id="Zw8-c4-IC5"/>
                 <outlet property="lblEval" destination="Bim-Ny-kKx" id="o8O-zi-hvB"/>
                 <outlet property="lblFrontEval" destination="xkM-gX-eP6" id="OjI-RI-IaX"/>
+                <outlet property="lblMobile" destination="EgW-Jw-npD" id="MS7-2e-Oxi"/>
                 <outlet property="lblRatio" destination="xdX-dK-b6E" id="9S4-Wb-SC6"/>
+                <outlet property="lblTitle" destination="sXf-Ww-fJz" id="aUd-qb-GB0"/>
             </connections>
             <point key="canvasLocation" x="26.5" y="52"/>
         </tableViewCell>

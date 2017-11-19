@@ -16,6 +16,7 @@ public class Carousel extends BaseModel {
 	private int videoId;
 	private Date writeTime = new Date();
 
+	private String writeTimeString;
 	private String videoName;
 	private double videoSize;
 	private String videoUrl;
@@ -132,6 +133,14 @@ public class Carousel extends BaseModel {
 
 	public void setWriteTime(Date writeTime) {
 		this.writeTime = writeTime;
+	}
+
+	public String getWriteTimeString() {
+		return writeTimeString;
+	}
+
+	public void setWriteTimeString(String writeTimeString) {
+		this.writeTimeString = writeTimeString;
 	}
 
 }

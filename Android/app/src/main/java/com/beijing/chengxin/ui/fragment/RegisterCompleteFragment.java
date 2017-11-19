@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.ui.activity.LoginActivity;
@@ -43,7 +42,7 @@ public class RegisterCompleteFragment extends Fragment {
                     ((LoginActivity)getActivity()).goHome();
                     break;
                 case R.id.btn_register_skip:
-                    Toast.makeText(getActivity() , "跳过" , Toast.LENGTH_LONG).show();
+                    ((LoginActivity)getActivity()).toMainActivity();
                     break;
                 case R.id.btn_back:
                     LoginActivity registerLoginActivity = (LoginActivity)getActivity();

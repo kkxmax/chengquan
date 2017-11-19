@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="MarkLog" table="MARK_LOGS">
+    <id column="ID" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="ACCOUNT_ID" name="accountId" type="int"/>
+    <property column="KIND" name="kind" type="int"/>
+    <property column="ESTIMATE_KIND" name="estimateKind" type="int"/>
+    <property column="ESTIMATE_METHOD" name="estimateMethod" type="int"/>
+    <property column="ERROR_KIND" name="errorKind" type="int"/>
+    <property column="PMARK" name="pmark" type="int"/>
+    <property column="NMARK" name="nmark" type="int"/>
+    <property column="SENDER_ID" name="senderId" type="int"/>
+    <property column="WRITE_TIME" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>

@@ -12,9 +12,15 @@ import net.sf.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
+import com.chengxin.bfip.CommonUtil;
 import com.chengxin.bfip.Constants;
 import com.chengxin.bfip.model.Account;
 import com.chengxin.bfip.model.AccountDAO;
+import com.chengxin.bfip.model.City;
+import com.chengxin.bfip.model.CityDAO;
+import com.chengxin.bfip.model.NoticeDAO;
+import com.chengxin.bfip.model.Province;
+import com.chengxin.bfip.model.ProvinceDAO;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.DateTimeUtil;
 import com.chengxin.common.JavascriptUtil;
@@ -27,8 +33,12 @@ import com.chengxin.common.KeyValueString;
 public class EnterpriseAccountController extends BaseController {
 
     private AccountDAO memberDao = null;
+    private NoticeDAO noticeDao = null;
+    private ProvinceDAO provinceDao = null;
     
     public void setMemberDao(AccountDAO value) {this.memberDao = value;}
+    public void setNoticeDao(NoticeDAO value) {this.noticeDao = value;}
+    public void setProvinceDao(ProvinceDAO value) {this.provinceDao = value;}
     
     public EnterpriseAccountController() throws Exception {
     	
@@ -70,6 +80,9 @@ public class EnterpriseAccountController extends BaseController {
     
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
     
+    	List<Province> provinces = provinceDao.search();
+		
+		request.setAttribute("provinces", provinces);
     	request.setAttribute("C_ACCOUNT_ENTER_TYPE", Constants.C_ACCOUNT_ENTER_TYPE);
     	request.setAttribute("C_ACCOUNT_TEST_STATUS", Constants.C_ACCOUNT_TEST_STATUS);
     	request.setAttribute("C_BAN_STATUS", Constants.C_BAN_STATUS);
@@ -128,6 +141,7 @@ public class EnterpriseAccountController extends BaseController {
         			DateTimeUtil.dateFormat(row.getWriteTime()),
         			row.getMobile(),
         			row.getEnterName(),
+        			row.getProvCity(),
         			row.getEnterKindName(),
         			row.getCode(),
         			String.valueOf(row.getViewCnt()) + "%",
@@ -149,8 +163,6 @@ public class EnterpriseAccountController extends BaseController {
     
     public ModelAndView viewDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
     	
-    	JSONObject result = new JSONObject();
-    	
     	String id = this.getBlankParameter(request, "id", "");
 
     	Account record = memberDao.getDetail(Integer.valueOf(id));
@@ -161,8 +173,6 @@ public class EnterpriseAccountController extends BaseController {
     }
 
     public ModelAndView showTestModal(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-    	
-    	JSONObject result = new JSONObject();
     	
     	String id = this.getBlankParameter(request, "id", "");
 
@@ -206,6 +216,14 @@ public class EnterpriseAccountController extends BaseController {
     	record.setTestStatus(Integer.valueOf(targetStatus));
     	
     	memberDao.update(record);
+    	
+    	int subKind = targetStatus.equals(String.valueOf(AccountDAO.TEST_ST_PASSED)) ? NoticeDAO.NOTICE_SUBKIND_AUTH_PASS : NoticeDAO.NOTICE_SUBKIND_AUTH_DENY;
+    	
+    	CommonUtil.insertNotice(noticeDao, NoticeDAO.NOTICE_TYPE_USER, record.getId(), NoticeDAO.NOTICE_KIND_AUTH
+				, subKind
+				, CommonUtil.getNoticeMsgTitle(NoticeDAO.NOTICE_KIND_AUTH)
+				, CommonUtil.getNoticeMsgContent(NoticeDAO.NOTICE_KIND_AUTH, subKind, null, null)
+				, null, null, null);
     	
     	result.put("retcode", 200);
     	result.put("msg", "操作成功");

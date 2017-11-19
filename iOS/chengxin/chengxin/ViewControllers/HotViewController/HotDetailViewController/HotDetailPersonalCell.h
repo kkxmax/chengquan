@@ -10,5 +10,15 @@
 
 @interface HotDetailPersonalCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollThumb;
+@property (weak, nonatomic) IBOutlet UIImageView *imgPhoto;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblContent;
+@property (weak, nonatomic) IBOutlet UILabel *lblDate;
+@property (weak, nonatomic) IBOutlet UILabel *lblElect;
+@property (weak, nonatomic) IBOutlet UILabel *lblReply;
+@property (weak, nonatomic) IBOutlet UIView *moreReplyView;
+@property (weak, nonatomic) IBOutlet UIButton *moreReplyButton;
+
+- (IBAction)onClickMoreReplyButton:(id)sender;
 
 @end

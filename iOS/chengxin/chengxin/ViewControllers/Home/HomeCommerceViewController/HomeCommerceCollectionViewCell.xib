@@ -15,9 +15,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="184" height="244"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_pic.png" translatesAutoresizingMaskIntoConstraints="NO" id="mqW-IB-Luf">
-                        <frame key="frameInset" maxY="60"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_pic.png" translatesAutoresizingMaskIntoConstraints="NO" id="mqW-IB-Luf">
+                        <frame key="frameInset" height="75.41%"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="恒大冰泉" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud8-Cu-wZo">
@@ -37,6 +37,11 @@
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="produceImageView" destination="mqW-IB-Luf" id="LSY-6l-QJf"/>
+                <outlet property="produceNameLabel" destination="Ud8-Cu-wZo" id="ihR-bb-cyM"/>
+                <outlet property="producePriceLabel" destination="xYV-kS-Dwi" id="sen-pZ-Ssh"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>

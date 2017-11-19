@@ -10,9 +10,10 @@
 
 @interface HomeCommerceViewController : UIViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 {
-    NSTimer *slideCommercePageTimer;
 }
-@property (nonatomic, strong) IBOutlet UIScrollView *slideCommerceScrollView;
-@property (nonatomic, strong) IBOutlet UIPageControl *slideCommercePageCtrl;
 @property (nonatomic, strong) IBOutlet UICollectionView *commerceCollectionView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
+- (void)getProductFromServer:cityName PleixingIds:(NSString*)pleixingIds Start:(NSString*)start Length:(NSString*)length Keyword:(NSString*)keyword;
+@property (nonatomic) NSInteger currentSortOrderIndex;
+@property (nonatomic, strong) IBOutlet UIButton *addButton;
 @end

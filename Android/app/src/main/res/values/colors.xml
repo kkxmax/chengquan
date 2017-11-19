@@ -20,7 +20,9 @@
     <color name="color_gray_f0">#F0F0F0</color>
     <color name="color_gray_f5">#F5F5F5</color>
     <color name="color_gray_e5">#E5E5E5</color>
+    <color name="color_gray_eb">#EBEBEB</color>
     <color name="color_red">#FF2A00</color>
+    <color name="color_black_trans">#99000000</color>
 
     <color name="txt_dark">#333333</color>
     <color name="txt_gray">#666666</color>

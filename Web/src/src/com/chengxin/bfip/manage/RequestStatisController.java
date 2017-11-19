@@ -78,7 +78,7 @@ public class RequestStatisController extends BaseController {
 		String to = this.getBlankParameter(request, "to", "");
 
 //		String where = " ";
-		List<ClickHistory> records = memberDao.request_statis(7 , from , to);
+		List<ClickHistory> records = memberDao.request_statis(ClickHistoryDAO.HISTORY_TYPE_REQUEST , from , to);
 
 		result.put("retcode", 200);
 		result.put("records", records);

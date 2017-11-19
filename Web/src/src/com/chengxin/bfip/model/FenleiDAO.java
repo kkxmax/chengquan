@@ -27,7 +27,7 @@ public class FenleiDAO extends BaseDataAccessObject {
     private static String VIEW = "Fenleis_v";
     
     // 分类类型
-    public static final int FENLEI_TYPE_PROJECT = 1;    // 项目
+    public static final int FENLEI_TYPE_ITEM = 1;    // 项目
     public static final int FENLEI_TYPE_SERVICE = 2;  // 服务
     
     
@@ -109,7 +109,7 @@ public class FenleiDAO extends BaseDataAccessObject {
         }
     }
     
-    private SQLWithParameters _makeSearchQuery(boolean isCountSQL, JSONObject filterParamObject, String extraWhere) {
+    private SQLWithParameters _makeSearchQuery(boolean isCountSQL, JSONObject filterParamObject, String extraWhere, String extraOrder, String groupby) {
         
         SQLWithParameters sql = new SQLWithParameters("");
         JSONArray likeParamArray = new JSONArray();
@@ -190,12 +190,33 @@ public class FenleiDAO extends BaseDataAccessObject {
         	sql.appendSQL(" AND " + extraWhere);
         }
         
-        if(!isCountSQL && !orderCol.isEmpty()) {
-        	sql.appendSQL(" ORDER BY " + orderCol + " " + orderDir);
-        }
-        
-        if(!isCountSQL && offset != -1 && limit != -1) {
-        	sql.appendSQL(" LIMIT " + offset + "," + limit);	
+        if(!isCountSQL) {
+        	if(!groupby.isEmpty()) {
+        		sql.appendSQL(" GROUP BY " + groupby);
+        	}
+        	String orderby = "";
+        	if(!orderCol.isEmpty()) {
+            	orderby = orderCol + " " + orderDir;
+            }
+        	
+        	if(!extraOrder.isEmpty()) {
+        		if(orderby.isEmpty()) {
+        			orderby += extraOrder;	
+        		}
+        		else {
+        			orderby += " ," + extraOrder;
+        		}
+        		
+        	}
+        	
+        	if(orderby.isEmpty()) {
+        		orderby = "id asc";
+        	}
+        	sql.appendSQL(" ORDER BY " + orderby);
+            
+            if(offset != -1 && limit != -1) {
+            	sql.appendSQL(" LIMIT " + offset + "," + limit);	
+            }
         }
         
         return sql;
@@ -210,7 +231,7 @@ public class FenleiDAO extends BaseDataAccessObject {
         Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
         Transaction transaction = session.beginTransaction();
         
-        SQLWithParameters sql = _makeSearchQuery(true, filterParamObject, extraWhere);
+        SQLWithParameters sql = _makeSearchQuery(true, filterParamObject, extraWhere, "", "");
 
         Query query = session.createSQLQuery(sql.getSQL());
         
@@ -232,11 +253,19 @@ public class FenleiDAO extends BaseDataAccessObject {
     }
     
     public List<Fenlei> search(JSONObject filterParamObject, String extraWhere) {
+    	return search(filterParamObject, extraWhere, "");
+    }
+    
+    public List<Fenlei> search(JSONObject filterParamObject, String extraWhere, String extraOrder) {
+    	return search(filterParamObject, extraWhere, extraOrder, "");
+    }
+    
+    public List<Fenlei> search(JSONObject filterParamObject, String extraWhere, String extraOrder, String groupby) {
     
         Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
         Transaction transaction = session.beginTransaction();
         
-        SQLWithParameters sql = _makeSearchQuery(false, filterParamObject, extraWhere);
+        SQLWithParameters sql = _makeSearchQuery(false, filterParamObject, extraWhere, extraOrder, groupby);
 
         Query query = session.createSQLQuery(sql.getSQL());
         

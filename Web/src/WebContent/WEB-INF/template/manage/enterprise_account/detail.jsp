@@ -12,7 +12,7 @@
         <div class="form-body col-xs-12">
           <div class="form-group">
             <label class="col-xs-4 align-right">账号:</label>
-            <label class="col-xs-8 align-left">${record.account}</label>
+            <label class="col-xs-8 align-left">${record.mobile}</label>
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">诚信代码:</label>
@@ -20,11 +20,11 @@
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">信用度:</label>
-            <label class="col-xs-8 align-left">${record.useful}%</label>
+            <label class="col-xs-8 align-left">${record.credit}%</label>
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">推荐人数:</label>
-            <label class="col-xs-8 align-left">${record.elect}</label>
+            <label class="col-xs-8 align-left">${record.electCnt}</label>
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">头像:</label>
@@ -36,7 +36,7 @@
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">身份证:</label>
-            <div class="col-xs-8"><img class="avatar-small" src="${C_UPLOAD_PATH}${record.certImage}" alt="身份证图像" style="height: 130px;"></div>
+            <div class="col-xs-8"><img class="avatar-small" src="${C_UPLOAD_PATH}${record.enterCertImage}" alt="身份证图像" style="height: 130px;"></div>
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">公司:</label>

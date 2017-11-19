@@ -26,6 +26,10 @@ public class ElectDAO extends BaseDataAccessObject {
 
     private static String VIEW = "Elects_v";
     
+    public static final int ELECT_KIND_PERSONAL_OR_ENTER = 1;
+    public static final int ELECT_KIND_HOT = 2;
+    public static final int ELECT_KIND_ESTIMATE = 3;
+    
     
     public void insert(Elect elect) {
         DBModelUtil.processSecure(Elect.class.getName(), elect, DBModelUtil.C_SECURE_TYPE_ENCRYPT);
@@ -253,11 +257,12 @@ public class ElectDAO extends BaseDataAccessObject {
                 Elect row = new Elect();
                 
                 row.setId(CommonUtil.toIntDefault(objectArray[0]));
-                row.setAccountId(CommonUtil.toIntDefault(objectArray[1]));
-                row.setHotId(CommonUtil.toIntDefault(objectArray[2]));
-                row.setEstimateId(CommonUtil.toIntDefault(objectArray[3]));
-                row.setOwner(CommonUtil.toIntDefault(objectArray[4]));
-                row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[5])));
+                row.setKind(CommonUtil.toIntDefault(objectArray[1]));
+                row.setAccountId(CommonUtil.toIntDefault(objectArray[2]));
+                row.setHotId(CommonUtil.toIntDefault(objectArray[3]));
+                row.setEstimateId(CommonUtil.toIntDefault(objectArray[4]));
+                row.setOwner(CommonUtil.toIntDefault(objectArray[5]));
+                row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[6])));
                 
                 DBModelUtil.processSecure(Elect.class.getName(), row, DBModelUtil.C_SECURE_TYPE_DECRYPT);
 

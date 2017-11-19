@@ -20,11 +20,11 @@
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">信用度:</label>
-            <label class="col-xs-8 align-left">0%</label>
+            <label class="col-xs-8 align-left">${record.credit}%</label>
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">推荐人数:</label>
-            <label class="col-xs-8 align-left">${record.elect}</label>
+            <label class="col-xs-8 align-left">${record.electCnt}</label>
           </div>
           <div class="form-group">
             <label class="col-xs-4 align-right">头像:</label>

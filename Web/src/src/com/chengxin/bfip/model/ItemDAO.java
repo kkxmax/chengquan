@@ -105,7 +105,7 @@ public class ItemDAO extends BaseDataAccessObject {
         }
     }
     
-    private SQLWithParameters _makeSearchQuery(boolean isCountSQL, JSONObject filterParamObject, String extraWhere) {
+    private SQLWithParameters _makeSearchQuery(boolean isCountSQL, JSONObject filterParamObject, String extraWhere, String extraOrder, String groupby) {
         
         SQLWithParameters sql = new SQLWithParameters("");
         JSONArray likeParamArray = new JSONArray();
@@ -146,7 +146,8 @@ public class ItemDAO extends BaseDataAccessObject {
             sql.appendSQL("SELECT id, code, account_id, name, fenlei_id, fenlei_name, city_id, city_name, province_id, province_name"
             		+ ", comment, need, weburl, is_show, status, status_name, up_time, down_time, contact_name, contact_mobile, contact_weixin "
             		+ ", logo, img_path1, img_path2, img_path3, img_path4, img_path5, write_time"
-            		+ ", akind, akind_name, enter_kind, enter_kind_name, realname, enter_name, account_mobile ");
+            		+ ", akind, akind_name, enter_kind, enter_kind_name, realname, enter_name, account_mobile, account_view_cnt"
+            		+ ", account_credit, account_code, addr, account_logo, account_name ");
         }
         
         sql.appendSQL(" FROM " + VIEW);
@@ -189,12 +190,33 @@ public class ItemDAO extends BaseDataAccessObject {
         	sql.appendSQL(" AND " + extraWhere);
         }
         
-        if(!isCountSQL && !orderCol.isEmpty()) {
-        	sql.appendSQL(" ORDER BY " + orderCol + " " + orderDir);
-        }
-        
-        if(!isCountSQL && offset != -1 && limit != -1) {
-        	sql.appendSQL(" LIMIT " + offset + "," + limit);	
+        if(!isCountSQL) {
+        	if(!groupby.isEmpty()) {
+        		sql.appendSQL(" GROUP BY " + groupby);
+        	}
+        	String orderby = "";
+        	if(!orderCol.isEmpty()) {
+            	orderby = orderCol + " " + orderDir;
+            }
+        	
+        	if(!extraOrder.isEmpty()) {
+        		if(orderby.isEmpty()) {
+        			orderby += extraOrder;	
+        		}
+        		else {
+        			orderby += " ," + extraOrder;
+        		}
+        		
+        	}
+        	
+        	if(orderby.isEmpty()) {
+        		orderby = "id asc";
+        	}
+        	sql.appendSQL(" ORDER BY " + orderby);
+            
+            if(offset != -1 && limit != -1) {
+            	sql.appendSQL(" LIMIT " + offset + "," + limit);	
+            }
         }
         
         return sql;
@@ -209,7 +231,7 @@ public class ItemDAO extends BaseDataAccessObject {
         Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
         Transaction transaction = session.beginTransaction();
         
-        SQLWithParameters sql = _makeSearchQuery(true, filterParamObject, extraWhere);
+        SQLWithParameters sql = _makeSearchQuery(true, filterParamObject, extraWhere, "", "");
 
         Query query = session.createSQLQuery(sql.getSQL());
         
@@ -231,11 +253,19 @@ public class ItemDAO extends BaseDataAccessObject {
     }
     
     public List<Item> search(JSONObject filterParamObject, String extraWhere) {
+    	return search(filterParamObject, extraWhere, "");
+    }
+    
+    public List<Item> search(JSONObject filterParamObject, String extraWhere, String extraOrder) {
+    	return search(filterParamObject, extraWhere, extraOrder, "");
+    }
+    
+    public List<Item> search(JSONObject filterParamObject, String extraWhere, String extraOrder, String groupby) {
     
         Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
         Transaction transaction = session.beginTransaction();
         
-        SQLWithParameters sql = _makeSearchQuery(false, filterParamObject, extraWhere);
+        SQLWithParameters sql = _makeSearchQuery(false, filterParamObject, extraWhere, extraOrder, groupby);
 
         Query query = session.createSQLQuery(sql.getSQL());
         
@@ -280,6 +310,7 @@ public class ItemDAO extends BaseDataAccessObject {
                 row.setImgPath4(CommonUtil.toStringDefault(objectArray[25]));
                 row.setImgPath5(CommonUtil.toStringDefault(objectArray[26]));
                 row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[27])));
+                row.setWriteTimeString(DateTimeUtil.dateFormat(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[27]))));
                 row.setAkind(CommonUtil.toIntDefault(objectArray[28]));
                 row.setAkindName(CommonUtil.toStringDefault(objectArray[29]));
                 row.setEnterKind(CommonUtil.toIntDefault(objectArray[30]));
@@ -287,6 +318,13 @@ public class ItemDAO extends BaseDataAccessObject {
                 row.setRealname(CommonUtil.toStringDefault(objectArray[32]));
                 row.setEnterName(CommonUtil.toStringDefault(objectArray[33]));
                 row.setAccountMobile(CommonUtil.toStringDefault(objectArray[34]));
+                row.setAccountViewCnt(CommonUtil.toIntDefault(objectArray[35]));
+                row.setAccountCredit((int) Math.round(CommonUtil.toDoubleDefault(objectArray[36])));
+                row.setAccountCode(CommonUtil.toStringDefault(objectArray[37]));
+                row.setAddr(CommonUtil.toStringDefault(objectArray[38]));
+                row.setAccountLogo(CommonUtil.toStringDefault(objectArray[39]));
+                row.setAccountName(CommonUtil.toStringDefault(objectArray[40]));
+                row.setImgPaths(CommonUtil.getImgPathList(objectArray, 22, 26));
                 
                 DBModelUtil.processSecure(Item.class.getName(), row, DBModelUtil.C_SECURE_TYPE_DECRYPT);
 

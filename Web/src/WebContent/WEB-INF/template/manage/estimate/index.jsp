@@ -39,17 +39,17 @@
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>账号:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="booknum">
+								class="form-control form-like-filter input-small" name="owner_mobile">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>评价人:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="name">
+								class="form-control form-like-filter input-small" name="owner_name">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>评价对象:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="reason">
+								class="form-control form-like-filter input-small" name="target_account_name">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
@@ -83,7 +83,6 @@
 						<tr>
 							<th>账号</th>
 							<th>评价人</th>
-							<th>write_time</th>
 							<th>评价内容</th>
 							<th>评价类型</th>
 							<th>评价方式</th>
@@ -129,15 +128,11 @@
 								"url" : "estimate.html?pAct=search"
 							},
 							"columns" : [ {
-								"name" : "booknum",
+								"name" : "owner_mobile",
 								"orderable" : true
 							}, {
 								"name" : "name",
 								"orderable" : true
-							}, {
-								"name" : "write_time",
-								"orderable" : true,
-								"visible" : false
 							}, {
 								"name" : "content",
 								"orderable" : true
@@ -151,7 +146,7 @@
 								"name" : "reason",
 								"orderable" : true
 							}, {
-								"name" : "update_time",
+								"name" : "write_time",
 								"orderable" : true
 							}, {
 								"orderable" : false
@@ -159,7 +154,7 @@
 							"bFilter" : false,
 							"bInfo" : true,
 							"bPaginate" : true,
-							"order" : [ [ 2, "desc" ] ]
+							"order" : [ [ 6, "desc" ] ]
 						});
 
 				$('select.form-filter, select.form-like-filter',

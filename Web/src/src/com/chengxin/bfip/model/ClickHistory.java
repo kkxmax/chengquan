@@ -7,13 +7,16 @@ import com.chengxin.common.BaseModel;
 public class ClickHistory extends BaseModel{
 	
 	private int id;
-	private int accountId;
+	private int ownerId;
 	private int type;
-	private int targetType;
+	private int shareKind;
+	private int accountId;
 	private int productId;
 	private int itemId;
 	private int serviceId;
 	private Date writeTime = new Date();
+	
+	private int contactAkind;
 	private int personal_cnt;
 	private int enterprise_cnt;
 	private String click_date;
@@ -99,11 +102,17 @@ public class ClickHistory extends BaseModel{
 	public void setAccountId(int accountId) {
 		this.accountId = accountId;
 	}
-	public int getTargetType() {
-		return targetType;
+	public int getOwnerId() {
+		return ownerId;
 	}
-	public void setTargetType(int targetType) {
-		this.targetType = targetType;
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
+	}
+	public int getShareKind() {
+		return shareKind;
+	}
+	public void setShareKind(int shareKind) {
+		this.shareKind = shareKind;
 	}
 	public int getProductId() {
 		return productId;
@@ -140,6 +149,12 @@ public class ClickHistory extends BaseModel{
 	}
 	public void setEnterprise_cnt(int enterprise_cnt) {
 		this.enterprise_cnt = enterprise_cnt;
+	}
+	public int getContactAkind() {
+		return contactAkind;
+	}
+	public void setContactAkind(int contactAkind) {
+		this.contactAkind = contactAkind;
 	}
 	
 	

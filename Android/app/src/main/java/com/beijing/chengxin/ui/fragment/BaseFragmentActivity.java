@@ -25,6 +25,15 @@ public class BaseFragmentActivity extends FragmentActivity {
         showFragment(fragment, isStack, true);
     }
 
+    public void addFragment(Fragment fragment) {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
+        transaction.add(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+    }
+
     public void showFragment(Fragment fragment, boolean isStack, boolean isAnimation) {
         showFragment(fragment, isStack, isAnimation, true);
     }
@@ -32,7 +41,7 @@ public class BaseFragmentActivity extends FragmentActivity {
     public void showFragment(Fragment fragment, boolean isStack, boolean isAnimation, boolean fromRight) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-        if(isAnimation) {
+        if (isAnimation) {
             if (fromRight)
                 transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right);
             else
@@ -45,6 +54,15 @@ public class BaseFragmentActivity extends FragmentActivity {
             transaction.addToBackStack(null);
 
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack();
+        } else {
+            onBackActivity();
+        }
     }
 
     public void onBackActivity() {

@@ -28,6 +28,7 @@ public class ControllerAdvice extends HandlerInterceptorAdapter {
         
         request.setAttribute(AppSettings.C_ASSETS_PATH, cachedObjectService.getProperty(CachedObjectService.C_APP_SETTINGS_NAME, AppSettings.C_ASSETS_PATH));
         request.setAttribute(AppSettings.C_UPLOAD_PATH, cachedObjectService.getProperty(CachedObjectService.C_APP_SETTINGS_NAME, AppSettings.C_UPLOAD_PATH));
+        request.setAttribute(AppSettings.C_EMPTY_HOT_IMAGE, cachedObjectService.getProperty(CachedObjectService.C_APP_SETTINGS_NAME, AppSettings.C_EMPTY_HOT_IMAGE));
         
         request.setAttribute(AppSettings.C_COMMON_FILE_SAVE_PATH, cachedObjectService.getProperty(CachedObjectService.C_APP_SETTINGS_NAME, AppSettings.C_COMMON_FILE_SAVE_PATH));
         request.setAttribute(AppSettings.C_COMMON_FILE_PATH_SEP, cachedObjectService.getProperty(CachedObjectService.C_APP_SETTINGS_NAME, AppSettings.C_COMMON_FILE_PATH_SEP));

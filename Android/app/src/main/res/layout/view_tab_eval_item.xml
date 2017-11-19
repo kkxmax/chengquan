@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        style="@style/layout_m0">
+
+        <RelativeLayout
+            style="@style/layout_mw"
+            android:padding="@dimen/margin_normal">
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/image_avatar_width"
+                android:layout_height="@dimen/image_avatar_height"
+                android:background="@drawable/no_image"
+                android:layout_alignParentLeft="true"/>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:layout_toRightOf="@+id/img_avatar"
+                android:orientation="vertical">
+                <RelativeLayout
+                    style="@style/layout_mw"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/margin_normal"
+                    android:paddingRight="@dimen/margin_normal">
+                    <TextView
+                        android:id="@+id/txt_avatar_name"
+                        style="@style/layout_ww"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:text="@string/str_sample"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_orange_dark"
+                        android:textSize="@dimen/text_size_16"/>
+
+                    <TextView
+                        android:id="@+id/txt_eval_type"
+                        style="@style/layout_ww"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:text="@string/str_sample"
+                        android:textColor="@color/color_orange_dark"
+                        android:textSize="@dimen/text_size_14"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/margin_normal"
+                    android:paddingRight="@dimen/margin_normal">
+                    <TextView
+                        android:id="@+id/txt_eval_content"
+                        style="@style/layout_mw"
+                        android:text="@string/eval_content"
+                        android:textColor="@color/txt_dark"/>
+                    <HorizontalScrollView
+                        android:id="@+id/scroll_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_descript_height"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:layout_marginBottom="@dimen/margin_normal">
+                        <LinearLayout
+                            android:id="@+id/layout_images"
+                            style="@style/layout_mm"
+                            android:orientation="horizontal">
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:layout_height="@dimen/row_height_smaller"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/txt_date"
+                            style="@style/layout_ww"
+                            android:text="@string/str_sample_date"/>
+
+                        <View style="@style/layout_0m" />
+
+                        <TextView
+                            android:id="@+id/txt_elect_cnt"
+                            style="@style/layout_ww"
+                            android:textColor="@color/color_blue_light"
+                            android:text="@string/number_bracket_20"
+                            android:drawableLeft="@drawable/zan_sel"
+                            android:drawablePadding="@dimen/margin_normal"/>
+
+                        <TextView
+                            android:id="@+id/txt_evaluate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_large"
+                            android:textColor="@color/color_blue_light"
+                            android:drawableLeft="@drawable/evaluate"/>
+
+                        <TextView
+                            android:id="@+id/txt_error"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_large"
+                            android:textColor="@color/color_blue_light"
+                            android:drawableLeft="@drawable/error"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray" />
+
+                <LinearLayout
+                    android:id="@+id/layout_remark"
+                    style="@style/layout_mw"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_remark_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_sample"/>
+
+                    <TextView
+                        android:id="@+id/txt_remark_more"
+                        style="@style/layout_ww"
+                        android:text="@string/more_detail"
+                        android:textSize="@dimen/text_size_14"
+                        android:textColor="@color/color_main_blue"/>
+
+                    <LinearLayout
+                        android:id="@+id/view_remark_body"
+                        style="@style/layout_mw"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_mark"
+            style="@style/layout_ww"
+            android:src="@drawable/label_bushushi"
+            android:background="@color/color_transparent"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/margin_large_more"/>
+    </RelativeLayout>
+
+    <View style="@style/splite_line_gray" />
+</LinearLayout>

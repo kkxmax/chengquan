@@ -78,7 +78,7 @@ public class BuyStatisController extends BaseController {
 		String to = this.getBlankParameter(request, "to", "");
 
 //		String where = " ";
-		List<ClickHistory> records = memberDao.buy_statis(6 , from , to);
+		List<ClickHistory> records = memberDao.buy_statis(ClickHistoryDAO.HISTORY_TYPE_BUY , from , to);
 
 		result.put("retcode", 200);
 		result.put("records", records);

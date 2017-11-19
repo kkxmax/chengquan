@@ -10,7 +10,7 @@
 
 @implementation HomeChoiceBusinessTableViewCell {
 }
-@synthesize networkNameLabel, extendButton, networkContentView, contentTableView;
+@synthesize lblName, extendButton, viewContent, contentTableView;
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -26,10 +26,10 @@
 - (IBAction)extendAction:(id)sender {
     if(extendButton.isSelected) {
         extendButton.selected = NO;
-        networkContentView.hidden = YES;
+        viewContent.hidden = YES;
     }else{
         extendButton.selected = YES;
-        networkContentView.hidden = NO;
+        viewContent.hidden = NO;
     }
     [contentTableView reloadData];
 }

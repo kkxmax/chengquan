@@ -11,15 +11,7 @@ import android.widget.TextView;
 
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.ui.activity.MyWriteActivity;
-import com.beijing.chengxin.ui.config.Constants;
-import com.beijing.chengxin.ui.widget.AutoScrollViewPager;
-import com.beijing.chengxin.ui.widget.PageIndicator;
-import com.beijing.chengxin.ui.widget.UrlImagePagerAdapter;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.beijing.chengxin.config.Constants;
 
 public class MyItemDetailFragment extends Fragment {
 

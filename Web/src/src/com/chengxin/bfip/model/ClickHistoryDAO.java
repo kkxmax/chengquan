@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import com.chengxin.bfip.CommonUtil;
 import com.chengxin.common.BaseDataAccessObject;
 import com.chengxin.common.DBModelUtil;
+import com.chengxin.common.DateTimeUtil;
 import com.chengxin.common.SQLWithParameters;
 
 /**
@@ -23,25 +24,279 @@ import com.chengxin.common.SQLWithParameters;
  */
 public class ClickHistoryDAO extends BaseDataAccessObject {
 
-	private static String VIEW = "ClickHistorys_v";
+	private static String VIEW = "Click_History_v";
 
 	//分类
-	private int HISTORY_TYPE_CONNECTION = 1;		//联系我
-	private int HISTORY_TYPE_SHOPPING = 2;			//产品分享
-	private int HISTORY_TYPE_ITEM = 3;				//项目分享
-	private int HISTORY_TYPE_SERVICE = 4;			//服务分享
-	private int HISTORY_TYPE_ETC = 5;				//其他分享
-	private int HISTORY_TYPE_BUY = 6;				//立即购买
-	private int HISTORY_TYPE_REQUEST = 7;			//邀请好友
-	private int HISTORY_TYPE_PERSONAL_DETAIL = 8;			//邀请好友
-	private int HISTORY_TYPE_ENTERPRISE_DETAIL = 9;			//邀请好友
-	private int HISTORY_TYPE_REPORT = 10;			//邀请好友
+	public static final int HISTORY_TYPE_CONTACT = 1;		//联系我
+	public static final int HISTORY_TYPE_SHARE = 2;			//分享
+	public static final int HISTORY_TYPE_BUY = 3;				//立即购买
+	public static final int HISTORY_TYPE_REQUEST = 4;			//邀请好友
 	
-	//账户类型
-	private int ACCOUNT_AKIND_PERSONAL = 1;
-	private int ACCOUNT_AKIND_ENTERPRISE = 2;
+	public static final int HISTORY_SHARE_KIND_PRODUCT = 1;			//产品分享
+	public static final int HISTORY_SHARE_KIND_ITEM = 2;			//项目分享
+	public static final int HISTORY_SHARE_KIND_SERVICE = 3;			//服务分享
+	public static final int HISTORY_SHARE_KIND_PERSONAL = 4;		//熟人详情分享,
+	public static final int HISTORY_SHARE_KIND_ENTER = 5;			//企业详情分享
+	public static final int HISTORY_SHARE_KIND_REPOET = 6;			//诚信报告分享
 
 
+	public void insert(ClickHistory clickHistory) {
+        DBModelUtil.processSecure(ClickHistory.class.getName(), clickHistory, DBModelUtil.C_SECURE_TYPE_ENCRYPT);
+        
+        this.getHibernateTemplate().save(clickHistory);
+    }
+
+    public void update(ClickHistory clickHistory) {
+        DBModelUtil.processSecure(ClickHistory.class.getName(), clickHistory, DBModelUtil.C_SECURE_TYPE_ENCRYPT);
+        
+        this.getHibernateTemplate().update(clickHistory);
+    }
+    
+    public void delete(ClickHistory clickHistory) {
+        DBModelUtil.processSecure(ClickHistory.class.getName(), clickHistory, DBModelUtil.C_SECURE_TYPE_ENCRYPT);
+        
+        this.getHibernateTemplate().delete(clickHistory);
+    }
+    
+    public void delete(int id) {
+        this.getHibernateTemplate().delete(get(id));
+    }
+    
+    public ClickHistory get(int id) {
+        StringBuffer stringBuffer = new StringBuffer();
+
+        stringBuffer.append("FROM ClickHistory ");
+        stringBuffer.append("WHERE id = :id ");
+
+        List list = (List)this.getHibernateTemplate().findByNamedParam(
+                    stringBuffer.toString(),
+                    new String[]{"id"},
+                    new Object[]{id});
+
+        stringBuffer = null;
+
+        if (list.size() > 0) {
+        	ClickHistory clickHistory = (ClickHistory)list.get(0);
+            
+            DBModelUtil.processSecure(ClickHistory.class.getName(), clickHistory, DBModelUtil.C_SECURE_TYPE_DECRYPT);
+            
+            return clickHistory;
+        }
+
+        return null;
+    }
+    
+    public ClickHistory getDetail(int id) {
+        
+        JSONObject filterParamObject = new JSONObject();
+        JSONArray equalParamArray = new JSONArray();
+        JSONObject equalParam = new JSONObject();
+        
+        equalParam.put("id", id);
+        equalParamArray.add(equalParam);
+        filterParamObject.put("equal_param", equalParamArray);
+        
+        List<ClickHistory> resultList = this.search(filterParamObject);
+        
+        if(resultList.size() > 0) {
+        	return resultList.get(0);
+        }
+        else {
+        	return null;	
+        }
+    }
+    
+    public ClickHistory getDetail(String where) {
+        
+        List<ClickHistory> resultList = this.search(null, where);
+        
+        if(resultList.size() > 0) {
+        	return resultList.get(0);
+        }
+        else {
+        	return null;	
+        }
+    }
+
+    private SQLWithParameters _makeSearchQuery(boolean isCountSQL, JSONObject filterParamObject, String extraWhere, String extraOrder, String groupby) {
+        
+        SQLWithParameters sql = new SQLWithParameters("");
+        JSONArray likeParamArray = new JSONArray();
+        JSONArray equalParamArray = new JSONArray();
+        int offset = -1;
+        int limit = -1;
+        String orderCol = "";
+        String orderDir = "asc";
+        
+        if(filterParamObject != null) {
+        	if(filterParamObject.has("like_param")) {
+            	likeParamArray = filterParamObject.getJSONArray("like_param");	
+            }
+            if(filterParamObject.has("equal_param")) {
+            	equalParamArray = filterParamObject.getJSONArray("equal_param");	
+            }
+            if(filterParamObject.has("order_col")) {
+            	orderCol = filterParamObject.getString("order_col");	
+            }
+            if(filterParamObject.has("order_dir")) {
+            	orderDir = filterParamObject.getString("order_dir");	
+            }
+            if(filterParamObject.has("start")) {
+            	offset = filterParamObject.getInt("start");	
+            }
+            if(filterParamObject.has("length")) {
+            	limit = filterParamObject.getInt("length");	
+            }	
+        }
+                
+        if(isCountSQL) {
+            sql.appendSQL("SELECT COUNT(*)");
+        } else {
+            sql.appendSQL("SELECT id, owner_id, type, share_kind, account_id, product_id, item_id, service_id, click_date, contact_akind ");
+        }
+        
+        sql.appendSQL(" FROM " +  VIEW);
+        sql.appendSQL(" WHERE 1 ");
+        
+        for(int i=0; i<likeParamArray.size(); i++) {
+        	JSONObject oneParam = likeParamArray.getJSONObject(i);
+        	Iterator<String> itr = oneParam.keys();
+        	while(itr.hasNext()) {
+        		String key = itr.next();
+        		sql.appendSQL(" AND " + key + " LIKE '%" + oneParam.get(key) + "%' ");
+        	}
+        }
+        
+        for(int i=0; i<equalParamArray.size(); i++) {
+        	JSONObject oneParam = equalParamArray.getJSONObject(i);
+        	Iterator<String> itr = oneParam.keys();
+        	while(itr.hasNext()) {
+        		String key = itr.next();
+        		sql.appendSQL(" AND " + key + "=" + oneParam.get(key));
+        	}
+        }
+        
+        if(!extraWhere.isEmpty()) {
+        	sql.appendSQL(" AND " + extraWhere);
+        }
+        
+        if(!isCountSQL) {
+        	if(!groupby.isEmpty()) {
+        		sql.appendSQL(" GROUP BY " + groupby);
+        	}
+        	String orderby = "";
+        	if(!orderCol.isEmpty()) {
+            	orderby = orderCol + " " + orderDir;
+            }
+        	
+        	if(!extraOrder.isEmpty()) {
+        		if(orderby.isEmpty()) {
+        			orderby += extraOrder;	
+        		}
+        		else {
+        			orderby += " ," + extraOrder;
+        		}
+        		
+        	}
+        	
+        	if(orderby.isEmpty()) {
+        		orderby = "id asc";
+        	}
+        	sql.appendSQL(" ORDER BY " + orderby);
+            
+            if(offset != -1 && limit != -1) {
+            	sql.appendSQL(" LIMIT " + offset + "," + limit);	
+            }
+        }
+        
+        return sql;
+    }
+    
+    public int count(JSONObject filterParamObject) {
+    	return count(filterParamObject, "");
+    }
+    
+    public int count(JSONObject filterParamObject, String extraWhere) {
+        
+        Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
+        Transaction transaction = session.beginTransaction();
+        
+        SQLWithParameters sql = _makeSearchQuery(true, filterParamObject, extraWhere, "", "");
+
+        Query query = session.createSQLQuery(sql.getSQL());
+        
+        DBModelUtil.fillParameter(sql, query);
+        
+        List list = null; try { list = query.list(); } catch(Exception e) {e.printStackTrace();}
+
+        int result = list ==  null ? 0 : Integer.parseInt("" + list.get(0));
+        
+        transaction.commit();
+        
+        if(session.isOpen()) {session.close();}
+        
+        return result;
+    }
+    
+    public List<ClickHistory> search(JSONObject filterParamObject) {
+    	return search(filterParamObject, "");
+    }
+    
+    public List<ClickHistory> search(JSONObject filterParamObject, String extraWhere) {
+    	return search(filterParamObject, extraWhere, "");
+    }
+    
+    public List<ClickHistory> search(JSONObject filterParamObject, String extraWhere, String extraOrder) {
+    	return search(filterParamObject, extraWhere, extraOrder, "");
+    }
+    
+    public List<ClickHistory> search(JSONObject filterParamObject, String extraWhere, String extraOrder, String groupby) {
+    
+        Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
+        Transaction transaction = session.beginTransaction();
+        
+        SQLWithParameters sql = _makeSearchQuery(false, filterParamObject, extraWhere, extraOrder, groupby);
+
+        Query query = session.createSQLQuery(sql.getSQL());
+        
+        DBModelUtil.fillParameter(sql, query);
+
+        List queryList = null; try { queryList = query.list(); } catch(Exception e) {e.printStackTrace();}
+        List<ClickHistory> resultList = new ArrayList<ClickHistory>();
+        
+        if (queryList != null) {
+            int listSize = queryList.size();
+            
+            for(int i = 0; i < listSize; i++) {
+                Object[] objectArray = (Object[])queryList.get(i);
+                
+                ClickHistory row = new ClickHistory();
+                
+                row.setId(CommonUtil.toIntDefault(objectArray[0]));
+                row.setOwnerId(CommonUtil.toIntDefault(objectArray[1]));
+                row.setType(CommonUtil.toIntDefault(objectArray[2]));
+                row.setShareKind(CommonUtil.toIntDefault(objectArray[3]));
+                row.setAccountId(CommonUtil.toIntDefault(objectArray[4]));
+                row.setProductId(CommonUtil.toIntDefault(objectArray[5]));
+                row.setItemId(CommonUtil.toIntDefault(objectArray[6]));
+                row.setServiceId(CommonUtil.toIntDefault(objectArray[7]));
+                row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[8])));
+                row.setClick_date(CommonUtil.toStringDefault(objectArray[9]));
+                row.setContactAkind(CommonUtil.toIntDefault(objectArray[10]));
+                
+                DBModelUtil.processSecure(Account.class.getName(), row, DBModelUtil.C_SECURE_TYPE_DECRYPT);
+
+                resultList.add(row);
+            }
+        }
+        
+        transaction.commit();
+        
+        if(session.isOpen()) {session.close();}
+        
+        return resultList;
+    }
+    
 	public List<ClickHistory> link_statis(int type , String from , String to){
 		Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
 		Transaction transaction = session.beginTransaction();
@@ -58,7 +313,7 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 			dateWhere = " and click_date >= '"+ from +"' and click_date <= '"+ to +"'";
 		}
 
-		dateSql.appendSQL("select click_date , account_id from click_history_v where type = " + String.valueOf(type) + dateWhere + " group BY click_date;");
+		dateSql.appendSQL("select click_date, account_id from " + VIEW + " where type = " + type + dateWhere + " group BY click_date;");
 
 		Query query = session.createSQLQuery(dateSql.getSQL());
 
@@ -78,11 +333,12 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				ClickHistory row = new ClickHistory();
 
 				row.setClick_date(CommonUtil.toStringDefault(objectArray[0]));
-				row.setAccountId(CommonUtil.toIntDefault(objectArray[1]));
 				
 				SQLWithParameters personalSql = new SQLWithParameters("");
 
-				personalSql.appendSQL("select count(id) as personal_count , account_id from click_history_v where type = " + String.valueOf(type) + " and akind = " + String.valueOf(ACCOUNT_AKIND_PERSONAL) + " and click_date = '" + row.getClick_date() + "'");
+				personalSql.appendSQL("select count(id) as personal_count, account_id from " + VIEW 
+						+ " where type = " + type + " and contact_akind = " + AccountDAO.ACCOUNT_TYPE_PERSONAL 
+						+ " and click_date = '" + row.getClick_date() + "'");
 
 				Query personalQuery = session.createSQLQuery(personalSql.getSQL());
 
@@ -99,7 +355,9 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters enterpriseSql = new SQLWithParameters("");
 
-				enterpriseSql.appendSQL("select count(id) as personal_count , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_CONNECTION) + " and akind = " + String.valueOf(ACCOUNT_AKIND_ENTERPRISE) + " and click_date = '" + row.getClick_date() + "'");
+				enterpriseSql.appendSQL("select count(id) as personal_count, account_id from " + VIEW
+						+ " where type = " + HISTORY_TYPE_CONTACT + " and contact_akind = " + AccountDAO.ACCOUNT_TYPE_ENTERPRISE 
+						+ " and click_date = '" + row.getClick_date() + "'");
 
 				Query enterpriseQuery = session.createSQLQuery(enterpriseSql.getSQL());
 
@@ -143,7 +401,8 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 			dateWhere = " and click_date >= '"+ from +"' and click_date <= '"+ to +"'";
 		}
 
-		dateSql.appendSQL("select click_date , account_id from click_history_v where (type = 2 or type = 3 or type = 4)"  + dateWhere + " group BY click_date;");
+		dateSql.appendSQL("select click_date , account_id from " + VIEW + " where type=" + HISTORY_TYPE_SHARE + " and (share_kind = " + HISTORY_SHARE_KIND_PRODUCT 
+				+ " or share_kind = " + HISTORY_SHARE_KIND_ITEM + " or share_kind = " + HISTORY_SHARE_KIND_SERVICE + ")"  + dateWhere + " group BY click_date;");
 
 		Query query = session.createSQLQuery(dateSql.getSQL());
 
@@ -167,7 +426,8 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters shopSql = new SQLWithParameters("");
 
-				shopSql.appendSQL("select count(id) as shop_cnt , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_SHOPPING) + " and click_date =  '" + row.getClick_date() + "'");
+				shopSql.appendSQL("select count(id) as shop_cnt , account_id from " + VIEW 
+						+ " where type = " + HISTORY_TYPE_SHARE + " and share_kind=" + HISTORY_SHARE_KIND_PRODUCT + " and click_date =  '" + row.getClick_date() + "'");
 
 				Query shopQuery = session.createSQLQuery(shopSql.getSQL());
 
@@ -184,7 +444,8 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters itemSql = new SQLWithParameters("");
 
-				itemSql.appendSQL("select count(id) as shop_cnt , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_ITEM) + " and click_date =  '" + row.getClick_date() + "'");
+				itemSql.appendSQL("select count(id) as shop_cnt , account_id from " + VIEW 
+						+ " where type = " + HISTORY_TYPE_SHARE + " and share_kind=" + HISTORY_SHARE_KIND_ITEM + " and click_date =  '" + row.getClick_date() + "'");
 
 				Query itemQuery = session.createSQLQuery(itemSql.getSQL());
 
@@ -201,7 +462,8 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters serviceSql = new SQLWithParameters("");
 
-				serviceSql.appendSQL("select count(id) as shop_cnt , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_SERVICE) + " and click_date =  '" + row.getClick_date() + "'");
+				serviceSql.appendSQL("select count(id) as shop_cnt , account_id from " + VIEW
+						+ " where type = " + HISTORY_TYPE_SHARE + " and share_kind=" + HISTORY_SHARE_KIND_SERVICE + " and click_date =  '" + row.getClick_date() + "'");
 
 				Query serviceQuery = session.createSQLQuery(serviceSql.getSQL());
 
@@ -245,7 +507,9 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 			dateWhere = " and click_date >= '"+ from +"' and click_date <= '"+ to +"'";
 		}
 
-		dateSql.appendSQL("select click_date , account_id from click_history_v where (type = 8 or type = 9 or type = 10)"  + dateWhere + " group BY click_date;");
+		dateSql.appendSQL("select click_date , account_id from " + VIEW + " where type=" + HISTORY_TYPE_SHARE + " and (share_kind = " 
+		+ HISTORY_SHARE_KIND_PERSONAL + " or share_kind = " + HISTORY_SHARE_KIND_ENTER + " or share_kind = " 
+				+ HISTORY_SHARE_KIND_REPOET + ")"  + dateWhere + " group BY click_date;");
 
 		Query query = session.createSQLQuery(dateSql.getSQL());
 
@@ -269,7 +533,8 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters shopSql = new SQLWithParameters("");
 
-				shopSql.appendSQL("select count(id) as shop_cnt , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_PERSONAL_DETAIL) + " and click_date =  '" + row.getClick_date() + "'");
+				shopSql.appendSQL("select count(id) as shop_cnt , account_id from " + VIEW
+						+ " where type = " + HISTORY_TYPE_SHARE + " and share_kind=" + HISTORY_SHARE_KIND_PERSONAL + " and click_date =  '" + row.getClick_date() + "'");
 
 				Query shopQuery = session.createSQLQuery(shopSql.getSQL());
 
@@ -286,7 +551,8 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters itemSql = new SQLWithParameters("");
 
-				itemSql.appendSQL("select count(id) as shop_cnt , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_ENTERPRISE_DETAIL) + " and click_date =  '" + row.getClick_date() + "'");
+				itemSql.appendSQL("select count(id) as shop_cnt , account_id from " + VIEW
+						+ " where type = " + HISTORY_TYPE_SHARE + " and share_kind=" + HISTORY_SHARE_KIND_ENTER + " and click_date =  '" + row.getClick_date() + "'");
 
 				Query itemQuery = session.createSQLQuery(itemSql.getSQL());
 
@@ -303,7 +569,8 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters serviceSql = new SQLWithParameters("");
 
-				serviceSql.appendSQL("select count(id) as shop_cnt , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_REPORT) + " and click_date =  '" + row.getClick_date() + "'");
+				serviceSql.appendSQL("select count(id) as shop_cnt , account_id from " + VIEW
+						+ " where type = " + HISTORY_TYPE_SHARE + " and share_kind=" + HISTORY_SHARE_KIND_REPOET + " and click_date =  '" + row.getClick_date() + "'");
 
 				Query serviceQuery = session.createSQLQuery(serviceSql.getSQL());
 
@@ -347,7 +614,7 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 			dateWhere = " and click_date >= '"+ from +"' and click_date <= '"+ to +"'";
 		}
 
-		dateSql.appendSQL("select click_date , account_id from click_history_v where type = " + String.valueOf(type) + dateWhere + " group BY click_date;");
+		dateSql.appendSQL("select click_date , account_id from " + VIEW + " where type = " + String.valueOf(type) + dateWhere + " group BY click_date;");
 
 		Query query = session.createSQLQuery(dateSql.getSQL());
 
@@ -371,7 +638,7 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters buySql = new SQLWithParameters("");
 
-				buySql.appendSQL("select count(id) as buy_count , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_BUY) + " and click_date = '" + row.getClick_date() + "'");
+				buySql.appendSQL("select count(id) as buy_count , account_id from " + VIEW + " where type = " + HISTORY_TYPE_BUY + " and click_date = '" + row.getClick_date() + "'");
 
 				Query buyQuery = session.createSQLQuery(buySql.getSQL());
 
@@ -416,7 +683,7 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 			dateWhere = " and click_date >= '"+ from +"' and click_date <= '"+ to +"'";
 		}
 
-		dateSql.appendSQL("select click_date , account_id from click_history_v where type = " + String.valueOf(type) + dateWhere + " group BY click_date;");
+		dateSql.appendSQL("select click_date , account_id from " + VIEW + " where type = " + String.valueOf(type) + dateWhere + " group BY click_date;");
 
 		Query query = session.createSQLQuery(dateSql.getSQL());
 
@@ -440,7 +707,7 @@ public class ClickHistoryDAO extends BaseDataAccessObject {
 				
 				SQLWithParameters request_sql = new SQLWithParameters("");
 
-				request_sql.appendSQL("select count(id) as buy_count , account_id from click_history_v where type = " + String.valueOf(HISTORY_TYPE_REQUEST) + " and click_date = '" + row.getClick_date() + "'");
+				request_sql.appendSQL("select count(id) as buy_count , account_id from " + VIEW + " where type = " + HISTORY_TYPE_REQUEST + " and click_date = '" + row.getClick_date() + "'");
 
 				Query requestQuery = session.createSQLQuery(request_sql.getSQL());
 

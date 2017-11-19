@@ -12,11 +12,8 @@
 {
 }
 @property (nonatomic, strong) UITableView *contentTableView;
-@property (nonatomic, strong) IBOutlet UILabel *networkNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UIView *viewContent;
 @property (nonatomic, strong) IBOutlet UIButton *extendButton;
-@property (nonatomic, strong) IBOutlet UIView *networkContentView;
-@property (nonatomic, strong) IBOutlet UIButton *networkContentButton;
-@property (nonatomic, strong) IBOutlet UIButton *leftButton;
-@property (nonatomic, strong) IBOutlet UIButton *centerButton;
-@property (nonatomic, strong) IBOutlet UIButton *rightButton;
+@property (weak, nonatomic) IBOutlet UIButton *btnContent;
 @end

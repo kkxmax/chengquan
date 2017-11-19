@@ -12,9 +12,15 @@ import net.sf.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
+import com.chengxin.bfip.CommonUtil;
 import com.chengxin.bfip.Constants;
 import com.chengxin.bfip.model.Account;
 import com.chengxin.bfip.model.AccountDAO;
+import com.chengxin.bfip.model.City;
+import com.chengxin.bfip.model.CityDAO;
+import com.chengxin.bfip.model.NoticeDAO;
+import com.chengxin.bfip.model.Province;
+import com.chengxin.bfip.model.ProvinceDAO;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.DateTimeUtil;
 import com.chengxin.common.JavascriptUtil;
@@ -27,8 +33,14 @@ import com.chengxin.common.KeyValueString;
 public class PersonalAccountController extends BaseController {
     
     private AccountDAO memberDao = null;
+    private NoticeDAO noticeDao = null;
+    private ProvinceDAO provinceDao = null;
+    private CityDAO cityDao = null;
     
     public void setMemberDao(AccountDAO value) {this.memberDao = value;}
+    public void setNoticeDao(NoticeDAO value) {this.noticeDao = value;}
+    public void setProvinceDao(ProvinceDAO value) {this.provinceDao = value;}
+    public void setCityDao(CityDAO value) {this.cityDao = value;}
     
     public PersonalAccountController() throws Exception {
     	
@@ -57,6 +69,8 @@ public class PersonalAccountController extends BaseController {
             return this.search(request, response, session);
         } else if (action.equals("showTestModal")) {
             return this.showTestModal(request, response, session);
+        } else if (action.equals("getCities")) {
+            return this.getCities(request, response, session);
         } else if (action.equals("viewDetail")) {
             return this.viewDetail(request, response, session);
         } else if (action.equals("changeBanStatus")) {
@@ -70,6 +84,9 @@ public class PersonalAccountController extends BaseController {
     
     public ModelAndView index(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
     	
+    	List<Province> provinces = provinceDao.search();
+		
+		request.setAttribute("provinces", provinces);
     	request.setAttribute("C_ACCOUNT_TEST_STATUS", Constants.C_ACCOUNT_TEST_STATUS);
     	request.setAttribute("C_BAN_STATUS", Constants.C_BAN_STATUS);
     	
@@ -126,9 +143,10 @@ public class PersonalAccountController extends BaseController {
         			"<img src='" + Constants.C_UPLOAD_PATH + row.getLogo() + "' alt='头像图片' width='45px' height='45px'>",
         			DateTimeUtil.dateFormat(row.getWriteTime()),
         			row.getMobile(),
-        			row.getEnterName(),
+        			row.getRealname(),
+        			row.getProvCity(),
         			row.getCode(),
-        			"0%",
+        			String.valueOf(row.getCredit()) + "%",
         			String.valueOf(row.getElectCnt()),
         			row.getTestStatusName(),
         			row.getBanStatusName(),
@@ -145,9 +163,28 @@ public class PersonalAccountController extends BaseController {
         return new ModelAndView("json_result");
     } 
     
+    public ModelAndView getCities(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+
+		JSONObject result = new JSONObject();
+
+		String provinceId = this.getBlankParameter(request, "provinceId", "");
+
+		String where = "1";
+		if(!provinceId.isEmpty()) {
+			where += " and province_id=" + provinceId;
+		}
+		
+		List<City> cities = cityDao.search(null, where);
+
+		result.put("retcode", 200);
+		result.put("records", cities);
+
+		request.setAttribute("JSON", result);
+
+		return new ModelAndView("json_result");
+	}
+    
     public ModelAndView viewDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-    	
-    	JSONObject result = new JSONObject();
     	
     	String id = this.getBlankParameter(request, "id", "");
 
@@ -159,8 +196,6 @@ public class PersonalAccountController extends BaseController {
     }
 
     public ModelAndView showTestModal(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-    	
-    	JSONObject result = new JSONObject();
     	
     	String id = this.getBlankParameter(request, "id", "");
 
@@ -204,6 +239,14 @@ public class PersonalAccountController extends BaseController {
     	record.setTestStatus(Integer.valueOf(targetStatus));
     	
     	memberDao.update(record);
+    	
+    	int subKind = targetStatus.equals(String.valueOf(AccountDAO.TEST_ST_PASSED)) ? NoticeDAO.NOTICE_SUBKIND_AUTH_PASS : NoticeDAO.NOTICE_SUBKIND_AUTH_DENY;
+    	
+    	CommonUtil.insertNotice(noticeDao, NoticeDAO.NOTICE_TYPE_USER, record.getId(), NoticeDAO.NOTICE_KIND_AUTH
+				, subKind
+				, CommonUtil.getNoticeMsgTitle(NoticeDAO.NOTICE_KIND_AUTH)
+				, CommonUtil.getNoticeMsgContent(NoticeDAO.NOTICE_KIND_AUTH, subKind, null, null)
+				, null, null, null);
     	
     	result.put("retcode", 200);
     	result.put("msg", "操作成功");

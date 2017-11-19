@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MGSwipeTableCell.h"
 
-@interface FavouritesTableItemViewCell : UITableViewCell
+@interface FavouritesTableItemViewCell : MGSwipeTableCell
 
 @property (nonatomic, retain) IBOutlet UIImageView* photo;
 @property (nonatomic, retain) IBOutlet UILabel* name;

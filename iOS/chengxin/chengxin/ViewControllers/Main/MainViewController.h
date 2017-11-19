@@ -15,5 +15,6 @@
 @property (nonatomic, strong) IBOutlet UIView *mainView;
 @property (nonatomic, strong) IBOutlet UIView *transTabBarView;
 @property (nonatomic, strong) IBOutlet UIView *homeChoiceBackgroundView;
+@property (nonatomic, strong) IBOutlet UIView *homeChoiceTransView;
 @property (nonatomic, strong) IBOutlet UIView *homeChoiceView;
 @end

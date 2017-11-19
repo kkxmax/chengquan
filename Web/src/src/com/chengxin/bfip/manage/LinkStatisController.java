@@ -78,7 +78,7 @@ public class LinkStatisController extends BaseController {
 		String to = this.getBlankParameter(request, "to", "");
 
 //		String where = " ";
-		List<ClickHistory> records = memberDao.link_statis(1 , from , to);
+		List<ClickHistory> records = memberDao.link_statis(ClickHistoryDAO.HISTORY_TYPE_CONTACT , from , to);
 
 		result.put("retcode", 200);
 		result.put("records", records);

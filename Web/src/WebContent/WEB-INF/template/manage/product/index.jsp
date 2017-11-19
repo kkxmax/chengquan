@@ -40,12 +40,12 @@
             &nbsp;&nbsp;
             <div class="form-group">
               <label>产品编号:</label>
-              <input type="text" class="form-control form-like-filter input-small" name="num">
+              <input type="text" class="form-control form-like-filter input-small" name="code">
             </div>
             &nbsp;&nbsp;
             <div class="form-group">
               <label>账号:</label>
-              <input type="text" class="form-control form-like-filter input-small" name="booknum">
+              <input type="text" class="form-control form-like-filter input-small" name="account_mobile">
             </div>
             &nbsp;&nbsp;
             <div class="form-group">
@@ -59,9 +59,20 @@
             </div>
             &nbsp;&nbsp;
             <div class="form-group">
+              <label>企业类型:
+              </label>
+              <select class="form-control form-filter select2me input-small" name="enter_kind">
+                <option value="">全部</option>
+                <c:forEach items="${C_ACCOUNT_ENTER_TYPE}" var="item">
+              	<option value="${item.key}">${item.value}</option>
+                </c:forEach>
+              </select>
+            </div>
+            &nbsp;&nbsp;
+            <div class="form-group">
               <label>发布时间:
               </label>
-              <div name="up_time" class="form-date-filter input-group input-large date-picker input-daterange" data-date-format="yyyy-mm-dd">
+              <div name="write_time" class="form-date-filter input-group input-large date-picker input-daterange" data-date-format="yyyy-mm-dd">
               	<input type="text" class="form-control" name="from" id="from">
               	<span class="input-group-addon">至</span>
               	<input type="text" class="form-control" name="to" id="to">
@@ -79,7 +90,6 @@
           <tr>
           	<th>序号</th>
             <th>产品编号</th>
-            <th>write_time</th>
             <th>账号</th>
             <th>产品名称</th>
             <th>产品价格</th>
@@ -121,13 +131,12 @@ jQuery(document).ready(function () {
         "columns": [
                     {"orderable": false},
                     {"name": "code", "orderable": true},
-                    {"name": "write_time", "orderable": true, "visible": false},
                     {"name": "account_mobile", "orderable": true},
                     {"name": "name", "orderable": true},
                     {"name": "price", "orderable": true},
                     {"name": "enter_name", "orderable": true},
                     {"name": "enter_kind_name", "orderable": true},
-                    {"name": "up_time", "orderable": true},
+                    {"name": "write_time", "orderable": true},
                     {"name": "status_name", "orderable": true},
                     {"orderable": false},
                    ],
@@ -135,7 +144,7 @@ jQuery(document).ready(function () {
         "bInfo": true,
         "bPaginate": true,
         "order": [
-                  [2, "desc"]
+                  [7, "desc"]
         ]
 	});
 

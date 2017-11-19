@@ -13,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
 import com.chengxin.bfip.Constants;
-import com.chengxin.bfip.model.Estimates;
-import com.chengxin.bfip.model.EstimatesDAO;
+import com.chengxin.bfip.model.AccountDAO;
+import com.chengxin.bfip.model.Estimate;
+import com.chengxin.bfip.model.EstimateDAO;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.DateTimeUtil;
 import com.chengxin.common.JavascriptUtil;
@@ -26,13 +27,13 @@ import com.chengxin.common.KeyValueString;
  */
 public class EstimateController extends BaseController {
 
-	private EstimatesDAO memberDao = null;
+	private EstimateDAO memberDao = null;
 
-	public EstimatesDAO getMemberDao() {
+	public EstimateDAO getMemberDao() {
 		return memberDao;
 	}
 
-	public void setMemberDao(EstimatesDAO value) {
+	public void setMemberDao(EstimateDAO value) {
 		this.memberDao = value;
 	}
 
@@ -88,7 +89,7 @@ public class EstimateController extends BaseController {
 		//			};
 		//			data.add(dataItem);
 		//		}
-		//		request.setAttribute("C_Estimates_KIND_NAME",  data);
+		//		request.setAttribute("C_Estimate_KIND_NAME",  data);
 		return new ModelAndView("manage/estimate/index");
 	}
 
@@ -117,28 +118,27 @@ public class EstimateController extends BaseController {
 		filterParamObject.put("order_col", orderColName);
 		filterParamObject.put("order_dir", orderDir);
 
-		String extraWhere = "";
-		List<Estimates> EstimatesList = memberDao.search(filterParamObject,
+		String extraWhere = "(upper_id is null or upper_id=0)";
+		List<Estimate> EstimateList = memberDao.search(filterParamObject,
 				extraWhere);
 		int count = memberDao.count(filterParamObject, extraWhere);
 
 		ArrayList<String[]> data = new ArrayList<String[]>();
 
-		for (int i = 0; i < EstimatesList.size(); i++) {
-			Estimates row = EstimatesList.get(i);
+		for (int i = 0; i < EstimateList.size(); i++) {
+			Estimate row = EstimateList.get(i);
 
 			String opHtml = "<a href='estimate.html?pAct=viewDetail&id="
 					+ String.valueOf(row.getId())
 					+ "' class='btn btn-xs purple' data-target='#global-modal' data-toggle='modal'><i class='fa fa-edit'></i> 查看</a>";
 			String[] dataItem = new String[] {
-					row.getMobile(), 
-					row.getOwnerName(),
-					DateTimeUtil.dateFormat(row.getWriteTime()),
+					row.getOwnerMobile(), 
+					row.getOwnerAkind() == AccountDAO.ACCOUNT_TYPE_PERSONAL ? row.getOwnerRealname() : row.getOwnerEnterName(),
 					row.getContent(),
 					row.getKindName(),
 					row.getMethodName(),
-					row.getReason(),
-					DateTimeUtil.dateFormat(row.getUpdateTime()), 
+					row.getTargetAccountAkind() == AccountDAO.ACCOUNT_TYPE_PERSONAL ? row.getTargetAccountRealname() : row.getTargetAccountEnterName(),
+					DateTimeUtil.dateFormat(row.getWriteTime()), 
 					opHtml 
 			};
 			data.add(dataItem);
@@ -155,11 +155,9 @@ public class EstimateController extends BaseController {
 
 	public ModelAndView viewDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
-		JSONObject result = new JSONObject();
-
 		String id = this.getBlankParameter(request, "id", "");
 
-		Estimates record = memberDao.getDetail(Integer.valueOf(id));
+		Estimate record = memberDao.getDetail(Integer.valueOf(id));
 
 		request.setAttribute("record", record);
 
@@ -172,7 +170,7 @@ public class EstimateController extends BaseController {
 
 		String id = this.getBlankParameter(request, "id", "");
 
-		Estimates record = memberDao.get(Integer.valueOf(id));
+		Estimate record = memberDao.get(Integer.valueOf(id));
 
 		memberDao.delete(record);
 

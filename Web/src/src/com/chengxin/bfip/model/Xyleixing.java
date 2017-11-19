@@ -12,6 +12,8 @@ public class Xyleixing extends BaseModel{
     private String title = "";
     private int upperId = 0;
     private Date writeTime = new Date();
+    private int isMyWatch;
+    private int isMyWatched;
     private List<Xyleixing> children = new ArrayList<Xyleixing>();
     
 
@@ -44,6 +46,18 @@ public class Xyleixing extends BaseModel{
 	}
 	public void setChildren(List<Xyleixing> children) {
 		this.children = children;
+	}
+	public int getIsMyWatch() {
+		return isMyWatch;
+	}
+	public void setIsMyWatch(int isMyWatch) {
+		this.isMyWatch = isMyWatch;
+	}
+	public int getIsMyWatched() {
+		return isMyWatched;
+	}
+	public void setIsMyWatched(int isMyWatched) {
+		this.isMyWatched = isMyWatched;
 	}
     
     

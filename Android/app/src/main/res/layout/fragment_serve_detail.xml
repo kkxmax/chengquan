@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_normal"
+        android:background="@drawable/rect_blue_gradient"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_logo"
+                android:layout_width="@dimen/image_avatar_height"
+                android:layout_height="@dimen/image_avatar_height"
+                android:background="@drawable/no_image"/>
+
+
+            <LinearLayout
+                style="@style/layout_0w"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:orientation="vertical">
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txt_name"
+                        style="@style/layout_ww"
+                        android:text="@string/str_sample"
+                        android:textSize="@dimen/text_size_14"
+                        android:textColor="@color/color_white"/>
+                    <TextView
+                        android:id="@+id/txt_leixing"
+                        style="@style/layout_ww"
+                        android:layout_marginStart="@dimen/margin_normal"
+                        android:padding="@dimen/margin_small"
+                        android:background="@drawable/round_rect_bg_no_border_white"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/text_size_12"
+                        android:text="互联网"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/layout_ww"
+                        android:text="@string/make_item_city"
+                        android:textSize="@dimen/text_size_10"
+                        android:textColor="@color/color_white"/>
+                    <TextView
+                        android:id="@+id/txt_city"
+                        style="@style/layout_ww"
+                        android:layout_marginStart="@dimen/margin_normal"
+                        android:text="@string/str_sample"
+                        android:textSize="@dimen/text_size_10"
+                        android:textColor="@color/color_white"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        style="@style/layout_m0">
+        <ScrollView
+            style="@style/layout_mm">
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="vertical">
+
+                <View style="@style/splite_line_gray_8"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingTop="@dimen/margin_normal_below"
+                    android:paddingBottom="@dimen/margin_normal_below"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <View style="@style/blue_prefix" />
+
+                    <TextView
+                        style="@style/layout_0w"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:text="@string/item_comment"
+                        android:textSize="@dimen/text_size_14"
+                        android:textColor="@color/txt_gray"/>
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:paddingRight="@dimen/margin_small"
+                        android:textSize="@dimen/text_size_10"
+                        android:textColor="@color/txt_gray_light"
+                        android:text="@string/comedity_number"/>
+
+                    <TextView
+                        android:id="@+id/txt_code"
+                        style="@style/layout_ww"
+                        android:layout_marginEnd="@dimen/margin_normal"
+                        android:textSize="@dimen/text_size_10"
+                        android:textColor="@color/txt_gray_light"
+                        android:text="@string/str_sample"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/margin_normal_top"
+                    android:paddingRight="@dimen/margin_normal_top">
+
+                    <TextView
+                        android:id="@+id/txt_comment"
+                        style="@style/layout_ww"
+                        android:text="@string/str_sample_item"
+                        android:paddingTop="@dimen/margin_normal"
+                        android:paddingBottom="@dimen/margin_normal"
+                        android:textColor="@color/txt_dark"
+                        android:textSize="@dimen/text_size_12"/>
+
+                    <View style="@style/splite_line_gray"/>
+
+                    <RelativeLayout
+                        style="@style/layout_ww"
+                        android:layout_height="@dimen/row_height_normal">
+                        <LinearLayout
+                            style="@style/layout_mm"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/layout_wm"
+                                android:textColor="@color/txt_gray_light"
+                                android:textSize="@dimen/text_size_12"
+                                android:text="@string/item_net"
+                                android:gravity="center_vertical"/>
+
+                            <TextView
+                                android:id="@+id/txt_weburl"
+                                style="@style/layout_0m"
+                                android:layout_marginLeft="@dimen/margin_small"
+                                android:gravity="center_vertical"
+                                android:text="@string/str_sample"
+                                android:textSize="@dimen/text_size_12"
+                                android:textColor="@color/color_main_blue"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            style="@style/layout_wm"
+                            android:src="@drawable/more"
+                            android:layout_alignParentRight="true"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:paddingLeft="@dimen/margin_normal_most"
+                    android:paddingRight="@dimen/margin_normal_most"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:textColor="@color/txt_gray_light"
+                        android:textSize="@dimen/text_size_12"
+                        android:text="@string/make_address"/>
+
+                    <TextView
+                        android:id="@+id/txt_addr"
+                        style="@style/layout_ww"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:text="@string/str_sample"
+                        android:textSize="@dimen/text_size_12"
+                        android:textColor="@color/txt_dark"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray_8"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingTop="@dimen/margin_normal_below"
+                    android:paddingBottom="@dimen/margin_normal_below"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+                    <View style="@style/blue_prefix" />
+                    <TextView
+                        style="@style/layout_mw"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:text="@string/item_connect"
+                        android:textSize="@dimen/text_size_12"
+                        android:textColor="@color/txt_gray"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/margin_normal_top"
+                    android:paddingRight="@dimen/margin_normal_top">
+
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:layout_height="@dimen/row_height_normal"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textColor="@color/txt_gray_light"
+                            android:text="@string/person_name_comma"
+                            android:textSize="@dimen/text_size_12"/>
+
+                        <TextView
+                            android:id="@+id/txt_relation_name"
+                            style="@style/layout_ww"
+                            android:layout_marginLeft="@dimen/margin_normal"
+                            android:text="@string/str_sample"
+                            android:textSize="@dimen/text_size_12"
+                            android:textColor="@color/txt_dark"/>
+
+                    </LinearLayout>
+
+                    <View style="@style/splite_line_gray"/>
+
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:layout_height="@dimen/row_height_normal"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textColor="@color/txt_gray_light"
+                            android:text="@string/phone_number_comma"
+                            android:textSize="@dimen/text_size_12"/>
+
+                        <TextView
+                            android:id="@+id/txt_relation_mobile"
+                            style="@style/layout_ww"
+                            android:layout_marginLeft="@dimen/margin_normal"
+                            android:text="@string/str_sample"
+                            android:textSize="@dimen/text_size_12"
+                            android:textColor="@color/txt_dark"/>
+
+                    </LinearLayout>
+
+                    <View style="@style/splite_line_gray"/>
+
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:layout_height="@dimen/row_height_normal"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textColor="@color/txt_gray_light"
+                            android:text="@string/weixin_number"
+                            android:textSize="@dimen/text_size_12"/>
+
+                        <TextView
+                            android:id="@+id/txt_relation_weixin"
+                            style="@style/layout_ww"
+                            android:layout_marginLeft="@dimen/margin_normal"
+                            android:text="@string/str_sample"
+                            android:textSize="@dimen/text_size_12"
+                            android:textColor="@color/txt_dark"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray_8" />
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="horizontal">
+
+                    <View style="@style/blue_prefix"
+                        android:layout_height="match_parent"/>
+
+                    <LinearLayout
+                        android:id="@+id/layout_enter"
+                        style="@style/layout_mw"
+                        android:padding="@dimen/margin_normal">
+
+                        <RelativeLayout
+                            android:layout_width="@dimen/image_avatar_height"
+                            android:layout_height="@dimen/image_avatar_height">
+                            <ImageView
+                                android:id="@+id/img_logo_enter"
+                                android:layout_width="@dimen/image_avatar_height"
+                                android:layout_height="@dimen/image_avatar_height"
+                                android:background="@color/color_gray_f5"/>
+                            <TextView
+                                android:id="@+id/txt_enter_type"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rect_orange_gradient"
+                                android:gravity="center"
+                                android:padding="@dimen/margin_tiny"
+                                android:textColor="@color/color_white"
+                                android:textSize="@dimen/text_size_10"
+                                android:text="@string/company"
+                                android:layout_alignParentBottom="true"/>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            style="@style/layout_wm"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/margin_normal">
+
+                            <TextView
+                                android:id="@+id/txt_enter_name"
+                                style="@style/layout_ww"
+                                android:text="@string/company_name"
+                                android:textSize="@dimen/text_size_14"
+                                android:textStyle="bold"
+                                android:textColor="@color/txt_dark"/>
+
+                            <RelativeLayout
+                                style="@style/layout_ww"
+                                android:layout_marginTop="@dimen/margin_normal_below">
+                                <LinearLayout
+                                    style="@style/layout_mw">
+
+                                    <TextView
+                                        style="@style/layout_ww"
+                                        android:text="@string/instead_num"
+                                        android:textSize="@dimen/text_size_12"/>
+
+                                    <TextView
+                                        android:id="@+id/txt_enter_code"
+                                        style="@style/layout_ww"
+                                        android:layout_marginLeft="@dimen/margin_small"
+                                        android:text="@string/str_sample"
+                                        android:textSize="@dimen/text_size_12"/>
+
+                                </LinearLayout>
+
+                                <ImageButton
+                                    android:layout_width="@dimen/margin_large_bellow"
+                                    android:layout_height="@dimen/margin_large"
+                                    android:src="@drawable/more"
+                                    android:background="@color/color_transparent"
+                                    android:layout_alignParentRight="true"/>
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                style="@style/layout_mw"
+                                android:layout_marginTop="@dimen/margin_normal_below">
+
+                                <TextView
+                                    style="@style/layout_ww"
+                                    android:text="@string/instead_rate"
+                                    android:textColor="@color/color_main_blue"
+                                    android:textSize="@dimen/text_size_10"/>
+
+                                <TextView
+                                    android:id="@+id/txt_enter_rate"
+                                    style="@style/layout_ww"
+                                    android:layout_marginLeft="@dimen/margin_small"
+                                    android:text="@string/str_sample"
+                                    android:textColor="@color/color_main_blue"
+                                    android:textSize="@dimen/text_size_10"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray_8"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:paddingLeft="@dimen/margin_normal_most"
+                    android:paddingRight="@dimen/margin_normal_most"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/layout_ww"
+                        android:text="@string/write_time"
+                        android:textColor="@color/txt_gray_light"
+                        android:textSize="@dimen/text_size_12"/>
+
+                    <TextView
+                        android:id="@+id/txt_write_time"
+                        style="@style/layout_ww"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:textColor="@color/txt_gray_light"
+                        android:text="@string/str_sample_datetime"
+                        android:textSize="@dimen/text_size_12"/>
+
+                </LinearLayout>
+
+                <View style="@style/splite_line_gray_8"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/btn_call"
+            style="@style/layout_ww"
+            android:src="@drawable/call"
+            android:background="@color/color_transparent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_large"/>
+    </RelativeLayout>
+
+</LinearLayout>

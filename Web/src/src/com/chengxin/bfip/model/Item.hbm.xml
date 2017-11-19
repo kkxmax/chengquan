@@ -15,6 +15,7 @@
     <property column="NAME" name="name"/>
     <property column="FENLEI_ID" name="fenleiId" type="int"/>
     <property column="CITY_ID" name="cityId" type="int"/>
+    <property column="ADDR" name="addr"/>
     <property column="COMMENT" name="comment"/>
     <property column="NEED" name="need"/>
     <property column="WEBURL" name="weburl"/>

@@ -3,56 +3,25 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeItemViewController">
             <connections>
+                <outlet property="addButton" destination="J12-bI-bG5" id="Vzg-YZ-7W6"/>
                 <outlet property="homeItemTableView" destination="RjY-om-WS4" id="VRf-Ge-Jyg"/>
-                <outlet property="slideItemPageCtrl" destination="uub-c9-RNZ" id="OTY-wB-Hqe"/>
-                <outlet property="slideItemScrollView" destination="fDW-Me-lQH" id="pfn-Xw-bmm"/>
+                <outlet property="indicatorView" destination="PHb-HU-dci" id="KQh-Ze-aJp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="jD1-RI-P6U"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="429"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xby-Nw-zMf">
-                    <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDW-Me-lQH">
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1090.png" translatesAutoresizingMaskIntoConstraints="NO" id="wZV-6N-5mH"/>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="wZV-6N-5mH" firstAttribute="top" secondItem="fDW-Me-lQH" secondAttribute="top" id="3uC-ic-Xzy"/>
-                                <constraint firstItem="wZV-6N-5mH" firstAttribute="centerY" secondItem="fDW-Me-lQH" secondAttribute="centerY" id="btA-UK-SNG"/>
-                                <constraint firstItem="wZV-6N-5mH" firstAttribute="leading" secondItem="fDW-Me-lQH" secondAttribute="leading" id="dRO-8A-tar"/>
-                                <constraint firstItem="wZV-6N-5mH" firstAttribute="centerX" secondItem="fDW-Me-lQH" secondAttribute="centerX" id="iRu-aj-kjK"/>
-                                <constraint firstAttribute="bottom" secondItem="wZV-6N-5mH" secondAttribute="bottom" id="sU8-nj-tP5"/>
-                                <constraint firstAttribute="trailing" secondItem="wZV-6N-5mH" secondAttribute="trailing" id="zZS-P5-qmJ"/>
-                            </constraints>
-                        </scrollView>
-                        <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="uub-c9-RNZ">
-                            <frame key="frameInset" minY="105.39%" width="36" height="37" maxX="19"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                        </pageControl>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="fDW-Me-lQH" firstAttribute="top" secondItem="xby-Nw-zMf" secondAttribute="top" id="0xt-d3-U8D"/>
-                        <constraint firstItem="fDW-Me-lQH" firstAttribute="leading" secondItem="xby-Nw-zMf" secondAttribute="leading" id="2Gg-XP-0qa"/>
-                        <constraint firstAttribute="bottom" secondItem="fDW-Me-lQH" secondAttribute="bottom" id="d82-Tw-Mf3"/>
-                        <constraint firstAttribute="trailing" secondItem="fDW-Me-lQH" secondAttribute="trailing" id="fp1-w5-hiy"/>
-                        <constraint firstAttribute="width" secondItem="xby-Nw-zMf" secondAttribute="height" multiplier="375:167" id="nfe-v5-Oc8"/>
-                    </constraints>
-                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RjY-om-WS4">
-                    <frame key="frameInset" height="74.46%"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                    <frame key="frameInset"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="dzc-J2-PoC"/>
@@ -62,24 +31,27 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J12-bI-bG5">
                     <frame key="frameInset" width="44" height="44" maxX="12" maxY="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <state key="normal" backgroundImage="add.png"/>
+                    <state key="normal" image="add.png"/>
                     <connections>
                         <action selector="addAction:" destination="-1" eventType="touchUpInside" id="tJO-Mc-9e9"/>
                     </connections>
                 </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PHb-HU-dci">
+                    <frame key="frameInset" minX="49.86%" minY="49.88%" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="xby-Nw-zMf" secondAttribute="trailing" id="9Id-WD-J6W"/>
-                <constraint firstItem="xby-Nw-zMf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HoO-RD-R7u"/>
-                <constraint firstItem="xby-Nw-zMf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="K1z-9l-fRa"/>
-            </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <tapGestureRecognizer id="AMi-Jw-O1B">
+            <connections>
+                <action selector="scrollViewTapGesture:" destination="-1" id="2Kd-wN-SY1"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="1090.png" width="319" height="167"/>
         <image name="add.png" width="44" height="44"/>
     </resources>
 </document>

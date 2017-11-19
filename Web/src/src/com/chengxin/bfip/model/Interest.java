@@ -11,6 +11,8 @@ public class Interest extends BaseModel {
     private int owner;
     private Date writeTime = new Date();
     
+    private String writeTimeString;
+    
     
 	public int getId() {
 		return id;
@@ -35,6 +37,12 @@ public class Interest extends BaseModel {
 	}
 	public void setWriteTime(Date writeTime) {
 		this.writeTime = writeTime;
+	}
+	public String getWriteTimeString() {
+		return writeTimeString;
+	}
+	public void setWriteTimeString(String writeTimeString) {
+		this.writeTimeString = writeTimeString;
 	}
     
 }

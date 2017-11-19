@@ -10,9 +10,10 @@
     <id column="ID" name="id" type="int">
       <generator class="identity" />
     </id>
-    <property column="ACCOUNT_ID" name="accountId" type="int"/>
+    <property column="OWNER_ID" name="ownerId" type="int"/>
     <property column="TYPE" name="type" type="int"/>
-    <property column="TARGET_TYPE" name="targetType" type="int"/>
+    <property column="SHARE_KIND" name="shareKind" type="int"/>
+    <property column="ACCOUNT_ID" name="accountId" type="int"/>
     <property column="PRODUCT_ID" name="productId" type="int"/>
     <property column="ITEM_ID" name="itemId" type="int"/>
     <property column="SERVICE_ID" name="serviceId" type="int"/>

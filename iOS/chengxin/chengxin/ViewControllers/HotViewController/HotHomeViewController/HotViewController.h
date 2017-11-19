@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-@interface HotViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface HotViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NotificationDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tblHotView;
 @property (weak, nonatomic) IBOutlet UILabel *messageNumberLabel;
+@property (weak, nonatomic) IBOutlet UIView *viewBlank;
+@property (weak, nonatomic) IBOutlet UIView *viewNoNetwork;
 
 @end

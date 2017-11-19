@@ -26,9 +26,21 @@ public class NoticeDAO extends BaseDataAccessObject {
 
     private static String VIEW = "Notices_v";
     
-    // 系统消息类型
-    public static final int NOTICE_TYPE_FEEDBACK = 1;    // 评价
-    public static final int NOTICE_TYPE_AUTH = 2;  // 认证
+    // type
+    public static final int NOTICE_TYPE_USER = 1;
+    public static final int NOTICE_TYPE_ADMIN = 2;
+    
+    // kind
+    public static final int NOTICE_KIND_ESTIMATE = 1;    // 评价
+    public static final int NOTICE_KIND_AUTH = 2;  // 认证
+    public static final int NOTICE_KIND_CORRECTION = 3;  // 纠错
+    public static final int NOTICE_KIND_INVITE = 4;  // 邀请好友
+    
+    // sub_kind
+    public static final int NOTICE_SUBKIND_CORRECTION_GIVE = 1;
+    public static final int NOTICE_SUBKIND_CORRECTION_RECEIVE = 2;
+    public static final int NOTICE_SUBKIND_AUTH_PASS = 1;
+    public static final int NOTICE_SUBKIND_AUTH_DENY = 2;
 
     // 系统消息状态
     public static final int NOTICE_ST_NEW = 1;      // 未读
@@ -112,7 +124,7 @@ public class NoticeDAO extends BaseDataAccessObject {
         }
     }
     
-    private SQLWithParameters _makeSearchQuery(boolean isCountSQL, JSONObject filterParamObject, String extraWhere) {
+    private SQLWithParameters _makeSearchQuery(boolean isCountSQL, JSONObject filterParamObject, String extraWhere, String extraOrder, String groupby) {
         
         SQLWithParameters sql = new SQLWithParameters("");
         JSONArray likeParamArray = new JSONArray();
@@ -150,7 +162,8 @@ public class NoticeDAO extends BaseDataAccessObject {
         if(isCountSQL) {
             sql.appendSQL("SELECT COUNT(*)");
         } else {
-            sql.appendSQL("SELECT id, type, kind, kind_name, content, write_time, status, status_name ");
+            sql.appendSQL("SELECT id, type, account_id, kind, sub_kind, msg_title, msg_content, invitee_id, estimate_id, error_id, status, write_time"
+            		+ ", kind_name, status_name ");
         }
         
         sql.appendSQL(" FROM " + VIEW);
@@ -193,12 +206,33 @@ public class NoticeDAO extends BaseDataAccessObject {
         	sql.appendSQL(" AND " + extraWhere);
         }
         
-        if(!isCountSQL && !orderCol.isEmpty()) {
-        	sql.appendSQL(" ORDER BY " + orderCol + " " + orderDir);
-        }
-        
-        if(!isCountSQL && offset != -1 && limit != -1) {
-        	sql.appendSQL(" LIMIT " + offset + "," + limit);	
+        if(!isCountSQL) {
+        	if(!groupby.isEmpty()) {
+        		sql.appendSQL(" GROUP BY " + groupby);
+        	}
+        	String orderby = "";
+        	if(!orderCol.isEmpty()) {
+            	orderby = orderCol + " " + orderDir;
+            }
+        	
+        	if(!extraOrder.isEmpty()) {
+        		if(orderby.isEmpty()) {
+        			orderby += extraOrder;	
+        		}
+        		else {
+        			orderby += " ," + extraOrder;
+        		}
+        		
+        	}
+        	
+        	if(orderby.isEmpty()) {
+        		orderby = "id asc";
+        	}
+        	sql.appendSQL(" ORDER BY " + orderby);
+            
+            if(offset != -1 && limit != -1) {
+            	sql.appendSQL(" LIMIT " + offset + "," + limit);	
+            }
         }
         
         return sql;
@@ -213,7 +247,7 @@ public class NoticeDAO extends BaseDataAccessObject {
         Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
         Transaction transaction = session.beginTransaction();
         
-        SQLWithParameters sql = _makeSearchQuery(true, filterParamObject, extraWhere);
+        SQLWithParameters sql = _makeSearchQuery(true, filterParamObject, extraWhere, "", "");
 
         Query query = session.createSQLQuery(sql.getSQL());
         
@@ -235,11 +269,19 @@ public class NoticeDAO extends BaseDataAccessObject {
     }
     
     public List<Notice> search(JSONObject filterParamObject, String extraWhere) {
+    	return search(filterParamObject, extraWhere, "");
+    }
+    
+    public List<Notice> search(JSONObject filterParamObject, String extraWhere, String extraOrder) {
+    	return search(filterParamObject, extraWhere, extraOrder, "");
+    }
+    
+    public List<Notice> search(JSONObject filterParamObject, String extraWhere, String extraOrder, String groupby) {
     
         Session session = SessionFactoryUtils.getNewSession(this.getHibernateTemplate().getSessionFactory());
         Transaction transaction = session.beginTransaction();
         
-        SQLWithParameters sql = _makeSearchQuery(false, filterParamObject, extraWhere);
+        SQLWithParameters sql = _makeSearchQuery(false, filterParamObject, extraWhere, extraOrder, groupby);
 
         Query query = session.createSQLQuery(sql.getSQL());
         
@@ -258,12 +300,19 @@ public class NoticeDAO extends BaseDataAccessObject {
                 
                 row.setId(CommonUtil.toIntDefault(objectArray[0]));
                 row.setType(CommonUtil.toIntDefault(objectArray[1]));
-                row.setKind(CommonUtil.toIntDefault(objectArray[2]));
-                row.setKindName(CommonUtil.toStringDefault(objectArray[3]));
-                row.setContent(CommonUtil.toStringDefault(objectArray[4]));
-                row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[5])));
-                row.setStatus(CommonUtil.toIntDefault(objectArray[6]));
-                row.setStatusName(CommonUtil.toStringDefault(objectArray[7]));
+                row.setAccountId(CommonUtil.toIntDefault(objectArray[2]));
+                row.setKind(CommonUtil.toIntDefault(objectArray[3]));
+                row.setSubKind(CommonUtil.toIntDefault(objectArray[4]));
+                row.setMsgTitle(CommonUtil.toStringDefault(objectArray[5]));
+                row.setMsgContent(CommonUtil.toStringDefault(objectArray[6]));
+                row.setInviteeId(CommonUtil.toIntDefault(objectArray[7]));
+                row.setEstimateId(CommonUtil.toIntDefault(objectArray[8]));
+                row.setErrorId(CommonUtil.toIntDefault(objectArray[9]));
+                row.setStatus(CommonUtil.toIntDefault(objectArray[10]));
+                row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[11])));
+                row.setWriteTimeString(DateTimeUtil.dateFormat(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[11]))));
+                row.setKindName(CommonUtil.toStringDefault(objectArray[12]));
+                row.setStatusName(CommonUtil.toStringDefault(objectArray[13]));
                 
                 DBModelUtil.processSecure(Notice.class.getName(), row, DBModelUtil.C_SECURE_TYPE_DECRYPT);
 

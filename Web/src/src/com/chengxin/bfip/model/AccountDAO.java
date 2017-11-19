@@ -35,13 +35,14 @@ public class AccountDAO extends BaseDataAccessObject {
     public static final int ENTER_TYPE_ENTERPRISE = 2;    // 个体户
 
     // 审核状态
+    public static final int TEST_ST_NEW = 0;
     public static final int TEST_ST_READY = 1;            // 审核中
     public static final int TEST_ST_PASSED = 2;           // 审核通过
     public static final int TEST_ST_UNPASSED = 3;         // 审核未通过
 
     // 禁用状态
-    public static final int BAN_ST_UNBANED = 1;             // 未禁用
-    public static final int BAN_ST_BANED = 2;           // 已禁用
+    public static final int BAN_ST_UNBANED = 0;             // 未禁用
+    public static final int BAN_ST_BANED = 1;           // 已禁用
     
     
     public void insert(Account member) {
@@ -162,7 +163,8 @@ public class AccountDAO extends BaseDataAccessObject {
             		+ ", test_status, ban_status, write_time, test_status_name, ban_status_name, enter_kind_name"
             		+ ", realname, token, reqcode_id, friend1, friend2, friend3, city_id, city_name, province_id, province_name"
             		+ ", job, experience, history, cert_num, enter_cert_num, enter_cert_image, xy_name"
-            		+ ", req_code_sender_id, req_code_sender_realname, req_code_sender_enter_name ");
+            		+ ", req_code_sender_id, req_code_sender_realname, req_code_sender_enter_name, credit, positive_feedback_cnt, negative_feedback_cnt"
+            		+ ", req_code_sender_akind, inviter_friend_level, prov_city ");
         }
         
         sql.appendSQL(" FROM " +  VIEW);
@@ -307,6 +309,7 @@ public class AccountDAO extends BaseDataAccessObject {
                 row.setTestStatus(CommonUtil.toIntDefault(objectArray[22]));
                 row.setBanStatus(CommonUtil.toIntDefault(objectArray[23]));
                 row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[24])));
+                row.setWriteTimeString(DateTimeUtil.dateFormat(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[24]))));
                 row.setTestStatusName(CommonUtil.toStringDefault(objectArray[25]));
                 row.setBanStatusName(CommonUtil.toStringDefault(objectArray[26]));
                 row.setEnterKindName(CommonUtil.toStringDefault(objectArray[27]));
@@ -330,6 +333,12 @@ public class AccountDAO extends BaseDataAccessObject {
                 row.setReqCodeSenderId(CommonUtil.toIntDefault(objectArray[45]));
                 row.setReqCodeSenderRealname(CommonUtil.toStringDefault(objectArray[46]));
                 row.setReqCodeSenderEnterName(CommonUtil.toStringDefault(objectArray[47]));
+                row.setCredit((int) Math.round(CommonUtil.toDoubleDefault(objectArray[48])));
+                row.setPositiveFeedbackCnt(CommonUtil.toIntDefault(objectArray[49]));
+                row.setNegativeFeedbackCnt(CommonUtil.toIntDefault(objectArray[50]));
+                row.setReqCodeSenderAkind(CommonUtil.toIntDefault(objectArray[51]));
+                row.setInviterFriendLevel(CommonUtil.toStringDefault(objectArray[52]).isEmpty() ? "" : CommonUtil.toStringDefault(objectArray[52]) + "度好友");
+                row.setProvCity(CommonUtil.toStringDefault(objectArray[53]));
                 
                 DBModelUtil.processSecure(Account.class.getName(), row, DBModelUtil.C_SECURE_TYPE_DECRYPT);
 

@@ -14,8 +14,8 @@ import org.springframework.web.util.HtmlUtils;
 
 import com.chengxin.bfip.CommonUtil;
 import com.chengxin.bfip.Constants;
-import com.chengxin.bfip.model.Videos;
-import com.chengxin.bfip.model.VideosDAO;
+import com.chengxin.bfip.model.Video;
+import com.chengxin.bfip.model.VideoDAO;
 import com.chengxin.common.AppSettings;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.BinaryFormUtil;
@@ -26,9 +26,9 @@ import com.chengxin.common.KeyValueString;
 
 public class VideoController extends BaseController {
 
-	private VideosDAO memberDao = null;
+	private VideoDAO memberDao = null;
 
-	public void setMemberDao(VideosDAO value) {
+	public void setMemberDao(VideoDAO value) {
 		this.memberDao = value;
 	}
 
@@ -88,7 +88,7 @@ public class VideoController extends BaseController {
 	public ModelAndView edit(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		String id = this.getBlankParameter(request, "id", "");
 
-		Videos record = memberDao.getDetail(Integer.valueOf(id));
+		Video record = memberDao.getDetail(Integer.valueOf(id));
 
 		request.setAttribute("record", record);
 
@@ -105,9 +105,9 @@ public class VideoController extends BaseController {
 		//if(video_title.equals("")) {
 		//	return JavascriptUtil.MessageMove(request, response, "video_title", "");
 		//}
-		Videos video = memberDao.getDetail(Integer.valueOf(id));
+		Video video = memberDao.getDetail(Integer.valueOf(id));
 		if (video == null)
-			video = new Videos();
+			video = new Video();
 		video.setId(id);
 		video.setTitle(title);
 		video.setComment(comment);
@@ -171,13 +171,13 @@ public class VideoController extends BaseController {
 		filterParamObject.put("order_dir", orderDir);
 
 		String extraWhere = "";
-		List<Videos> VideosList = memberDao.search(filterParamObject, extraWhere);
+		List<Video> VideoList = memberDao.search(filterParamObject, extraWhere);
 		int count = memberDao.count(filterParamObject, extraWhere);
 
 		ArrayList<String[]> data = new ArrayList<String[]>();
 
-		for (int i = 0; i < VideosList.size(); i++) {
-			Videos row = VideosList.get(i);
+		for (int i = 0; i < VideoList.size(); i++) {
+			Video row = VideoList.get(i);
 
 			String opHtml = "", status = "关系中";
 			//opHtml += "<a href='javascript:viewRecord(" + String.valueOf(row.getId()) + ")' class='btn btn-xs yellow'><i class='fa fa-file-o'></i> 查看</a>";
@@ -210,7 +210,7 @@ public class VideoController extends BaseController {
 
 		String id = this.getBlankParameter(request, "id", "");
 
-		Videos record = memberDao.get(Integer.valueOf(id));
+		Video record = memberDao.get(Integer.valueOf(id));
 
 		memberDao.delete(record);
 		String videoPath = CommonUtil.getRepositoryRealPath(request) + "\\.." + record.getVideoUrl().replace("/", "\\");

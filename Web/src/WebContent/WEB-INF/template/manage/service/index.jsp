@@ -39,12 +39,12 @@
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>服务编号:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="num">
+								class="form-control form-like-filter input-small" name="code">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>账号:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="booknum">
+								class="form-control form-like-filter input-small" name="account_mobile">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
@@ -54,13 +54,13 @@
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>发布方:</label> <input type="text"
-								class="form-control form-like-filter input-small" name="issue">
+								class="form-control form-like-filter input-small" name="account_name">
 						</div>
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>账号类型: </label> <select
 								class="form-control form-filter select2me input-small"
-								name="booktype">
+								name="akind">
 								<option value="">全部</option>
 								<c:forEach items="${C_SERVICE_BOOKTYPE_NAME}" var="item">
 									<option value="${item.key}">${item.value}</option>
@@ -70,7 +70,7 @@
 						&nbsp;&nbsp;
 						<div class="form-group">
 							<label>发布时间: </label>
-							<div name="down_time"
+							<div name="write_time"
 								class="form-date-filter input-group input-large date-picker input-daterange"
 								data-date-format="yyyy-mm-dd">
 								<input type="text" class="form-control" name="from"> <span
@@ -93,7 +93,6 @@
 						<tr>
 							<th>服务编号</th>
 							<th>账号</th>
-							<th>write_time</th>
 							<th>服务名称</th>
 							<th>姓名</th>
 							<th>手机号</th>
@@ -136,14 +135,13 @@ jQuery(document).ready(function () {
         "columns": [
                     {"name": "code", "orderable": true},
                     {"name": "account_mobile", "orderable": true},
-                    {"name": "write_time", "orderable": true, "visible": false},
                     {"name": "name", "orderable": true},
                     {"name": "contact_name", "orderable": true},
                     {"name": "contact_mobile", "orderable": true},
                     {"name": "contact_weixin", "orderable": true},
-                    {"orderable": false},
+                    {"name": "account_name", "orderable": false},
                     {"name": "akind_name", "orderable": true},
-                    {"name": "up_time", "orderable": true},
+                    {"name": "write_time", "orderable": true},
                     {"name": "status_name", "orderable": true},
                     {"orderable": false},
                    ],
@@ -151,7 +149,7 @@ jQuery(document).ready(function () {
         "bInfo": true,
         "bPaginate": true,
         "order": [
-                  [2, "desc"]
+                  [8, "desc"]
         ]
 	});
 

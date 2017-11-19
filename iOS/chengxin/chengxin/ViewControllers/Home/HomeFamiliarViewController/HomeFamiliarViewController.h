@@ -10,9 +10,10 @@
 
 @interface HomeFamiliarViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 {
-    NSTimer *slideFamiliarPageTimer;
 }
-@property (nonatomic, strong) IBOutlet UIScrollView *slideFamiliarScrollView;
-@property (nonatomic, strong) IBOutlet UIPageControl *slideFamiliarPageCtrl;
 @property (nonatomic, strong) IBOutlet UITableView *homeFamiliarTableView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *indicatorView;
+
+-(void) getFriendFromServer:(NSString*)cityName aKind:(NSString*)akind XyleixingIds:(NSString*)xyleixingIds Start:(NSString*)start Length:(NSString*)length Keyword:(NSString*)keyword ;
+@property (nonatomic) NSInteger currentSortOrderIndex;
 @end

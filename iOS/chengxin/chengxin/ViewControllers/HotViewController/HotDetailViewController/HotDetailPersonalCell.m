@@ -7,6 +7,7 @@
 //
 
 #import "HotDetailPersonalCell.h"
+#import "Global.h"
 
 @implementation HotDetailPersonalCell
 
@@ -20,5 +21,11 @@
 
     // Configure the view for the selected state
 }
+
+- (IBAction)onClickMoreReplyButton:(id)sender {
+    self.moreReplyButton.selected = !self.moreReplyButton.selected;
+    [[NSNotificationCenter defaultCenter] postNotificationName:SHOW_MORE_REPLY_VIEW_NOTIFICATION object:nil];
+}
+
 
 @end

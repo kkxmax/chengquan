@@ -11,8 +11,14 @@
       <generator class="identity" />
     </id>
     <property column="TYPE" name="type" type="int"/>
+    <property column="ACCOUNT_ID" name="accountId" type="int"/>
     <property column="KIND" name="kind" type="int"/>
-    <property column="CONTENT" name="content"/>
+    <property column="SUB_KIND" name="subKind" type="int"/>
+    <property column="MSG_TITLE" name="msgTitle"/>
+    <property column="MSG_CONTENT" name="msgContent"/>
+    <property column="INVITEE_ID" name="inviteeId" type="int"/>
+    <property column="ESTIMATE_ID" name="estimateId" type="int"/>
+    <property column="ERROR_ID" name="errorId" type="int"/>
     <property column="STATUS" name="status" type="int"/>
     <property column="WRITE_TIME" name="writeTime" type="timestamp"/>
     

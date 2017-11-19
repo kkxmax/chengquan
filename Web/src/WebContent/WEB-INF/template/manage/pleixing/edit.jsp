@@ -26,10 +26,10 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">父母</label>
                     <div class="col-md-9">
-                        <select class="form-control select2me input-small" name="upper_id">
+                        <select class="form-control select2me input-small" name="upperId">
 		                	<option value="0">一级类型</option>
 		                	<c:forEach items="${root_leixings}" var="item">
-		                		<option value="${item.id}" <c:if test="${record.upper_id == item.id}">selected</c:if>>${item.title}</option>
+		                		<option value="${item.id}" <c:if test="${record.upperId == item.id}">selected</c:if>>${item.title}</option>
 		                	</c:forEach>
 		                </select>
                     </div>

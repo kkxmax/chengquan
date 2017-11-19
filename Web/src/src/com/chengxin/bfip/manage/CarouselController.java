@@ -15,8 +15,8 @@ import com.chengxin.bfip.CommonUtil;
 import com.chengxin.bfip.Constants;
 import com.chengxin.bfip.model.Carousel;
 import com.chengxin.bfip.model.CarouselDAO;
-import com.chengxin.bfip.model.Videos;
-import com.chengxin.bfip.model.VideosDAO;
+import com.chengxin.bfip.model.Video;
+import com.chengxin.bfip.model.VideoDAO;
 import com.chengxin.common.AppSettings;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.BinaryFormUtil;
@@ -33,10 +33,10 @@ import com.chengxin.common.KeyValueString;
 public class CarouselController extends BaseController {
 
 	private CarouselDAO memberDao = null;
-	private VideosDAO videosDao = null;
+	private VideoDAO videoDao = null;
 
 	public void setMemberDao(CarouselDAO value) {this.memberDao = value;}
-	public void setVideosDao(VideosDAO value) {this.videosDao = value;}
+	public void setVideoDao(VideoDAO value) {this.videoDao = value;}
 
 	public CarouselController() throws Exception {
 	}
@@ -91,7 +91,7 @@ public class CarouselController extends BaseController {
 		filterParamObject.put("order_col", "write_time");
 		filterParamObject.put("order_dir", "desc");
 
-		List<Videos> videosList = videosDao.search(filterParamObject);
+		List<Video> videosList = videoDao.search(filterParamObject);
 
 		request.setAttribute("videosList", videosList);
 
@@ -184,7 +184,7 @@ public class CarouselController extends BaseController {
 
 			String[] dataItem = new String[] {
 					String.valueOf(i+1),
-					"<img src='" + Constants.C_UPLOAD_PATH + row.getImgUrl() + "' alt='头像图片' width='45px' height='45px'>",
+					"<img src='" + Constants.C_UPLOAD_PATH + row.getImgUrl() + "' alt='头像图片' width='135px' height='45px'>",
 					row.getKind() == CarouselDAO.MEDIA_KIND_IMAGE ? "图片" : "视频",
 					"" + row.getOrd(),
 					DateTimeUtil.dateFormat(row.getWriteTime(), "yyyy-MM-dd HH:mm"),

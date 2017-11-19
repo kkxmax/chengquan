@@ -208,6 +208,7 @@ public class InterestDAO extends BaseDataAccessObject {
                 row.setTarget(CommonUtil.toIntDefault(objectArray[1]));
                 row.setOwner(CommonUtil.toIntDefault(objectArray[2]));
                 row.setWriteTime(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[3])));
+                row.setWriteTimeString(DateTimeUtil.dateFormat(DateTimeUtil.stringToDate(CommonUtil.toStringDefault(objectArray[3]))));
                 
                 DBModelUtil.processSecure(Interest.class.getName(), row, DBModelUtil.C_SECURE_TYPE_DECRYPT);
 

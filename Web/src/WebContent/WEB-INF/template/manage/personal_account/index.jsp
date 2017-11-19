@@ -40,12 +40,12 @@
             &nbsp;&nbsp;
             <div class="form-group">
               <label>账号:</label>
-              <input type="text" class="form-control form-like-filter input-small" name="account">
+              <input type="text" class="form-control form-like-filter input-small" name="mobile">
             </div>
             &nbsp;&nbsp;
             <div class="form-group">
               <label>真实姓名:</label>
-              <input type="text" class="form-control form-like-filter input-small" name="enter_name">
+              <input type="text" class="form-control form-like-filter input-small" name="realname">
             </div>
             &nbsp;&nbsp;
             <div class="form-group">
@@ -73,6 +73,19 @@
                 	<option value="${item.key}">${item.value}</option>
                 </c:forEach>
               </select>
+            </div>
+            &nbsp;&nbsp;
+            <div class="form-group">
+              <label>所在地:</label>
+              <select class="form-control form-filter select2me input-small" id="province_id" name="province_id" onchange="province_id_changed();">
+                <option value="">全部</option>
+                  <c:forEach items="${provinces}" var="item">
+                	<option value="${item.id}">${item.name}</option>
+                  </c:forEach>
+              </select>
+              <select class="form-control form-filter select2me input-small" id="city_id" name="city_id" onchange="city_id_changed();">
+                <option value="">全部</option>
+              </select>
               <button class="btn btn-sm yellow" onclick="loadTable();return false;"><i class="fa fa-search"></i> 查询
               </button>
             </div>
@@ -89,6 +102,7 @@
             <th>创造时间</th>
             <th>账号</th>
             <th>真实姓名</th>
+            <th>所在地</th>
             <th>诚信代码</th>
             <th>诚信度</th>
             <th>推荐人数</th>
@@ -130,7 +144,8 @@ jQuery(document).ready(function () {
                     {"orderable": false},
                     {"name": "write_time", "orderable": true, "visible": false},
                     {"name": "account", "orderable": true},
-                    {"name": "enter_name", "orderable": true},
+                    {"name": "realname", "orderable": true},
+                    {"name": "prov_city", "orderable": true},
                     {"name": "code", "orderable": true},
                     {"name": "credit", "orderable": true},
                     {"name": "elect_cnt", "orderable": true},
@@ -150,7 +165,36 @@ jQuery(document).ready(function () {
 		loadTable();
 	});
 	
+	province_id_changed();
 });
+
+function province_id_changed() {
+	$.ajax({
+		type: "POST",
+		url: "${cur_page}?pAct=getCities",
+				data: {'provinceId': $('#province_id').val()},
+				success: function (resp) {
+					if (resp.retcode == 200) {
+						records = resp.records;
+						html = "<option value=''>全部</option>";
+						for(var i=0; i<records.length; i++) {
+							record = records[i];
+							html += "<option value=" + record.id + ">" + record.name + "</option>";
+						}
+						$('#city_id').html(html);
+						$('#city_id').select2();
+						city_id_changed();
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					bootbox.alert("发生错误！");
+				}
+			});
+}
+
+function city_id_changed() {
+	loadTable();
+}
 
 function changeBanStatus(id, targetStatus) {
 	if(targetStatus == 1) {

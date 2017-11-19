@@ -94,9 +94,11 @@ public class NoticeController extends BaseController {
 		filterParamObject.put("length", length);
 		filterParamObject.put("order_col", orderColName);
 		filterParamObject.put("order_dir", orderDir);
+		
+		String strWhere = "type=" + NoticeDAO.NOTICE_TYPE_ADMIN;
 
-		List<Notice> itemList = noticeDao.search(filterParamObject);
-		int count = noticeDao.count(filterParamObject);
+		List<Notice> itemList = noticeDao.search(filterParamObject, strWhere);
+		int count = noticeDao.count(filterParamObject, strWhere);
 
 		ArrayList<String[]> data = new ArrayList<String[]>();
 
@@ -112,7 +114,7 @@ public class NoticeController extends BaseController {
 					"<input type='checkbox' name='sel_ids[]' notice_id=" + row.getId() + ">",
 					String.valueOf(i + 1),
 					row.getKindName(),
-					row.getContent(),
+					row.getMsgContent(),
 					row.getStatusName(),
 					DateTimeUtil.dateFormat(row.getWriteTime()),
 					opHtml 
@@ -181,7 +183,7 @@ public class NoticeController extends BaseController {
 
 		JSONObject result = new JSONObject();
 
-		int newNoticeCnt = noticeDao.count(null, "status = " + NoticeDAO.NOTICE_ST_NEW);
+		int newNoticeCnt = noticeDao.count(null, "type= " + NoticeDAO.NOTICE_TYPE_ADMIN + " and status = " + NoticeDAO.NOTICE_ST_NEW);
 		
 		result.put("retcode", 200);
 		result.put("newNoticeCnt", newNoticeCnt);

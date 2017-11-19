@@ -19,10 +19,21 @@
         android:padding="@dimen/margin_normal"
         android:scrollbars="none">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/large_text"/>
+        <LinearLayout
+            style="@style/layout_mw"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                style="@style/layout_ww"
+                android:padding="@dimen/margin_large"
+                android:text="@string/chenghu_agreement_title"
+                android:textSize="@dimen/text_size_18"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/chenghu_agreement"/>
+        </LinearLayout>
 
     </ScrollView>
 

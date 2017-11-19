@@ -10,8 +10,12 @@
 
 @interface LoginViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UIButton* passwordEye;
+@property (nonatomic, retain) IBOutlet UITextField* phoneNumberInput;
+@property (nonatomic, retain) IBOutlet UITextField* passwordInput;
 -(IBAction)onRegister:(id)sender;
 -(IBAction)onSignup:(id)sender;
 -(IBAction)onForgot:(id)sender;
 -(IBAction)onSeePassword:(id)sender;
+-(IBAction)onDeletePhoneNumber:(id)sender;
 @end

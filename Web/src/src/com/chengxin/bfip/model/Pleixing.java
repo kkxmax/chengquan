@@ -1,6 +1,8 @@
 package com.chengxin.bfip.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.chengxin.common.BaseModel;
 
@@ -10,6 +12,7 @@ public class Pleixing extends BaseModel {
     private String title = "";
     private int upperId = 0;
     private Date writeTime = new Date();
+    private List<Pleixing> children = new ArrayList<Pleixing>();
     
 	public int getId() {
 		return id;
@@ -35,6 +38,11 @@ public class Pleixing extends BaseModel {
 	public void setWriteTime(Date writeTime) {
 		this.writeTime = writeTime;
 	}
-	  
+	public List<Pleixing> getChildren() {
+		return children;
+	}
+	public void setChildren(List<Pleixing> children) {
+		this.children = children;
+	}
 }
 

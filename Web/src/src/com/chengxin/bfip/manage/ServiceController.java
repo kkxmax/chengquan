@@ -13,10 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
 
 import com.chengxin.bfip.Constants;
-import com.chengxin.bfip.model.Account;
 import com.chengxin.bfip.model.AccountDAO;
-import com.chengxin.bfip.model.Services;
-import com.chengxin.bfip.model.ServicesDAO;
+import com.chengxin.bfip.model.Service;
+import com.chengxin.bfip.model.ServiceDAO;
 import com.chengxin.common.BaseController;
 import com.chengxin.common.DateTimeUtil;
 import com.chengxin.common.JavascriptUtil;
@@ -28,9 +27,9 @@ import com.chengxin.common.KeyValueString;
  */
 public class ServiceController extends BaseController {
 
-	private ServicesDAO memberDao = null;
+	private ServiceDAO memberDao = null;
 
-	public void setMemberDao(ServicesDAO value) {
+	public void setMemberDao(ServiceDAO value) {
 		this.memberDao = value;
 	}
 
@@ -104,30 +103,27 @@ public class ServiceController extends BaseController {
 		filterParamObject.put("order_dir", orderDir);
 
 		String extraWhere = "";
-		List<Services> ServicesList = memberDao.search(filterParamObject,
+		List<Service> ServiceList = memberDao.search(filterParamObject,
 				extraWhere);
 		int count = memberDao.count(filterParamObject, extraWhere);
 
 		ArrayList<String[]> data = new ArrayList<String[]>();
 
-		for (int i = 0; i < ServicesList.size(); i++) {
-			Services row = ServicesList.get(i);
+		for (int i = 0; i < ServiceList.size(); i++) {
+			Service row = ServiceList.get(i);
 
-			String opHtml = "<a href='service.html?pAct=viewDetail&id="
-					+ String.valueOf(row.getId())
-					+ "' class='btn btn-xs purple' data-target='#global-modal' data-toggle='modal'><i class='fa fa-edit'></i> 查看</a>";
-			opHtml += "<a href='javascript:;delete_record("+ String.valueOf(row.getId()) +");' class='btn btn-xs default'><i class='fa fa-trash-o'></i>删除</a>";
+			String opHtml = "<a href='service.html?pAct=viewDetail&id=" + row.getId() + "' class='btn btn-xs purple' data-target='#global-modal' data-toggle='modal'><i class='fa fa-edit'></i> 查看</a>";
+			opHtml += "<a href='javascript:;delete_record("+ row.getId() +");' class='btn btn-xs default'><i class='fa fa-trash-o'></i>删除</a>";
 			String[] dataItem = new String[] {
 					row.getCode(), 
 					row.getAccountMobile(), 
-					DateTimeUtil.dateFormat(row.getWriteTime()), 
 					row.getName(),
 					row.getContactName(), 
 					row.getContactMobile(),
 					row.getContactWeixin(), 
-					row.getAkindName().equals(AccountDAO.ACCOUNT_TYPE_PERSONAL) ? row.getRealname() : row.getEnterName(),
+					row.getAkind() == AccountDAO.ACCOUNT_TYPE_PERSONAL ? row.getRealname() : row.getEnterName(),
 					row.getAkindName(), 
-					row.getUpTime(), 
+					DateTimeUtil.dateFormat(row.getWriteTime()), 
 					row.getStatusName(),
 					opHtml 
 			};
@@ -145,11 +141,9 @@ public class ServiceController extends BaseController {
 
 	public ModelAndView viewDetail(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
-		JSONObject result = new JSONObject();
-
 		String id = this.getBlankParameter(request, "id", "");
 
-		Services record = memberDao.getDetail(Integer.valueOf(id));
+		Service record = memberDao.getDetail(Integer.valueOf(id));
 
 		request.setAttribute("record", record);
 
@@ -162,7 +156,7 @@ public class ServiceController extends BaseController {
 
 		String id = this.getBlankParameter(request, "id", "");
 
-		Services record = memberDao.get(Integer.valueOf(id));
+		Service record = memberDao.get(Integer.valueOf(id));
 
 		memberDao.delete(record);
 

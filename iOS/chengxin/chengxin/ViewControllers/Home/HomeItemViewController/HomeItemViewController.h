@@ -10,10 +10,13 @@
 
 @interface HomeItemViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 {
-    NSTimer *slideItemPageTimer;
 }
-@property (nonatomic, strong) IBOutlet UIScrollView *slideItemScrollView;
-@property (nonatomic, strong) IBOutlet UIPageControl *slideItemPageCtrl;
 @property (nonatomic, strong) IBOutlet UITableView *homeItemTableView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *indicatorView;
+
+- (void)getItemFromServer:cityName AKind:(NSString*)akind FenleiIds:(NSString*)fenleiIds Start:(NSString*)start Length:(NSString*)length Keyword:(NSString*)keyword;
+@property (nonatomic) NSInteger currentSortOrderIndex;
+
+@property (nonatomic, strong) IBOutlet UIButton *addButton;
 
 @end

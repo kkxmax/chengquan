@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ScrollPictureView.h"
+#import "EditPictureView.h"
 
 @interface ReformViewController : UIViewController
-@property ScrollPictureView *scrollPictureView;
+@property EditPictureView *editPictureView;
 @property (weak, nonatomic) IBOutlet UIView *viewContent;
 
 @end

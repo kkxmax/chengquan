@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <modal_width val="60%"></modal_width>
 <div class="modal-header">
@@ -13,23 +16,32 @@
 				<div class="form-body col-xs-12">
 					<div class="form-group">
 						<label class="col-xs-3 text-right">账号:</label> <label
-							class="col-xs-9 text-left">${record.booknum}</label>
+							class="col-xs-9 text-left">${record.ownerMobile}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">纠错人:</label> <label
-							class="col-xs-9 text-left">${record.name}</label>
+							class="col-xs-9 text-left">
+							<c:if test="${record.ownerAkind == 1}">${record.ownerRealname}</c:if>
+							<c:if test="${record.ownerAkind == 2}">${record.ownerEnterName}</c:if>
+						</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">被评价人:</label> <label
-							class="col-xs-9 text-left">${record.no_name}</label>
+							class="col-xs-9 text-left">
+							<c:if test="${record.estimateeAkind == 1}">${record.estimateeRealname}</c:if>
+							<c:if test="${record.estimateeAkind == 2}">${record.estimateeEnterName}</c:if>
+						</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">评价人:</label> <label
-							class="col-xs-9 text-left">${record.real_name}</label>
+							class="col-xs-9 text-left">
+							<c:if test="${record.estimaterAkind == 1}">${record.estimaterRealname}</c:if>
+							<c:if test="${record.estimaterAkind == 2}">${record.estimaterEnterName}</c:if>
+						</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">评价内容:</label><label
-							class="col-xs-9 text-left">${record.content}</label>
+							class="col-xs-9 text-left">${record.estimateContent}</label>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-3 text-right">纠错原因:</label> <label
@@ -41,8 +53,12 @@
 
 					</div>
 					<div class="form-group">
-						<label class="col-xs-3 text-right">服务图片:</label>
-						<div class="col-xs-9 text-left"></div>
+						<label class="col-xs-3 text-right">图片:</label>
+						<div class="col-xs-9 text-left">
+							<c:forEach items="${record.imgPaths}" var="imgPath">
+								<img class="avatar-small" src="${C_UPLOAD_PATH}${imgPath}" alt="图像" style="width:18%">
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -50,42 +66,10 @@
 	</div>
 </div>
 <div class="modal-footer" style="text-align: center">
-	<button type="button" class="btn green" onclick="pass(${record.id})">审核</button>
 	<button type="button" class="btn default" data-dismiss="modal">返回</button>
 </div>
 
 
 <script>
-function pass(id) {
 
-	bootbox.confirm("是否通过？", function(result) {
-		if (result) {
-			Metronic.blockUI({
-				target : '#content-div',
-				animate : true
-			});
-			$.ajax({
-				type : "POST",
-				url : "error.html?pAct=pass",
-				data : {
-					'id' : id
-				},
-				success : function(resp) {
-					Metronic.unblockUI('#content-div');
-					if (resp.retcode == 200) {
-						toastr['success'](resp.msg);
-						$('#global-modal').modal('hide');
-						loadTable();
-					} else {
-						toastr['error'](resp.msg);
-					}
-				},
-				error : function(xhr, ajaxOptions, thrownError) {
-					Metronic.unblockUI('#content-div');
-					bootbox.alert("发生错误！");
-				}
-			});
-		}
-	});
-}
 </script>

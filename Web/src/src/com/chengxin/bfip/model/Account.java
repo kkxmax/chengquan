@@ -1,6 +1,8 @@
 package com.chengxin.bfip.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.chengxin.common.BaseModel;
 
@@ -11,7 +13,7 @@ public class Account extends BaseModel {
     private String password = "";
     private int reqCodeId = 0;
     private String token = "";
-    private int akind = 1;
+    private int akind = 0;
     private String code = "";
     private int viewCnt = 0;
     private String logo = "";
@@ -38,13 +40,18 @@ public class Account extends BaseModel {
     private String bossMobile = "";
     private String bossWeixin = "";
     private int testStatus = 0;
-    private int banStatus = 1;
+    private int banStatus = 0;
     private Date writeTime = new Date();
     
+    private String writeTimeString;
     private int credit = 0;
     private int electCnt = 0;
     private int feedbackCnt = 0;
+    private int positiveFeedbackCnt = 0;
+    private int negativeFeedbackCnt = 0;
     private int reqCodeSenderId;
+    private String inviterFriendLevel;
+    private int reqCodeSenderAkind;
     private String reqCodeSenderRealname;
     private String reqCodeSenderEnterName;
     private String testStatusName;
@@ -56,8 +63,14 @@ public class Account extends BaseModel {
     private String cityName;
     private int provinceId;
     private String provinceName;
+    private String provCity;
     private String xyName;
     private int interested = 0;
+    private int isStarInterested = 0;
+    private List<Estimate> estimates = new ArrayList<Estimate>();
+    private List<Product> products = new ArrayList<Product>();
+    private List<Item> items = new ArrayList<Item>();
+    private List<Service> services = new ArrayList<Service>();
     
     
 	public String getMobile() {
@@ -365,6 +378,72 @@ public class Account extends BaseModel {
 	}
 	public void setCredit(int credit) {
 		this.credit = credit;
+	}
+	public List<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	public List<Item> getItems() {
+		return items;
+	}
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+	public List<Service> getServices() {
+		return services;
+	}
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
+	public int getIsStarInterested() {
+		return isStarInterested;
+	}
+	public void setIsStarInterested(int isStarInterested) {
+		this.isStarInterested = isStarInterested;
+	}
+	public int getPositiveFeedbackCnt() {
+		return positiveFeedbackCnt;
+	}
+	public void setPositiveFeedbackCnt(int positiveFeedbackCnt) {
+		this.positiveFeedbackCnt = positiveFeedbackCnt;
+	}
+	public int getNegativeFeedbackCnt() {
+		return negativeFeedbackCnt;
+	}
+	public void setNegativeFeedbackCnt(int negativeFeedbackCnt) {
+		this.negativeFeedbackCnt = negativeFeedbackCnt;
+	}
+	public List<Estimate> getEstimates() {
+		return estimates;
+	}
+	public void setEstimates(List<Estimate> estimates) {
+		this.estimates = estimates;
+	}
+	public String getWriteTimeString() {
+		return writeTimeString;
+	}
+	public void setWriteTimeString(String writeTimeString) {
+		this.writeTimeString = writeTimeString;
+	}
+	public int getReqCodeSenderAkind() {
+		return reqCodeSenderAkind;
+	}
+	public void setReqCodeSenderAkind(int reqCodeSenderAkind) {
+		this.reqCodeSenderAkind = reqCodeSenderAkind;
+	}
+	public String getInviterFriendLevel() {
+		return inviterFriendLevel;
+	}
+	public void setInviterFriendLevel(String inviterFriendLevel) {
+		this.inviterFriendLevel = inviterFriendLevel;
+	}
+	public String getProvCity() {
+		return provCity;
+	}
+	public void setProvCity(String provCity) {
+		this.provCity = provCity;
 	}
 
 }
