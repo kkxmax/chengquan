@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Document   : Member.hbm.xml
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="Role" table="roles">
+    <id column="id" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="title" name="title"/>
+    <property column="func_personal" name="funcPersonal" type="int"/>
+    <property column="func_enter" name="funcEnter" type="int"/>
+    <property column="func_fenlei" name="funcFenlei" type="int"/>
+    <property column="func_xingye" name="funcXingye" type="int"/>
+    <property column="func_carousel" name="funcCarousel" type="int"/>
+    <property column="func_video" name="funcVideo" type="int"/>
+    <property column="func_product" name="funcProduct" type="int"/>
+    <property column="func_comment" name="funcComment" type="int"/>
+    <property column="func_statistic" name="funcStatistic" type="int"/>
+    <property column="func_item" name="funcItem" type="int"/>
+    <property column="func_hot" name="funcHot" type="int"/>
+    <property column="func_error" name="funcError" type="int"/>
+    <property column="func_chanpin" name="funcChanpin" type="int"/>
+    <property column="func_opinion" name="funcOpinion" type="int"/>
+    <property column="func_system" name="funcSystem" type="int"/>
+    
+  </class>
+</hibernate-mapping>

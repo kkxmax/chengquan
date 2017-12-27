@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_gray_f0">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <View style="@style/splite_line_gray_8"/>
+
+    <TextView
+        android:id="@+id/txt_agreement"
+        style="@style/row_normal"
+        android:text="@string/chengxin_agreement_title"
+        android:drawableRight="@drawable/more"/>
+    <View style="@style/splite_line_gray_8"/>
+
+    <TextView
+        android:id="@+id/txt_about_me"
+        style="@style/row_normal"
+        android:text="@string/about_me"
+        android:drawableRight="@drawable/more"/>
+    <View style="@style/splite_line_gray"/>
+
+    <TextView
+        android:id="@+id/txt_change_password"
+        style="@style/row_normal"
+        android:text="@string/change_password"
+        android:drawableRight="@drawable/more"/>
+    <View style="@style/splite_line_gray_8"/>
+
+    <TextView
+        android:id="@+id/txt_upgrade"
+        style="@style/row_normal"
+        android:text="@string/upgrade_version"
+        android:drawableRight="@drawable/new_version"
+        android:layout_marginBottom="@dimen/margin_extra"/>
+
+    <TextView
+        android:id="@+id/txt_logout"
+        style="@style/row_normal"
+        android:text="@string/logout"
+        android:gravity="center"/>
+
+</LinearLayout>

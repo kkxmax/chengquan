@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="Video" table="videos">
+    <id column="id" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="video_url" name="videoUrl"/>
+    <property column="video_name" name="videoName"/>
+    <property column="video_size" name="videoSize"/>
+    <property column="title" name="title"/>
+    <property column="comment" name="comment"/>
+    <property column="write_time" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>

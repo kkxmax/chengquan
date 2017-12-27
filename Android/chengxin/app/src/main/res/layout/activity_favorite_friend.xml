@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/btn_person"
+            style="@style/layout_0w"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/txt_orange_gray"
+            android:background="@drawable/btn_person_tab"
+            android:checked="true"
+            android:textOn="@string/str_person"
+            android:textOff="@string/str_person"/>
+        <ToggleButton
+            android:id="@+id/btn_enterprise"
+            style="@style/layout_0w"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/txt_orange_gray"
+            android:background="@drawable/btn_person_tab"
+            android:textOn="@string/str_enterprise"
+            android:textOff="@string/str_enterprise"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/view_body"
+        style="@style/layout_m0">
+    </FrameLayout>
+
+</LinearLayout>

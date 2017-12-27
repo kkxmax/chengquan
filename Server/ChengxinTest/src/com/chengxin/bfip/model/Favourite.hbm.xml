@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="Favourite" table="favourites">
+    <id column="id" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="kind" name="kind" type="int"/>
+    <property column="owner" name="owner" type="int"/>
+    <property column="product_id" name="productId" type="int"/>
+    <property column="hot_id" name="hotId" type="int"/>
+    <property column="write_time" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>

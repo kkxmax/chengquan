@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
+            <connections>
+                <outlet property="evaluateTabbarItem" destination="lfr-ud-nJW" id="0sX-d6-X8Q"/>
+                <outlet property="favouriteTabbarItem" destination="z7f-rt-gep" id="1SM-T7-sb4"/>
+                <outlet property="homeChoiceBackgroundView" destination="Qck-Q0-TXM" id="tXC-t4-hhJ"/>
+                <outlet property="homeChoiceTransView" destination="aUI-9c-60g" id="mdQ-qN-LM4"/>
+                <outlet property="homeChoiceView" destination="AjP-wn-SMQ" id="V8K-w3-geB"/>
+                <outlet property="homeTabbarItem" destination="ZGP-27-DQ9" id="nWA-sZ-nDZ"/>
+                <outlet property="hotTabbarItem" destination="DkV-Ol-yHX" id="5jG-FX-xyE"/>
+                <outlet property="mainTabBar" destination="rBK-rf-4qz" id="NIk-ym-gQ1"/>
+                <outlet property="mainView" destination="MTN-8E-KVP" id="skl-d1-FLq"/>
+                <outlet property="mineTabbarItem" destination="MM4-mf-dh2" id="hxE-Sc-CL5"/>
+                <outlet property="transTabBarView" destination="gAz-8h-geM" id="zuc-42-GeR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="cft-fD-zhh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MTN-8E-KVP">
+                    <frame key="frameInset" maxY="49"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBK-rf-4qz">
+                    <frame key="frameInset" height="49"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <items>
+                        <tabBarItem title="首页" image="home_nor.png" selectedImage="home_sel.png" id="ZGP-27-DQ9"/>
+                        <tabBarItem tag="1" title="热点" image="home_hot_nor.png" selectedImage="home_hot_sel.png" id="DkV-Ol-yHX"/>
+                        <tabBarItem tag="2" title="评价" image="home_evaluate_nor.png" selectedImage="home_evaluate_sel.png" id="lfr-ud-nJW"/>
+                        <tabBarItem tag="3" title="关注" image="home_follow_nor.png" selectedImage="home_follow_sel.png" id="z7f-rt-gep"/>
+                        <tabBarItem tag="4" title="我的" image="home_my_nor.png" selectedImage="home_my_sel.png" id="MM4-mf-dh2"/>
+                    </items>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="U27-pR-yVD"/>
+                    </connections>
+                </tabBar>
+                <view hidden="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAz-8h-geM">
+                    <frame key="frameInset" minY="218"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="EGf-vO-rIO" appends="YES" id="pr9-ch-Lrm"/>
+                    </connections>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qck-Q0-TXM">
+                    <frame key="frameInset" minY="64"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view hidden="YES" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUI-9c-60g">
+                            <frame key="frameInset"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="JjE-HF-ydP" appends="YES" id="cdm-WU-66T"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AjP-wn-SMQ">
+                            <frame key="frameInset" width="83.47%"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="eB7-Ru-4ig" appends="YES" id="C3a-78-d0W"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <nil key="simulatedTopBarMetrics"/>
+        </view>
+        <swipeGestureRecognizer direction="right" id="eB7-Ru-4ig">
+            <connections>
+                <action selector="handleSwipe:" destination="-1" id="Fxz-ac-JBd"/>
+            </connections>
+        </swipeGestureRecognizer>
+        <tapGestureRecognizer id="EGf-vO-rIO">
+            <connections>
+                <action selector="handleTapTransTabBarView:" destination="-1" id="cZF-VJ-fEu"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="JjE-HF-ydP">
+            <connections>
+                <action selector="handleTapChoiceView:" destination="-1" id="Rqr-cO-efZ"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="home_evaluate_nor.png" width="22" height="22"/>
+        <image name="home_evaluate_sel.png" width="22" height="22"/>
+        <image name="home_follow_nor.png" width="22" height="22"/>
+        <image name="home_follow_sel.png" width="22" height="22"/>
+        <image name="home_hot_nor.png" width="22" height="22"/>
+        <image name="home_hot_sel.png" width="22" height="22"/>
+        <image name="home_my_nor.png" width="22" height="22"/>
+        <image name="home_my_sel.png" width="22" height="22"/>
+        <image name="home_nor.png" width="22" height="22"/>
+        <image name="home_sel.png" width="22" height="22"/>
+    </resources>
+</document>

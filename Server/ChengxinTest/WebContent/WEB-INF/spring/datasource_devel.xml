@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="dataSource"
+            class="org.apache.commons.dbcp.BasicDataSource"
+            p:driverClassName="com.mysql.jdbc.Driver"
+            p:url="jdbc:mysql://localhost:3306/chengxin_test_db?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"
+            p:username="root"
+            p:password="Chengquan@2017" />
+
+</beans>

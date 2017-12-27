@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/refresh_frame"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_avatar_height"
+        android:background="@drawable/trans"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <ProgressBar
+            android:id="@+id/pull_to_refresh_progress"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:indeterminateDrawable="@drawable/com_progress_small"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>

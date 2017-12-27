@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_normal_top"
+        android:background="@drawable/rect_blue_gradient"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="@dimen/image_avatar_width"
+                android:layout_height="@dimen/image_avatar_height"
+                android:background="@color/color_white"
+                android:padding="1dp">
+                <ImageView
+                    android:id="@+id/img_logo"
+                    style="@style/layout_mm"
+                    android:background="@color/color_gray_f5"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                style="@style/layout_0w"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:orientation="vertical">
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txt_name"
+                        style="@style/layout_ww"
+                        android:text="@string/str_sample"
+                        android:textSize="@dimen/text_size_16"
+                        android:textColor="@color/txt_gray_white"/>
+                    <TextView
+                        android:id="@+id/txt_hangye"
+                        style="@style/layout_ww"
+                        android:layout_marginStart="@dimen/margin_normal"
+                        android:background="@drawable/round_rect_bg_no_border_white"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/text_size_8"
+                        android:paddingLeft="@dimen/margin_normal"
+                        android:paddingRight="@dimen/margin_normal"
+                        android:paddingTop="@dimen/margin_tiny"
+                        android:paddingBottom="@dimen/margin_tiny"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_sample"/>
+                    <View style="@style/layout_0m" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/layout_ww"
+                        android:text="@string/str_chengxin_id"
+                        android:textSize="@dimen/text_size_14"
+                        android:textColor="@color/color_white"/>
+                    <TextView
+                        android:id="@+id/txt_code"
+                        style="@style/layout_ww"
+                        android:layout_marginStart="@dimen/margin_small"
+                        android:text="@string/str_sample"
+                        android:textSize="@dimen/text_size_14"
+                        android:textColor="@color/color_white"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/splite_line_gray"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_normal"/>
+
+        <LinearLayout
+            style="@style/layout_mw"
+            android:orientation="horizontal">
+            <LinearLayout
+                style="@style/layout_0w"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    style="@style/layout_ww"
+                    android:padding="@dimen/margin_small"
+                    android:text="@string/str_chengxin_rate"
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/color_white"/>
+                <TextView
+                    android:id="@+id/txt_credit"
+                    style="@style/layout_ww"
+                    android:text="@string/str_sample"
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/color_white"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/layout_0w"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    style="@style/layout_ww"
+                    android:padding="@dimen/margin_small"
+                    android:text="@string/str_like_count"
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/color_white"/>
+                <TextView
+                    android:id="@+id/txt_elect_cnt"
+                    style="@style/layout_ww"
+                    android:text="@string/str_sample"
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/color_white"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/layout_0w"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <TextView
+                    style="@style/layout_ww"
+                    android:padding="@dimen/margin_small"
+                    android:text="@string/str_eval_count"
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/color_white"/>
+                <TextView
+                    android:id="@+id/txt_feedback_cnt"
+                    style="@style/layout_ww"
+                    android:text="@string/str_sample"
+                    android:textSize="@dimen/text_size_10"
+                    android:textColor="@color/color_white"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        style="@style/layout_m0">
+
+        <LinearLayout
+            style="@style/layout_mw"
+            android:orientation="vertical">
+
+            <View style="@style/splite_line_gray_8"/>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="horizontal">
+                <View style="@style/blue_prefix" />
+                <TextView
+                    style="@style/layout_0w"
+                    android:padding="@dimen/margin_normal_top"
+                    android:text="@string/chengxin_report_basic"/>
+            </LinearLayout>
+
+            <View style="@style/splite_line_gray"/>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/margin_normal_most"
+                android:paddingRight="@dimen/margin_normal"
+                android:paddingBottom="@dimen/margin_normal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/row_height_normal"
+                    android:gravity="center_vertical">
+                    <LinearLayout
+                        style="@style/layout_mm"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/chengxin_report_company"/>
+                        <TextView
+                            android:id="@+id/txt_enter_name"
+                            style="@style/layout_0m"
+                            android:layout_marginLeft="@dimen/margin_small"
+                            android:gravity="center_vertical"
+                            android:text="@string/str_sample"
+                            android:textColor="@color/color_main_blue"/>
+                    </LinearLayout>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/more"
+                        android:background="@color/color_transparent"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_normal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chengxin_report_place"/>
+                    <TextView
+                        android:id="@+id/txt_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:textColor="@color/txt_dark"
+                        android:text="@string/str_sample"/>
+                </LinearLayout>
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_normal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chengxin_report_weixin"/>
+                    <TextView
+                        android:id="@+id/txt_weixin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:textColor="@color/txt_dark"
+                        android:text="@string/str_sample"/>
+                </LinearLayout>
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_normal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chengxin_report_position"/>
+                    <TextView
+                        android:id="@+id/txt_job"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_small"
+                        android:textColor="@color/txt_dark"
+                        android:text="@string/str_sample"/>
+                </LinearLayout>
+                <View style="@style/splite_line_gray"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_normal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/chengxin_report_recommend"/>
+                        <TextView
+                            android:id="@+id/txt_recommender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin_small"
+                            android:text="@string/str_sample"
+                            android:textColor="@color/color_main_blue"/>
+                    </LinearLayout>
+                    <ImageButton
+                        android:layout_width="@dimen/margin_large_bellow"
+                        android:layout_height="@dimen/margin_large"
+                        android:src="@drawable/more"
+                        android:background="@color/color_transparent"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <View style="@style/splite_line_gray_8"/>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="horizontal">
+                <View style="@style/blue_prefix" />
+                <TextView
+                    style="@style/layout_0w"
+                    android:padding="@dimen/margin_normal_top"
+                    android:text="@string/chengxin_report_person_experience"/>
+            </LinearLayout>
+            <View style="@style/splite_line_gray"/>
+            <TextView
+                android:id="@+id/txt_history"
+                style="@style/layout_mw"
+                android:padding="@dimen/margin_normal_most"
+                android:text="@string/str_sample"
+                android:textColor="@color/txt_dark"/>
+            <View style="@style/splite_line_gray_8"/>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="horizontal">
+                <View style="@style/blue_prefix" />
+                <TextView
+                    style="@style/layout_0w"
+                    android:padding="@dimen/margin_normal_top"
+                    android:text="@string/chengxin_report_job_experience"/>
+            </LinearLayout>
+            <View style="@style/splite_line_gray"/>
+            <TextView
+                android:id="@+id/txt_experience"
+                style="@style/layout_mw"
+                android:padding="@dimen/margin_normal_most"
+                android:text="@string/str_sample"
+                android:textColor="@color/txt_dark"/>
+            <View style="@style/splite_line_gray_8"/>
+
+            <LinearLayout
+                android:id="@+id/view_recommed_part"
+                style="@style/layout_mw"
+                android:orientation="vertical">
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="horizontal">
+                    <View style="@style/blue_prefix" />
+                    <TextView
+                        style="@style/layout_0w"
+                        android:padding="@dimen/margin_normal_top"
+                        android:text="@string/chengxin_report_my_recommend"/>
+                </LinearLayout>
+                <View style="@style/splite_line_gray"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:paddingTop="@dimen/margin_normal_most"
+                    android:paddingLeft="@dimen/margin_normal_most"
+                    android:paddingRight="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_normal">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/image_avatar_width"
+                        android:layout_height="@dimen/image_avatar_height">
+                        <ImageView
+                            android:id="@+id/img_recommend_logo"
+                            style="@style/layout_mm"
+                            android:background="@color/color_gray_f5"/>
+                        <TextView
+                            android:id="@+id/txt_recommend_logo_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rect_orange_gradient"
+                            android:gravity="center"
+                            android:padding="@dimen/margin_tiny"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/text_size_8"
+                            android:text="@string/enterprise"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        style="@style/layout_wm"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/margin_normal">
+
+                        <LinearLayout
+                            style="@style/layout_mw">
+                            <TextView
+                                android:id="@+id/txt_recommend_name"
+                                style="@style/layout_ww"
+                                android:text="@string/str_sample"
+                                android:textSize="@dimen/text_size_14"
+                                android:textStyle="bold"
+                                android:textColor="@color/txt_dark"/>
+                            <TextView
+                                android:id="@+id/txt_recommend_hangye"
+                                style="@style/layout_ww"
+                                android:layout_marginStart="@dimen/margin_normal"
+                                android:background="@drawable/round_rect_bg_no_border_blue"
+                                android:textColor="@color/color_main_blue"
+                                android:textSize="@dimen/text_size_8"
+                                android:paddingLeft="@dimen/margin_normal"
+                                android:paddingRight="@dimen/margin_normal"
+                                android:paddingTop="@dimen/margin_tiny"
+                                android:paddingBottom="@dimen/margin_tiny"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
+                                android:text="@string/str_sample"/>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            style="@style/layout_ww"
+                            android:paddingTop="@dimen/margin_small">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/instead_num"
+                                    android:textSize="@dimen/text_size_12"
+                                    android:textColor="@color/txt_dark"/>
+                                <TextView
+                                    android:id="@+id/txt_recommend_code"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/margin_small"
+                                    android:text="@string/str_sample"
+                                    android:textSize="@dimen/text_size_12"
+                                    android:textColor="@color/txt_dark"/>
+
+                            </LinearLayout>
+                            <ImageButton
+                                android:id="@+id/img_recommend_detail"
+                                android:layout_width="@dimen/margin_large_bellow"
+                                android:layout_height="@dimen/margin_large"
+                                android:src="@drawable/more"
+                                android:background="@color/color_transparent"
+                                android:layout_alignParentRight="true"/>
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            style="@style/layout_mw"
+                            android:paddingTop="@dimen/margin_small">
+                            <TextView
+                                style="@style/layout_ww"
+                                android:text="@string/instead_rate"
+                                android:textColor="@color/color_blue_light"
+                                android:textSize="@dimen/text_size_10"/>
+                            <TextView
+                                android:id="@+id/txt_recommend_credit_1"
+                                style="@style/layout_ww"
+                                android:text="@string/str_sample"
+                                android:textColor="@color/color_blue_light"
+                                android:textSize="@dimen/text_size_10"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <View style="@style/splite_line_gray"
+                    android:paddingLeft="@dimen/margin_normal_most"
+                    android:paddingRight="@dimen/margin_normal"/>
+
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:padding="@dimen/margin_normal"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        style="@style/layout_0w"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:padding="@dimen/margin_small"
+                            android:text="@string/str_chengxin_rate"
+                            android:textSize="@dimen/text_size_10"
+                            android:textColor="@color/txt_gray_light"/>
+                        <TextView
+                            android:id="@+id/txt_recommend_credit_2"
+                            style="@style/layout_ww"
+                            android:text="@string/str_sample"
+                            android:textSize="@dimen/text_size_10"
+                            android:textColor="@color/color_main_blue"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/layout_0w"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:padding="@dimen/margin_small"
+                            android:text="@string/str_like_count"
+                            android:textSize="@dimen/text_size_10"
+                            android:textColor="@color/txt_gray_light"/>
+                        <TextView
+                            android:id="@+id/txt_recommend_elect_cnt"
+                            style="@style/layout_ww"
+                            android:text="@string/str_sample"
+                            android:textSize="@dimen/text_size_10"
+                            android:textColor="@color/color_main_blue"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/layout_0w"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:padding="@dimen/margin_small"
+                            android:text="@string/str_eval_count"
+                            android:textSize="@dimen/text_size_10"
+                            android:textColor="@color/txt_gray_light"/>
+                        <TextView
+                            android:id="@+id/txt_recommend_feedback_cnt"
+                            style="@style/layout_ww"
+                            android:text="@string/str_sample"
+                            android:textSize="@dimen/text_size_10"
+                            android:textColor="@color/color_main_blue"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

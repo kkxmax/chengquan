@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_white"
+    tools:context="com.beijing.chengxin.ui.activity.LoginActivity"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <ScrollView
+        style="@style/layout_m0"
+        android:padding="@dimen/margin_normal"
+        android:scrollbars="none">
+
+        <LinearLayout
+            style="@style/layout_mw"
+            android:orientation="vertical">
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_1"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_1"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_2"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_2"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_3"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_3"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_4"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_4"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_5"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_5"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_6"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_6"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_7"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_7"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_8"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_8"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_9"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_9"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_10"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_10"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_11"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_11"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal_top"
+                android:text="@string/agreement_title_12"
+                android:textSize="@dimen/text_size_14"
+                android:textColor="@color/txt_dark"/>
+            <TextView
+                style="@style/layout_mw"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:text="@string/agreement_content_12"
+                android:textSize="@dimen/text_size_12"
+                android:textColor="@color/txt_gray"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

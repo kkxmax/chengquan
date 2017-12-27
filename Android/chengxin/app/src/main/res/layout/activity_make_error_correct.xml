@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <FrameLayout
+        style="@style/layout_m0">
+        <LinearLayout
+            style="@style/layout_mm"
+            android:orientation="vertical">
+            <ScrollView
+                style="@style/layout_m0">
+                <LinearLayout
+                    style="@style/layout_mw"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:layout_height="@dimen/row_height_normal"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_normal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/right_mistake_receive_eval_person"/>
+                        <TextView
+                            android:id="@+id/txt_pname"
+                            style="@style/layout_0w"
+                            android:background="@color/color_transparent"
+                            android:lines="1"
+                            android:textColor="@color/txt_dark"
+                            android:textSize="@dimen/text_size_14"
+                            android:layout_marginLeft="@dimen/margin_normal">
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:layout_height="@dimen/row_height_normal"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_normal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/right_mistake_eval_person"/>
+                        <TextView
+                            android:id="@+id/txt_nname"
+                            style="@style/layout_0w"
+                            android:background="@color/color_transparent"
+                            android:lines="1"
+                            android:textColor="@color/txt_dark"
+                            android:textSize="@dimen/text_size_14"
+                            android:layout_marginLeft="@dimen/margin_normal">
+                        </TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_normal">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/right_mistake_eval_content"/>
+                        <TextView
+                            android:id="@+id/txt_ncomment"
+                            style="@style/layout_mw"
+                            android:background="@color/color_transparent"
+                            android:textColor="@color/txt_dark"
+                            android:textSize="@dimen/text_size_14"
+                            android:layout_marginLeft="@dimen/margin_normal">
+                        </TextView>
+                    </LinearLayout>
+
+                    <View style="@style/splite_line_gray_8"/>
+
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:padding="@dimen/margin_normal">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:layout_height="@dimen/row_height_small"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/error_type"/>
+                        <LinearLayout
+                            style="@style/layout_mw"
+                            android:orientation="vertical" >
+                            <LinearLayout
+                                style="@style/layout_mw"
+                                android:orientation="horizontal">
+                                <ToggleButton
+                                    android:id="@+id/btn_kuada"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/row_height_small"
+                                    android:background="@color/color_transparent"
+                                    android:drawableLeft="@drawable/btn_radio"
+                                    android:checked="true"
+                                    android:textOn="@string/error_overstate"
+                                    android:textOff="@string/error_overstate"/>
+                                <ToggleButton
+                                    android:id="@+id/btn_xujia"
+                                    android:layout_marginLeft="@dimen/margin_normal_most"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="@dimen/row_height_small"
+                                    android:background="@color/color_transparent"
+                                    android:drawableLeft="@drawable/btn_radio"
+                                    android:textOn="@string/error_false"
+                                    android:textOff="@string/error_false"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <View style="@style/splite_line_gray"/>
+
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:padding="@dimen/margin_normal"
+                        android:background="@color/color_white"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:layout_height="@dimen/row_height_small"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/error_reason"/>
+                        <LinearLayout
+                            style="@style/layout_0w"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/edt_reason"
+                                style="@style/layout_mw"
+                                android:lines="5"
+                                android:background="@color/color_white"
+                                android:ems="10"
+                                android:inputType="textMultiLine"
+                                android:textSize="@dimen/text_size_14"
+                                android:maxLength="100"
+                                android:textColor="@color/txt_dark"
+                                android:gravity="left|top" />
+                            <TextView
+                                android:id="@+id/txt_reason_cnt"
+                                style="@style/layout_mw"
+                                android:gravity="right"
+                                android:text="0/100"
+                                android:textColor="@color/txt_gray_light"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <View style="@style/splite_line_gray"/>
+
+                    <LinearLayout
+                        style="@style/layout_mw"
+                        android:padding="@dimen/margin_normal"
+                        android:background="@color/color_white"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/layout_ww"
+                            android:layout_height="@dimen/row_height_small"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/text_size_14"
+                            android:text="@string/error_evidence"/>
+                        <LinearLayout
+                            style="@style/layout_0w"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:orientation="vertical">
+                            <EditText
+                                android:id="@+id/edt_whyis"
+                                style="@style/layout_mw"
+                                android:lines="5"
+                                android:background="@color/color_white"
+                                android:ems="10"
+                                android:inputType="textMultiLine"
+                                android:textSize="@dimen/text_size_14"
+                                android:maxLength="100"
+                                android:textColor="@color/txt_dark"
+                                android:gravity="left|top" />
+                            <TextView
+                                android:id="@+id/txt_whyis_cnt"
+                                style="@style/layout_mw"
+                                android:gravity="right"
+                                android:text="0/100"
+                                android:layout_marginBottom="@dimen/margin_normal"
+                                android:textColor="@color/txt_gray_light"/>
+
+                            <View style="@style/splite_line_gray"/>
+
+                            <com.beijing.chengxin.ui.widget.GridView
+                                android:id="@+id/grid_view"
+                                style="@style/layout_mw"
+                                android:layout_marginTop="@dimen/margin_normal"
+                                android:minHeight="@dimen/image_fabu_height"
+                                android:horizontalSpacing="@dimen/margin_normal"
+                                android:verticalSpacing="@dimen/margin_normal"
+                                android:numColumns="3"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </ScrollView>
+
+            <LinearLayout
+                style="@style/layout_mw"
+                android:orientation="horizontal"
+                android:background="@color/color_gray_f5"
+                android:padding="@dimen/margin_normal">
+                <Button
+                    android:id="@+id/btn_publish"
+                    style="@style/layout_mw"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:background="@drawable/round_rect_orange_gradient"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/text_size_18"
+                    android:text="@string/make_eval"/>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

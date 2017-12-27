@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        layout="@layout/nav_bar" />
+
+    <LinearLayout
+        style="@style/layout_mw"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/btn_comedity"
+            style="@style/layout_0m"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/txt_orange_gray"
+            android:background="@drawable/btn_person_tab"
+            android:checked="true"
+            android:textOn="@string/comedity"
+            android:textOff="@string/comedity"/>
+        <ToggleButton
+            android:id="@+id/btn_hot"
+            style="@style/layout_0m"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/txt_orange_gray"
+            android:background="@drawable/btn_person_tab"
+            android:textOn="@string/tab_hot"
+            android:textOff="@string/tab_hot"/>
+    </LinearLayout>
+
+    <FrameLayout
+        style="@style/layout_m0"
+        android:paddingTop="@dimen/margin_small"
+        android:background="@color/color_gray_f5">
+
+        <LinearLayout
+            android:id="@+id/view_blank_part"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_gray_e5"
+            android:gravity="center"
+            android:visibility="visible"
+            android:orientation="vertical">
+            <ImageView
+                style="@style/layout_ww"
+                android:src="@drawable/blank"/>
+            <TextView
+                style="@style/layout_ww"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:textColor="@color/txt_gray_light"
+                android:text="@string/empty_data"/>
+        </LinearLayout>
+        <com.beijing.chengxin.ui.widget.NoSwipeableViewPager
+            android:id="@+id/viewPager"
+            style="@style/layout_mm"/>
+    </FrameLayout>
+
+</LinearLayout>

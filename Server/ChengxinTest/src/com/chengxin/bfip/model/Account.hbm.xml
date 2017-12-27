@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="Account" table="accounts">
+    <id column="id" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="mobile" name="mobile"/>
+    <property column="password" name="password"/>
+    <property column="token" name="token"/>
+    <property column="reqcode_id" name="reqCodeId" type="int"/>
+    <property column="akind" name="akind" type="int"/>
+    <property column="code" name="code"/>
+    <property column="view_cnt" name="viewCnt" type="int"/>
+    <property column="logo" name="logo"/>
+    <property column="realname" name="realname"/>
+    <property column="enter_kind" name="enterKind" type="int"/>
+    <property column="enter_name" name="enterName"/>
+    <property column="enter_id" name="enterId" type="int"/>
+    <property column="xyleixing_id" name="xyleixingId" type="int"/>
+    <property column="city_id" name="cityId" type="int"/>
+    <property column="addr" name="addr"/>
+    <property column="job" name="job"/>
+    <property column="weburl" name="weburl"/>
+    <property column="weixin" name="weixin"/>
+    <property column="main_job" name="mainJob"/>
+    <property column="cert_num" name="certNum"/>
+    <property column="cert_image" name="certImage"/>
+    <property column="enter_cert_num" name="enterCertNum"/>
+    <property column="enter_cert_image" name="enterCertImage"/>
+    <property column="experience" name="experience" type="text"/>
+    <property column="history" name="history" type="text"/>
+    <property column="comment" name="comment" type="text"/>
+    <property column="recommend" name="recommend" type="text"/>
+    <property column="boss_name" name="bossName"/>
+    <property column="boss_job" name="bossJob"/>
+    <property column="boss_mobile" name="bossMobile"/>
+    <property column="boss_weixin" name="bossWeixin"/>
+    <property column="test_status" name="testStatus" type="int"/>
+    <property column="ban_status" name="banStatus" type="int"/>
+    <property column="write_time" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>

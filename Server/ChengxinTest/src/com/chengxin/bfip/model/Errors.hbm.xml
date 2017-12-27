@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	Author : Genesys Framework 
+	Description: Purpose 
+		of the document follows. 
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+	<class name="Errors" table="errors">
+		<id column="id" name="id" type="int">
+			<generator class="identity" />
+		</id>
+		<property column="estimate_id" name="estimateId" type="int"/>
+		<property column="owner_id" name="ownerId" type="int"/>
+		<property column="kind" name="kind" type="int"/>
+		<property column="reason" name="reason" type="text"/>
+		<property column="whyis" name="whyis" type="text"/>
+		<property column="status" name="status" type="int" />
+		<property column="img_path1" name="imgPath1" />
+		<property column="img_path2" name="imgPath2" />
+		<property column="img_path3" name="imgPath3" />
+		<property column="img_path4" name="imgPath4" />
+		<property column="img_path5" name="imgPath5" />
+		<property column="img_path6" name="imgPath6" />
+		<property column="write_time" name="writeTime" type="timestamp"/>
+
+	</class>
+</hibernate-mapping>

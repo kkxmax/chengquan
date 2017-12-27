@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_white"
+    tools:context="com.beijing.chengxin.ui.activity.MainActivity"
+    android:gravity="center">
+
+    <LinearLayout
+        style="@style/layout_mm"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_tab_height"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:id="@+id/btn_familiar"
+                style="@style/top_tab_button"
+                android:checked="true"
+                android:textOn="@string/familiar"
+                android:textOff="@string/familiar"/>
+            <ToggleButton
+                android:id="@+id/btn_enterprise"
+                style="@style/top_tab_button"
+                android:textOn="@string/enterprise"
+                android:textOff="@string/enterprise"/>
+            <ToggleButton
+                android:id="@+id/btn_comedity"
+                style="@style/top_tab_button"
+                android:textOn="@string/comedity"
+                android:textOff="@string/comedity"/>
+            <ToggleButton
+                android:id="@+id/btn_item"
+                style="@style/top_tab_button"
+                android:textOn="@string/item"
+                android:textOff="@string/item"/>
+            <ToggleButton
+                android:id="@+id/btn_serve"
+                style="@style/top_tab_button"
+                android:textOn="@string/serve"
+                android:textOff="@string/serve"/>
+            <com.beijing.chengxin.ui.widget.SimpleSortSpinner
+                android:id="@+id/btn_sort_set"
+                style="@style/top_tab_button"
+                android:text="@string/sort_set"
+                android:drawableRight="@drawable/drop_down"/>
+            <TextView
+                android:id="@+id/btn_condition_set"
+                style="@style/top_tab_button"
+                android:text="@string/condition_set"
+                android:drawableRight="@drawable/drop_down"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            style="@style/layout_mm">
+
+            <LinearLayout
+                android:id="@+id/view_blank_part"
+                style="@style/layout_mm"
+                android:background="@color/color_gray_f5"
+                android:gravity="center"
+                android:visibility="visible"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/image_scroll_view_height">
+                <ImageView
+                    style="@style/layout_ww"
+                    android:src="@drawable/blank"/>
+                <TextView
+                    style="@style/layout_ww"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:textColor="@color/txt_gray_light"
+                    android:text="@string/empty_data"/>
+            </LinearLayout>
+
+            <handmark.pulltorefresh.library.PullToRefreshScrollView
+                xmlns:ptr="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/pull_refresh_scrollview"
+                style="@style/layout_mm"
+                ptr:ptrAnimationStyle="flip"
+                ptr:ptrMode="both" >
+                <LinearLayout
+                    style="@style/layout_m0"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/image_scroll_view_height">
+                        <com.beijing.chengxin.ui.widget.AutoScrollViewPager
+                            android:id="@+id/autoScrollViewPager"
+                            style="@style/layout_mm"
+                            android:background="@color/color_gray_f0"
+                            android:clickable="true"/>
+                        <com.beijing.chengxin.ui.widget.PageIndicator
+                            android:id="@+id/pageIndicator"
+                            style="@style/layout_ww"
+                            android:layout_marginRight="@dimen/margin_small"
+                            android:layout_marginBottom="@dimen/margin_small"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+
+                    <FrameLayout
+                        android:id="@+id/scroll_body"
+                        style="@style/layout_mm" />
+
+                </LinearLayout>
+            </handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+        </RelativeLayout>
+
+        <!--<RelativeLayout
+            style="@style/layout_mm">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_scroll_view_height">
+                <com.beijing.chengxin.ui.widget.AutoScrollViewPager
+                    android:id="@+id/autoScrollViewPager"
+                    style="@style/layout_mm"
+                    android:background="@color/color_gray_f0"
+                    android:clickable="true"/>
+                <com.beijing.chengxin.ui.widget.PageIndicator
+                    android:id="@+id/pageIndicator"
+                    style="@style/layout_ww"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                style="@style/layout_mm"
+                android:background="@color/color_transparent"
+                android:clickable="false"/>
+        </RelativeLayout>-->
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_normal_most"
+        android:layout_marginBottom="@dimen/margin_extra"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/add"
+        android:visibility="visible"/>
+
+</RelativeLayout>

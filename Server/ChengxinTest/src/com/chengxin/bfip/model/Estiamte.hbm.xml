@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+	Author : Genesys Framework 
+	Description: Purpose 
+		of the document follows. 
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+	<class name="Estimate" table="estimates">
+		<id column="id" name="id" type="int">
+			<generator class="identity" />
+		</id>
+		<property column="type" name="type" type="int"/>
+		<property column="upper_id" name="upperId" type="int"/>
+		<property column="account_id" name="accountId" type="int"/>
+		<property column="hot_id" name="hotId" type="int"/>
+		<property column="owner" name="owner" type="int"/>
+		<property column="content" name="content" />
+		<property column="kind" name="kind" type="int" />
+		<property column="method" name="method" type="int" />
+		<property column="reason" name="reason" />
+		<property column="img_path1" name="imgPath1" />
+		<property column="img_path2" name="imgPath2" />
+		<property column="img_path3" name="imgPath3" />
+		<property column="img_path4" name="imgPath4" />
+		<property column="img_path5" name="imgPath5" />
+		<property column="update_time" name="updateTime" type="timestamp"/>
+		<property column="write_time" name="writeTime" type="timestamp"/>
+
+	</class>
+</hibernate-mapping>

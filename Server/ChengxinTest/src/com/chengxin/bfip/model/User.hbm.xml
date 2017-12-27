@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="User" table="users">
+    <id column="id" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="username" name="username"/>
+    <property column="realname" name="realname"/>
+    <property column="password" name="password"/>
+    <property column="role_id" name="roleId"/>
+    <property column="write_time" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>

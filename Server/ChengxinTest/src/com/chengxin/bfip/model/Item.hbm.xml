@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--
+    Author     : Genesys Framework
+    Description:
+        Purpose of the document follows.
+-->
+<hibernate-mapping package="com.chengxin.bfip.model">
+  <class name="Item" table="items">
+    <id column="id" name="id" type="int">
+      <generator class="identity" />
+    </id>
+    <property column="code" name="code"/>
+    <property column="account_id" name="accountId" type="int"/>
+    <property column="name" name="name"/>
+    <property column="fenlei_id" name="fenleiId" type="int"/>
+    <property column="city_id" name="cityId" type="int"/>
+    <property column="addr" name="addr"/>
+    <property column="comment" name="comment"/>
+    <property column="need" name="need"/>
+    <property column="weburl" name="weburl"/>
+    <property column="is_show" name="isShow" type="int"/>
+    <property column="status" name="status" type="int"/>
+    <property column="up_time" name="upTime" type="timestamp"/>
+    <property column="down_time" name="downTime" type="timestamp"/>
+    <property column="contact_name" name="contactName"/>
+    <property column="contact_mobile" name="contactMobile"/>
+    <property column="contact_weixin" name="contactWeixin"/>
+    <property column="logo" name="logo"/>
+    <property column="img_path1" name="imgPath1"/>
+    <property column="img_path2" name="imgPath2"/>
+    <property column="img_path3" name="imgPath3"/>
+    <property column="img_path4" name="imgPath4"/>
+    <property column="img_path5" name="imgPath5"/>
+    <property column="write_time" name="writeTime" type="timestamp"/>
+    
+  </class>
+</hibernate-mapping>
