@@ -2,7 +2,6 @@ package com.beijing.chengxin;
 
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
-
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -15,13 +14,13 @@ import android.widget.Toast;
 import com.beijing.chengxin.config.AppConfig;
 import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.NetworkEngine;
+import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.ui.activity.LoginActivity;
 import com.beijing.chengxin.ui.widget.CustomToast;
 
 import java.io.File;
 import java.net.CookieHandler;
 import java.net.CookieManager;
-
 
 public class ChengxinApplication extends Application {
 
@@ -48,7 +47,6 @@ public class ChengxinApplication extends Application {
 
         instance = this;
         super.onCreate();
-
         Fabric.with(this, new Crashlytics());
     }
     @Override
@@ -99,10 +97,11 @@ public class ChengxinApplication extends Application {
     public static void finishAndLoginActivityFromDuplicate(Activity activity) {
         if (activity != null && !activity.isFinishing() && !activity.isDestroyed()) {
             AppConfig.setLoginPwd("");
+            SessionInstance.clearInstance();
 
             CustomToast.makeText(activity, R.string.msg_login_duplicate, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(activity, LoginActivity.class);
-            intent.putExtra(Constants.IS_AUTO_LOGIN, false);
+//            intent.putExtra(Constants.IS_AUTO_LOGIN, false);
             activity.startActivity(intent);
 
             activity.finish();

@@ -160,7 +160,7 @@ public class MainHotFragment extends Fragment {
             TextView txt_eval_count =  (TextView)convertView.findViewById(R.id.txt_eval_count);
             TextView txt_time =  (TextView)convertView.findViewById(R.id.txt_time);
 
-            final HorizontalScrollView hs_view =  (HorizontalScrollView)convertView.findViewById(R.id.hs_view);
+            //final HorizontalScrollView hs_view =  (HorizontalScrollView)convertView.findViewById(R.id.hs_view);
             final LinearLayout layout_images =  (LinearLayout)convertView.findViewById(R.id.layout_images);
 
             txt_item_title.setText(item.getTitle());
@@ -175,13 +175,15 @@ public class MainHotFragment extends Fragment {
             if (imgList != null && imgList.size() > 0) {
                 layout_images.removeAllViews();
 
-                int listImgWidth = (int) (ChengxinApplication.getScreenWidth() - margin * 4) / 3;
-                int listImgHeight = (listImgWidth  * 3) / 4;
+                int width = (ChengxinApplication.getScreenWidth() - getResources().getDimensionPixelSize(R.dimen.margin_normal) * 3) / 3;
+                int height = width * 2 / 3;
+
                 for (int i = 0; i < imgList.size(); i++) {
                     ImageView imgView = new ImageView(mContext);
                     imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    int height = (int) (getResources().getDimension(R.dimen.image_hot_item_width));
-                    int width = height * 3 / 2;
+
+                    //int height = (int) (getResources().getDimension(R.dimen.image_hot_item_width));
+                    //int width = height * 3 / 2;
                     //int width = height;
                     LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(width, height);
                     lparams.setMargins(0, 0, (int) (getResources().getDimension(R.dimen.margin_small)), 0);
@@ -190,8 +192,12 @@ public class MainHotFragment extends Fragment {
                     Picasso.with(mContext).load(Constants.FILE_ADDR + imgList.get(i)).placeholder(R.drawable.no_image).into(imgView);
                     layout_images.addView(imgView);
                 }
+
+                layout_images.setVisibility(View.VISIBLE);
+                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+                layout_images.setLayoutParams(lparams);
             } else {
-                hs_view.setVisibility(View.GONE);
+                layout_images.setVisibility(View.GONE);
             }
 
             convertView.setOnClickListener(new View.OnClickListener() {

@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.config.Constants;
+import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.ui.fragment.BaseFragmentActivity;
 import com.beijing.chengxin.ui.fragment.LoginFragment;
 import com.beijing.chengxin.ui.fragment.RealnameCertFragment;
@@ -26,8 +27,12 @@ public class LoginActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        fragmentLogin = new LoginFragment();
-        showFragment(fragmentLogin, false, false);
+        if (SessionInstance.getInstance() != null) {
+            toMainActivity();
+        } else {
+            fragmentLogin = new LoginFragment();
+            showFragment(fragmentLogin, false, false);
+        }
     }
 
     // add dd -- 2017.12.07

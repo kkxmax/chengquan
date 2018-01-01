@@ -18,6 +18,6 @@ public interface ApiService  {
             @Field("pAct") String pAct,
             @Field("kind") int kind,
             @Field("id") int id,
-            @Field("share") int share
+            @Field("token") String token
     );
 }

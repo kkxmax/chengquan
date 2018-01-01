@@ -204,7 +204,7 @@ public class EvalMeActivity extends ParentFragmentActivity {
 
             Picasso.with(EvalMeActivity.this)
                     .load(Constants.FILE_ADDR + item.getOwnerLogo())
-                    .placeholder(R.drawable.no_image)
+                    .placeholder(item.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                     .into(viewHolder.imgAvatar);
             viewHolder.txtItemType.setText(item.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.string.str_person : R.string.str_enterprise);
             viewHolder.txtName.setText(item.getOwnerAkind() == 1 ? item.getOwnerRealname() : item.getOwnerEnterName());

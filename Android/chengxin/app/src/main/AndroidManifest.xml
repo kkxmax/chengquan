@@ -54,7 +54,7 @@
 
         <activity
             android:name=".ui.activity.DetailActivity"
-            android:screenOrientation="sensorPortrait"/>
+            android:screenOrientation="sensorPortrait" />
 
         <activity
             android:name=".ui.activity.MakeEvaluationActivity"
@@ -94,7 +94,6 @@
         <activity
             android:name=".ui.activity.VideoPlayActivity"
             android:screenOrientation="sensorPortrait" />
-
         <activity
             android:name=".ui.activity.SearchActivity"
             android:screenOrientation="sensorPortrait" />

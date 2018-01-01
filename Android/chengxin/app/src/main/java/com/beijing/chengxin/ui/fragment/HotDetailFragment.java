@@ -22,6 +22,7 @@ import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -66,12 +67,13 @@ import java.util.List;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
 import static com.beijing.chengxin.config.Constants.ENTER_TYPE_PERSONAL;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
 public class HotDetailFragment extends Fragment {
 
-	public final String TAG = HotDetailFragment.class.getName();
+    public final String TAG = HotDetailFragment.class.getName();
     private View rootView;
 
     private ToggleButton btnEval ,btnEnter, btnFavourite, btnElectCount;
@@ -81,9 +83,7 @@ public class HotDetailFragment extends Fragment {
     private WebView webView;
 
     ScrollView scrollView;
-
-    MyAdapter mAdapter;
-    ViewPager mPager;
+    FrameLayout listBody;
 
     ArrayList<BaseView> mTabViews;
     HotEvalListView mListView1;
@@ -109,7 +109,7 @@ public class HotDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	rootView = inflater.inflate(R.layout.fragment_hot_detail, container, false);
+        rootView = inflater.inflate(R.layout.fragment_hot_detail, container, false);
 
         // set title
         ((TextView)rootView.findViewById(R.id.txt_nav_title)).setText(getString(R.string.hot_detail));
@@ -139,6 +139,7 @@ public class HotDetailFragment extends Fragment {
         txt_write_time = (TextView)rootView.findViewById(R.id.txt_write_time);
 
         scrollView = (ScrollView)rootView.findViewById(R.id.scrollView);
+        listBody = (FrameLayout) rootView.findViewById(R.id.list_body);
         webView = (WebView) rootView.findViewById(R.id.webView);
 
         evalList = new ArrayList<EvalModel>();
@@ -151,35 +152,11 @@ public class HotDetailFragment extends Fragment {
         mTabViews.add(mListView1);
         mTabViews.add(mListView2);
 
-        mAdapter = new MyAdapter();
-        mPager = (ViewPager)rootView.findViewById(R.id.pager);
-        mPager.setAdapter(mAdapter);
-        mPager.addOnPageChangeListener (new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-            @Override
-            public void onPageSelected(int position) {
-                selectTabButton(position);
-                onChangedViewSize();
-            }
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-
         info = new SyncInfo(getActivity());
 
-        return rootView;
-    }
+        selectTabButton(0);
 
-    public void onChangedViewSize() {
-        BaseView itemView = mTabViews.get(mPager.getCurrentItem());
-        itemView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        int height = itemView.getMeasuredHeight();
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mPager.getLayoutParams();
-        params.height = height;
-        mPager.setLayoutParams(params);
+        return rootView;
     }
 
     @Override
@@ -260,16 +237,11 @@ public class HotDetailFragment extends Fragment {
                     break;
                 case R.id.btn_eval:
                     selectTabButton(0);
-                    mPager.setCurrentItem(0);
                     break;
                 case R.id.btn_enterprise:
                     selectTabButton(1);
-                    mPager.setCurrentItem(1);
                     break;
                 case R.id.txt_comment:
-//                    HotEvalFragment fragment = new HotEvalFragment();
-//                    fragment.setId(item.getId());
-//                    ((BaseFragmentActivity)getActivity()).showFragment(fragment, true);
                     Intent intent = new Intent(getActivity(), HotEvalActivity.class);
                     intent.putExtra("hotId", item.getId());
                     startActivity(intent);
@@ -299,14 +271,17 @@ public class HotDetailFragment extends Fragment {
 
     private void selectTabButton(int position){
         resetTabBtn();
+        listBody.removeAllViews();
         switch(position){
             case 0:
                 btnEval.setChecked(true);
+                listBody.addView(mListView1);
                 break;
             case 1:
                 btnEnter.setChecked(true);
                 if (enterList.size() < 1)
                     new EnterpriseListAsync().execute("0", "-1", String.valueOf(hotId));
+                listBody.addView(mListView2);
                 break;
         }
     }
@@ -435,20 +410,7 @@ public class HotDetailFragment extends Fragment {
                 if(result.getRetCode() == ERROR_OK) {
                     evalList.clear();
                     evalList.addAll(result.getList());
-                    mListView1.setData(evalList, new OnItemClickListener() {
-                        @Override
-                        public void onListItemClick(int position, View view) {
-                            EvalDetailFragment fragment = new EvalDetailFragment();
-                            fragment.setEvalModel(evalList.get(position));
-                            ((BaseFragmentActivity)getActivity()).showFragment(fragment, true);
-                        }
-                    });
-                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            onChangedViewSize();
-                        }
-                    }, 100);
+                    mListView1.setData(evalList);
                 } else if (result.getRetCode() == Constants.ERROR_DUPLICATE) {
                     ChengxinApplication.finishActivityFromDuplicate(getActivity());
                 } else {
@@ -483,21 +445,7 @@ public class HotDetailFragment extends Fragment {
                 if(result.getRetCode() == ERROR_OK) {
                     enterList.clear();
                     enterList.addAll(result.getList());
-                    mListView2.setData(enterList, new OnItemClickListener() {
-                        @Override
-                        public void onListItemClick(int position, View view) {
-                            EnterpriseDetailFragment fragment = new EnterpriseDetailFragment();
-                            fragment.setId(enterList.get(position).getId());
-                            ((BaseFragmentActivity)getActivity()).addFragment(fragment);
-                        }
-                    });
-
-                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            onChangedViewSize();
-                        }
-                    }, 100);
+                    mListView2.setData(enterList);
                 } else if (result.getRetCode() == Constants.ERROR_DUPLICATE) {
                     ChengxinApplication.finishActivityFromDuplicate(getActivity());
                 } else {

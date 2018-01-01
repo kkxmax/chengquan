@@ -22,8 +22,8 @@ import java.io.Serializable;
  */
 public class SessionInstance implements Serializable {
 
-    private static final long serialVersionUID = -1509339033761436903L;
-    public static final String TAG = SessionInstance.class.toString();
+//    private static final long serialVersionUID = -1509339033761436903L;
+    public static final String TAG = SessionInstance.class.getName();
     private static SessionInstance INSTANCE;
     
     LoginModel loginData;
@@ -39,11 +39,10 @@ public class SessionInstance implements Serializable {
     /**
      * return SessionInstance
      *
-     * @author ssk
+     * @author kkj
      */
     public static synchronized SessionInstance getInstance() {
         if (INSTANCE == null) {
-
             try {
                 FileInputStream fis = ChengxinApplication.getContext().openFileInput(TAG);
                 ObjectInputStream ois = new ObjectInputStream(fis);
@@ -59,7 +58,7 @@ public class SessionInstance implements Serializable {
     /**
      * clear Session Instance for sign out.
      *
-     * @author ssk
+     * @author kkj
      */
     public static void clearInstance() {
         ChengxinApplication.getContext().deleteFile(TAG);
@@ -70,7 +69,7 @@ public class SessionInstance implements Serializable {
      * initialize Session with login data
      *
      * param data DataLogin
-     * @author ssk
+     * @author kkj
      */
     public static void initialize(Context context, LoginModel response) {
         INSTANCE = new SessionInstance();

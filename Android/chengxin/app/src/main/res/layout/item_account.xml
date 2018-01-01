@@ -9,7 +9,7 @@
         android:id="@+id/img_avatar"
         android:layout_width="@dimen/row_height_normal"
         android:layout_height="@dimen/row_height_normal"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:background="@color/color_gray_f5"/>
 
     <TextView

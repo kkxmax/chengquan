@@ -42,6 +42,7 @@ import java.util.List;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
 public class ComedityDetailFragment extends Fragment{
@@ -197,6 +198,7 @@ public class ComedityDetailFragment extends Fragment{
 
         oks.show(context);
     }
+
     View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

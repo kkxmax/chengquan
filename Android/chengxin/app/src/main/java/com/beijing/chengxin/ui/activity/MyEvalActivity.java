@@ -213,7 +213,7 @@ public class MyEvalActivity extends ParentFragmentActivity {
 
             Picasso.with(MyEvalActivity.this)
                     .load(Constants.FILE_ADDR + item.getTargetAccountLogo())
-                    .placeholder(R.drawable.no_image)
+                    .placeholder(item.getTargetAccountAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                     .into(viewHolder.imgAvatar);
             viewHolder.txtItemType.setText(item.getTargetAccountAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.string.str_person : R.string.str_enterprise);
             viewHolder.txtName.setText(item.getTargetAccountAkind() == 1 ? item.getTargetAccountRealname() : item.getTargetAccountEnterName());

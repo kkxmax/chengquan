@@ -205,7 +205,7 @@ public class EvalMeNotifyFragment extends Fragment {
 
             Picasso.with(getContext())
                     .load(Constants.FILE_ADDR + item.getOwnerLogo())
-                    .placeholder(R.drawable.no_image)
+                    .placeholder(item.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                     .into(viewHolder.imgAvatar);
             viewHolder.txtItemType.setVisibility(View.GONE);
             viewHolder.txtName.setText(item.getOwnerAkind() == 1 ? item.getOwnerRealname() : item.getOwnerEnterName());
@@ -267,7 +267,7 @@ public class EvalMeNotifyFragment extends Fragment {
     class NoticeListAsync extends AsyncTask<String, String, MyEvalNoticeModel> {
         @Override
         protected void onPreExecute() {
-            super.onPreExecute();
+            Utils.displayProgressDialog(getActivity());
         }
         @Override
         protected MyEvalNoticeModel doInBackground(String... strs) {
@@ -314,10 +314,11 @@ public class EvalMeNotifyFragment extends Fragment {
                 else
                     viewBlankPart.setVisibility(View.GONE);
             }
+            Utils.disappearProgressDialog();
         }
         @Override
         protected void onCancelled() {
-            super.onCancelled();
+            Utils.disappearProgressDialog();
         }
     }
 

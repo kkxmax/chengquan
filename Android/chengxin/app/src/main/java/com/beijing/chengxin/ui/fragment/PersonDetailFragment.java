@@ -49,6 +49,7 @@ import java.util.HashMap;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
 import static com.beijing.chengxin.config.Constants.ACCOUNT_TYPE_PERSON;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
@@ -285,6 +286,7 @@ public class PersonDetailFragment extends Fragment implements OnViewSizeChangeLi
 
         oks.show(context);
     }
+
     View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

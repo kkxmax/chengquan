@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,9 +33,7 @@ import com.beijing.chengxin.network.NetworkEngine;
 import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.BaseModel;
 import com.beijing.chengxin.network.model.ComedityModel;
-import com.beijing.chengxin.network.model.XyleixingListModel;
 import com.beijing.chengxin.network.model.XyleixingModel;
-import com.beijing.chengxin.ui.dialog.SelectGalleryDialog;
 import com.beijing.chengxin.ui.listener.OnCancelListener;
 import com.beijing.chengxin.ui.view.MeHangyeListView;
 import com.beijing.chengxin.ui.widget.GridView;
@@ -511,9 +506,30 @@ public class MakeComedityActivity extends ParentFragmentActivity {
                     String filePath = ChengxinApplication.getTempFilePath(Constants.FILE_PREFIX_COMEDITY_IMAGE + photoIndex + Constants.FILE_EXTENTION_AUTH_IMAGE);
                     boolean flag = NetworkEngine.downloadFile(imgUrl, filePath);
                     if (flag) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                        imageList.add(bitmap);
-                        imagePathList.add(filename);
+                        File imgFile = new File(filePath);
+                        long len_kb = imgFile.length() / 1024;
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        //options.outWidth = (int) getResources().getDimensionPixelSize(R.dimen.image_fabu_height);
+                        //options.outHeight = (int) getResources().getDimensionPixelSize(R.dimen.image_fabu_height);;
+                        //options.outHeight = (int) getResources().getDimension(R.dimen.image_fabu_height);;
+                        Bitmap bitmap = null;
+
+                        if (len_kb > 500 && len_kb < 5000) {
+                            options.inSampleSize = 4;
+
+                            bitmap = BitmapFactory.decodeFile(filePath, options);
+                        } else if (len_kb >= 5000) {
+                            options.inSampleSize = 16;
+
+                            bitmap = BitmapFactory.decodeFile(filePath, options);
+                        } else if (len_kb <= 500) {
+                            bitmap = BitmapFactory.decodeFile(filePath, options);
+                        }
+
+                        if (bitmap != null) {
+                            imageList.add(bitmap);
+                            imagePathList.add(filename);
+                        }
                     } else {
                         photoIndex--;
                     }

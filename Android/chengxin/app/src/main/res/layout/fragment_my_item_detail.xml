@@ -55,6 +55,7 @@
                 android:id="@+id/img_logo"
                 android:layout_width="@dimen/image_avatar_height"
                 android:layout_height="@dimen/image_avatar_height"
+                android:scaleType="centerCrop"
                 android:background="@drawable/no_image_item"/>
 
             <LinearLayout

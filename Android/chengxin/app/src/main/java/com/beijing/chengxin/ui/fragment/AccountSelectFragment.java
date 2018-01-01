@@ -140,7 +140,7 @@ public class AccountSelectFragment extends Fragment {
 
             Picasso.with(getActivity())
                     .load(Constants.FILE_ADDR + item.getLogo())
-                    .placeholder(R.drawable.no_image)
+                    .placeholder(item.getAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                     .into(img_avatar);
 
             txt_name.setText(CommonUtils.getUserName(item));

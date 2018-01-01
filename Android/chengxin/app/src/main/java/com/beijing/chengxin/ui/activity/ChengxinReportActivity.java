@@ -1,5 +1,6 @@
 package com.beijing.chengxin.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Context;
+
 import com.beijing.chengxin.ChengxinApplication;
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.config.Constants;
@@ -25,10 +26,12 @@ import com.beijing.chengxin.ui.widget.Utils;
 import com.hy.chengxin.http.Api.HttpApi;
 
 import java.util.HashMap;
-import static com.beijing.chengxin.config.Constants.ERROR_DUPLICATE;
+
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
+import static com.beijing.chengxin.config.Constants.ERROR_DUPLICATE;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 import static com.beijing.chengxin.config.Constants.RESULT_CODE_LOGIN_DUPLICATE;
 

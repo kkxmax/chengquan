@@ -27,22 +27,22 @@
         android:textSize="@dimen/text_size_14"
         android:textColor="@color/txt_gray"/>
 
-    <HorizontalScrollView
-        android:id="@+id/hs_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/image_hot_item_width"
-        android:layout_marginTop="@dimen/margin_normal"
-        android:scrollbars="none"
-        android:visibility="visible">
+    <!--<HorizontalScrollView-->
+        <!--android:id="@+id/hs_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/image_hot_item_width"-->
+        <!--android:layout_marginTop="@dimen/margin_normal"-->
+        <!--android:scrollbars="none"-->
+        <!--android:visibility="visible">-->
 
         <LinearLayout
             android:id="@+id/layout_images"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/image_hot_item_width"
             android:orientation="horizontal">
 
         </LinearLayout>
-    </HorizontalScrollView>
+    <!--</HorizontalScrollView>-->
 
     <LinearLayout
         style="@style/layout_mw"

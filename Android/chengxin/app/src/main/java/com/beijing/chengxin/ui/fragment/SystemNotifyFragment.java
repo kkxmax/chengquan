@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +62,9 @@ public class SystemNotifyFragment extends Fragment {
 
         viewBlankPart = (View) rootView.findViewById(R.id.view_blank_part);
         listView = (ListView)rootView.findViewById(R.id.listView);
+        listView.setBackgroundColor(getResources().getColor(R.color.color_gray_f5));
+        listView.setPadding(0, 0, 0, 0);
+        listView.setDividerHeight(0);
         listAdapter = new ListAdapter();
         listView.setAdapter(listAdapter);
 

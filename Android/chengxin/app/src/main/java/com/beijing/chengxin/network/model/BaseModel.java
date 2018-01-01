@@ -1,10 +1,12 @@
 package com.beijing.chengxin.network.model;
 
+import java.io.Serializable;
+
 /**
  * Created by star on 11/2/2017.
  */
 
-public class BaseModel {
+public class BaseModel implements Serializable {
     int retCode;
     String msg;
 

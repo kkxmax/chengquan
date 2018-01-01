@@ -193,7 +193,7 @@ public class TabEvalView extends BaseView implements View.OnClickListener {
 
         Picasso.with(mActivity)
                 .load(Constants.FILE_ADDR + obj.getOwnerLogo())
-                .placeholder(R.drawable.no_image)
+                .placeholder(obj.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                 .into(imgAvatar);
         if (obj.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON)
             txtAvatarName.setText(obj.getOwnerRealname());

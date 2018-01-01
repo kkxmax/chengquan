@@ -89,9 +89,9 @@
 
             <View style="@style/splite_line_gray_8" />
 
-            <com.beijing.chengxin.ui.widget.NoSwipeableViewPager
-                android:id="@+id/pager"
-                style="@style/layout_mw"/>
+            <FrameLayout
+                android:id="@+id/list_body"
+                style="@style/layout_mw" />
 
         </LinearLayout>
     </ScrollView>

@@ -1,5 +1,6 @@
 package com.beijing.chengxin.ui.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.BaseModel;
 import com.beijing.chengxin.network.model.EvalModel;
 import com.beijing.chengxin.network.model.HotModel;
+import com.beijing.chengxin.ui.activity.HotEvalActivity;
 import com.beijing.chengxin.ui.widget.Utils;
 import com.beijing.chengxin.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
@@ -86,9 +88,10 @@ public class HotEvalListFragment extends Fragment {
                     ((BaseFragmentActivity)getActivity()).onBackPressed();
                     break;
                 case R.id.txt_comment:
-                    HotEvalFragment fragment = new HotEvalFragment();
-                    fragment.setId(item.getId());
-                    ((BaseFragmentActivity)getActivity()).showFragment(fragment, true);
+                    Intent intent = new Intent(getActivity(), HotEvalActivity.class);
+                    intent.putExtra("hotId", item.getId());
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     break;
             }
         }

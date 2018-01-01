@@ -41,7 +41,7 @@ public class Constants {
     public static final String P_ACTION = "pAct";
     public static final String P_TOKEN = "token";
 
-    public static final String IS_AUTO_LOGIN = "auto_login";
+//    public static final String IS_AUTO_LOGIN = "auto_login";
 
     public static final float LEVEL_ZERO = 0.01f;
 
@@ -66,8 +66,8 @@ public class Constants {
 
     public static final String NOTIFY_SEARCH_COND_CHANGED = "search_condition_changed";
     public static final String NOTIFY_USERMODEL_CHANGED = "usermodel_changed";
-    public static final String NOTIFY_FOLLOW_INFO_CHANGED = "follow_info_changed"; // 关注 - Sub Activity
-    public static final String NOTIFY_FOLLOW_INFO_CHANGED_FRAGMENT = "follow_info_changed_fragment"; // 关注
+    public static final String NOTIFY_FOLLOW_INFO_CHANGED = "follow_info_changed"; // 닲님 - Sub Activity
+    public static final String NOTIFY_FOLLOW_INFO_CHANGED_FRAGMENT = "follow_info_changed_fragment"; // 닲님
     public static final String NOTIFY_NEWS_COUNT_CHANGED = "news_count_changed";
 
     public final static int INDEX_FAMILIAR = 0;

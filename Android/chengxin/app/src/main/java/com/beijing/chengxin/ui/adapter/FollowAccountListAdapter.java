@@ -96,7 +96,7 @@ public class FollowAccountListAdapter extends BaseAdapter implements SectionInde
         holder.txtName.setText(tmpName);
         Picasso.with(parent.getContext())
                 .load(Constants.FILE_ADDR +item.getLogo())
-                .placeholder(item.getAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.drawable.no_image_person : R.drawable.no_image_enter)
+                .placeholder(item.getAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                 .skipMemoryCache()
                 .into(holder.imgAvatar);
 

@@ -219,7 +219,7 @@
                     android:background="@drawable/round_rect_orange_gradient"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/text_size_18"
-                    android:text="@string/make_eval"/>
+                    android:text="@string/send"/>
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

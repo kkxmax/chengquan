@@ -1,5 +1,6 @@
 package com.hy.chengxin.http.Api;
 
+import com.beijing.chengxin.network.SessionInstance;
 import com.hy.chengxin.http.model.OnShareResponseResult;
 
 import retrofit2.Call;
@@ -19,7 +20,8 @@ public class OnShareAPI {
     }
 
     public void onShare(int kind, int id) {
-        Call<OnShareResponseResult> call = HttpApi.getApiService().onShare("onShare", kind, id, 1);
+        String token = SessionInstance.getInstance().getLoginData().getToken();
+        Call<OnShareResponseResult> call = HttpApi.getApiService().onShare("onShare", kind, id, token);
         call.enqueue(new Callback<OnShareResponseResult>() {
             @Override
             public void onResponse(Call<OnShareResponseResult> call, Response<OnShareResponseResult> response) {

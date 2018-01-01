@@ -8,6 +8,7 @@
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_17">17sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
     <dimen name="text_size_22">22sp</dimen>
@@ -33,7 +34,9 @@
 
     <!--main screen-->
     <dimen name="top_tab_height">40dp</dimen>
-    <dimen name="name_max_width">150dp</dimen>
+    <dimen name="name_max_width">135dp</dimen>
+    <dimen name="tag_max_width">76dp</dimen>
+    <dimen name="eval_name_max_width">260dp</dimen>
     <dimen name="image_scroll_view_height">120dp</dimen>
     <dimen name="comedity_image_height">180dp</dimen>
     <dimen name="video_height">220dp</dimen>

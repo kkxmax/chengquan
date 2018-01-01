@@ -383,7 +383,7 @@ public class MakeEvaluationActivity extends ParentFragmentActivity {
                 Log.i(TAG, "Crop Fail");
             }
         }
-        if (requestCode == Constants.ACTIVITY_ACCOUNT_SELECT) {
+        if (requestCode == Constants.ACTIVITY_ACCOUNT_SELECT && resultCode == RESULT_OK && data != null) {
             userId = data.getIntExtra("userId", -1);
             userCode = data.getStringExtra("code");
             userName = data.getStringExtra("name");

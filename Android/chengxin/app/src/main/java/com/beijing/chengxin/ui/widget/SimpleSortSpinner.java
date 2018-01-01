@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +79,6 @@ public class SimpleSortSpinner extends TextView implements View.OnClickListener 
         }
 
         mPopupWnd.showAsDropDown(this);
-
     }
 
     private OnItemSelectListener mSelectListener = new OnItemSelectListener() {

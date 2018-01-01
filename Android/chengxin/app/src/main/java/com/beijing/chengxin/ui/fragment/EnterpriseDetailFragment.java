@@ -53,6 +53,7 @@ import java.util.HashMap;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
 import static com.beijing.chengxin.config.Constants.ACCOUNT_TYPE_PERSON;
 import static com.beijing.chengxin.config.Constants.ENTER_KIND_ENTERPRISE;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
@@ -296,6 +297,7 @@ public class EnterpriseDetailFragment extends Fragment implements OnViewSizeChan
         oks.show(context);
 
     }
+
     View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -638,7 +640,7 @@ public class EnterpriseDetailFragment extends Fragment implements OnViewSizeChan
                 .placeholder(R.drawable.no_image_enter)
                 .into(img_avatar);
         Picasso.with(getActivity())
-                .load(Constants.FILE_ADDR + accountDetail.getCertImage())
+                .load(Constants.FILE_ADDR + accountDetail.getEnterCertImage())
                 .placeholder(R.drawable.no_image)
                 .into(img_business_cert);
 

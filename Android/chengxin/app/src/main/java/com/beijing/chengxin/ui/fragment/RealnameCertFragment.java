@@ -791,6 +791,10 @@ public class RealnameCertFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.pls_insert_mainjob_enter, Toast.LENGTH_SHORT).show();
                 return flag;
             }
+            if (edtCertNumEnter.getText().toString().trim().length() == 0) {
+                Toast.makeText(getContext(), R.string.pls_insert_certnum_enter, Toast.LENGTH_SHORT).show();
+                return flag;
+            }
             if (edtCertNumEnter.getText().toString().trim().length() > 25) {
                 Toast.makeText(getContext(), R.string.pls_incorrect_certnum_enter, Toast.LENGTH_SHORT).show();
                 return flag;

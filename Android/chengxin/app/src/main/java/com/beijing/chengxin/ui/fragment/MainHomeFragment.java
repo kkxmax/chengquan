@@ -374,6 +374,8 @@ public class MainHomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         recommendViewPager.startAutoScroll();
+
+        mPullRefreshScrollView.setRefreshing();
     }
 
     @Override

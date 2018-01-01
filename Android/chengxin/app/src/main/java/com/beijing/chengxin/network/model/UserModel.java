@@ -1,12 +1,13 @@
 package com.beijing.chengxin.network.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by star on 11/2/2017.
  */
 
-public class UserModel {
+public class UserModel implements Serializable {
 
     int id;
     String mobile;

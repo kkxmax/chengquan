@@ -33,6 +33,7 @@ import java.util.HashMap;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
+
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
 public class ServeDetailFragment extends Fragment {
@@ -65,7 +66,6 @@ public class ServeDetailFragment extends Fragment {
         ((TextView)rootView.findViewById(R.id.txt_nav_title)).setText(getString(R.string.serve_detail));
         btnShare = (ImageButton)rootView.findViewById(R.id.btn_share);
         btnShare.setVisibility(View.VISIBLE);
-        btnShare.setOnClickListener(mClickListener);
 
         btnBack = (ImageButton)rootView.findViewById(R.id.btn_back);
         btnCall = (ImageButton)rootView.findViewById(R.id.btn_call);
@@ -164,6 +164,7 @@ public class ServeDetailFragment extends Fragment {
             }
         });
     }
+
     View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -185,44 +186,45 @@ public class ServeDetailFragment extends Fragment {
                     ((BaseFragmentActivity)getActivity()).showFragment(fragment, true);
                     break;
                 case R.id.btn_call:
-                    //new OnContactAsync().execute(String.valueOf(item.getAccountId()));
-                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + item.getContactMobile())));
+                    onContactDialTask();
                     break;
             }
         }
     };
 
-    class OnContactAsync extends AsyncTask<String, String, BaseModel> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Utils.displayProgressDialog(getActivity());
-        }
-        @Override
-        protected BaseModel doInBackground(String... strs) {
-            return info.syncOnContact(strs[0]);
-        }
-        @Override
-        protected void onPostExecute(BaseModel result) {
-            super.onPostExecute(result);
-            if (result .isValid()) {
-                if(result.getRetCode() == ERROR_OK) {
-                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + item.getAccountMobile())));
-                } else if (result.getRetCode() == Constants.ERROR_DUPLICATE) {
-                    ChengxinApplication.finishActivityFromDuplicate(getActivity());
-                } else {
-                    Toast.makeText(getActivity(), result.getMsg(), Toast.LENGTH_LONG).show();
-                }
-            } else {
-                Toast.makeText(getActivity(), getString(R.string.err_server), Toast.LENGTH_LONG).show();
+    private void onContactDialTask() {
+        new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                Utils.displayProgressDialog(getActivity());
             }
-            Utils.disappearProgressDialog();
-        }
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-            Utils.disappearProgressDialog();
-        }
+            @Override
+            protected Object doInBackground(Object... params) {
+                return info.syncOnContact("" + item.getAccountId());
+            }
+            @Override
+            protected void onPostExecute(Object obj) {
+                BaseModel result = (BaseModel) obj;
+                if (result.isValid()) {
+                    if(result.getRetCode() == ERROR_OK) {
+                        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + item.getContactMobile())));
+                    } else if (result.getRetCode() == Constants.ERROR_DUPLICATE) {
+                        ChengxinApplication.finishActivityFromDuplicate(getActivity());
+                    } else {
+                        Toast.makeText(getActivity(), result.getMsg(), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.err_server), Toast.LENGTH_LONG).show();
+                }
+                Utils.disappearProgressDialog();
+            }
+            @Override
+            protected void onCancelled() {
+                super.onCancelled();
+                Utils.disappearProgressDialog();
+            }
+        }.execute();
     }
 
     private void showUserDetail() {

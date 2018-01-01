@@ -361,7 +361,6 @@ public class MyCollectActivity extends ParentFragmentActivity {
                     holder.txtReadCount = (TextView) convertView.findViewById(R.id.txt_read_count);
                     holder.txtEvalCount = (TextView) convertView.findViewById(R.id.txt_eval_count);
                     holder.txtTime = (TextView) convertView.findViewById(R.id.txt_time);
-                    holder.hsView = (HorizontalScrollView) convertView.findViewById(R.id.hs_view);
                     holder.layoutImages = (LinearLayout) convertView.findViewById(R.id.layout_images);
                     convertView.setTag(holder);
                 } else {
@@ -385,12 +384,16 @@ public class MyCollectActivity extends ParentFragmentActivity {
                 ArrayList<String> imgList = item.getHotImgPaths();
                 if (imgList != null && imgList.size() > 0) {
                     holder.layoutImages.removeAllViews();
+
+                    int width = (ChengxinApplication.getScreenWidth() - getResources().getDimensionPixelSize(R.dimen.margin_normal) * 3) / 3;
+                    int height = width * 2 / 3;
+
                     for (int i = 0; i < imgList.size(); i++) {
                         ImageView imgView = new ImageView(mContext);
                         imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                        int height = (int) (getResources().getDimension(R.dimen.image_hot_item_width));
+                        //int height = (int) (getResources().getDimension(R.dimen.image_hot_item_width));
                         //int width = height * 3 / 2;
-                        int width = height;
+                        //int width = height;
                         LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(width, height);
                         lparams.setMargins(0, 0, (int) (getResources().getDimension(R.dimen.margin_small)), 0);
                         imgView.setLayoutParams(lparams);
@@ -398,9 +401,12 @@ public class MyCollectActivity extends ParentFragmentActivity {
                         Picasso.with(mContext).load(Constants.FILE_ADDR + imgList.get(i)).placeholder(R.drawable.no_image).into(imgView);
                         holder.layoutImages.addView(imgView);
                     }
-                    holder.hsView.setVisibility(View.VISIBLE);
+                    holder.layoutImages.setVisibility(View.VISIBLE);
+
+                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+                    holder.layoutImages.setLayoutParams(lparams);
                 } else {
-                    holder.hsView.setVisibility(View.GONE);
+                    holder.layoutImages.setVisibility(View.GONE);
                 }
 
                 convertView.setOnClickListener(new View.OnClickListener() {
@@ -433,7 +439,6 @@ public class MyCollectActivity extends ParentFragmentActivity {
         private class HotViewHolder {
             int id;
             TextView txtItemTitle, txtDescript, txtReadCount, txtEvalCount, txtTime;
-            HorizontalScrollView hsView;
             LinearLayout layoutImages;
         }
     }

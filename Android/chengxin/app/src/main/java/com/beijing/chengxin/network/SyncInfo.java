@@ -1166,13 +1166,16 @@ public class SyncInfo {
 
     // 我的发布-产品
     // keyword : 搜索关键字
-    public ComedityListModel syncMyProductList(String keyword) {
+    public ComedityListModel syncMyProductList(String keyword, int start, int length) {
         ComedityListModel result = new ComedityListModel();
 
         Map<String, String> params = new HashMap<String, String>();
         params.put(Constants.P_ACTION, "getMyProductList");
         params.put(Constants.P_TOKEN, SessionInstance.getInstance().getLoginData().getToken());
         params.put("keyword", keyword);
+        params.put("start", "" + start);
+        if (length > 0)
+            params.put("length", "" + length);
 
         String responseString = NetworkEngine.post(Constants.API_ADDR, params);
 
@@ -1190,13 +1193,16 @@ public class SyncInfo {
 
     // 我的发布-项目
     // keyword : 搜索关键字
-    public ItemListModel syncMyItemList(String keyword) {
+    public ItemListModel syncMyItemList(String keyword, int start, int length) {
         ItemListModel result = new ItemListModel();
 
         Map<String, String> params = new HashMap<String, String>();
         params.put(Constants.P_ACTION, "getMyItemList");
         params.put(Constants.P_TOKEN, SessionInstance.getInstance().getLoginData().getToken());
         params.put("keyword", keyword);
+        params.put("start", "" + start);
+        if (length > 0)
+            params.put("length", "" + length);
 
         String responseString = NetworkEngine.post(Constants.API_ADDR, params);
 
@@ -1214,13 +1220,16 @@ public class SyncInfo {
 
     // 我的发布-服务
     // keyword : 搜索关键字
-    public ServeListModel syncMyServeList(String keyword) {
+    public ServeListModel syncMyServeList(String keyword, int start, int length) {
         ServeListModel result = new ServeListModel();
 
         Map<String, String> params = new HashMap<String, String>();
         params.put(Constants.P_ACTION, "getMyServiceList");
         params.put(Constants.P_TOKEN, SessionInstance.getInstance().getLoginData().getToken());
         params.put("keyword", keyword);
+        params.put("start", "" + start);
+        if (length > 0)
+            params.put("length", "" + length);
 
         String responseString = NetworkEngine.post(Constants.API_ADDR, params);
 

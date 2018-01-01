@@ -76,10 +76,10 @@ public class LoginFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         info = new SyncInfo(getActivity());
 
-        boolean is_auto_login = getActivity().getIntent().getBooleanExtra(Constants.IS_AUTO_LOGIN, true);
-        if (is_auto_login && AppConfig.getLoginMobile().length() > 0 && AppConfig.getLoginPwd().length() > 0) {
-            new LoginAsync().execute(AppConfig.getLoginMobile(), AppConfig.getLoginPwd());
-        }
+//        boolean is_auto_login = getActivity().getIntent().getBooleanExtra(Constants.IS_AUTO_LOGIN, true);
+//        if (is_auto_login && AppConfig.getLoginMobile().length() > 0 && AppConfig.getLoginPwd().length() > 0) {
+//            new LoginAsync().execute(AppConfig.getLoginMobile(), AppConfig.getLoginPwd());
+//        }
     }
 
     private View.OnClickListener mButtonClickListener = new View.OnClickListener() {

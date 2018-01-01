@@ -114,10 +114,12 @@ public class SelectCityDialog extends Dialog {
         cityWheel.addChangingListener(new OnWheelChangedListener() {
             @Override
             public void onChanged(WheelView wheel, int oldValue, int newValue) {
-                if (newValue > 0)
-                    mCurrentCity = cityList.get(countryWheel.getCurrentItem()).getCities().get(newValue);
-                else
-                    mCurrentCity = null;
+                if (!scrolling) {
+                    if (newValue > 0)
+                        mCurrentCity = cityList.get(countryWheel.getCurrentItem()).getCities().get(newValue);
+                    else
+                        mCurrentCity = null;
+                }
             }
         });
 

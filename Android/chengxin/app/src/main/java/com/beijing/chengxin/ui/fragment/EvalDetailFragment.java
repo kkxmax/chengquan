@@ -153,7 +153,7 @@ public class EvalDetailFragment extends Fragment {
 
                 Picasso.with(getContext())
                         .load(Constants.FILE_ADDR + evalInfo.getOwnerLogo())
-                        .placeholder(evalInfo.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON  ? R.drawable.no_image_person : R.drawable.no_image_enter)
+                        .placeholder(evalInfo.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON  ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                         .into(imgAvatar);
                 if (evalInfo.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON)
                     txtName.setText(evalInfo.getOwnerRealname());
@@ -268,7 +268,7 @@ public class EvalDetailFragment extends Fragment {
 
                 Picasso.with(getContext())
                         .load(Constants.FILE_ADDR + evalInfo.getOwnerLogo())
-                        .placeholder(R.drawable.no_image)
+                        .placeholder(item.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON  ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                         .into(imgAvatar);
                 String name;
                 if (item.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON)

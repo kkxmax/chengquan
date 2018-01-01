@@ -276,25 +276,25 @@ public class MyWriteFragment extends Fragment {
             @Override
             protected Object doInBackground(Object... params) {
                 if (get_index == INDEX_GET_DATA_COMEDITY) {
-                    ComedityListModel progressDatas = new SyncInfo(mContext).syncMyProductList(search);
+                    ComedityListModel progressDatas = new SyncInfo(mContext).syncMyProductList(search, adapter1.mDatas.size(), Constants.PAGE_ITEM_COUNT);
                     publishProgress(1, progressDatas);
                 }
                 if (get_index == INDEX_GET_DATA_ITEM) {
-                    ItemListModel successDatas = new SyncInfo(mContext).syncMyItemList(search);
+                    ItemListModel successDatas = new SyncInfo(mContext).syncMyItemList(search, adapter2.mDatas.size(), Constants.PAGE_ITEM_COUNT);
                     publishProgress(2, successDatas);
                 }
                 if (get_index == INDEX_GET_DATA_SERVICE) {
-                    ServeListModel failDatas = new SyncInfo(getContext()).syncMyServeList(search);
+                    ServeListModel failDatas = new SyncInfo(getContext()).syncMyServeList(search, adapter3.mDatas.size(), Constants.PAGE_ITEM_COUNT);
                     publishProgress(3, failDatas);
                 }
                 if (get_index == INDEX_GET_DATA_ALL) {
-                    ComedityListModel progressDatas = new SyncInfo(mContext).syncMyProductList(search);
+                    ComedityListModel progressDatas = new SyncInfo(mContext).syncMyProductList(search, adapter1.mDatas.size(), Constants.PAGE_ITEM_COUNT);
                     publishProgress(1, progressDatas);
 
-                    ItemListModel successDatas = new SyncInfo(mContext).syncMyItemList(search);
+                    ItemListModel successDatas = new SyncInfo(mContext).syncMyItemList(search, adapter2.mDatas.size(), Constants.PAGE_ITEM_COUNT);
                     publishProgress(2, successDatas);
 
-                    ServeListModel failDatas = new SyncInfo(getContext()).syncMyServeList(search);
+                    ServeListModel failDatas = new SyncInfo(getContext()).syncMyServeList(search, adapter3.mDatas.size(), Constants.PAGE_ITEM_COUNT);
                     publishProgress(3, failDatas);
                 }
 

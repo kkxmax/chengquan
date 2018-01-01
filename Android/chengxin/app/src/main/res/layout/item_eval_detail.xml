@@ -9,6 +9,7 @@
         android:id="@+id/img_avatar"
         android:layout_width="@dimen/image_avatar_width"
         android:layout_height="@dimen/image_avatar_width"
+        android:scaleType="centerCrop"
         android:background="@drawable/no_image_enter"/>
 
     <LinearLayout
