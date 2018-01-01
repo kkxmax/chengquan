@@ -296,7 +296,7 @@ public class HotController extends BaseController {
 					String.valueOf(row.getCommentCnt()),
 					String.valueOf(row.getElectCnt()),
 					String.valueOf(row.getShareCnt()),
-					DateTimeUtil.dateFormat(row.getStatusName()),
+					row.getStatusName(),
 					DateTimeUtil.dateFormat(row.getWriteTime()), 
 					opHtml 
 			};

@@ -1,6 +1,5 @@
 package com.chengxin.bfip.api;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -157,17 +156,26 @@ public class ApiController extends BaseController {
 
     public ModelAndView init(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 
-    	if(PRINT_LOG) {
-    		try {
-    			HashMap<String, String> paramMap = getParameters(request);
-    			String strReq = "";
-    			for(Map.Entry<String, String> entry: paramMap.entrySet()) {
-    				strReq += entry.getKey() + "=" + entry.getValue() + ", ";
-    			}
-				CommonUtil.log(request, String.format("Request(from %s) : %s", CommonUtil.getIpAddr(request), strReq));
-			} catch (IOException e) {
-				e.printStackTrace();
+    	String ipAddr = "unknown";
+    	String logFileName = "unknown";
+    	String api = this.getBlankParameter(request, "pAct", "");
+    	if(PRINT_LOG && !api.equals("getNoticeCount")) {
+    		HashMap<String, String> paramMap = getParameters(request);
+			String strReq = "";
+			for(Map.Entry<String, String> entry: paramMap.entrySet()) {
+				strReq += entry.getKey() + "=" + entry.getValue() + ", ";
 			}
+			
+			ipAddr = CommonUtil.getIpAddr(request);
+			if(ipAddr.indexOf(":") >= 0) {
+				ipAddr = ipAddr.replace(":", ".");
+			}
+			logFileName = DateTimeUtil.getUniqueTime() + "_" + api + ".txt";
+			
+			CommonUtil.log(request, ipAddr, logFileName, String.format("Request(%s from %s) : %s", DateTimeUtil.getDateTime(), CommonUtil.getIpAddr(request), strReq));
+			
+			request.setAttribute("IPADDR", ipAddr);
+			request.setAttribute("LOG_FILENAME", logFileName);
     	}
     	
     	if(MODE_DEVEL) {
@@ -415,17 +423,17 @@ public class ApiController extends BaseController {
     
     private ModelAndView JSONResult(HttpServletRequest request, JSONObject object, Account loginAccount) {
     	
-    	if(PRINT_LOG) {
-    		try {
-    			String strAction = this.getBlankParameter(request, "pAct", "");
-    			Integer loginAccountId = null;
-    			if(loginAccount != null) {
-    				loginAccountId = loginAccount.getId();
-    			}
-				CommonUtil.log(request, String.format("Response(to %s, pAct: %s, loginAccountId: %d) : %s", CommonUtil.getIpAddr(request), strAction, loginAccountId, object.toString()));
-			} catch (IOException e) {
-				e.printStackTrace();
+    	String api = this.getBlankParameter(request, "pAct", "");
+    	
+    	if(PRINT_LOG && !api.equals("getNoticeCount")) {
+    		String strAction = this.getBlankParameter(request, "pAct", "");
+			Integer loginAccountId = null;
+			if(loginAccount != null) {
+				loginAccountId = loginAccount.getId();
 			}
+			String ipAddr = (String) request.getAttribute("IPADDR");
+			String logFileName = (String) request.getAttribute("LOG_FILENAME");
+			CommonUtil.log(request, ipAddr, logFileName, String.format("Response(%s to %s, pAct: %s, loginAccountId: %d) : %s", DateTimeUtil.getDateTime(), CommonUtil.getIpAddr(request), strAction, loginAccountId, object.toString()));
     	}
     	
     	request.setAttribute("JSON", object);
@@ -769,12 +777,6 @@ public class ApiController extends BaseController {
     	String strHistory = formUtil.getString("history", "");
     	String strXyWatch = formUtil.getString("xyWatch", "");
     	String strXyWatched = formUtil.getString("xyWatched", "");
-    	
-    	if(PRINT_LOG) {
-    		CommonUtil.log(request, "authPersonal");
-    		CommonUtil.log(request, String.format("Request : realname=%s, certNum=%s, enterId=%s, xyleixingId=%s, cityId=%s, job=%s, weixin=%s, experience=%s, history=%s, xyWatch=%s, xyWatched=%s"
-    				, strRealname, strCertNum, strEnterId, strXyleixingId, strCityId, strJob, strWeixin, strExperience, strHistory, strXyWatch, strXyWatched));
-    	}
     	
     	if(loginAccount.getTestStatus() == AccountDAO.TEST_ST_READY) {
     		result.put("retCode", 210);
@@ -1338,10 +1340,6 @@ public class ApiController extends BaseController {
     		
     		loginAccount.setLogo(strImageFileLogo);
         	loginAccount.setAkind(AccountDAO.ACCOUNT_TYPE_ENTERPRISE);
-        	if(loginAccount.getCode().isEmpty()) {
-        		String strCode = CommonUtil.genAccountCode(cityDao, accountDao, Integer.valueOf(strCityId));
-        		loginAccount.setCode(strCode);
-        	}
         	loginAccount.setEnterKind(Integer.valueOf(strEnterKind));
         	loginAccount.setEnterName(strEnterName);
         	loginAccount.setEnterCertNum(strEnterCertNum);
@@ -1529,10 +1527,6 @@ public class ApiController extends BaseController {
     			loginAccount.setEnterCertImage(strImageFileCert);
     		}
         	loginAccount.setAkind(AccountDAO.ACCOUNT_TYPE_ENTERPRISE);
-        	if(loginAccount.getCode().isEmpty()) {
-        		String strCode = CommonUtil.genAccountCode(cityDao, accountDao, Integer.valueOf(strCityId));
-        		loginAccount.setCode(strCode);
-        	}
         	loginAccount.setEnterKind(Integer.valueOf(strEnterKind));
         	loginAccount.setEnterName(strEnterName);
         	loginAccount.setEnterCertNum(strEnterCertNum);
@@ -1672,10 +1666,7 @@ public class ApiController extends BaseController {
     			strImageFileLogo = Constants.CERT_IMAGE_URL + "/" + imgFileLogo.getPhysicalPath() + "/" + imgFileLogo.getPhysicalName();
     			loginAccount.setLogo(strImageFileLogo);
     		}
-        	if(loginAccount.getCode().isEmpty()) {
-        		String strCode = CommonUtil.genAccountCode(cityDao, accountDao, Integer.valueOf(strCityId));
-        		loginAccount.setCode(strCode);
-        	}
+    		loginAccount.setAddr(strAddr);
         	loginAccount.setWeburl(strWebUrl);
         	loginAccount.setWeixin(strWeixin);
         	loginAccount.setComment(strComment);
@@ -2079,7 +2070,7 @@ public class ApiController extends BaseController {
     	filter.put("start", 0);
     	filter.put("length", Constants.CAROUSEL_CNT_IN_APP);
     	
-    	List<Carousel> carouselList = carouselDao.search(filter, "status=1", "ord asc");
+    	List<Carousel> carouselList = carouselDao.search(filter, "status=1", "ord asc, write_time asc");
     	
     	result.put("retCode", 200);
     	result.put("data", carouselList);
@@ -3466,11 +3457,6 @@ public class ApiController extends BaseController {
     	String strStart = this.getBlankParameter(request, "start", "0");
     	String strLength = this.getBlankParameter(request, "length", "-1");
     	
-    	if(PRINT_LOG) {
-    		CommonUtil.log(request, "getEstimateListForHot");
-    		CommonUtil.log(request, String.format("Request : hotId=%s, start=%s, length=%s", strHotId, strStart, strLength));
-    	}
-    	
     	if(strHotId.isEmpty()) {
     		result.put("retCode", 201);
         	result.put("msg", "hotId is empty");
@@ -4287,6 +4273,18 @@ public class ApiController extends BaseController {
     	}
     	
     	clickHistoryDao.insert(clickHistory);
+    	
+    	if(strKind.equals(String.valueOf(ClickHistoryDAO.HISTORY_SHARE_KIND_HOT_DETAIL))) {
+    		Hot hot = hotDao.get(Integer.valueOf(strId));
+    		if(hot == null) {
+    			result.put("retCode", 203);
+    			result.put("msg", "That hot doesn't exist");
+    	    	
+    	    	return JSONResult(request, result, loginAccount);
+    		}
+    		hot.setShareCnt(hot.getShareCnt() + 1);
+    		hotDao.update(hot);
+    	}
     	
     	result.put("retCode", 200);
     	

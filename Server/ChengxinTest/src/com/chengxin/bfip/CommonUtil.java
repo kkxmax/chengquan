@@ -51,7 +51,15 @@ public class CommonUtil {
 	}
 
 	public static String toStringDefault(Object obj) {
-		return obj == null ? "" : obj.toString();
+		if(obj == null) {
+			return "";
+		}
+		else if(obj.toString().equals("null")) {
+			return "null ";
+		}
+		else {
+			return obj.toString();
+		}
 	}
 
 	public static int toIntDefault(Object obj) {
@@ -86,17 +94,52 @@ public class CommonUtil {
 		return genRand6String();
 	}
 	
-	public static void log(HttpServletRequest request, String content) throws IOException {
+	public static void logGlobal(HttpServletRequest request, String content) {
 		File file = new File(getRepositoryRealPath(request), Constants.LOG_FILE_NAME);
 		if(!file.exists()) {
-			file.createNewFile();	
+			try {
+				file.createNewFile();
+				FileOutputStream oFile = new FileOutputStream(file, true);
+				oFile.write(content.getBytes("UTF-8"));
+				oFile.write("\n".getBytes("UTF-8"));
+		        oFile.flush();
+		        oFile.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		}
+	}
+	
+	public static void log(HttpServletRequest request, String logPath, String logFileName, String content) {
+		
+		String realPath = getRepositoryRealPath(request) + Constants.C_COMMON_FILE_PATH_SEP + "logs" + Constants.C_COMMON_FILE_PATH_SEP + logPath;
+		File dir = new File(realPath); 
+		try {
+			if(!dir.exists()) {
+				if(!dir.mkdirs()) {
+					logGlobal(request, String.format("mkdirs() failed ---- logPath : %s, logFileName : %s", logPath, logFileName));
+					return;
+				}
+			}
+			File file = new File(realPath, logFileName);
+			if(!file.exists()) {
+				if(!file.createNewFile()) {
+					logGlobal(request, String.format("createNewFile() failed ---- logPath : %s, logFileName : %s", logPath, logFileName));
+					return;
+				}
+			}
+			
+			FileOutputStream oFile = new FileOutputStream(file, true);
+			oFile.write(content.getBytes("UTF-8"));
+			oFile.write("\n".getBytes("UTF-8"));
+	        oFile.flush();
+	        oFile.close();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			logGlobal(request, String.format("log() failed ---- logPath : %s, logFileName : %s", logPath, logFileName));
 		}
 		
-		FileOutputStream oFile = new FileOutputStream(file, true);
-		oFile.write(content.getBytes("UTF-8"));
-		oFile.write("\n".getBytes("UTF-8"));
-        oFile.flush();
-        oFile.close();
 	}
 	
 	public static String getIpAddr(HttpServletRequest request) {      
@@ -165,8 +208,13 @@ public class CommonUtil {
 				+ city.getCode();
 		String strDate = (String.valueOf(calendar.get(Calendar.MONTH)).length() == 1 ? "0" + String.valueOf(calendar.get(Calendar.MONTH) + 1) : String.valueOf(calendar.get(Calendar.MONTH) + 1))
 				+ (String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)).length() == 1 ? "0" + calendar.get(Calendar.DAY_OF_MONTH) : calendar.get(Calendar.DAY_OF_MONTH));
-		int nCode = accountDao.count(null, "SUBSTR(code FROM 6 FOR 4) = '" + strDate + "'");
-		String strCode = String.valueOf(nCode + 1);
+		
+		String strCode = "001";
+		List<Account> lastMatchCodes = accountDao.search(null, "substr(code from 6 for 4) = '" + strDate + "'", "substr(code from 10) desc");
+		if(lastMatchCodes.size() > 0) {
+			strCode = String.valueOf(Integer.valueOf(lastMatchCodes.get(0).getCode().substring(9)) + 1);
+		}
+		
 		if(strCode.length() < 3) {
 			int len = strCode.length();
 			for(int i=0; i<3-len; i++) {
