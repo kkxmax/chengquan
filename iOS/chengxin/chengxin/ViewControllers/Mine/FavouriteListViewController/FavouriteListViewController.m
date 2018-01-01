@@ -33,6 +33,8 @@
     NSInteger refreshReDianStartIndex;
     NSMutableArray* aryHeights;
 
+    float imageWidth;
+    float imageHeight;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,6 +63,9 @@
     }];
     
     refreshReDianStartIndex = 0;
+    
+    imageWidth = (SCREEN_WIDTH - 20 - 14) / 3;
+    imageHeight = imageWidth * 80 / 113;
 
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -282,7 +287,7 @@
     if(aryHeights.count > indexPath.row)
         return [aryHeights[indexPath.row] floatValue];
     else
-        return 250;
+        return 174.f;
 //    if(reDianArray.count <= indexPath.row)
 //        return 169.0f;
 //    HotObject *hot = reDianArray[indexPath.row];
@@ -306,35 +311,43 @@
     cell.lblEval.text = [NSString stringWithFormat:@"%ld", (long)hot.mCommentCnt];
     cell.lblDate.text = [GeneralUtil getDateHourMinFrom:hot.strWriteTimeString];
     
-    for( UIView* subV in [cell.scrollThumb subviews])
+    for( UIView* subV in [cell.imageContentView subviews])
     {
         [subV removeFromSuperview];
     }
     
     NSMutableArray *aryPath = hot.aryImgPath;
     if ( aryPath == nil || aryPath.count == 0  ) {
-        //cell.scrollThumb.hidden = YES;
+        cell.imageContentView.hidden = YES;
     }
     else
     {
+        cell.imageContentView.hidden = NO;
+        cell.imageContentView.frame = CGRectMake(cell.imageContentView.frame.origin.x, cell.imageContentView.frame.origin.y, cell.imageContentView.frame.size.width, imageHeight);
         for (int i = 0; i < aryPath.count; i++)
         {
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 120, 0, 113, 80)];
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(i * (imageWidth + 7), 0, imageWidth, imageHeight)];
             NSString *imgPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, aryPath[i]];
-            [imgView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"bg_pic"]];
-            [cell.scrollThumb addSubview:imgView];
+            
+            [imgView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+            [cell.imageContentView addSubview:imgView];
         }
-        [cell.scrollThumb setContentSize:CGSizeMake(aryPath.count * 120 - 7, 80)];
+
+//        for (int i = 0; i < aryPath.count; i++)
+//        {
+//            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 120, 0, 113, 80)];
+//            NSString *imgPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, aryPath[i]];
+//            [imgView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"bg_pic"]];
+//            [cell.scrollThumb addSubview:imgView];
+//        }
+//        [cell.scrollThumb setContentSize:CGSizeMake(aryPath.count * 120 - 7, 80)];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tblRedian beginUpdates];
         [cell.lblTitle sizeToFit];
         [cell.lblContent sizeToFit];
-        NSNumber *itemHeight =  [NSNumber numberWithFloat:250 + cell.lblTitle.frame.size.height - 16 + cell.lblContent.frame.size.height - 51 - (aryPath.count == 0 ? 80 : 0)];
-        if([itemHeight floatValue] < 60)
-            itemHeight = [NSNumber numberWithFloat:60.0f];
-        
+        NSNumber *itemHeight =  [NSNumber numberWithFloat:174 + cell.lblTitle.frame.size.height + cell.lblContent.frame.size.height - (aryPath.count == 0 ? imageHeight : 0)];
         [aryHeights replaceObjectAtIndex:indexPath.row  withObject:itemHeight];
         
         [self.tblRedian endUpdates];

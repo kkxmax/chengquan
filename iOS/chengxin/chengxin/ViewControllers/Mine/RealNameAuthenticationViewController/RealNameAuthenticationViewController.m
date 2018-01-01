@@ -1394,12 +1394,18 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if(component == 0) {
+        if(cityArray.count <= row)
+            return nil;
         NSDictionary *cityDic = (NSDictionary *)[cityArray objectAtIndex:row];
         return cityDic[@"name"];
     }
     else {
+        if([pickerView selectedRowInComponent:0] >= cityArray.count)
+            return nil;
         NSDictionary *cityDic = (NSDictionary *)[cityArray objectAtIndex:[pickerView selectedRowInComponent:0]];
         NSArray *cityOtherArray = (NSArray *)(cityDic[@"cities"]);
+        if(row >= cityOtherArray.count)
+            return nil;
         NSDictionary *cityOtherDic = (NSDictionary *)(cityOtherArray[row]);
         return cityOtherDic[@"name"];
     }
@@ -1407,14 +1413,20 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if(component == 0) {
+        if(cityArray.count <= row)
+            return;
         NSDictionary *cityDic = (NSDictionary *)[cityArray objectAtIndex:row];
         cityID = cityDic[@"id"];
         cityRow = row;
         [self.cityPickerView reloadAllComponents];
     }
     else {
+        if([pickerView selectedRowInComponent:0] >= cityArray.count)
+            return;
         NSDictionary *cityDic = (NSDictionary *)[cityArray objectAtIndex:[pickerView selectedRowInComponent:0]];
         NSArray *cityOtherArray = (NSArray *)(cityDic[@"cities"]);
+        if(row >= cityOtherArray.count)
+            return;
         NSDictionary *cityOtherDic = (NSDictionary *)(cityOtherArray[row]);
         cityOtherID = cityOtherDic[@"id"];
         cityOtherRow = row;

@@ -73,10 +73,11 @@
     self.lblWhy.text = self.data[@"whyis"];
     self.lblEstimaterName.text = self.data[@"estimaterName"];
     self.lblEstimaterComment.text = self.data[@"estimateContent"];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, self.data[@"estimaterLogo"] ]];
-    [self.imgEstimaterPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"no_image.png"]];
-
     int akind = [self.data[@"estimaterAkind"] intValue];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, self.data[@"estimaterLogo"] ]];
+    [self.imgEstimaterPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:akind == 1 ? @"no_image_person.png" : @"no_image_enter.png"]];
+
+    
     if(akind == 1)
         [self.imgBusinessType setImage:[UIImage imageNamed:@"personal"]];
     else if(akind == 2)

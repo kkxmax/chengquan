@@ -43,12 +43,18 @@ enum {
 @end
 
 @implementation FavouritesTableViewController
+{
+    MGSwipeTableCell* currentCell;
+    
+}
 @synthesize tblInterView;
 @synthesize selectType, lblTitle;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    currentCell = nil;
+    
     aryKeys = [NSMutableArray arrayWithArray:@[ @"*", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#" ]];
     self.automaticallyAdjustsScrollViewInsets = NO;
     tblInterView.sectionIndexBackgroundColor = [UIColor clearColor];
@@ -223,7 +229,7 @@ enum {
                 for(int i = 0; i < interList.count; i++) {
                     NSMutableDictionary *interDic = [[NSMutableDictionary alloc] initWithDictionary:(NSDictionary *)(interList[i])];
                     
-                    if ([interDic[@"interested"] integerValue] != 1)
+                    if ([interDic[@"interested"] integerValue] != 1 && selectType < 2)
                         continue;
                     int akind = [interDic[@"akind"] intValue];
                     NSString *name;
@@ -378,7 +384,8 @@ enum {
     NSDictionary *dic = [aryInterData objectAtIndex:index];
     
     NSString *logoPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dic[@"logo"]];
-    [cell.photo sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed:@"bg_pic"]];
+    NSInteger akind = [dic[@"akind"] integerValue];
+    [cell.photo sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed: akind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"] ];
     cell.name.text = aryInterName[index];
     cell.tag = index;
     cell.delegate = self;
@@ -463,7 +470,10 @@ enum {
         expansionSettings.buttonIndex = -1;
         expansionSettings.fillOnTrigger = NO;
         //return [NSMutableArray array];
-        return [self createRightButtons:cell.tag];
+        if(selectType == SELECT_FRIEND_0)
+            return [self createRightButtons_1:cell.tag];
+        else
+            return [self createRightButtons:cell.tag];
     } else {
         expansionSettings.buttonIndex = -1;
         expansionSettings.fillOnTrigger = NO;
@@ -476,6 +486,8 @@ enum {
     NSLog(@"Delegate: button tapped, %@ position, index %d, from Expansion: %@",
           direction == MGSwipeDirectionLeftToRight ? @"left" : @"right", (int)index, fromExpansion ? @"YES" : @"NO");
     
+    currentCell = cell;
+    [cell refreshButtons:YES];
     if (direction == MGSwipeDirectionRightToLeft && index == 0) {
         return YES;
     }
@@ -663,5 +675,109 @@ enum {
         }
         [GeneralUtil setUserPreference:preferenceKey value:strData];
     }
+}
+
+#pragma mark - ShangJia
+- (void)setInterestedToServer_1:(NSInteger)index AccountId:(NSString*)accountId Value:(NSString*) val {
+    NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
+    [dicParams setObject:@"setInterest" forKey:@"pAct"];
+    [dicParams setObject:accountId forKey:@"accountId"];
+    [dicParams setObject:val forKey:@"val"];
+    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
+    
+    [GeneralUtil showProgress];
+    [[WebAPI sharedInstance] sendPostRequest:ACTION_SETINTEREST Parameters:dicParams :^(NSObject *resObj) {
+        [GeneralUtil hideProgress];
+        NSDictionary *dicRes = (NSDictionary *)resObj;
+        
+        if (dicRes != nil ) {
+            if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
+                
+                if([val isEqualToString:@"0"])
+                    [aryInterData[index] setObject:[NSNumber numberWithInt:0] forKey:@"interested"];
+                else
+                    [aryInterData[index] setObject:[NSNumber numberWithInt:1] forKey:@"interested"];
+                
+                if(currentCell)
+                {
+                    [currentCell refreshButtons:YES];
+                }
+                //[self makeIndexedDictionaryData];
+                
+            }else{
+                
+            }
+        }
+    }];
+    
+}
+
+- (NSArray *)createRightButtons_1:(int)number
+{
+    NSString *code;
+    NSMutableArray *aryData;
+    
+    
+    code = [aryInterCode objectAtIndex:number];
+    aryData = dicInterCode[@"*"];
+    
+    NSNumber* interested;
+    interested = aryInterData[number][@"interested"];
+    
+    NSMutableArray * result = [NSMutableArray array];
+    
+    UIButton *btnFavourite = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120.f, 55.f)];
+    if([interested intValue] == 1)
+    {
+        btnFavourite.tag = number;
+        [btnFavourite setBackgroundColor:BLACK_COLOR_245];
+        [btnFavourite setTitle:@"取消关注" forState:UIControlStateNormal];
+        [btnFavourite setTitleColor:BLACK_COLOR_102 forState:UIControlStateNormal];
+        [btnFavourite.titleLabel setFont:FONT_14];
+        [btnFavourite addTarget:self action:@selector(onClickFavouriteButton_1:) forControlEvents:UIControlEventTouchUpInside];
+        [result addObject:btnFavourite];
+    }else
+    {
+        btnFavourite.tag = number;
+        //[btnFavourite setBackgroundColor:BLACK_COLOR_245];
+        [btnFavourite setBackgroundImage:[UIImage imageNamed:@"orange_button_bg"] forState:UIControlStateNormal];
+        [btnFavourite setTitle:@"+ 关注" forState:UIControlStateNormal];
+        [btnFavourite setTitleColor:WHITE_COLOR forState:UIControlStateNormal];
+        [btnFavourite.titleLabel setFont:FONT_14];
+        [btnFavourite addTarget:self action:@selector(onClickFavouriteButton_1:) forControlEvents:UIControlEventTouchUpInside];
+        [result addObject:btnFavourite];
+    }
+    
+    
+    UIButton *btnStartSet = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 120.f, 55.f)];
+    
+    if ([aryData containsObject:code]) {
+        btnStartSet.tag = number;
+        [btnStartSet setBackgroundImage:[UIImage imageNamed:@"orange_button_bg"] forState:UIControlStateNormal];
+        [btnStartSet setTitle:@"取消星标关注" forState:UIControlStateNormal];
+        [btnStartSet setTitleColor:WHITE_COLOR forState:UIControlStateNormal];
+        [btnStartSet.titleLabel setFont:FONT_14];
+        [btnStartSet addTarget:self action:@selector(onClickStartSetButton:) forControlEvents:UIControlEventTouchUpInside];
+    }else
+    {
+        btnStartSet.tag = number;
+        [btnStartSet setBackgroundImage:[UIImage imageNamed:@"orange_button_bg"] forState:UIControlStateNormal];
+        [btnStartSet setTitle:@"设为星标关注" forState:UIControlStateNormal];
+        [btnStartSet setTitleColor:WHITE_COLOR forState:UIControlStateNormal];
+        [btnStartSet.titleLabel setFont:FONT_14];
+        [btnStartSet addTarget:self action:@selector(onClickStartSetButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    [result addObject:btnStartSet];
+    
+    return result;
+}
+- (void)onClickFavouriteButton_1:(UIButton*) button {
+    
+    NSDictionary *dic = aryInterData[button.tag];
+    if([dic[@"interested"] intValue] == 1)
+        [self setInterestedToServer_1:button.tag AccountId:dic[@"id"] Value:@"0"];
+    else
+        [self setInterestedToServer_1:button.tag AccountId:dic[@"id"] Value:@"1"];
+    
 }
 @end

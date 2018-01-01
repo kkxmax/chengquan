@@ -27,61 +27,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [GeneralUtil showProgress];
+    
     // Do any additional setup after loading the view from its nib.
-    int akind = [[CommonData sharedInstance].userInfo[@"akind"] intValue];
-    if(akind == 1)
-    {
-        self.lblName.text = [CommonData sharedInstance].userInfo[@"realname"];
-        if(self.lblName.text.length == 0)
-        {
-            self.lblName.text = [CommonData sharedInstance].userInfo[@"mobile"];
-        }
-    }else if(akind == 2)
-    {
-        self.lblName.text = [CommonData sharedInstance].userInfo[@"enterName"];
-    }
-    [self.lblName sizeToFit];
-    NSString *strXYName = [CommonData sharedInstance].userInfo[@"xyName"];
-    if(strXYName.length == 0) {
-        self.btnBusiness.hidden = YES;
-    }else{
-        self.btnBusiness.hidden = NO;
-        [self.btnBusiness setTitle:[CommonData sharedInstance].userInfo[@"xyName"] forState:UIControlStateNormal];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            CGRect nameLabelFrame = self.lblName.frame;
-            CGSize stringSize = [self.btnBusiness.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0]}];
-            [self.btnBusiness setFrame:CGRectMake(nameLabelFrame.origin.x + nameLabelFrame.size.width + 3, nameLabelFrame.origin.y, stringSize.width, 16)];
-        });
-    }
-
-    self.lblCompanyName.text = [CommonData sharedInstance].userInfo[@"enterName"];
-    self.lblCodeNumber.text = [CommonData sharedInstance].userInfo[@"code"];
-    if(self.lblCodeNumber.text.length == 0) {
-        self.lblCodeNumber.text = @"请认证";
-    }
-
-    if([[CommonData sharedInstance].userInfo[@"credit"] longValue] == 0) {
-        self.lblChengHuDu.text = @"诚信度: 暂无";
-    }else{
-        self.lblChengHuDu.text = [NSString stringWithFormat:@"诚信度: %@%@", [[CommonData sharedInstance].userInfo[@"credit"] stringValue], @"%"];
-    }
-
-    self.lblFeedback.text = [NSString stringWithFormat:@"评价: %@", [[CommonData sharedInstance].userInfo[@"feedbackCnt"] stringValue]];
-    self.lblDianZan.text = [NSString stringWithFormat:@"点赞: %@", [[CommonData sharedInstance].userInfo[@"electCnt"] stringValue]];
-    self.lblAddress.text = [NSString stringWithFormat:@"%@ %@ %@", [CommonData sharedInstance].userInfo[@"provinceName"], [CommonData sharedInstance].userInfo[@"cityName"], [CommonData sharedInstance].userInfo[@"addr"]];
-    self.lblCompanyWebURL.text = [CommonData sharedInstance].userInfo[@"weburl"];
-    self.lblWeixinNumber.text = [CommonData sharedInstance].userInfo[@"weixin"];
-    self.lblPosition.text = [CommonData sharedInstance].userInfo[@"job"];
-    self.lblWorkExperience.text = [CommonData sharedInstance].userInfo[@"experience"];
-    self.lblPersonalHistory.text = [CommonData sharedInstance].userInfo[@"history"];
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, [CommonData sharedInstance].userInfo[@"logo"]]];
-    [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+    
     
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
     [dicParams setObject:ACTION_GETINVITERINFO forKey:@"pAct"];
     [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
     
+    [GeneralUtil showProgress];
     [[WebAPI sharedInstance] sendPostRequest:ACTION_GETINVITERINFO Parameters:dicParams :^(NSObject *resObj) {
         [GeneralUtil hideProgress];
         NSDictionary *dicRes = (NSDictionary *)resObj;
@@ -99,12 +53,12 @@
                     self.lblRecommenderDianZan.text = @"";
                     [self.btnRecommenderBusiness setTitle:@"" forState:UIControlStateNormal];
                     self.recommendView.hidden = YES;
-                    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, 658)];
+                    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, 782)];
                     return;
                 }else
                 {
                     self.recommendView.hidden = NO;
-                    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, 827)];
+                    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, 951)];
                 }
                 [[CommonData sharedInstance] setSelectedFriendAccountID:inviterInfo[@"id"]];
                 
@@ -135,11 +89,73 @@
     }];
     
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    int akind = [[CommonData sharedInstance].userInfo[@"akind"] intValue];
+    if(akind == 1)
+    {
+        self.lblName.text = [CommonData sharedInstance].userInfo[@"realname"];
+        if(self.lblName.text.length == 0)
+        {
+            self.lblName.text = [CommonData sharedInstance].userInfo[@"mobile"];
+        }
+    }else if(akind == 2)
+    {
+        self.lblName.text = [CommonData sharedInstance].userInfo[@"enterName"];
+    }
+    [self.lblName sizeToFit];
+    
+    NSString *strXYName = [CommonData sharedInstance].userInfo[@"xyName"];
+    if(strXYName.length == 0) {
+        self.btnBusiness.hidden = YES;
+    }else{
+        self.btnBusiness.hidden = NO;
+        [self.btnBusiness setTitle:strXYName forState:UIControlStateNormal];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CGRect nameLabelFrame = self.lblName.frame;
+            
+            CGSize titleSize = [self.lblName.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
+            int nNextLine = 0;
+            while (titleSize.width >= self.lblName.frame.size.width) {
+                titleSize.width -= self.lblName.frame.size.width;
+                nNextLine ++;
+            }
+            CGSize stringSize = [strXYName sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0]}];
+            
+            [self.btnBusiness setFrame:CGRectMake(nameLabelFrame.origin.x + titleSize.width + 3, nameLabelFrame.origin.y + 21 * nNextLine, stringSize.width, 16)];
+        });
+    }
 
+   
+    self.lblCompanyName.text = [CommonData sharedInstance].userInfo[@"enterName"];
+    self.lblCodeNumber.text = [CommonData sharedInstance].userInfo[@"code"];
+    if(self.lblCodeNumber.text.length == 0) {
+        self.lblCodeNumber.text = @"请认证";
+    }
+    
+    if([[CommonData sharedInstance].userInfo[@"credit"] longValue] == 0) {
+        self.lblChengHuDu.text = @"诚信度: 暂无";
+    }else{
+        self.lblChengHuDu.text = [NSString stringWithFormat:@"诚信度: %@%@", [[CommonData sharedInstance].userInfo[@"credit"] stringValue], @"%"];
+    }
+    
+    self.lblFeedback.text = [NSString stringWithFormat:@"评价: %@", [[CommonData sharedInstance].userInfo[@"feedbackCnt"] stringValue]];
+    self.lblDianZan.text = [NSString stringWithFormat:@"点赞: %@", [[CommonData sharedInstance].userInfo[@"electCnt"] stringValue]];
+    self.lblAddress.text = [NSString stringWithFormat:@"%@ %@ %@", [CommonData sharedInstance].userInfo[@"provinceName"], [CommonData sharedInstance].userInfo[@"cityName"], [CommonData sharedInstance].userInfo[@"addr"]];
+    self.lblCompanyWebURL.text = [CommonData sharedInstance].userInfo[@"weburl"];
+    self.lblWeixinNumber.text = [CommonData sharedInstance].userInfo[@"weixin"];
+    self.lblPosition.text = [CommonData sharedInstance].userInfo[@"job"];
+    self.lblWorkExperience.text = [CommonData sharedInstance].userInfo[@"experience"];
+    self.lblPersonalHistory.text = [CommonData sharedInstance].userInfo[@"history"];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, [CommonData sharedInstance].userInfo[@"logo"]]];
+    
+    [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:akind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     
     
 }
@@ -290,9 +306,9 @@
 - (void)onCallForStatics {
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
     [dicParams setObject:@"onShare" forKey:@"pAct"];
+    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
     [dicParams setObject:@"6" forKey:@"kind"];
     [dicParams setObject:[CommonData sharedInstance].userInfo[@"id"] forKey:@"id"];
-    [dicParams setObject:@"1" forKey:@"share"];
     
     [[WebAPI sharedInstance] sendPostRequest:ACTION_ONSHARE Parameters:dicParams :^(NSObject *resObj) {
         

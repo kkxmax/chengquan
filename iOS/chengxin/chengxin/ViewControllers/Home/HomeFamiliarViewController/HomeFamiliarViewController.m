@@ -53,10 +53,11 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
 {
     // You will get here when the reloadData finished
-    if(baseDelegate && [keyPath isEqualToString:@"contentSize"]) {
+    if(object == self.homeFamiliarTableView) {
         self.homeFamiliarTableView.frame = CGRectMake(self.homeFamiliarTableView.frame.origin.x, self.homeFamiliarTableView.frame.origin.y, self.homeFamiliarTableView.frame.size.width, self.homeFamiliarTableView.contentSize.height);
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.homeFamiliarTableView.frame.size.height);
-        [baseDelegate finishedLoadingData:0];
+        if(baseDelegate)
+            [baseDelegate finishedLoadingData:0];
     }
 }
 
@@ -188,7 +189,11 @@
         [homeFamiliarTableCell.userTypeLabel setText:@"未认证"];
     }
     
-    homeFamiliarTableCell.nameLabel.text = [GeneralUtil getUserName:friendDic];
+    NSString *strUserName = [GeneralUtil getUserName:friendDic];
+    if(strUserName.length > HOME_NAME_MAX_LENGTH) {
+        strUserName = [NSString stringWithFormat:@"%@…", [strUserName substringWithRange:NSMakeRange(0, HOME_NAME_MAX_LENGTH)]];
+    }
+    homeFamiliarTableCell.nameLabel.text = strUserName;
     int nReqCodeSenderAKind = [friendDic[@"reqCodeSenderAkind"] intValue];
     NSString *reqName = @"";
     if([friendDic[@"reqCodeSenderId"] longValue] > 0) {
@@ -211,17 +216,21 @@
     }
     [homeFamiliarTableCell.nameLabel sizeToFit];
     NSString *xyName= friendDic[@"xyName"];
+
     if ([xyName isEqualToString:@""]) {
         [homeFamiliarTableCell.xyNameButton setHidden:YES];
     } else {
+        if(xyName.length > HOME_TAG_MAX_LENGTH) {
+            xyName = [NSString stringWithFormat:@"%@…", [xyName substringWithRange:NSMakeRange(0, HOME_TAG_MAX_LENGTH)]];
+        }
         [homeFamiliarTableCell.xyNameButton setHidden:NO];
-        [homeFamiliarTableCell.xyNameButton setTitle:friendDic[@"xyName"] forState:UIControlStateNormal];
+        [homeFamiliarTableCell.xyNameButton setTitle:xyName forState:UIControlStateNormal];
         dispatch_async(dispatch_get_main_queue(), ^{
             CGSize stringSize = [homeFamiliarTableCell.xyNameButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11.0]}];
             int bw = stringSize.width + 12;
-            if(homeFamiliarTableCell.nameLabel.frame.size.width > (tableView.frame.size.width - 75 - bw - homeFamiliarTableCell.nameLabel.frame.origin.x)) {
-                [homeFamiliarTableCell.nameLabel setFrame:CGRectMake(homeFamiliarTableCell.nameLabel.frame.origin.x, homeFamiliarTableCell.nameLabel.frame.origin.y, tableView.frame.size.width - 75 - bw - homeFamiliarTableCell.nameLabel.frame.origin.x, homeFamiliarTableCell.nameLabel.frame.size.height)];
-            }
+//            if(homeFamiliarTableCell.nameLabel.frame.size.width > (tableView.frame.size.width - 75 - bw - homeFamiliarTableCell.nameLabel.frame.origin.x)) {
+//                [homeFamiliarTableCell.nameLabel setFrame:CGRectMake(homeFamiliarTableCell.nameLabel.frame.origin.x, homeFamiliarTableCell.nameLabel.frame.origin.y, tableView.frame.size.width - 75 - bw - homeFamiliarTableCell.nameLabel.frame.origin.x, homeFamiliarTableCell.nameLabel.frame.size.height)];
+//            }
             CGRect nameLabelFrame = homeFamiliarTableCell.nameLabel.frame;
             [homeFamiliarTableCell.xyNameButton setFrame:CGRectMake(nameLabelFrame.origin.x + nameLabelFrame.size.width + 6, nameLabelFrame.origin.y + 2, bw, 16)];
         });

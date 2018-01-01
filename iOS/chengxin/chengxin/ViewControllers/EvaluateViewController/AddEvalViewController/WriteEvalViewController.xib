@@ -22,6 +22,8 @@
                 <outlet property="lblEvalName" destination="Jmn-Xf-VPt" id="bmR-pq-cwl"/>
                 <outlet property="lblReasonCnt" destination="aJs-ge-y49" id="gHc-aJ-Paa"/>
                 <outlet property="selectTypeView" destination="EnR-Vs-k6h" id="qYz-Qj-dkr"/>
+                <outlet property="topSpace" destination="BuB-Ip-X0l" id="g12-uI-LqE"/>
+                <outlet property="topSpace1" destination="YLj-Hu-sxP" id="aCD-ZL-TJr"/>
                 <outlet property="txtViewContent" destination="BAh-5R-Rfg" id="dPP-U1-yiZ"/>
                 <outlet property="txtViewReason" destination="uhv-qd-Sct" id="UxH-Pf-ZqL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -31,7 +33,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="796"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kUh-eB-IXX" userLabel="Navigation View">
@@ -89,143 +91,148 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0q-YR-ZVi">
-                                    <frame key="frameInset" minY="50" height="8"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDE-nL-gZo">
-                                    <frame key="frameInset" minX="12" minY="62" width="357" height="40"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <connections>
-                                        <action selector="onClickEvalNameButton:" destination="-1" eventType="touchUpInside" id="b6S-qp-dzV"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsy-cg-8V6">
-                                    <frame key="frameInset" minX="83" minY="118" width="20" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="check_nor.png"/>
-                                    <state key="selected" image="check_sel.png"/>
-                                    <connections>
-                                        <action selector="onClickFrontEval:" destination="-1" eventType="touchUpInside" id="b7e-gI-TYX"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUX-Ke-9zz">
-                                    <frame key="frameInset" minX="189" minY="118" width="20" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="check_nor.png"/>
-                                    <state key="selected" image="check_sel.png"/>
-                                    <connections>
-                                        <action selector="onClickBackEval:" destination="-1" eventType="touchUpInside" id="moG-Z6-xE0"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpz-A7-PKT">
-                                    <frame key="frameInset" minX="110" minY="116" width="54" height="24"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <state key="normal" title="正面评价">
-                                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onClickFrontEval:" destination="-1" eventType="touchUpInside" id="out-TA-MDD"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0I-Rg-7bf">
-                                    <frame key="frameInset" minX="216" minY="116" width="54" height="24"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <state key="normal" title="负面评价">
-                                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onClickBackEval:" destination="-1" eventType="touchUpInside" id="aK0-VY-f0D"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBN-6Q-njP">
-                                    <frame key="frameInset" minY="71" width="21" height="20" maxX="6"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="more.png"/>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cB-dg-gpT">
-                                    <frame key="frameInset" minX="83" minY="165" width="20" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="check_nor.png"/>
-                                    <state key="selected" image="check_sel.png"/>
-                                    <connections>
-                                        <action selector="onClickDetailEval:" destination="-1" eventType="touchUpInside" id="Kie-Tk-rLS"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj9-XF-6ri">
-                                    <frame key="frameInset" minX="189" minY="165" width="20" height="20"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="check_nor.png"/>
-                                    <state key="selected" image="check_sel.png"/>
-                                    <connections>
-                                        <action selector="onClickQuickEval:" destination="-1" eventType="touchUpInside" id="v77-Cp-x7x"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhL-za-XK5">
-                                    <frame key="frameInset" minX="110" minY="163" width="54" height="24"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <state key="normal" title="详细评价">
-                                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onClickDetailEval:" destination="-1" eventType="touchUpInside" id="P7c-8q-6NY"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MS9-jH-XLs">
-                                    <frame key="frameInset" minX="216" minY="167" width="54" height="16"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <state key="normal" title="快捷评价">
-                                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="onClickQuickEval:" destination="-1" eventType="touchUpInside" id="68b-tL-TWp"/>
-                                    </connections>
-                                </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="评价人姓名:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktt-Ol-Dae">
-                                    <frame key="frameInset" minX="12" minY="74" width="71" height="14"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AVb-mE-3QD">
-                                    <frame key="frameInset" minX="12" minY="108" height="1" maxX="13"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="评价类型:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcy-zf-GOd">
-                                    <frame key="frameInset" minX="12" minY="120" width="59" height="16"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5l-aj-8mg">
-                                    <frame key="frameInset" minX="12" minY="149" height="1" maxX="13"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eau-le-ea6">
-                                    <frame key="frameInset" minX="12" minY="167" width="59" height="16"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <string key="text">评价方式:
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tds-FF-bze">
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0q-YR-ZVi">
+                                            <frame key="frameInset" height="8"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDE-nL-gZo">
+                                            <frame key="frameInset" minX="11" minY="13" width="357" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="onClickEvalNameButton:" destination="-1" eventType="touchUpInside" id="b6S-qp-dzV"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsy-cg-8V6">
+                                            <frame key="frameInset" minX="83" minY="68" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="check_nor.png"/>
+                                            <state key="selected" image="check_sel.png"/>
+                                            <connections>
+                                                <action selector="onClickFrontEval:" destination="-1" eventType="touchUpInside" id="b7e-gI-TYX"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUX-Ke-9zz">
+                                            <frame key="frameInset" minX="189" minY="68" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="check_nor.png"/>
+                                            <state key="selected" image="check_sel.png"/>
+                                            <connections>
+                                                <action selector="onClickBackEval:" destination="-1" eventType="touchUpInside" id="moG-Z6-xE0"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpz-A7-PKT">
+                                            <frame key="frameInset" minX="110" minY="66" width="54" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" title="正面评价">
+                                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onClickFrontEval:" destination="-1" eventType="touchUpInside" id="out-TA-MDD"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0I-Rg-7bf">
+                                            <frame key="frameInset" minX="217" minY="66" width="54" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" title="负面评价">
+                                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onClickBackEval:" destination="-1" eventType="touchUpInside" id="aK0-VY-f0D"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBN-6Q-njP">
+                                            <frame key="frameInset" minY="23" width="21" height="20" maxX="7"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="more.png"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cB-dg-gpT">
+                                            <frame key="frameInset" minX="83" minY="114" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="check_nor.png"/>
+                                            <state key="selected" image="check_sel.png"/>
+                                            <connections>
+                                                <action selector="onClickDetailEval:" destination="-1" eventType="touchUpInside" id="Kie-Tk-rLS"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj9-XF-6ri">
+                                            <frame key="frameInset" minX="189" minY="114" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="check_nor.png"/>
+                                            <state key="selected" image="check_sel.png"/>
+                                            <connections>
+                                                <action selector="onClickQuickEval:" destination="-1" eventType="touchUpInside" id="v77-Cp-x7x"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhL-za-XK5">
+                                            <frame key="frameInset" minX="110" minY="112" width="54" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" title="详细评价">
+                                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onClickDetailEval:" destination="-1" eventType="touchUpInside" id="P7c-8q-6NY"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MS9-jH-XLs">
+                                            <frame key="frameInset" minX="217" minY="116" width="54" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <state key="normal" title="快捷评价">
+                                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="onClickQuickEval:" destination="-1" eventType="touchUpInside" id="68b-tL-TWp"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="评价人姓名:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktt-Ol-Dae">
+                                            <frame key="frameInset" minX="11" minY="26" width="71" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AVb-mE-3QD">
+                                            <frame key="frameInset" minX="12" minY="54" height="1" maxX="13"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="评价类型:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcy-zf-GOd">
+                                            <frame key="frameInset" minX="11" minY="70" width="59" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5l-aj-8mg">
+                                            <frame key="frameInset" minX="12" minY="100" height="1" maxX="13"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eau-le-ea6">
+                                            <frame key="frameInset" minX="11" minY="116" width="59" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <string key="text">评价方式:
 :</string>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmn-Xf-VPt">
-                                    <frame key="frameInset" minX="100" minY="71" height="21" maxX="35"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmn-Xf-VPt">
+                                            <frame key="frameInset" minX="90" minY="22" height="21" maxX="45"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzC-LR-ts7">
                                     <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -355,7 +362,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="0.67450980390000004" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <state key="normal" title="发表评价">
+                                            <state key="normal" title="提交">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -374,6 +381,7 @@
                                 <constraint firstAttribute="trailing" secondItem="q6u-bI-741" secondAttribute="trailing" id="27H-8X-YJ8"/>
                                 <constraint firstItem="1Hq-aQ-Fj8" firstAttribute="leading" secondItem="kpH-be-AFu" secondAttribute="leading" id="3Uy-OZ-660"/>
                                 <constraint firstItem="q6u-bI-741" firstAttribute="leading" secondItem="kpH-be-AFu" secondAttribute="leading" id="54g-eX-VMU"/>
+                                <constraint firstItem="tds-FF-bze" firstAttribute="top" secondItem="kpH-be-AFu" secondAttribute="top" constant="50" id="BuB-Ip-X0l"/>
                                 <constraint firstItem="TRs-nX-BzV" firstAttribute="top" secondItem="8DE-iw-flR" secondAttribute="bottom" constant="13" id="C2P-Ag-aja"/>
                                 <constraint firstAttribute="trailing" secondItem="1Hq-aQ-Fj8" secondAttribute="trailing" id="CZy-aw-b2i"/>
                                 <constraint firstItem="gzC-LR-ts7" firstAttribute="leading" secondItem="kpH-be-AFu" secondAttribute="leading" constant="12" id="Jyb-TS-W9Q"/>
@@ -384,9 +392,12 @@
                                 <constraint firstAttribute="trailing" secondItem="TRs-nX-BzV" secondAttribute="trailing" constant="31" id="W3x-tu-fzQ"/>
                                 <constraint firstItem="gzC-LR-ts7" firstAttribute="top" secondItem="kpH-be-AFu" secondAttribute="top" constant="196" id="YLj-Hu-sxP"/>
                                 <constraint firstItem="8DE-iw-flR" firstAttribute="leading" secondItem="kpH-be-AFu" secondAttribute="leading" id="ZZl-lK-G75"/>
+                                <constraint firstItem="gzC-LR-ts7" firstAttribute="top" secondItem="tds-FF-bze" secondAttribute="bottom" id="iAI-nU-4yo"/>
                                 <constraint firstAttribute="trailing" secondItem="8DE-iw-flR" secondAttribute="trailing" id="lCW-DS-p7U"/>
                                 <constraint firstItem="8DE-iw-flR" firstAttribute="top" secondItem="q6u-bI-741" secondAttribute="bottom" id="mpQ-lw-nH5"/>
                                 <constraint firstAttribute="trailing" secondItem="gzC-LR-ts7" secondAttribute="trailing" constant="13" id="pss-hE-WAB"/>
+                                <constraint firstItem="tds-FF-bze" firstAttribute="leading" secondItem="kpH-be-AFu" secondAttribute="leading" id="xt7-Cs-x7b"/>
+                                <constraint firstAttribute="trailing" secondItem="tds-FF-bze" secondAttribute="trailing" id="z9U-G7-cFQ"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -406,7 +417,8 @@
                 <constraint firstItem="6oh-fW-Qyr" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="lHm-D9-kaF"/>
                 <constraint firstAttribute="bottom" secondItem="6oh-fW-Qyr" secondAttribute="bottom" id="ma4-HK-KD4"/>
             </constraints>
-            <point key="canvasLocation" x="25.5" y="52.5"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="25.5" y="117"/>
         </view>
     </objects>
     <resources>

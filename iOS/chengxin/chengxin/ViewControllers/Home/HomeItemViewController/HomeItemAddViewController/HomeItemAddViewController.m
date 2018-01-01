@@ -122,7 +122,7 @@
 
 - (IBAction)onAdd:(id)sender {
     [self hideAllKeyboard];
-    [GeneralUtil showProgress];
+    
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
     NSString *actionName;
     if([CommonData sharedInstance].addItemServiceIndex == ITEM_PAGE) {
@@ -135,7 +135,13 @@
         if(cityOtherID)
             [dicParams setObject:cityOtherID forKey:@"cityId"];
         else
-            [dicParams setObject:@"" forKey:@"cityId"];
+        {
+            [appDelegate.window makeToast:@"请选择所在城市"
+                                 duration:3.0
+                                 position:CSToastPositionCenter
+                                    style:nil];
+            return;
+        }
         [dicParams setObject:self.addressDetailTextField.text forKey:@"addr"];
         [dicParams setObject:self.needTextField.text forKey:@"need"];
     }else{
@@ -177,6 +183,8 @@
     [dicParams setObject:self.contactNameTextField.text forKey:@"contactName"];
     [dicParams setObject:self.contactMobileTextField.text forKey:@"contactMobile"];
     [dicParams setObject:self.contactWeixinTextField.text forKey:@"contactWeixin"];
+    
+    [GeneralUtil showProgress];
     [[WebAPI sharedInstance] sendPostRequestWithUpload:actionName Parameters:dicParams UploadImages:imageDictionary :^(NSObject *resObj) {
         [GeneralUtil hideProgress];
         NSDictionary *dicRes = (NSDictionary *)resObj;

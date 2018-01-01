@@ -66,8 +66,8 @@
 // WEB API
 //#define BASE_URL                                @"http://10.70.3.61:8080/BFIP/api.html?"
 //#define BASE_WEB_URL                            @"http://10.70.3.61:8080/BFIP"
-//#define BASE_URL                                @"http://180.76.183.131/BFIP/api.html?"
-//#define BASE_WEB_URL                            @"http://180.76.183.131/BFIP"
+//#define BASE_URL                                @"http://180.76.183.131/ChengxinTest/api.html?"
+//#define BASE_WEB_URL                            @"http://180.76.183.131/ChengxinTest"
 //#define BASE_URL                                @"http://cqegz.com/BFIP/api.html?"
 //#define BASE_WEB_URL                            @"http://cqegz.com/BFIP"
 #define BASE_URL                                @"http://cqegz.com/ChengxinTest/api.html?"
@@ -136,6 +136,11 @@
 
 // GET DATA COUNT
 #define REFRESH_GET_DATA_COUNT                  10
+
+// SET NAME LENGTH TO MAX
+#define HOME_NAME_MAX_LENGTH                    7
+#define HOME_TAG_MAX_LENGTH                     5
+#define EVALUATE_DETAIL_TITLE_MAX_LENGTH        15
 
 // RESPONSE CODE
 #define RESPONSE_SUCCESS        200

@@ -44,6 +44,7 @@
     CGFloat fServiceTableViewHeight;
     
     CGFloat fScrollViewContentHeight;
+    BOOL hideCompaynInfoFlag;
 }
 @end
 
@@ -82,6 +83,8 @@ enum {
     lblBackEval.layer.cornerRadius = 12.0f;
     lblFrontEval.layer.cornerRadius = 12.0f;
     viewWriteMessage.layer.cornerRadius = 17.0f;
+    
+    hideCompaynInfoFlag = NO;
     
     height = scrollContentView.frame.size.height;
     tblEvaluateView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
@@ -138,7 +141,7 @@ enum {
     }else if(tblItemView == object) {
         tblItemView.frame = CGRectMake(tblItemView.frame.origin.x, tblItemView.frame.origin.y, tblItemView.frame.size.width, tblItemView.contentSize.height);
         fItemTableViewHeight = tblItemView.frame.size.height;
-    }else if([keyPath isEqualToString:@"ServiceContentSize"]) {
+    }else if(tblServiceView == object) {
         tblServiceView.frame = CGRectMake(tblServiceView.frame.origin.x, tblServiceView.frame.origin.y, tblServiceView.frame.size.width, tblServiceView.contentSize.height);
         fServiceTableViewHeight = tblServiceView.frame.size.height;
     }
@@ -147,10 +150,10 @@ enum {
 
 - (void)dealloc
 {
-    [tblEvaluateView removeObserver:self forKeyPath:@"EvaluateContentSize" context:NULL];
-    [collectProductView removeObserver:self forKeyPath:@"ProductContentSize" context:NULL];
-    [tblItemView removeObserver:self forKeyPath:@"ItemContentSize" context:NULL];
-    [tblServiceView removeObserver:self forKeyPath:@"ServiceContentSize" context:NULL];
+    [tblEvaluateView removeObserver:self forKeyPath:@"contentSize" context:NULL];
+    [collectProductView removeObserver:self forKeyPath:@"contentSize" context:NULL];
+    [tblItemView removeObserver:self forKeyPath:@"contentSize" context:NULL];
+    [tblServiceView removeObserver:self forKeyPath:@"contentSize" context:NULL];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -261,6 +264,9 @@ enum {
 - (void)showEvaluateDetailView:(NSNotification *)notification {
     EvaluateDetailViewController *detailViewController = [[EvaluateDetailViewController alloc] initWithNibName:@"EvaluateDetailViewController" bundle:nil];
     NSNumber *evaluteIndex = (NSNumber *)(notification.object);
+    if(evaluateArray.count <= [evaluteIndex integerValue]) {
+        return;
+    }
     NSMutableDictionary *evaluateDic = (NSMutableDictionary *)[evaluateArray objectAtIndex:[evaluteIndex integerValue]];
     detailViewController.dicEvalData = evaluateDic;
     detailViewController.isHotEvaluator = NO;
@@ -269,6 +275,9 @@ enum {
 
 - (void)showFixErrorView:(NSNotification *)notification {
     NSNumber *evaluateIndex = (NSNumber *)(notification.object);
+    if(evaluateArray.count <= [evaluateIndex integerValue]) {
+        return;
+    }
     ReformViewController *reformVC = [[ReformViewController alloc] initWithNibName:@"ReformViewController" bundle:nil];
     reformVC.reformAccountDic = (NSDictionary *)[evaluateArray objectAtIndex:[evaluateIndex integerValue]];
     reformVC.isOwnerFlag = YES;
@@ -297,7 +306,11 @@ enum {
         self.personalWeixinLabel.text = friendDictionary[@"weixin"];
         self.personalView.hidden = NO;
         self.minimizeBarView.hidden = YES;
-        fScrollViewContentHeight = 590.f;
+        self.minimizeBarViewHeight.constant = 0;
+        self.viewOfficeDetail.hidden = YES;
+        self.officeContentView.hidden = YES;
+        fScrollViewContentHeight = 550;
+
     }else {
         self.navTitleLabel.text = @"企业信息";
         self.officeMarkLabel.text = @"企业";//friendDictionary[@"enterKindName"];
@@ -312,10 +325,17 @@ enum {
         self.lblBossWeiXin.text = friendDictionary[@"bossWeixin"];
         self.lblAddr.text = [NSString stringWithFormat:@"%@ %@ %@", friendDictionary[@"provinceName"], friendDictionary[@"cityName"], friendDictionary[@"addr"]];
         NSString *certImageName = friendDictionary[@"enterCertImage"];
-        [self.imgBusinessCert sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, certImageName]]];
+        [self.imgBusinessCert sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, certImageName]] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
         self.personalView.hidden = YES;
         self.minimizeBarView.hidden = NO;
-        fScrollViewContentHeight = 1104.f;
+        self.minimizeBarViewHeight.constant = 36;
+        self.viewOfficeDetail.hidden = NO;
+        self.officeContentView.hidden = NO;
+
+        [self.lblRecommend sizeToFit];
+        [self.lblOfficeInfo sizeToFit];
+        self.officeContentViewHeight.constant = 114 + self.lblRecommend.frame.size.height + self.lblOfficeInfo.frame.size.height;
+        fScrollViewContentHeight = 945 + self.lblRecommend.frame.size.height + self.lblOfficeInfo.frame.size.height;
     }
     if([self.lblName.text isEqualToString:@""])
         self.lblName.text = friendDictionary[@"mobile"];
@@ -347,10 +367,16 @@ enum {
     }else{
         self.btnXYName.hidden = NO;
         [self.btnXYName setTitle:friendDictionary[@"xyName"] forState:UIControlStateNormal];
+        CGSize stringSize = [self.btnXYName.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0]}];
         dispatch_async(dispatch_get_main_queue(), ^{
             CGRect nameLabelFrame = self.lblName.frame;
-            CGSize stringSize = [self.btnXYName.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0]}];
-            [self.btnXYName setFrame:CGRectMake(nameLabelFrame.origin.x + nameLabelFrame.size.width + 3, nameLabelFrame.origin.y, stringSize.width, 16)];
+            CGSize titleSize = [self.lblName.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
+            int nNextLine = 0;
+            while (titleSize.width >= self.lblName.frame.size.width) {
+                titleSize.width -= self.lblName.frame.size.width;
+                nNextLine ++;
+            }
+            [self.btnXYName setFrame:CGRectMake(nameLabelFrame.origin.x + titleSize.width + 3, nameLabelFrame.origin.y + 21 * nNextLine, stringSize.width, 16)];
         });
     }
     self.lblCode.text = friendDictionary[@"code"];
@@ -545,22 +571,32 @@ enum {
             cell.replyContentLabel.hidden = YES;
             NSDictionary *evaluateDic = (NSDictionary *)[evaluateArray objectAtIndex:indexPath.row];
             NSInteger ownerAkind = [evaluateDic[@"ownerAkind"] integerValue];
+            NSString *strUserName = @"";
             if(ownerAkind == PERSONAL_KIND) {
-                cell.ownerNameLabel.text = evaluateDic[@"ownerRealname"];
+                strUserName = evaluateDic[@"ownerRealname"];
             }else{
-                cell.ownerNameLabel.text = evaluateDic[@"ownerEnterName"];
+                strUserName = evaluateDic[@"ownerEnterName"];
             }
-            [cell.ownerNameLabel sizeToFit];
+            
+            if(strUserName.length > EVALUATE_DETAIL_TITLE_MAX_LENGTH) {
+                strUserName = [NSString stringWithFormat:@"%@…", [strUserName substringWithRange:NSMakeRange(0, EVALUATE_DETAIL_TITLE_MAX_LENGTH)]];
+            }
+            cell.ownerNameLabel.text = strUserName;
+//            [cell.ownerNameLabel sizeToFit];
             cell.ownerContentTextView.text = evaluateDic[@"content"];
             cell.evaluateKindLabel.text = evaluateDic[@"kindName"];
             NSString *logoImageName = evaluateDic[@"ownerLogo"];
             if(logoImageName)
-                [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person.png" : @"no_image_enter.png"]];
+                [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
             
             if([evaluateDic[@"isFalse"] longValue] == 1) {
                 cell.isFalseImageView.hidden = NO;
             }else{
                 cell.isFalseImageView.hidden = YES;
+            }
+            for( UIView* subV in [cell.scrollThumb subviews])
+            {
+                [subV removeFromSuperview];
             }
             NSMutableArray *evaluateImageArray = evaluateDic[@"imgPaths"];
             for (int i = 0; i < evaluateImageArray.count; i++)
@@ -786,22 +822,25 @@ enum {
 
 - (IBAction)onClickShowHideButton:(id)sender {
     
-    if ( consOfficeDetail.constant > 0) {
+    if (!hideCompaynInfoFlag) {
+        hideCompaynInfoFlag = YES;
         [UIView animateWithDuration:3.0f animations:^{
-            consOfficeDetail.constant = 0.f;
+            fScrollViewContentHeight -= 478.f;
             [imgShowHide setImage:[UIImage imageNamed:@"arrow_down"]];
             [lblShowHide setText:@"展开"];
             self.viewOfficeDetail.hidden = YES;
+            [self setScrollContentSize];
             
         }];
     } else
     {
+        hideCompaynInfoFlag = NO;
         self.viewOfficeDetail.hidden = NO;
         [UIView animateWithDuration:3.0f animations:^{
-            consOfficeDetail.constant = 478.f;
+            fScrollViewContentHeight += 478.f;
             [imgShowHide setImage:[UIImage imageNamed:@"arrow_up"]];
             [lblShowHide setText:@"收起"];
-            
+            [self setScrollContentSize];
         }];
     }
 }
@@ -1010,6 +1049,31 @@ enum {
 //            URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", [URL absoluteString] ]];
 //        }
         [[UIApplication sharedApplication] openURL:URL];
+        NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
+        [dicParams setObject:@"onContact" forKey:@"pAct"];
+        [dicParams setObject:friendDictionary[@"id"] forKey:@"accountId"];
+        [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
+        
+        [[WebAPI sharedInstance] sendPostRequest:@"onContact" Parameters:dicParams :^(NSObject *resObj) {
+            
+            NSDictionary *dicRes = (NSDictionary *)resObj;
+            //[GeneralUtil hideProgress];
+            if (dicRes != nil ) {
+                if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
+                    
+                }else{
+                    [appDelegate.window makeToast:dicRes[@"msg"]
+                                         duration:3.0
+                                         position:CSToastPositionCenter
+                                            style:nil];
+                }
+            }else{
+                [appDelegate.window makeToast:@"网络不连接"
+                                     duration:3.0
+                                     position:CSToastPositionCenter
+                                        style:nil];
+            }
+        }];
     }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1025,14 +1089,18 @@ enum {
                 self.scrollContentViewHeight.constant = fEvaluateTableViewHeight;
                 self.scrollViewContentHeight.constant = fScrollViewContentHeight + fEvaluateTableViewHeight - 244;
             }else{
-                self.scrollContentViewHeight.constant = 244.f;
-                self.scrollViewContentHeight.constant = fScrollViewContentHeight;
+                if(fEvaluateTableViewHeight == 45) {
+                    self.scrollContentViewHeight.constant = 244.f;
+                    self.scrollViewContentHeight.constant = fScrollViewContentHeight;
+                }else{
+                    self.scrollContentViewHeight.constant = fEvaluateTableViewHeight;
+                    self.scrollViewContentHeight.constant = fScrollViewContentHeight + fEvaluateTableViewHeight - 244;
+                }
             }
             if(evaluateArray.count > 0) {
                 self.blankView.hidden = YES;
             }else{
                 self.blankView.hidden = NO;
-//                self.blankTextLabel.text = @"暂时还没有评论！";
             }
             break;
         case SELECT_PROD:
@@ -1040,14 +1108,18 @@ enum {
                 self.scrollContentViewHeight.constant = fProductTableViewHeight;
                 self.scrollViewContentHeight.constant = fScrollViewContentHeight + fProductTableViewHeight - 244;
             }else{
-                self.scrollContentViewHeight.constant = 244.f;
-                self.scrollViewContentHeight.constant = fScrollViewContentHeight;
+                if(fProductTableViewHeight == 0) {
+                    self.scrollContentViewHeight.constant = 244.f;
+                    self.scrollViewContentHeight.constant = fScrollViewContentHeight;
+                }else{
+                    self.scrollContentViewHeight.constant = fProductTableViewHeight;
+                    self.scrollViewContentHeight.constant = fScrollViewContentHeight + fProductTableViewHeight - 244;
+                }
             }
             if(productArray.count > 0) {
                 self.blankView.hidden = YES;
             }else{
                 self.blankView.hidden = NO;
-//                self.blankTextLabel.text = @"暂时还没有产品！";
             }
             break;
         case SELECT_ITEM:
@@ -1055,14 +1127,18 @@ enum {
                 self.scrollContentViewHeight.constant = fItemTableViewHeight;
                 self.scrollViewContentHeight.constant = fScrollViewContentHeight + fItemTableViewHeight - 244;
             }else{
-                self.scrollContentViewHeight.constant = 244.f;
-                self.scrollViewContentHeight.constant = fScrollViewContentHeight;
+                if(fItemTableViewHeight == 0) {
+                    self.scrollContentViewHeight.constant = 244.f;
+                    self.scrollViewContentHeight.constant = fScrollViewContentHeight;
+                }else{
+                    self.scrollContentViewHeight.constant = fItemTableViewHeight;
+                    self.scrollViewContentHeight.constant = fScrollViewContentHeight + fItemTableViewHeight - 244;
+                }
             }
             if(itemArray.count > 0) {
                 self.blankView.hidden = YES;
             }else{
                 self.blankView.hidden = NO;
-//                self.blankTextLabel.text = @"暂时还没有项目！";
             }
             break;
         case SELECT_SERV:
@@ -1070,14 +1146,18 @@ enum {
                 self.scrollContentViewHeight.constant = fServiceTableViewHeight;
                 self.scrollViewContentHeight.constant = fScrollViewContentHeight + fServiceTableViewHeight - 244;
             }else{
-                self.scrollContentViewHeight.constant = 244.f;
-                self.scrollViewContentHeight.constant = fScrollViewContentHeight;
+                if(fServiceTableViewHeight == 0) {
+                    self.scrollContentViewHeight.constant = 244.f;
+                    self.scrollViewContentHeight.constant = fScrollViewContentHeight;
+                }else{
+                    self.scrollContentViewHeight.constant = fServiceTableViewHeight;
+                    self.scrollViewContentHeight.constant = fScrollViewContentHeight + fServiceTableViewHeight - 244;
+                }
             }
             if(serviceArray.count > 0) {
                 self.blankView.hidden = YES;
             }else{
                 self.blankView.hidden = NO;
-//                self.blankTextLabel.text = @"暂时还没有服务！";
             }
             break;
         default:
@@ -1085,7 +1165,7 @@ enum {
     }
     NSInteger aKind = [friendDictionary[@"akind"] integerValue];
     if(aKind != PERSONAL_KIND)
-        self.lblOfficeContentBottom.constant = self.selectView.frame.size.height + self.scrollContentViewHeight.constant + 36;
+        self.lblOfficeContentBottom.constant = self.selectView.frame.size.height + self.scrollContentViewHeight.constant + 36 + 49;
     [self.bgScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, self.scrollViewContentHeight.constant + 124)];
 }
 
@@ -1180,14 +1260,15 @@ enum {
 - (void)onCallForStatics {
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
     [dicParams setObject:@"onShare" forKey:@"pAct"];
+    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
     NSInteger akind = [friendDictionary[@"akind"] integerValue];
     if (akind == PERSONAL_KIND)
-        [dicParams setObject:@"4" forKey:@"kind"];
+        [dicParams setObject:[NSNumber numberWithInteger:4] forKey:@"kind"];
     else
-        [dicParams setObject:@"5" forKey:@"kind"];
+        [dicParams setObject:[NSNumber numberWithInteger:5] forKey:@"kind"];
     
     [dicParams setObject:friendDictionary[@"id"] forKey:@"id"];
-    [dicParams setObject:@"1" forKey:@"share"];
+//    [dicParams setObject:@"1" forKey:@"share"];
     
     [[WebAPI sharedInstance] sendPostRequest:ACTION_ONSHARE Parameters:dicParams :^(NSObject *resObj) {
         

@@ -30,6 +30,8 @@
 @property (nonatomic, weak) IBOutlet UIScrollView *writeEvalScrollView;
 @property (nonatomic, weak) IBOutlet UIButton *accountSelectButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightReasonView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpace1;
 
 - (IBAction)onClickFrontEval:(id)sender;
 - (IBAction)onClickBackEval:(id)sender;

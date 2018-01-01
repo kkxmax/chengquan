@@ -91,4 +91,9 @@
 - (IBAction)onBackAction:(id)sender;
 
 @property (nonatomic, assign) int selectType;
+
+@property (weak, nonatomic) IBOutlet UIView *officeContentView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *officeContentViewHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *minimizeBarViewHeight;
 @end

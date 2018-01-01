@@ -162,7 +162,8 @@ enum {
     FavouritesTableItemViewCell *cell = (FavouritesTableItemViewCell*)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     NSDictionary *dic = [evaluatorArray objectAtIndex:indexPath.row];
     NSString *logoPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dic[@"logo"]];
-    [cell.photo sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+    NSInteger akind = [dic[@"akind"] integerValue];
+    [cell.photo sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed: akind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
     if (selectType == SELECT_PERSONAL ) {
         cell.name.text = dic[@"realname"];
     }else if(selectType == SELECT_ENTERPRISE) {

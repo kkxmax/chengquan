@@ -11,9 +11,9 @@
 @interface HotTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblContent;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollThumb;
 @property (weak, nonatomic) IBOutlet UILabel *lblRead;
 @property (weak, nonatomic) IBOutlet UILabel *lblEval;
 @property (weak, nonatomic) IBOutlet UILabel *lblDate;
+@property (weak, nonatomic) IBOutlet UIView *imageContentView;
 
 @end

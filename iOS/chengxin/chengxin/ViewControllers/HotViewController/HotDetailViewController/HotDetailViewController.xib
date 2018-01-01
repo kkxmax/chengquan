@@ -312,6 +312,15 @@ CQ
 CQ
 </string>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtV-Ce-Uoy">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="SZc-4H-re5"/>
+                                <constraint firstAttribute="width" constant="20" id="ybP-0N-90w"/>
+                            </constraints>
+                            <connections>
+                                <action selector="onShareAction:" destination="-1" eventType="touchUpInside" id="qUH-Pp-x7D"/>
+                            </connections>
+                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQ5-Zs-QVT">
                             <constraints>
                                 <constraint firstAttribute="width" constant="28" id="jwS-2z-6cc"/>
@@ -391,6 +400,7 @@ CQ
                     <constraints>
                         <constraint firstItem="CQ5-Zs-QVT" firstAttribute="top" secondItem="0Mm-nV-12i" secondAttribute="bottom" constant="1" id="0Ir-L7-Spn"/>
                         <constraint firstItem="Bbk-TW-7lj" firstAttribute="leading" secondItem="HSX-Xg-uTu" secondAttribute="leading" id="1CZ-LY-plp"/>
+                        <constraint firstItem="ZtV-Ce-Uoy" firstAttribute="top" secondItem="Bbk-TW-7lj" secondAttribute="bottom" constant="11" id="1Qz-BZ-HRl"/>
                         <constraint firstItem="HLf-QM-SXM" firstAttribute="top" secondItem="ONS-Ng-rFv" secondAttribute="bottom" constant="2" id="1qj-qj-Ayz"/>
                         <constraint firstItem="BxI-mV-SB6" firstAttribute="top" secondItem="Bbk-TW-7lj" secondAttribute="bottom" constant="8" id="33L-dN-iGG"/>
                         <constraint firstItem="0Mm-nV-12i" firstAttribute="leading" secondItem="ONS-Ng-rFv" secondAttribute="trailing" constant="32" id="5SS-m0-Gkn"/>
@@ -402,6 +412,7 @@ CQ
                         <constraint firstItem="rj6-XJ-Emn" firstAttribute="top" secondItem="BxI-mV-SB6" secondAttribute="top" id="Ehh-Qb-0Ib"/>
                         <constraint firstItem="ONS-Ng-rFv" firstAttribute="top" secondItem="Bbk-TW-7lj" secondAttribute="bottom" constant="8" id="FKm-Dc-gEQ"/>
                         <constraint firstItem="sx1-dc-tzU" firstAttribute="top" secondItem="iVU-wp-p2l" secondAttribute="bottom" constant="2" id="FgC-vc-Dlm"/>
+                        <constraint firstItem="ZtV-Ce-Uoy" firstAttribute="leading" secondItem="ONS-Ng-rFv" secondAttribute="trailing" constant="32" id="Hff-Ou-SLj"/>
                         <constraint firstItem="9xS-X1-ctg" firstAttribute="leading" secondItem="iVU-wp-p2l" secondAttribute="leading" id="I4K-C0-na4"/>
                         <constraint firstItem="iVU-wp-p2l" firstAttribute="top" secondItem="Bbk-TW-7lj" secondAttribute="bottom" constant="8" id="J4z-zE-lgS"/>
                         <constraint firstItem="6dq-Bm-BhU" firstAttribute="top" secondItem="BxI-mV-SB6" secondAttribute="bottom" constant="2" id="Ki3-mf-0w1"/>
@@ -415,9 +426,11 @@ CQ
                         <constraint firstItem="9xS-X1-ctg" firstAttribute="bottom" secondItem="iVU-wp-p2l" secondAttribute="bottom" id="VBf-cR-ybB"/>
                         <constraint firstAttribute="trailing" secondItem="CQ5-Zs-QVT" secondAttribute="trailing" constant="8" id="bpZ-Lo-ScR"/>
                         <constraint firstAttribute="trailing" secondItem="0Mm-nV-12i" secondAttribute="trailing" constant="11" id="emG-s8-QsF"/>
+                        <constraint firstItem="CQ5-Zs-QVT" firstAttribute="top" secondItem="ZtV-Ce-Uoy" secondAttribute="bottom" constant="1" id="eqX-ju-a1P"/>
                         <constraint firstItem="ONS-Ng-rFv" firstAttribute="leading" secondItem="iVU-wp-p2l" secondAttribute="trailing" constant="31" id="fcQ-io-1ky"/>
                         <constraint firstItem="CQ5-Zs-QVT" firstAttribute="leading" secondItem="HLf-QM-SXM" secondAttribute="trailing" constant="20" id="haj-q4-1cd"/>
                         <constraint firstAttribute="trailing" secondItem="Bbk-TW-7lj" secondAttribute="trailing" id="iQV-X1-b8l"/>
+                        <constraint firstAttribute="trailing" secondItem="ZtV-Ce-Uoy" secondAttribute="trailing" constant="11" id="oMF-gG-rVQ"/>
                         <constraint firstItem="SdB-gw-qXg" firstAttribute="top" secondItem="Bbk-TW-7lj" secondAttribute="bottom" constant="7" id="qYf-VO-wK3"/>
                         <constraint firstItem="9xS-X1-ctg" firstAttribute="trailing" secondItem="iVU-wp-p2l" secondAttribute="trailing" id="sf2-DX-oTH"/>
                         <constraint firstItem="rj6-XJ-Emn" firstAttribute="trailing" secondItem="BxI-mV-SB6" secondAttribute="trailing" id="wBm-Cd-PMw"/>

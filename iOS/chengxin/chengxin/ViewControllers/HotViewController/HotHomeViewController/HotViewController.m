@@ -24,6 +24,9 @@
     AAPullToRefresh *bottomRefreshView;
     NSInteger refreshStartIndex;
     NSMutableArray* aryHeights;
+    
+    float imageWidth;
+    float imageHeight;
 }
 @end
 
@@ -70,6 +73,8 @@
     
     refreshStartIndex = 0;
 
+    imageWidth = (SCREEN_WIDTH - 20 - 14) / 3;
+    imageHeight = imageWidth * 80 / 113;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -131,18 +136,18 @@
         if (dicRes != nil ) {
             if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
                 NSArray *aryData = dicRes[@"data"];
-                if(aryData.count == 0)
-                    self.viewBlank.hidden = NO;
-                else
-                    self.viewBlank.hidden = YES;
 //                [aryHotData removeAllObjects];
                 for (int i = 0; i < aryData.count; i++) {
                     [aryHotData addObject:[self parseHotObjFromData:aryData[i]]];
                 }
                 for(int i = 0; i < aryData.count; i++)
                 {
-                    [aryHeights addObject:[NSNumber numberWithFloat:60.0f]];
+                    [aryHeights addObject:[NSNumber numberWithFloat:174.0f]];
                 }
+                if(aryHotData.count == 0)
+                    self.viewBlank.hidden = NO;
+                else
+                    self.viewBlank.hidden = YES;
                 [tblHotView reloadData];
             }
             else
@@ -201,7 +206,7 @@
     if(aryHeights.count > indexPath.row)
         return [aryHeights[indexPath.row] floatValue];
     else
-        return 250;
+        return 174;
     /*
     if(aryHotData.count <= indexPath.row)
         return 249.0f;
@@ -229,38 +234,43 @@
     cell.lblDate.text = [strDate substringToIndex:strDate.length-3];
 
     NSMutableArray *aryPath = hot.aryImgPath;
-    for( UIView* subV in [cell.scrollThumb subviews])
+    for( UIView* subV in [cell.imageContentView subviews])
     {
         [subV removeFromSuperview];
     }
     if ( aryPath == nil || aryPath.count == 0  ) {
         //cell.scrollThumb.hidden = YES;
-        cell.scrollThumb.userInteractionEnabled = false;
+        cell.imageContentView.hidden = YES;
     }
     else
     {
-        cell.scrollThumb.userInteractionEnabled = true;
+        cell.imageContentView.hidden = NO;
+        cell.imageContentView.frame = CGRectMake(cell.imageContentView.frame.origin.x, cell.imageContentView.frame.origin.y, cell.imageContentView.frame.size.width, imageHeight);
         for (int i = 0; i < aryPath.count; i++)
         {
-            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 120, 0, 113, 80)];
+            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(i * (imageWidth + 7), 0, imageWidth, imageHeight)];
             NSString *imgPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, aryPath[i]];
-
+            
             [imgView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
-            [cell.scrollThumb addSubview:imgView];
+            [cell.imageContentView addSubview:imgView];
         }
-        [cell.scrollThumb setContentSize:CGSizeMake(aryPath.count * 120 - 7, 80)];
+//        for (int i = 0; i < aryPath.count; i++)
+//        {
+//            UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(i * (imageWidth + 7), 0, imageWidth, imageHeight)];
+//            NSString *imgPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, aryPath[i]];
+//
+//            [imgView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+//            [cell.scrollThumb addSubview:imgView];
+//        }
+//        [cell.scrollThumb setContentSize:CGSizeMake(aryPath.count * 120 - 7, 80)];
     }
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tblHotView beginUpdates];
         [cell.lblTitle sizeToFit];
         [cell.lblContent sizeToFit];
-        NSNumber *itemHeight =  [NSNumber numberWithFloat:250 + cell.lblTitle.frame.size.height - 16 + cell.lblContent.frame.size.height - 51 - (aryPath.count == 0 ? 80 : 0)];
-        if([itemHeight floatValue] < 60)
-            itemHeight = [NSNumber numberWithFloat:60.0f];
-        
+        NSNumber *itemHeight =  [NSNumber numberWithFloat:174 + cell.lblTitle.frame.size.height + cell.lblContent.frame.size.height - (aryPath.count == 0 ? imageHeight : 0)];
         [aryHeights replaceObjectAtIndex:indexPath.row  withObject:itemHeight];
-        
         [self.tblHotView endUpdates];
     });
     return cell;

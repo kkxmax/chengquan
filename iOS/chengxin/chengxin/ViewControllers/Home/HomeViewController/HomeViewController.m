@@ -50,6 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     isFontAdjusted = false;
+    [CommonData sharedInstance].subHomeIndex = 0;
     // Do any additional setup after loading the view from its nib.
     homeFamiliarVC = [[HomeFamiliarViewController alloc] initWithNibName:@"HomeFamiliarViewController" bundle:nil];
     homeEnterpriseVC = [[HomeEnterpriseViewController alloc] initWithNibName:@"HomeEnterpriseViewController" bundle:nil];
@@ -118,6 +119,34 @@
 
     topRefreshView.showPullToRefresh = YES;
     bottomRefreshView.showPullToRefresh = YES;
+    
+    
+    NSInteger nCurrentPage = [CommonData sharedInstance].subHomeIndex;
+    switch(nCurrentPage) {
+        case 0:
+            [homeFamiliarVC viewWillAppear:animated];
+            [self familiarButtonAction: nil];
+            break;
+        case 1:
+            [homeEnterpriseVC viewWillAppear:animated];
+            [self enterpriseButtonAction:nil];
+            break;
+        case 2:
+            [homeCommerceVC viewWillAppear:animated];
+            [self commerceButtonAction:nil];
+            break;
+        case 3:
+            [homeItemVC viewWillAppear:animated];
+            [self itemButtonAction: nil];
+            break;
+        case 4:
+            [homeServiceVC viewWillAppear:animated];
+            [self serviceButtonAction: nil];
+            break;
+        default:
+            break;
+    }
+
    
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -759,7 +788,7 @@ static NSInteger currentPage = 0;
                 [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, overScrollView.frame.size.height - slideHomeScrollView.frame.size.height)];
             }else{
                 self.blankView.hidden = YES;
-                [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, familiarTableViewHeight + slideHomeScrollView.frame.size.height)];
+                [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, familiarTableViewHeight)];
             }
             break;
         case 1:
@@ -772,7 +801,7 @@ static NSInteger currentPage = 0;
                 [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, overScrollView.frame.size.height - slideHomeScrollView.frame.size.height)];
             }else{
                 self.blankView.hidden = YES;
-                [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, enterpriseTableViewHeight + slideHomeScrollView.frame.size.height)];
+                [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, enterpriseTableViewHeight)];
             }
             break;
         case 2:
@@ -798,7 +827,7 @@ static NSInteger currentPage = 0;
                 [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, overScrollView.frame.size.height - slideHomeScrollView.frame.size.height)];
             }else{
                 self.blankView.hidden = YES;
-                [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, itemTableViewHeight + slideHomeScrollView.frame.size.height)];
+                [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, itemTableViewHeight)];
             }
             break;
         case 4:
@@ -811,7 +840,7 @@ static NSInteger currentPage = 0;
                 [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, overScrollView.frame.size.height - slideHomeScrollView.frame.size.height)];
             }else{
                 self.blankView.hidden = YES;
-                [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, serviceTableViewHeight + slideHomeScrollView.frame.size.height)];
+                [overScrollView setContentSize:CGSizeMake(overScrollView.frame.size.width, serviceTableViewHeight)];
             }
             break;
         default:

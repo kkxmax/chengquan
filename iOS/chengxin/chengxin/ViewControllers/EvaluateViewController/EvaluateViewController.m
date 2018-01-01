@@ -676,6 +676,10 @@
         cell.lblElectCnt.text = [NSString stringWithFormat:@"点赞:%d", [dic[@"targetAccountElectCnt"] intValue]];
         cell.lblEstimationCnt.text = [NSString stringWithFormat:@"评价:%d", [dic[@"targetAccountFeedbackCnt"] intValue]];
         
+        for( UIView* subV in [cell.scrollThumb subviews])
+        {
+            [subV removeFromSuperview];
+        }
         NSArray* aryPath = dic[@"imgPaths"];
         for (int i = 0; i < aryPath.count; i++)
         {
@@ -728,6 +732,10 @@
         cell.lblElectCnt.text = [NSString stringWithFormat:@"点赞:%d", [dic[@"ownerElectCnt"] intValue]];
         cell.lblEstimationCnt.text = [NSString stringWithFormat:@"评价:%d", [dic[@"ownerFeedbackCnt"] intValue]];
         
+        for( UIView* subV in [cell.scrollThumb subviews])
+        {
+            [subV removeFromSuperview];
+        }
         NSArray* aryPath = dic[@"imgPaths"];
         for (int i = 0; i < aryPath.count; i++)
         {

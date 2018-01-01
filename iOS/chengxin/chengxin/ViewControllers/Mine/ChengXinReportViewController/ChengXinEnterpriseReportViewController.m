@@ -26,48 +26,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [GeneralUtil showProgress];
-    self.lblManagerName.text = [CommonData sharedInstance].userInfo[@"bossName"];
-    self.lblMainBusiness.text = [CommonData sharedInstance].userInfo[@"bossJob"];
-    self.lblManagerPosition.text = [CommonData sharedInstance].userInfo[@"mainJob"];
-    self.lblManagerPhoneNumber.text = [CommonData sharedInstance].userInfo[@"bossMobile"];
-    self.lblManagerWeixinNumber.text = [CommonData sharedInstance].userInfo[@"weixin"];
-    self.lblOfficeAddress.text = [NSString stringWithFormat:@"%@ %@ %@", [CommonData sharedInstance].userInfo[@"provinceName"], [CommonData sharedInstance].userInfo[@"cityName"], [CommonData sharedInstance].userInfo[@"addr"]];
-
-    self.lblCompanyInfo.text = [CommonData sharedInstance].userInfo[@"comment"];
-    self.lblRecommend.text = [CommonData sharedInstance].userInfo[@"recommend"];
-    self.lblCompanyURL.text = [CommonData sharedInstance].userInfo[@"weburl"];
-    
-    self.lblName.text = [CommonData sharedInstance].userInfo[@"enterName"];
-
-    [self.btnBusiness setTitle:[CommonData sharedInstance].userInfo[@"xyName"] forState:UIControlStateNormal];
-    self.lblCompanyName.text = [CommonData sharedInstance].userInfo[@"enterName"];
-    self.lblCodeNumber.text = [CommonData sharedInstance].userInfo[@"code"];
-    if([[CommonData sharedInstance].userInfo[@"credit"] longValue] == 0) {
-        self.lblChengHuDu.text = @"诚信度: 暂无";
-    }else{
-        self.lblChengHuDu.text = [NSString stringWithFormat:@"诚信度: %@%@", [[CommonData sharedInstance].userInfo[@"credit"] stringValue], @"%"];
-    }
-    
-    self.lblFeedback.text = [NSString stringWithFormat:@"评价: %@", [[CommonData sharedInstance].userInfo[@"feedbackCnt"] stringValue]];
-    self.lblDianZan.text = [NSString stringWithFormat:@"点赞: %@", [[CommonData sharedInstance].userInfo[@"electCnt"] stringValue]];
-    //self.lblAddress.text = [CommonData sharedInstance].userInfo[@"addr"];
-    //self.lblCompanyWebURL.text = [CommonData sharedInstance].userInfo[@"weburl"];
-    //self.lblWeixinNumber.text = [CommonData sharedInstance].userInfo[@"weixin"];
-    //self.lblPosition.text = [CommonData sharedInstance].userInfo[@"job"];
-    //self.lblWorkExperience.text = [CommonData sharedInstance].userInfo[@"experience"];
-
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, [CommonData sharedInstance].userInfo[@"logo"]]];
-    
-    [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"no_image.png"]];
-    
-    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, [CommonData sharedInstance].userInfo[@"enterCertImage"]]];
-    [self.businessPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bg_pic.png"]];
-    
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
     [dicParams setObject:ACTION_GETINVITERINFO forKey:@"pAct"];
     [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
     
+    [GeneralUtil showProgress];
     [[WebAPI sharedInstance] sendPostRequest:ACTION_GETINVITERINFO Parameters:dicParams :^(NSObject *resObj) {
         [GeneralUtil hideProgress];
         NSDictionary *dicRes = (NSDictionary *)resObj;
@@ -79,12 +42,12 @@
                 if(inviterInfo == nil)
                 {
                     self.recommendView.hidden = YES;
-                    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, 750)];
+                    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, 874)];
                     return;
                 }else
                 {
                     self.recommendView.hidden = NO;
-                    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, 919)];
+                    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, 1043)];
                 }
                 
                 [[CommonData sharedInstance] setSelectedFriendAccountID:inviterInfo[@"id"]];
@@ -116,7 +79,78 @@
         }
     }];
 }
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.lblName.text = [CommonData sharedInstance].userInfo[@"enterName"];
+    
+    [self.lblName sizeToFit];
+    
+    NSString *strXYName = [CommonData sharedInstance].userInfo[@"xyName"];
+    if(strXYName.length == 0) {
+        self.btnBusiness.hidden = YES;
+    }else{
+        self.btnBusiness.hidden = NO;
+        [self.btnBusiness setTitle:strXYName forState:UIControlStateNormal];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CGRect nameLabelFrame = self.lblName.frame;
+            
+            CGSize titleSize = [self.lblName.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
+            int nNextLine = 0;
+            while (titleSize.width >= self.lblName.frame.size.width) {
+                titleSize.width -= self.lblName.frame.size.width;
+                nNextLine ++;
+            }
+            CGSize stringSize = [strXYName sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.0]}];
+            
+            [self.btnBusiness setFrame:CGRectMake(nameLabelFrame.origin.x + titleSize.width + 3, nameLabelFrame.origin.y + 21 * nNextLine, stringSize.width, 16)];
+        });
+    }
+    
+    self.lblManagerName.text = [CommonData sharedInstance].userInfo[@"bossName"];
+    self.lblMainBusiness.text = [CommonData sharedInstance].userInfo[@"bossJob"];
+    self.lblManagerPosition.text = [CommonData sharedInstance].userInfo[@"mainJob"];
+    self.lblManagerPhoneNumber.text = [CommonData sharedInstance].userInfo[@"bossMobile"];
+    self.lblManagerWeixinNumber.text = [CommonData sharedInstance].userInfo[@"weixin"];
+    self.lblOfficeAddress.text = [NSString stringWithFormat:@"%@ %@ %@", [CommonData sharedInstance].userInfo[@"provinceName"], [CommonData sharedInstance].userInfo[@"cityName"], [CommonData sharedInstance].userInfo[@"addr"]];
+    
+    self.lblCompanyInfo.text = [CommonData sharedInstance].userInfo[@"comment"];
+    self.lblRecommend.text = [CommonData sharedInstance].userInfo[@"recommend"];
+    self.lblCompanyURL.text = [CommonData sharedInstance].userInfo[@"weburl"];
+    
+    
+    
+    
+    //[self.btnBusiness setTitle:[CommonData sharedInstance].userInfo[@"xyName"] forState:UIControlStateNormal];
+    self.lblCompanyName.text = [CommonData sharedInstance].userInfo[@"enterName"];
+    self.lblCodeNumber.text = [CommonData sharedInstance].userInfo[@"code"];
+    if([[CommonData sharedInstance].userInfo[@"credit"] longValue] == 0) {
+        self.lblChengHuDu.text = @"诚信度: 暂无";
+    }else{
+        self.lblChengHuDu.text = [NSString stringWithFormat:@"诚信度: %@%@", [[CommonData sharedInstance].userInfo[@"credit"] stringValue], @"%"];
+    }
+    
+    self.lblFeedback.text = [NSString stringWithFormat:@"评价: %@", [[CommonData sharedInstance].userInfo[@"feedbackCnt"] stringValue]];
+    self.lblDianZan.text = [NSString stringWithFormat:@"点赞: %@", [[CommonData sharedInstance].userInfo[@"electCnt"] stringValue]];
+    //self.lblAddress.text = [CommonData sharedInstance].userInfo[@"addr"];
+    //self.lblCompanyWebURL.text = [CommonData sharedInstance].userInfo[@"weburl"];
+    //self.lblWeixinNumber.text = [CommonData sharedInstance].userInfo[@"weixin"];
+    //self.lblPosition.text = [CommonData sharedInstance].userInfo[@"job"];
+    //self.lblWorkExperience.text = [CommonData sharedInstance].userInfo[@"experience"];
+    
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, [CommonData sharedInstance].userInfo[@"logo"]]];
+    NSInteger akind = [[CommonData sharedInstance].userInfo[@"akind"] integerValue];
+    [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:akind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
+    
+    
+    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, [CommonData sharedInstance].userInfo[@"enterCertImage"]]];
+    [self.businessPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"bg_pic.png"]];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -257,9 +291,10 @@
 - (void)onCallForStatics {
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
     [dicParams setObject:@"onShare" forKey:@"pAct"];
+    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
     [dicParams setObject:@"6" forKey:@"kind"];
     [dicParams setObject:[CommonData sharedInstance].userInfo[@"id"] forKey:@"id"];
-    [dicParams setObject:@"1" forKey:@"share"];
+//    [dicParams setObject:@"1" forKey:@"share"];
     
     [[WebAPI sharedInstance] sendPostRequest:ACTION_ONSHARE Parameters:dicParams :^(NSObject *resObj) {
         

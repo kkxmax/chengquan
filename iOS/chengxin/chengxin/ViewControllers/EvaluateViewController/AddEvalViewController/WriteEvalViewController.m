@@ -50,6 +50,7 @@
     self.btnPersonal.layer.cornerRadius = 17.f;
     self.btnEnterprise.layer.cornerRadius = 17.f;
     
+    [CommonData sharedInstance].selectedEvaluatorDic = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,11 +63,13 @@
     if(self.evalAccountDictionary) {
         NSInteger aKind = [self.evalAccountDictionary[@"akind"] integerValue];
         if (aKind == PERSONAL_KIND) {
-            lblEvalName.text = self.evalAccountDictionary[@"realname"];
+            lblEvalName.text = [NSString stringWithFormat:@"%@(%@)", self.evalAccountDictionary[@"realname"], self.evalAccountDictionary[@"code"]];
         }else{
-            lblEvalName.text = self.evalAccountDictionary[@"enterName"];
+            lblEvalName.text = [NSString stringWithFormat:@"%@(%@)", self.evalAccountDictionary[@"enterName"], self.evalAccountDictionary[@"code"]];
         }
         self.selectTypeView.hidden = YES;
+        self.topSpace.constant = 0;
+        self.topSpace1.constant = 146;
         self.accountSelectButton.enabled = NO;
         evalId = [NSString stringWithFormat:@"%d", (int)([self.evalAccountDictionary[@"id"] intValue])];
     }else{

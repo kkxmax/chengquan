@@ -10,6 +10,7 @@
 #import "Reachability.h"
 #import "Global.h"
 #import "CustomIOS7AlertView.h"
+#import "GeneralUtil.h"
 
 @implementation GeneralUtil
 
@@ -439,6 +440,32 @@ static NSInteger nShowProgressCount = 0;
 
 + (NSString *) getDateHourMinFrom:(NSString *)timeStr {
     return [timeStr substringToIndex:timeStr.length-3];
+}
+
++ (BOOL) isPhotoAvailable {
+    if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusDenied || [PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusRestricted) {
+        return NO;
+    } else if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusNotDetermined) {
+//        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+//        }];
+        return YES;
+    } else {
+        return YES;
+    }
+}
+
++ (BOOL) isCameraAvailable {
+    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0) {
+        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (status == AVAuthorizationStatusDenied || status == AVAuthorizationStatusRestricted) {
+            return NO;
+        } else if (status == AVAuthorizationStatusNotDetermined) {
+//            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:nil];
+            return YES;
+        }
+        return YES;
+    } else
+        return YES;
 }
 
 @end

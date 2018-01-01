@@ -50,6 +50,7 @@
                  AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
                  if(app.isAccountDuplicated)
                      return;
+                 [GeneralUtil setUserPreference:@"phone" value:@""];
                  [appDelegate.window makeToast:@"该账号已在其他设备登录"
                                      duration:3.0
                                      position:CSToastPositionCenter

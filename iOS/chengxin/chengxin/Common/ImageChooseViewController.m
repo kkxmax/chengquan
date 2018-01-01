@@ -10,6 +10,7 @@
 #import "UIView+Toast.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "TOCropViewController.h"
+#import "GeneralUtil.h"
 
 @interface ImageChooseViewController ()<TOCropViewControllerDelegate>
 
@@ -40,24 +41,39 @@
 
 -(IBAction)onCamera:(id)sender
 {
-    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-    [imagePicker setDelegate:self];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
-    self.view.hidden = YES;
-    //[self dismissViewControllerAnimated:YES completion:nil];
+    if ([GeneralUtil isCameraAvailable] == NO) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
+        
+        UIAlertView *statusAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"这个应用需要访问您的相机。\n进入设置>诚乎>相机" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [statusAlert show];
+    } else {
+        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+        [imagePicker setDelegate:self];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        [self presentViewController:imagePicker animated:YES completion:nil];
+        self.view.hidden = YES;
+    }
 }
 -(IBAction)onGallery:(id)sender
 {
-    UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-    [imagePicker setDelegate:self];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
-    self.view.hidden = YES;
-    //[self dismissViewControllerAnimated:NO completion:nil];
-    
+    if ([GeneralUtil isPhotoAvailable] == NO) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
+        
+        UIAlertView *statusAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"这个应用需要访问您的照片。\n进入设置>诚乎>照片" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [statusAlert show];
+    } else {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
+            [imagePicker setDelegate:self];
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [self presentViewController:imagePicker animated:YES completion:nil];
+            self.view.hidden = YES;
+        }
+    }
 }
 
 #pragma mark - Cropper Delegate -
@@ -72,6 +88,26 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
+    if ([picker sourceType] == UIImagePickerControllerSourceTypePhotoLibrary) {
+        if ([GeneralUtil isPhotoAvailable] == NO) {
+            [self dismissViewControllerAnimated:NO completion:nil];
+            [self dismissViewControllerAnimated:NO completion:nil];
+            
+            UIAlertView *statusAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"这个应用需要访问您的照片。\n进入设置>诚乎>照片" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [statusAlert show];
+            return;
+        }
+    } else if ([picker sourceType] == UIImagePickerControllerSourceTypeCamera) {
+        if ([GeneralUtil isCameraAvailable] == NO) {
+            [self dismissViewControllerAnimated:NO completion:nil];
+            [self dismissViewControllerAnimated:NO completion:nil];
+            
+            UIAlertView *statusAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"这个应用需要访问您的相机。\n进入设置>诚乎>相机" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            [statusAlert show];
+            return;
+        }
+    }
+
     [self dismissViewControllerAnimated:NO completion:nil];
     [self dismissViewControllerAnimated:NO completion:nil];
     NSURL *imageURL = (NSURL *)[info objectForKey:UIImagePickerControllerReferenceURL];
@@ -95,7 +131,7 @@
                 cropController.aspectRatioPreset = TOCropViewControllerAspectRatioPreset8x5;
             }
             [self presentViewController:cropController animated:YES completion:nil];
-//            [self.delegate chooseViewController:self shownImage:[self scaleAndRotateImage:image]];
+            //            [self.delegate chooseViewController:self shownImage:[self scaleAndRotateImage:image]];
         }
     } failureBlock:^(NSError *err) {
         NSLog(@"Error: %@",[err localizedDescription]);

@@ -100,7 +100,7 @@
         NSInteger ownerAkind = [dicEvalData[@"ownerAkind"] integerValue];
         
         NSString *logoPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dicEvalData[@"ownerLogo"]];
-        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person.png" : @"no_image_enter.png"]];
+        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
         
         if(ownerAkind == PERSONAL_KIND) {
             cell.lblTitle.text = dicEvalData[@"ownerRealname"];
@@ -140,9 +140,14 @@
         NSMutableArray *replyArray = dicEvalData[@"replys"];
         cell.replyContentLabel.text = [NSString stringWithFormat:@"%d", (int)(replyArray.count)];
         NSMutableArray *aryPath = dicEvalData[@"imgPaths"];
-        
+  
+        for( UIView* subV in [cell.scrollThumb subviews])
+        {
+            [subV removeFromSuperview];
+        }
         if ( aryPath == nil || aryPath.count == 0  ) {
             cell.scrollThumb.hidden = YES;
+            cell.lblMoreTopSpace.constant = 10;
         }
         else
         {
@@ -159,6 +164,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tblEvalView beginUpdates];
             [cell.lblContent sizeToFit];
+            [cell.lblTitle sizeToFit];
             [cell.lblMore sizeToFit];
             basicCellHeight = cell.lblMore.frame.origin.y + cell.lblMore.frame.size.height + 53;
             [self.tblEvalView endUpdates];
@@ -181,7 +187,7 @@
         NSInteger ownerAkind = [dic[@"ownerAkind"] integerValue];
         
         NSString *logoPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dic[@"ownerLogo"]];
-        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person.png" : @"no_image_enter.png"]];
+        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
         
         if(ownerAkind == PERSONAL_KIND) {
             cell.lblReply.text = [NSString stringWithFormat:@"%@: %@", dic[@"ownerRealname"], dic[@"content"]];
@@ -190,7 +196,7 @@
         }
 
         NSString *strDate = [GeneralUtil getDateHourMinFrom:dic[@"writeTimeString"]];
-        cell.lblDate.text = [strDate substringWithRange:NSMakeRange(0, strDate.length-3)];
+        cell.lblDate.text = strDate;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tblEvalView beginUpdates];
             [cell.lblReply sizeToFit];

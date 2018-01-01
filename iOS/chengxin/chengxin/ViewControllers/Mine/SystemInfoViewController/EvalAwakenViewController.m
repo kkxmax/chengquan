@@ -62,9 +62,9 @@ enum {
     [dicParams setObject:@"" forKey:@"start"];
     [dicParams setObject:@"" forKey:@"length"];
     [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
-    
+    [GeneralUtil showProgress];
     [[WebAPI sharedInstance] sendPostRequest:ACTION_GETMYEVALUATELIST Parameters:dicParams :^(NSObject *resObj) {
-        
+        [GeneralUtil hideProgress];
         NSDictionary *dicRes = (NSDictionary *)resObj;
         
         if (dicRes != nil ) {
@@ -110,8 +110,10 @@ enum {
     [dicParams setObject:@"" forKey:@"start"];
     [dicParams setObject:@"" forKey:@"length"];
     [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
+    
+    [GeneralUtil showProgress];
     [[WebAPI sharedInstance] sendPostRequest:ACTION_GETOTHEREVALUATELIST Parameters:dicParams :^(NSObject *resObj) {
-        
+        [GeneralUtil hideProgress];
         NSDictionary *dicRes = (NSDictionary *)resObj;
         
         if (dicRes != nil ) {
@@ -279,11 +281,11 @@ enum {
         evalDic = (NSDictionary *)(backEvaluateArray[indexPath.row]);
     }
     NSString *logoImageName = evalDic[@"ownerLogo"];
+    long ownerKind = [evalDic[@"ownerAkind"] longValue];
     if(![logoImageName isEqualToString:@""]) {
-        [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+        [cell.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed: ownerKind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"] ];
     }
 
-    long ownerKind = [evalDic[@"ownerAkind"] longValue];
     if (ownerKind == PERSONAL_KIND) {
         cell.nameLabel.text = evalDic[@"ownerRealname"];
     }else{

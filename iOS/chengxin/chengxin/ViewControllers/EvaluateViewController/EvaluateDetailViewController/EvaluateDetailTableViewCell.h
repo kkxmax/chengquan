@@ -24,6 +24,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *replyContentLabel;
 @property (nonatomic, weak) IBOutlet UIButton *zanButton;
 @property (nonatomic, weak) IBOutlet UIButton *errorButton;
-
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *lblMoreTopSpace;
 
 @end

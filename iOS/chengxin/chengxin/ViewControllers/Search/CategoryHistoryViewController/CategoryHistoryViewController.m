@@ -144,49 +144,49 @@
         case 0:
         {
             curCategoryArray = [CommonData sharedInstance].arrayFamiliarHistory;
-            categorySearchbar.text = [CommonData sharedInstance].searchFamiliarText;
+            //categorySearchbar.text = [CommonData sharedInstance].searchFamiliarText;
         }
             break;
         case 1:
         {
             curCategoryArray = [CommonData sharedInstance].arrayEnterpriseHistory;
-            categorySearchbar.text = [CommonData sharedInstance].searchEnterpriseText;
+            //categorySearchbar.text = [CommonData sharedInstance].searchEnterpriseText;
         }
             break;
         case 2:
         {
             curCategoryArray = [CommonData sharedInstance].arrayProductHistory;
-            categorySearchbar.text = [CommonData sharedInstance].searchProductText;
+            //categorySearchbar.text = [CommonData sharedInstance].searchProductText;
         }
             break;
         case 3:
         {
             curCategoryArray = [CommonData sharedInstance].arrayItemHistory;
-            categorySearchbar.text = [CommonData sharedInstance].searchItemText;
+            //categorySearchbar.text = [CommonData sharedInstance].searchItemText;
         }
             break;
         case 4:
         {
             curCategoryArray = [CommonData sharedInstance].arrayServiceHistory;
-            categorySearchbar.text = [CommonData sharedInstance].searchServiceText;
+            //categorySearchbar.text = [CommonData sharedInstance].searchServiceText;
         }
             break;
         case 5:
         {
             curCategoryArray = [CommonData sharedInstance].arrayCodeHistory;
-            categorySearchbar.text = [CommonData sharedInstance].searchCodeText;
+            //categorySearchbar.text = [CommonData sharedInstance].searchCodeText;
         }
             break;
         case 6:
         {
             curCategoryArray = [CommonData sharedInstance].arrayEvaluatePersonalHistory;
-            categorySearchbar.text = [CommonData sharedInstance].searchEvaluatePersonalText;
+            //categorySearchbar.text = [CommonData sharedInstance].searchEvaluatePersonalText;
         }
             break;
         case 7:
         {
             curCategoryArray = [CommonData sharedInstance].arrayEvaluateEnterpriseHistory;
-            categorySearchbar.text = [CommonData sharedInstance].searchEvaluateEnterpriseText;
+            //categorySearchbar.text = [CommonData sharedInstance].searchEvaluateEnterpriseText;
         }
             break;
         default:
@@ -259,13 +259,19 @@
         [CommonData sharedInstance].subHomeIndex = curCategoryIndex;
     else
         [CommonData sharedInstance].subHomeIndex = 0;
-    [[NSNotificationCenter defaultCenter] postNotificationName:SHOW_RESULT_SEARCH_VIEW_NOTIFICATION object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:SHOW_RESULT_SEARCH_VIEW_NOTIFICATION object:nil];
     UINavigationController *navVC = (UINavigationController *)self.parentViewController;
     [self.navigationController popToViewController:[navVC.childViewControllers objectAtIndex:(navVC.childViewControllers.count - 3)] animated:YES];
 }
 
 - (void)addSearchTextToHistory {
     if(![categorySearchbar.text isEqualToString:@""]) {
+        for(int i = 0; i < curCategoryArray.count; i++) {
+            NSString *searchString = [curCategoryArray objectAtIndex:i];
+            if([categorySearchbar.text isEqualToString:searchString]) {
+                return;
+            }
+        }
         if(curCategoryArray.count > 10) {
             [curCategoryArray removeObjectAtIndex:0];
         }
@@ -294,10 +300,6 @@
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    if([searchBar.text isEqualToString:@""]) {
-        [self addSearchTextToHistory];
-        [self completeSearch];
-    }
 }
 
 /*

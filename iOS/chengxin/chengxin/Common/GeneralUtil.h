@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Photos/Photos.h>
 
 @class CustomIOS7AlertView;
 
@@ -42,5 +43,8 @@
 
 + (NSString *) getUserName:(NSDictionary*)dic;
 + (NSString *) getDateHourMinFrom:(NSString *)timeStr;
+
++ (BOOL) isPhotoAvailable;
++ (BOOL) isCameraAvailable;
 
 @end

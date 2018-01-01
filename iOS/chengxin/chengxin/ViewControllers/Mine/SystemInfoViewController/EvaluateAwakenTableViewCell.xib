@@ -15,7 +15,7 @@
                 <frame key="frameInset" width="375" height="223"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="adapter.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kia-1B-qva">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="no_image_person1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kia-1B-qva">
                         <frame key="frameInset" minX="12" minY="14" width="35" height="35"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -99,6 +99,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="adapter.png" width="68" height="69"/>
+        <image name="no_image_person1.png" width="65" height="65"/>
     </resources>
 </document>

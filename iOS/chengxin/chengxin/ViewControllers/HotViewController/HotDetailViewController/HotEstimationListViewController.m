@@ -86,7 +86,7 @@
         NSInteger ownerAkind = [dic[@"ownerAkind"] integerValue];
         
         NSString *imgPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dic[@"ownerLogo"]];
-        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:ownerAkind ? @"no_image_person.png" : @"no_image_enter.png"]];
+        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:ownerAkind ? @"no_image_person1.png" : @"no_image_enter.png"]];
         
         if(ownerAkind == PERSONAL_KIND) {
             cell.lblTitle.text = dic[@"ownerRealname"];
@@ -95,6 +95,10 @@
         }
         NSString *strDate = dic[@"writeTimeString"];
         cell.lblDate.text = strDate;
+        for( UIView* subV in [cell.scrollThumb subviews])
+        {
+            [subV removeFromSuperview];
+        }
         NSArray *aryPath = dic[@"imgPaths"];
         
         for (int i = 0; i < aryPath.count; i++)

@@ -164,7 +164,7 @@
         self.btnEdit.hidden = NO;
         self.btnDelete.hidden = NO;
     }
-    /*
+    
     NSString *accountLogoImageName = itemDic[@"accountLogo"];
     if(accountLogoImageName) {
         self.accountLogoImageLabel.hidden = YES;
@@ -185,7 +185,7 @@
     self.writeTimeLabel.text = itemDic[@"writeTimeString"];
     accountID = [NSString stringWithFormat:@"%ld", (long)[itemDic[@"accountId"] integerValue]];
     callString = itemDic[@"accountMobile"];
-     */
+     
 }
 #pragma mark - IBAction
 
@@ -311,6 +311,32 @@
 //            URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", [URL absoluteString] ]];
 //        }
         [[UIApplication sharedApplication] openURL:URL];
+        
+        NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
+        [dicParams setObject:@"onContact" forKey:@"pAct"];
+        [dicParams setObject:accountID forKey:@"accountId"];
+        [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
+        
+        [[WebAPI sharedInstance] sendPostRequest:@"onContact" Parameters:dicParams :^(NSObject *resObj) {
+            
+            NSDictionary *dicRes = (NSDictionary *)resObj;
+            //[GeneralUtil hideProgress];
+            if (dicRes != nil ) {
+                if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
+                    
+                }else{
+                    [appDelegate.window makeToast:dicRes[@"msg"]
+                                         duration:3.0
+                                         position:CSToastPositionCenter
+                                            style:nil];
+                }
+            }else{
+                [appDelegate.window makeToast:@"网络不连接"
+                                     duration:3.0
+                                     position:CSToastPositionCenter
+                                        style:nil];
+            }
+        }];
     }
 }
 

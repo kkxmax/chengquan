@@ -258,8 +258,9 @@ enum {
 
             cell.lblTime.text = [GeneralUtil getDateHourMinFrom:dic[@"writeTimeString"]];
             cell.lblEstimationMarks.hidden = YES;
+            int akind = [dic[@"estimaterAkind"] intValue];
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dic[@"estimaterLogo"] ]];
-            [cell.imgPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+            [cell.imgPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:akind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
         }
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -281,8 +282,9 @@ enum {
             cell.lblCause.text = [NSString stringWithFormat:@"纠错依据: %@", dic[@"reason"]];
             cell.lblTime.text = [GeneralUtil getDateHourMinFrom:dic[@"writeTimeString"]];
             cell.lblEstimationMarks.hidden = NO;
+            int akind = [dic[@"estimaterAkind"] intValue];
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dic[@"estimaterLogo"] ]];
-            [cell.imgPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+            [cell.imgPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:akind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
         }
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -303,7 +305,8 @@ enum {
             cell.lblTime.text = [GeneralUtil getDateHourMinFrom:dic[@"writeTimeString"]];
             cell.lblEstimationMarks.hidden = YES;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dic[@"estimaterLogo"] ]];
-            [cell.imgPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+            int akind = [dic[@"estimaterAkind"] intValue];
+            [cell.imgPhoto sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:akind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
         }
         
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];

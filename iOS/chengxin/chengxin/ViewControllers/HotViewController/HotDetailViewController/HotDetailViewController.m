@@ -159,9 +159,30 @@
     }];
     
     refreshOfficeStartIndex = 0;
-    
+    [tblEvalView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld context:NULL];
+    [tblOfficeView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld context:NULL];
 }
 
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
+{
+    // You will get here when the reloadData finished
+    if(tblEvalView == object) {
+        tblEvalView.frame = CGRectMake(tblEvalView.frame.origin.x, tblEvalView.frame.origin.y, tblEvalView.frame.size.width, tblEvalView.contentSize.height);
+        fEvalTableContentSizeHeight = tblEvalView.frame.size.height;
+    }else if(tblOfficeView == object) {
+        tblOfficeView.frame = CGRectMake(tblOfficeView.frame.origin.x, tblOfficeView.frame.origin.y, tblOfficeView.frame.size.width, tblOfficeView.contentSize.height);
+        fOfficeTableContentSizeHeight = tblOfficeView.frame.size.height;
+    }
+   // [self setScrollContentSize];
+    [self setScrollInfoContentSize ];
+}
+
+- (void)dealloc
+{
+    [tblEvalView removeObserver:self forKeyPath:@"contentSize" context:NULL];
+   
+}
 - (void)updateEvaluateView:(NSNotification *)notification {
     [GeneralUtil showProgress];
     NSMutableArray *evaluateMeArray = (NSMutableArray *)(notification.object);
@@ -215,8 +236,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self getHotEvaluateDataFromServer:refreshEvalStartIndex Length:REFRESH_GET_DATA_COUNT];
-    [self getHotOfficeDataFromServer:refreshOfficeStartIndex Length:REFRESH_GET_DATA_COUNT];
+    //[self getHotEvaluateDataFromServer:refreshEvalStartIndex Length:REFRESH_GET_DATA_COUNT];
+    //[self getHotOfficeDataFromServer:refreshOfficeStartIndex Length:REFRESH_GET_DATA_COUNT];
+    [self refreshTopEvalItems];
+    [self refreshTopOfficeItems];
     
     topEvalRefreshView.showPullToRefresh = YES;
     bottomEvalRefreshView.showPullToRefresh = YES;
@@ -319,9 +342,6 @@
                         [evaluateHeightArray addObject:@"0"];
                     }
                     [self.tblEvalView reloadData];
-                    fEvalTableContentSizeHeight = self.tblEvalView.contentSize.height;
-                    self.tblEvalView.frame = CGRectMake(self.tblEvalView.frame.origin.x, self.tblEvalView.frame.origin.y, self.tblEvalView.frame.size.width, fEvalTableContentSizeHeight);
-                    [self setScrollInfoContentSize];
                 }
                 
             }else{
@@ -366,9 +386,9 @@
                 }
                 
                 [self.tblOfficeView reloadData];
-                fOfficeTableContentSizeHeight = self.tblOfficeView.contentSize.height;
-                self.tblOfficeView.frame = CGRectMake(self.tblOfficeView.frame.origin.x, self.tblOfficeView.frame.origin.y, self.tblOfficeView.frame.size.width, fOfficeTableContentSizeHeight);
-                [self setScrollInfoContentSize];
+//                fOfficeTableContentSizeHeight = self.tblOfficeView.contentSize.height;
+//                self.tblOfficeView.frame = CGRectMake(self.tblOfficeView.frame.origin.x, self.tblOfficeView.frame.origin.y, self.tblOfficeView.frame.size.width, fOfficeTableContentSizeHeight);
+//                [self setScrollInfoContentSize];
             }else{
                 [appDelegate.window makeToast:dicRes[@"msg"]
                             duration:3.0
@@ -449,6 +469,7 @@
 
 //    [self updateTableScrollHeight];
     if ( tableView == tblEvalView) {
+
         if(aryEvalData.count <= indexPath.row)
             return 173.f;
 
@@ -516,15 +537,25 @@
         NSInteger ownerAkind = [dic[@"ownerAkind"] integerValue];
         
         NSString *imgPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dic[@"ownerLogo"]];
-        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person.png" : @"no_image_enter.png"]];
+        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
         
+        NSString *strUserName = @"";
         if(ownerAkind == PERSONAL_KIND) {
-            cell.lblTitle.text = dic[@"ownerRealname"];
+            strUserName = dic[@"ownerRealname"];
         }else{
-            cell.lblTitle.text = dic[@"ownerEnterName"];
+            strUserName = dic[@"ownerEnterName"];
         }
+        if(strUserName.length > EVALUATE_DETAIL_TITLE_MAX_LENGTH) {
+            strUserName = [NSString stringWithFormat:@"%@…", [strUserName substringWithRange:NSMakeRange(0, EVALUATE_DETAIL_TITLE_MAX_LENGTH)]];
+        }
+        cell.lblTitle.text = strUserName;
+
         NSString *strDate = dic[@"writeTimeString"];
         cell.lblDate.text = [strDate substringWithRange:NSMakeRange(0, strDate.length - 3)];
+        for( UIView* subV in [cell.scrollThumb subviews])
+        {
+            [subV removeFromSuperview];
+        }
         NSArray *aryPath = dic[@"imgPaths"];
 
         for (int i = 0; i < aryPath.count; i++)
@@ -552,7 +583,7 @@
         if(replyArray.count > 0) {
             cell.lblReply.hidden = NO;
             if(replyArray.count > 1) {
-                cell.moreReplyLabel.text = [NSString stringWithFormat:@"展开全部回复（%d条）>", (int)(replyArray.count)];
+                cell.moreReplyLabel.text = [NSString stringWithFormat:@"查看全部%d条回复 >", (int)(replyArray.count)];
             }
             cell.moreReplyView.hidden = NO;
             //cell.separatorLine.hidden = NO;
@@ -569,17 +600,18 @@
                 }
                 NSString *replyContent = replyDic[@"content"];
                 NSString *replyText = [NSString stringWithFormat:@"%@ : %@", ownerName, replyContent];
-                totalContent = [NSString stringWithFormat:@"%@%@\n\n", totalContent, replyText];
+                totalContent = [NSString stringWithFormat:@"%@%@", totalContent, replyText];
 //                if(!cell.moreReplyButton.selected)
 //                    break;
             }
+            cell.lblReply.text = totalContent;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tblEvalView beginUpdates];
-                cell.lblReply.text = totalContent;
                 [cell.lblReply sizeToFit];
                 NSString *strReplyHeight = [NSString stringWithFormat:@"%f", cell.lblReply.frame.size.height];
                 [evaluateHeightArray replaceObjectAtIndex:indexPath.row withObject:strReplyHeight];
                 [self.tblEvalView endUpdates];
+                
             });
         }
         return cell;
@@ -595,19 +627,26 @@
         NSString *logoImageName = dic[@"logo"];
         NSInteger aKind = [dic[@"akind"] integerValue];
         if(logoImageName) {
-            [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
+            [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed:aKind == 1 ? @"no_image_person.png" : @"no_image_enter.png"]];
             
         }
+        NSString *strUserName;
         if (aKind == PERSONAL_KIND) {
-            cell.nameLabel.text = dic[@"realname"];
+            strUserName = dic[@"realname"];
             cell.officeMarkLabel.text = @"个人";
         }else {
-            cell.nameLabel.text = dic[@"enterName"];
+            strUserName = dic[@"enterName"];
             cell.officeMarkLabel.text = @"企业";//dic[@"enterKindName"];
         }
         
-        if([cell.nameLabel.text isEqualToString:@""])
-            cell.nameLabel.text = dic[@"mobile"];
+        if([strUserName isEqualToString:@""])
+            strUserName = dic[@"mobile"];
+        
+        if(strUserName.length > HOME_NAME_MAX_LENGTH) {
+            strUserName = [NSString stringWithFormat:@"%@…", [strUserName substringWithRange:NSMakeRange(0, HOME_NAME_MAX_LENGTH)]];
+        }
+        cell.nameLabel.text = strUserName;
+
         int nReqCodeSenderAKind = [dic[@"reqCodeSenderAkind"] intValue];
         NSString *reqName = @"";
         if([dic[@"reqCodeSenderId"] longValue] > 0) {
@@ -634,14 +673,25 @@
             cell.reqView.hidden = NO;
         }
         [cell.nameLabel sizeToFit];
-        [cell.xyNameButton setTitle:dic[@"xyName"] forState:UIControlStateNormal];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            CGSize stringSize = [cell.xyNameButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0]}];
-            if(cell.nameLabel.frame.size.width > (tableView.frame.size.width - 75 - stringSize.width - cell.nameLabel.frame.origin.x)) {
-                [cell.nameLabel setFrame:CGRectMake(cell.nameLabel.frame.origin.x, cell.nameLabel.frame.origin.y, tableView.frame.size.width - 75 - stringSize.width - cell.nameLabel.frame.origin.x, cell.nameLabel.frame.size.height)];
+        NSString *xyName= dic[@"xyName"];
+        if ([xyName isEqualToString:@""]) {
+            [cell.xyNameButton setHidden:YES];
+        } else {
+            if(xyName.length > HOME_TAG_MAX_LENGTH) {
+                xyName = [NSString stringWithFormat:@"%@…", [xyName substringWithRange:NSMakeRange(0, HOME_TAG_MAX_LENGTH)]];
             }
+            [cell.xyNameButton setHidden:NO];
+            [cell.xyNameButton setTitle:xyName forState:UIControlStateNormal];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CGSize stringSize = [cell.xyNameButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11.0]}];
+            int bw = stringSize.width + 12;
+
+//            if(cell.nameLabel.frame.size.width > (tableView.frame.size.width - 75 - stringSize.width - cell.nameLabel.frame.origin.x)) {
+//                [cell.nameLabel setFrame:CGRectMake(cell.nameLabel.frame.origin.x, cell.nameLabel.frame.origin.y, tableView.frame.size.width - 75 - stringSize.width - cell.nameLabel.frame.origin.x, cell.nameLabel.frame.size.height)];
+//            }
             CGRect nameLabelFrame = cell.nameLabel.frame;
-            [cell.xyNameButton setFrame:CGRectMake(nameLabelFrame.origin.x + nameLabelFrame.size.width + 3, nameLabelFrame.origin.y - 2, stringSize.width, 16)];
+            [cell.xyNameButton setFrame:CGRectMake(nameLabelFrame.origin.x + nameLabelFrame.size.width + 6, nameLabelFrame.origin.y + 2, bw, 16)];
         });
         
         cell.codeLabel.text = dic[@"code"];
@@ -791,7 +841,7 @@
     [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
     [dicParams setObject:[NSNumber numberWithInteger:hotData.mId] forKey:@"hotId"];
     [dicParams setObject:[NSNumber numberWithInt:hotData.isElectedByMe == 1 ? 0 : 1] forKey:@"val"];
-    
+    [GeneralUtil showProgress];
     [[WebAPI sharedInstance] sendPostRequest:@"electHot" Parameters:dicParams :^(NSObject *resObj) {
         NSDictionary *dicRes = (NSDictionary *)resObj;
         [GeneralUtil hideProgress];
@@ -1054,11 +1104,11 @@
 - (void)onCallForStatics {
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
     [dicParams setObject:@"onShare" forKey:@"pAct"];
-    [dicParams setObject:@"7" forKey:@"kind"];
+    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
+    [dicParams setObject:[NSNumber numberWithInteger:7] forKey:@"kind"];
     
-    NSString *hotId = [NSString stringWithFormat:@"%ld",(long)hotData.mId];
-    [dicParams setObject:hotId forKey:@"id"];
-    [dicParams setObject:@"1" forKey:@"share"];
+    [dicParams setObject:[NSNumber numberWithInteger:hotData.mId] forKey:@"id"];
+//    [dicParams setObject:@"1" forKey:@"share"];
     
     [[WebAPI sharedInstance] sendPostRequest:ACTION_ONSHARE Parameters:dicParams :^(NSObject *resObj) {
         

@@ -20,6 +20,9 @@
 @end
 
 @implementation LoginViewController
+{
+    UIView* maskView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,14 +49,22 @@
     [super viewWillAppear:animated];
     
     self.phoneNumberInput.text = [GeneralUtil getUserPreference:@"phoneNumber"];
+    self.passwordInput.text = [GeneralUtil getUserPreference:@"password"];
     self.btnLogin.layer.cornerRadius = 5;
     
     NSString *phone = [GeneralUtil getUserPreference:@"phone"];
     NSString *password = [GeneralUtil getUserPreference:@"password"];
+    
+        
+    if(maskView)
+    {
+        [maskView removeFromSuperview];
+    }
     if( (phone != nil && phone.length != 0) && (password != nil && password.length != 0))
     {
-        self.phoneNumberInput.text = phone;
-        self.passwordInput.text = password;
+        maskView = [[UIView alloc] initWithFrame:self.view.frame];
+        [maskView setBackgroundColor:[UIColor whiteColor]];
+        [self.view addSubview:maskView];
     }
 }
 
@@ -119,13 +130,14 @@
         
         if (dicRes != nil ) {
             if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
+                [GeneralUtil setUserPreference:@"phone" value:self.phoneNumberInput.text];
                 [GeneralUtil setUserPreference:@"password" value:self.passwordInput.text];
                 [GeneralUtil setUserPreference:@"phoneNumber" value:self.phoneNumberInput.text];
                 [CommonData sharedInstance].tokenName = dicRes[@"token"];
                 [CommonData sharedInstance].userInfo = dicRes[@"userInfo"];
                 MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
                 [self.navigationController pushViewController:mainVC animated:YES];
-                [GeneralUtil setUserPreference:@"phone" value:self.phoneNumberInput.text];
+                
                 self.passwordInput.text = @"";
                 AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
                 app.isAccountDuplicated = false;

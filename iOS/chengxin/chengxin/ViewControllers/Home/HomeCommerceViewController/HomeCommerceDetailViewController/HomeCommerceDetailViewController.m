@@ -296,9 +296,33 @@
 //            URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", [URL absoluteString] ]];
 //        }
         [[UIApplication sharedApplication] openURL:URL];
+        NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
+        [dicParams setObject:@"onContact" forKey:@"pAct"];
+        [dicParams setObject:accountID forKey:@"accountId"];
+        [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
+        
+        [[WebAPI sharedInstance] sendPostRequest:@"onContact" Parameters:dicParams :^(NSObject *resObj) {
+            
+            NSDictionary *dicRes = (NSDictionary *)resObj;
+            //[GeneralUtil hideProgress];
+            if (dicRes != nil ) {
+                if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
+                    
+                }else{
+                    [appDelegate.window makeToast:dicRes[@"msg"]
+                                         duration:3.0
+                                         position:CSToastPositionCenter
+                                            style:nil];
+                }
+            }else{
+                [appDelegate.window makeToast:@"服务器繁忙，请稍后重试"
+                                     duration:3.0
+                                     position:CSToastPositionCenter
+                                        style:nil];
+            }
+        }];
     }
 }
-
 
 
 /*
@@ -383,9 +407,10 @@
 - (void)onCallForStatics {
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
     [dicParams setObject:@"onShare" forKey:@"pAct"];
-    [dicParams setObject:@"1" forKey:@"kind"];
+    [dicParams setObject:[CommonData sharedInstance].tokenName forKey:@"token"];
+    [dicParams setObject:[NSNumber numberWithInteger:1] forKey:@"kind"];
     [dicParams setObject:productDictionary[@"id"] forKey:@"id"];
-    [dicParams setObject:@"1" forKey:@"share"];
+//    [dicParams setObject:@"1" forKey:@"share"];
     
     [[WebAPI sharedInstance] sendPostRequest:ACTION_ONSHARE Parameters:dicParams :^(NSObject *resObj) {
         

@@ -18,6 +18,7 @@
 @interface SystemAlarmViewController ()
 {
     NSMutableArray *alertArray;
+    NSMutableArray *alertHeightArray;
 }
 @end
 
@@ -28,6 +29,7 @@
     [self.tblContentView registerNib:[UINib nibWithNibName:@"SystemAlarmTableViewCell" bundle:nil] forCellReuseIdentifier:@"SystemAlarmCellIdentifier"];
     // Do any additional setup after loading the view from its nib.
     alertArray = [NSMutableArray array];
+    alertHeightArray = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +55,10 @@
         if (dicRes != nil ) {
             if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
                 alertArray = (NSMutableArray *)(dicRes[@"data"]);
+                for(int i = 0; i < alertArray.count; i++) {
+                    NSNumber *alertHeight = [NSNumber numberWithFloat:66.f];
+                    [alertHeightArray addObject:alertHeight];
+                }
                 [self.tblContentView reloadData];
             }else{
                 [appDelegate.window makeToast:dicRes[@"msg"]
@@ -90,8 +96,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return 66.f;
+    if(alertHeightArray.count <= indexPath.row)
+        return 66.f;
+    NSNumber *heightNumber =  [alertHeightArray objectAtIndex:indexPath.row];
+    return [heightNumber floatValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,7 +109,16 @@
     NSDictionary *alertDic = (NSDictionary *)[alertArray objectAtIndex:indexPath.row]; //msgTitle, msgContent, writeTimeString
     cell.titleLabel.text = alertDic[@"msgTitle"];
     cell.contentLabel.text = alertDic[@"msgContent"];
-    cell.timeLabel.text = alertDic[@"writeTimeString"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tblContentView beginUpdates];
+        [cell.contentLabel sizeToFit];
+        float basicCellHeight = cell.contentLabel.frame.origin.y + cell.contentLabel.frame.size.height + 3;
+        if(alertHeightArray.count > indexPath.row) {
+            [alertHeightArray replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithFloat:basicCellHeight]];
+        }
+        [self.tblContentView endUpdates];
+    });
+    cell.timeLabel.text = [GeneralUtil getDateHourMinFrom:alertDic[@"writeTimeString"]];
     return cell;
 }
 

@@ -307,7 +307,12 @@
             [homeFamiliarTableCell.userTypeLabel setText:@"未认证"];
         }
         
-        homeFamiliarTableCell.nameLabel.text = [GeneralUtil getUserName:friendDic];
+        NSString *strUserName = [GeneralUtil getUserName:friendDic];
+        if(strUserName.length > HOME_NAME_MAX_LENGTH) {
+            strUserName = [NSString stringWithFormat:@"%@…", [strUserName substringWithRange:NSMakeRange(0, HOME_NAME_MAX_LENGTH)]];
+        }
+        homeFamiliarTableCell.nameLabel.text = strUserName;
+
         int nReqCodeSenderAKind = [friendDic[@"reqCodeSenderAkind"] intValue];
         NSString *reqName = @"";
         if([friendDic[@"reqCodeSenderId"] longValue] > 0) {
@@ -333,16 +338,19 @@
         if ([xyName isEqualToString:@""]) {
             [homeFamiliarTableCell.xyNameButton setHidden:YES];
         } else {
+            if(xyName.length > HOME_TAG_MAX_LENGTH) {
+                xyName = [NSString stringWithFormat:@"%@…", [xyName substringWithRange:NSMakeRange(0, HOME_TAG_MAX_LENGTH)]];
+            }
             [homeFamiliarTableCell.xyNameButton setHidden:NO];
-            [homeFamiliarTableCell.xyNameButton setTitle:friendDic[@"xyName"] forState:UIControlStateNormal];
+            [homeFamiliarTableCell.xyNameButton setTitle:xyName forState:UIControlStateNormal];
             dispatch_async(dispatch_get_main_queue(), ^{
-                CGSize stringSize = [homeFamiliarTableCell.xyNameButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0]}];
-                int bw = stringSize.width + 6;
-                if(homeFamiliarTableCell.nameLabel.frame.size.width > (tableView.frame.size.width - 75 - bw - homeFamiliarTableCell.nameLabel.frame.origin.x)) {
-                    [homeFamiliarTableCell.nameLabel setFrame:CGRectMake(homeFamiliarTableCell.nameLabel.frame.origin.x, homeFamiliarTableCell.nameLabel.frame.origin.y, tableView.frame.size.width - 75 - bw - homeFamiliarTableCell.nameLabel.frame.origin.x, homeFamiliarTableCell.nameLabel.frame.size.height)];
-                }
+                CGSize stringSize = [homeFamiliarTableCell.xyNameButton.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11.0]}];
+                int bw = stringSize.width + 12;
+                //            if(homeFamiliarTableCell.nameLabel.frame.size.width > (tableView.frame.size.width - 75 - bw - homeFamiliarTableCell.nameLabel.frame.origin.x)) {
+                //                [homeFamiliarTableCell.nameLabel setFrame:CGRectMake(homeFamiliarTableCell.nameLabel.frame.origin.x, homeFamiliarTableCell.nameLabel.frame.origin.y, tableView.frame.size.width - 75 - bw - homeFamiliarTableCell.nameLabel.frame.origin.x, homeFamiliarTableCell.nameLabel.frame.size.height)];
+                //            }
                 CGRect nameLabelFrame = homeFamiliarTableCell.nameLabel.frame;
-                [homeFamiliarTableCell.xyNameButton setFrame:CGRectMake(nameLabelFrame.origin.x + nameLabelFrame.size.width + 3, nameLabelFrame.origin.y, bw, 16)];
+                [homeFamiliarTableCell.xyNameButton setFrame:CGRectMake(nameLabelFrame.origin.x + nameLabelFrame.size.width + 6, nameLabelFrame.origin.y + 2, bw, 16)];
             });
         }
 
@@ -475,8 +483,16 @@
 }
 -(IBAction)onFriends:(id)sender
 {
-    CXLFavouritesTableViewController* vc = [[CXLFavouritesTableViewController alloc] initWithNibName:@"CXLFavouritesTableViewController" bundle:nil];
     UIButton *button = (UIButton*) sender;
+    if(button.tag == 0)
+    {
+        FavouritesTableViewController* vc = [[FavouritesTableViewController alloc] initWithNibName:@"FavouritesTableViewController" bundle:nil];
+        vc.selectType = 2;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    CXLFavouritesTableViewController* vc = [[CXLFavouritesTableViewController alloc] initWithNibName:@"CXLFavouritesTableViewController" bundle:nil];
+    
     switch (button.tag) {
         case 0:
             vc.selectType = 2;
