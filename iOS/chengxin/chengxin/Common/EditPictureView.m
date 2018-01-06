@@ -84,6 +84,8 @@
         
         UIImage *img = [aryPicture objectAtIndex:i];
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, 80, 80)];
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
         [imgView setImage:img];
         
         [view addSubview:imgView];
@@ -142,6 +144,7 @@
 -(void)onClickAddPicture:(UIButton*) button
 {
     logoPicker = [[ImageChooseViewController alloc] initWithNibName:@"ImageChooseViewController" bundle:nil];
+    logoPicker.notEdit = YES;
     logoPicker.delegate = self;
     logoPicker.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     logoPicker.isSquareCrop = YES;

@@ -18,10 +18,7 @@
 #import "Global.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
-#import <TencentOpenAPI/TencentOAuth.h>
-#import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
-#import "WeiboSDK.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
@@ -40,23 +37,24 @@
     self.isAccountDuplicated = false;
     [IQKeyboardManager sharedManager].enable = YES;
 
-    UINavigationController *navVC = [[UINavigationController alloc] init];
-    self.navController = navVC;
+//    UINavigationController *navVC = [[UINavigationController alloc] init];
+//    self.navController = navVC;
     // Override point for customization after application launch.
-    LoginViewController *loginVC;
-    if(IS_IPHONE_5_OR_LESS)
-    {
-        loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController_iphone4" bundle:nil];
-    }else
-    {
-        loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    }
+//    LoginViewController *loginVC;
+//    if(IS_IPHONE_5_OR_LESS)
+//    {
+//        loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController_iphone4" bundle:nil];
+//    }else
+//    {
+//        loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+//    }
     
+    [self autoLogin];
     notificationTimer = [NSTimer scheduledTimerWithTimeInterval:NOTIFICATION_SECOND target:self selector:@selector(GetNotificationFromServer) userInfo:nil repeats:YES];
     //MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-    [navVC pushViewController:loginVC animated:NO];
-    self.window.rootViewController = navVC;
-    [self.window addSubview:navVC.view];
+//    [navVC pushViewController:loginVC animated:NO];
+//    self.window.rootViewController = navVC;
+//    [self.window addSubview:navVC.view];
     [self.window makeKeyAndVisible];
 
 
@@ -147,4 +145,102 @@
     });
 }
 
+#pragma mark - 自动登录
+- (void)autoLogin
+{
+    NSString *phone = [GeneralUtil getUserPreference:@"phone"];
+    NSString *password = [GeneralUtil getUserPreference:@"password"];
+    if( (phone != nil && phone.length != 0) && (password != nil && password.length != 0))
+    {
+        __weak typeof(self) weakSelf = self;
+        NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
+        [dicParams setObject:@"login" forKey:@"pAct"];
+        [dicParams setObject:phone forKey:@"mobile"];
+        [dicParams setObject:password forKey:@"password"];
+        
+        [[WebAPI sharedInstance] sendPostRequest:ACTION_LOGIN Parameters:dicParams :^(NSObject *resObj) {
+            
+            [GeneralUtil hideProgress];
+            
+            NSDictionary *dicRes = (NSDictionary *)resObj;
+            
+            if (dicRes != nil ) {
+                if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
+                    [CommonData sharedInstance].tokenName = dicRes[@"token"];
+                    [CommonData sharedInstance].userInfo = dicRes[@"userInfo"];
+                    dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                    
+                    dispatch_sync(queue, ^{
+                        [weakSelf setRootVC];
+                    });
+                    weakSelf.isAccountDuplicated = false;
+                } else {
+                    [weakSelf setLoginVC];
+                }
+            }else
+            {
+                [weakSelf setLoginVC];
+            }
+        }];
+            
+        return;
+        
+        NSData *data =    [NSJSONSerialization dataWithJSONObject:dicParams options:NSJSONWritingPrettyPrinted error:nil];
+        
+        NSString *strUrl= [NSString stringWithFormat:@"%@",BASE_URL];
+        NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[NSURL URLWithString:strUrl]];
+        [request setHTTPMethod:@"POST"];
+        [request setTimeoutInterval:10];
+        request.HTTPBody=data;
+        NSError *error;
+        NSData*connectionData= [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
+        NSDictionary *dicRes;
+        if (error==nil) {
+            dicRes = [NSJSONSerialization JSONObjectWithData:connectionData options:NSJSONReadingMutableContainers error:nil];
+        }
+        
+        if (dicRes&&dicRes.count>0)
+        {
+            if ([dicRes[@"retCode"] intValue] == RESPONSE_SUCCESS) {
+                [CommonData sharedInstance].tokenName = dicRes[@"token"];
+                [CommonData sharedInstance].userInfo = dicRes[@"userInfo"];
+                dispatch_queue_t queue =  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                
+                dispatch_sync(queue, ^{
+                    [weakSelf setRootVC];
+                });
+                weakSelf.isAccountDuplicated = false;
+            } else {
+                    [weakSelf setLoginVC];
+            }
+        } else {
+            [self setLoginVC];
+        }
+    } else {
+        [self setLoginVC];
+    }
+}
+
+#pragma mark -
+- (void)setRootVC
+{
+    MainViewController *mainVC = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:mainVC];
+    self.window.rootViewController = self.navController;
+//    [self.navController pushViewController:mainVC animated:YES];
+}
+
+- (void)setLoginVC
+{
+    LoginViewController *loginVC;
+    if(IS_IPHONE_5_OR_LESS)
+    {
+        loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController_iphone4" bundle:nil];
+    }else
+    {
+        loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    }
+    self.navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    self.window.rootViewController = self.navController;
+}
 @end

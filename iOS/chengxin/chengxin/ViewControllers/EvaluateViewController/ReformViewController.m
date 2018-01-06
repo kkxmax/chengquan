@@ -54,11 +54,13 @@
         self.evaluateReceiverLabel.text = self.reformAccountDic[@"targetAccountName"];
         self.evaluateSenderLabel.text = self.reformAccountDic[@"ownerName"];
         self.evaluateContentTextView.text = self.reformAccountDic[@"content"];
+        self.evaluateContentTextView.editable = NO;
         self.errorReasonTextView.text = self.reformAccountDic[@"reason"];
     }else{
         self.evaluateReceiverLabel.text = self.reformAccountDic[@"estimateeName"];
         self.evaluateSenderLabel.text = self.reformAccountDic[@"estimaterName"];
         self.evaluateContentTextView.text = self.reformAccountDic[@"estimateContent"];
+        
         self.errorReasonTextView.text = self.reformAccountDic[@"reason"];
     }
     int nKind = [self.reformAccountDic[@"kind"] intValue];
@@ -106,6 +108,14 @@
         return;
     }
     
+    if (imageArray.count == 0) {
+        [appDelegate.window makeToast:@"请选择图片"
+                             duration:3.0
+                             position:CSToastPositionCenter
+                                style:nil];
+        return;
+    }
+    
     [GeneralUtil showProgress];
     
     NSMutableDictionary *dicParams = [[NSMutableDictionary alloc] init];
@@ -125,6 +135,10 @@
     NSMutableArray *imageDataArray = [NSMutableArray array];
     for (int i = 0; i < imageArray.count; i++) {
         NSData* image = UIImagePNGRepresentation(imageArray[i]);
+        
+        if (image == nil) {
+            image = UIImageJPEGRepresentation(imageArray[i], 0.7);
+        }
         [imageDataArray addObject:image];
     }
     

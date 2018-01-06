@@ -454,6 +454,7 @@ static NSInteger currentPage = 0;
     if(!familiarButton.selected)
     {
         [CommonData sharedInstance].subHomeIndex = 0;
+        [CommonData sharedInstance].searchFamiliarText = @"";
         [self setOverScrollViewContentSize];
         [self moveToPage:0];
         familiarButton.selected = YES;
@@ -472,6 +473,7 @@ static NSInteger currentPage = 0;
     if(!enterpriseButton.selected)
     {
         [CommonData sharedInstance].subHomeIndex = 1;
+        [CommonData sharedInstance].searchEnterpriseText = @"";
         [self setOverScrollViewContentSize];
         [self moveToPage:1];
         enterpriseButton.selected = YES;
@@ -490,6 +492,7 @@ static NSInteger currentPage = 0;
     if(!commerceButton.selected)
     {
         [CommonData sharedInstance].subHomeIndex = 2;
+        [CommonData sharedInstance].searchProductText = @"";
         [self setOverScrollViewContentSize];
         [self moveToPage:2];
         commerceButton.selected = YES;
@@ -513,6 +516,7 @@ static NSInteger currentPage = 0;
     if(!itemButton.selected)
     {
         [CommonData sharedInstance].subHomeIndex = 3;
+        [CommonData sharedInstance].searchItemText = @"";
         [self setOverScrollViewContentSize];
         [self moveToPage:3];
         itemButton.selected = YES;
@@ -531,6 +535,7 @@ static NSInteger currentPage = 0;
     if(!serviceButton.selected)
     {
         [CommonData sharedInstance].subHomeIndex = 4;
+        [CommonData sharedInstance].searchServiceText = @"";
         [self setOverScrollViewContentSize];
         [self moveToPage:4];
         serviceButton.selected = YES;

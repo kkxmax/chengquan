@@ -463,6 +463,9 @@
 		C5541C1C1FF91F9E004AA6C2 /* no_image_enter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C5541C191FF91F9E004AA6C2 /* no_image_enter@2x.png */; };
 		C5541C1D1FF91F9E004AA6C2 /* no_image_item@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C5541C1A1FF91F9E004AA6C2 /* no_image_item@2x.png */; };
 		C5541C1E1FF91F9E004AA6C2 /* no_image_person@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C5541C1B1FF91F9E004AA6C2 /* no_image_person@2x.png */; };
+		C5541C241FFD3306004AA6C2 /* HXBigImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5541C211FFD3306004AA6C2 /* HXBigImageViewCell.m */; };
+		C5541C251FFD3306004AA6C2 /* MSBrowseImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C5541C231FFD3306004AA6C2 /* MSBrowseImageView.m */; };
+		C5541C271FFD332A004AA6C2 /* no_image_person@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C5541C261FFD332A004AA6C2 /* no_image_person@3x.png */; };
 		C58D5B011FEDB76E00595A4C /* TOCropViewControllerLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C58D5AD61FEDB76D00595A4C /* TOCropViewControllerLocalizable.strings */; };
 		C58D5B021FEDB76E00595A4C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C58D5ADF1FEDB76D00595A4C /* Info.plist */; };
 		C58D5B031FEDB76E00595A4C /* TOActivityCroppedImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C58D5AE51FEDB76D00595A4C /* TOActivityCroppedImageProvider.m */; };
@@ -1207,6 +1210,11 @@
 		C5541C191FF91F9E004AA6C2 /* no_image_enter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_image_enter@2x.png"; sourceTree = "<group>"; };
 		C5541C1A1FF91F9E004AA6C2 /* no_image_item@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_image_item@2x.png"; sourceTree = "<group>"; };
 		C5541C1B1FF91F9E004AA6C2 /* no_image_person@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_image_person@2x.png"; sourceTree = "<group>"; };
+		C5541C201FFD3306004AA6C2 /* HXBigImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBigImageViewCell.h; sourceTree = "<group>"; };
+		C5541C211FFD3306004AA6C2 /* HXBigImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBigImageViewCell.m; sourceTree = "<group>"; };
+		C5541C221FFD3306004AA6C2 /* MSBrowseImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSBrowseImageView.h; sourceTree = "<group>"; };
+		C5541C231FFD3306004AA6C2 /* MSBrowseImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MSBrowseImageView.m; sourceTree = "<group>"; };
+		C5541C261FFD332A004AA6C2 /* no_image_person@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_image_person@3x.png"; sourceTree = "<group>"; };
 		C58D5AD71FEDB76D00595A4C /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
 		C58D5AD81FEDB76D00595A4C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
 		C58D5AD91FEDB76D00595A4C /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/TOCropViewControllerLocalizable.strings; sourceTree = "<group>"; };
@@ -1766,6 +1774,7 @@
 		520A47BF1FA1AD6D00492751 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C5541C1F1FFD3306004AA6C2 /* BigImage */,
 				0F3DD0331E716DDD006D1F34 /* ImageChooseViewController.h */,
 				0F3DD0341E716DDD006D1F34 /* ImageChooseViewController.m */,
 				0F3DD0351E716DDD006D1F34 /* ImageChooseViewController.xib */,
@@ -2004,6 +2013,7 @@
 		521C101D1F9E059C006636E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C5541C261FFD332A004AA6C2 /* no_image_person@3x.png */,
 				C5541C191FF91F9E004AA6C2 /* no_image_enter@2x.png */,
 				C5541C1A1FF91F9E004AA6C2 /* no_image_item@2x.png */,
 				C5541C1B1FF91F9E004AA6C2 /* no_image_person@2x.png */,
@@ -2817,6 +2827,17 @@
 			path = AAPullToRefresh;
 			sourceTree = "<group>";
 		};
+		C5541C1F1FFD3306004AA6C2 /* BigImage */ = {
+			isa = PBXGroup;
+			children = (
+				C5541C201FFD3306004AA6C2 /* HXBigImageViewCell.h */,
+				C5541C211FFD3306004AA6C2 /* HXBigImageViewCell.m */,
+				C5541C221FFD3306004AA6C2 /* MSBrowseImageView.h */,
+				C5541C231FFD3306004AA6C2 /* MSBrowseImageView.m */,
+			);
+			path = BigImage;
+			sourceTree = "<group>";
+		};
 		C58D5AD51FEDB76D00595A4C /* TOCropViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3529,6 +3550,7 @@
 				521C10B51F9E059D006636E7 /* login_eye_gray@3x.png in Resources */,
 				0F527D981F2F080600F0AA25 /* ProductTableViewCell.xib in Resources */,
 				521C10CE1F9E059D006636E7 /* xq_Collection_sel@2x.png in Resources */,
+				C5541C271FFD332A004AA6C2 /* no_image_person@3x.png in Resources */,
 				521C10A71F9E059D006636E7 /* home_sel@3x.png in Resources */,
 				521C10B71F9E059D006636E7 /* login_input_delete@3x.png in Resources */,
 				5281BEE01FA325A6008B9030 /* HomeCommerceViewController.xib in Resources */,
@@ -3650,6 +3672,7 @@
 				52B3E8011FA9C142008C3A97 /* EvaluateDetailTableViewCell.m in Sources */,
 				520D5D2D1FBEE16B00075750 /* WebViewController.m in Sources */,
 				526E24A01FAFE69900FF988A /* GeneralUtil.m in Sources */,
+				C5541C241FFD3306004AA6C2 /* HXBigImageViewCell.m in Sources */,
 				526444DE1FA74AEB00FB0836 /* HomeChoiceAllCityViewController.m in Sources */,
 				0F0409931EA49603004655E0 /* FavouriteListViewController.m in Sources */,
 				526E248A1FAFE39B00FF988A /* AFNetworkReachabilityManager.m in Sources */,
@@ -3669,6 +3692,7 @@
 				0F3DD0361E716DDD006D1F34 /* ImageChooseViewController.m in Sources */,
 				5264A2B21FAC7313008091F2 /* SystemAlarmViewController.m in Sources */,
 				524E2B6E1FB141F9009468E1 /* SDWebImageDownloader.m in Sources */,
+				C5541C251FFD3306004AA6C2 /* MSBrowseImageView.m in Sources */,
 				52B3E7F81FA9C01E008C3A97 /* ReformViewController.m in Sources */,
 				526E24891FAFE39B00FF988A /* AFHTTPSessionManager.m in Sources */,
 				525B6A8D1FB44C7A00F1BD1F /* HotDetailOfficeCell.m in Sources */,

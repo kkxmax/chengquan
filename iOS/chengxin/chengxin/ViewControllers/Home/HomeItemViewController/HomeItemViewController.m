@@ -67,11 +67,10 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary  *)change context:(void *)context
 {
     // You will get here when the reloadData finished
-    if(object == self.homeItemTableView) {
+    if(baseDelegate && [keyPath isEqualToString:@"contentSize"]) {
         self.homeItemTableView.frame = CGRectMake(self.homeItemTableView.frame.origin.x, self.homeItemTableView.frame.origin.y, self.homeItemTableView.frame.size.width, self.homeItemTableView.contentSize.height);
         self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.homeItemTableView.frame.size.height);
-        if(baseDelegate)
-            [baseDelegate finishedLoadingData:3];
+        [baseDelegate finishedLoadingData:3];
     }
     
 }

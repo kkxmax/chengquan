@@ -29,6 +29,7 @@
                 <outlet property="scrollDataViewHeight" destination="t4c-sA-3hX" id="E1a-go-h6b"/>
                 <outlet property="scrollInfoView" destination="upv-vH-w17" id="tHf-BD-cVx"/>
                 <outlet property="scrollinfoviewHeight" destination="wG6-6Z-m3X" id="Y8y-wN-b6a"/>
+                <outlet property="tableContentHeight" destination="atU-s9-wd6" id="5p1-KU-Ydt"/>
                 <outlet property="tableContentView" destination="tjN-6w-8Ia" id="Mcx-04-pBR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -389,8 +390,9 @@ CQ
                                 <action selector="onElect:" destination="-1" eventType="touchUpInside" id="HHk-c4-If5"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3d-PQ-AmS">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3d-PQ-AmS">
                             <rect key="frame" x="344" y="12" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <connections>
                                 <action selector="onShareAction:" destination="-1" eventType="touchUpInside" id="lf3-hU-8nE"/>
                             </connections>

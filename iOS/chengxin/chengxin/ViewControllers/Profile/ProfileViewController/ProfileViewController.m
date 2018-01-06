@@ -123,6 +123,16 @@
                 [avPlayerVC.view removeFromSuperview];
                 avPlayerVC = nil;
             }
+#if XCODE_8_VERSION
+            AVPlayer *player = [[AVPlayer alloc] initWithURL:url];
+            // create a player view controller
+            avPlayerVC = [[AVPlayerViewController alloc]init];
+            avPlayerVC.view.frame = videoPlayerView.frame;
+            [self addChildViewController:avPlayerVC];
+            [self.view addSubview:avPlayerVC.view];
+            avPlayerVC.player = player;
+            [player play];
+#else
             if (@available(iOS 11.0, *)) {
                 AVPlayer *player = [[AVPlayer alloc] initWithURL:url];
                 // create a player view controller
@@ -141,6 +151,7 @@
                 avPlayerVC.player = player;
                 [player play];
             }
+#endif
         } else {
             netStatusAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"没有网路连接。" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
             [netStatusAlert show];
