@@ -101,6 +101,15 @@ public class CarouselController extends BaseController {
 	public ModelAndView upload(BinaryFormUtil formUtil, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		int kind = Integer.parseInt(formUtil.getString("kind", "0"));
 		int ord = Integer.parseInt(formUtil.getString("ord", "0"));
+		
+		if(memberDao.count(null, "status=1 and ord=" + ord) > 0) {
+			JSONObject result = new JSONObject();
+			result.put("flag", false);
+			result.put("msg", "轮播图排序重复，请先下架其他相同排序的轮播图");
+			request.setAttribute("JSON", result);
+
+			return new ModelAndView("json_result");
+		}
 
 		double sw = Double.parseDouble(formUtil.getString("sw", "0"));
 		double sh = Double.parseDouble(formUtil.getString("sh", "0"));
@@ -145,8 +154,6 @@ public class CarouselController extends BaseController {
 
 		memberDao.insert(carousel);
 		
-		this.cachedObjectService.deleteProgram();
-
 		//return JavascriptUtil.MessageMove(request, response, "", "program.html?pAct=search");
 		JSONObject result = new JSONObject();
 		result.put("flag", true);

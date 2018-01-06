@@ -145,7 +145,7 @@ public class EnterpriseAccountController extends BaseController {
         			row.getProvCity(),
         			row.getEnterKindName(),
         			row.getCode(),
-        			String.valueOf(row.getViewCnt()) + "%",
+        			String.valueOf(row.getCredit()) + "%",
         			row.getReqCodeSenderName(),
         			String.valueOf(row.getInviteCnt()),
         			row.getTestStatusName(),

@@ -323,6 +323,14 @@ public class ApiController extends BaseController {
         	return this.getAccountInfo(request, response, session, loginAccount, result, bShare);
         } else if(strAction.equals("getAccountDetail")) {
         	return this.getAccountDetail(request, response, session, loginAccount, result, bShare);
+        } else if(strAction.equals("getAccountDetailEstimate")) {
+        	return this.getAccountDetailEstimate(request, response, session, loginAccount, result, bShare);     
+        } else if(strAction.equals("getAccountDetailProduct")) {
+        	return this.getAccountDetailProduct(request, response, session, loginAccount, result, bShare);             
+        } else if(strAction.equals("getAccountDetailItem")) {
+        	return this.getAccountDetailItem(request, response, session, loginAccount, result, bShare);
+        } else if(strAction.equals("getAccountDetailService")) {
+        	return this.getAccountDetailService(request, response, session, loginAccount, result, bShare);        
         } else if(strAction.equals("leaveEstimate")) {
         	return this.leaveEstimate(request, response, session, loginAccount, result);
         } else if(strAction.equals("leaveReply")) {
@@ -2646,32 +2654,249 @@ public class ApiController extends BaseController {
         	return JSONResult(request, result, loginAccount);
     	}
     	
-    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
-    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
+//    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	
+//    	for(Estimate item : estimates) {
+//    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
+//    		item.setReplys(replys);
+//    	}
     	
+//    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
+//    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
+    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
+		
+//          account.setEstimates(estimates);
+//        account.setProducts(products);
+//        account.setItems(items);
+//        account.setServices(services);
+
+        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
+        if(friendLevel != null) {
+                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
+        }
+    	
+    	result.put("retCode", 200);
+    	result.put("account", account);
+    	
+    	return JSONResult(request, result, loginAccount);
+    }
+    
+    
+    private ModelAndView getAccountDetailEstimate(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result, boolean bShare) throws Exception {
+    	
+    	if(bShare) {
+    		String strShareUserId = this.getBlankParameter(request, "shareUserId", "");
+    		if(strShareUserId.isEmpty()) {
+    			result.put("retCode", 211);
+            	result.put("msg", "ShareUserId is empty!");
+            	
+            	return JSONResult(request, result, loginAccount);
+    		}
+    		loginAccount = accountDao.get(Integer.valueOf(strShareUserId));
+    	}
+    	
+    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
+    	
+//    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
+//    	
+//    	if(account == null) {
+//    		result.put("retCode", 201);
+//        	result.put("msg", "That account doesn't exist");
+//        	
+//        	return JSONResult(request, result, loginAccount);
+//    	}
+    	
+    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
+//    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	
     	for(Estimate item : estimates) {
     		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
     		item.setReplys(replys);
     	}
     	
-    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
+//    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
     	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
-    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
+//    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
 		
-    	account.setEstimates(estimates);
-		account.setProducts(products);
-		account.setItems(items);
-		account.setServices(services);
-		
-		Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
-		if(friendLevel != null) {
-			account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
-		}
+//          account.setEstimates(estimates);
+//        account.setProducts(products);
+//        account.setItems(items);
+//        account.setServices(services);
+//
+//        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
+//        if(friendLevel != null) {
+//                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
+//        }
     	
     	result.put("retCode", 200);
-    	result.put("account", account);
+    	result.put("estimates", estimates);
+    	
+    	return JSONResult(request, result, loginAccount);
+    }
+    
+    private ModelAndView getAccountDetailProduct(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result, boolean bShare) throws Exception {
+    	
+    	if(bShare) {
+    		String strShareUserId = this.getBlankParameter(request, "shareUserId", "");
+    		if(strShareUserId.isEmpty()) {
+    			result.put("retCode", 211);
+            	result.put("msg", "ShareUserId is empty!");
+            	
+            	return JSONResult(request, result, loginAccount);
+    		}
+    		loginAccount = accountDao.get(Integer.valueOf(strShareUserId));
+    	}
+    	
+    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
+    	
+    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
+    	
+    	if(account == null) {
+    		result.put("retCode", 201);
+        	result.put("msg", "That account doesn't exist");
+        	
+        	return JSONResult(request, result, loginAccount);
+    	}
+    	
+//    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
+    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	
+//    	for(Estimate item : estimates) {
+//    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
+//    		item.setReplys(replys);
+//    	}
+    	
+    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
+//    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
+//    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
+		
+//          account.setEstimates(estimates);
+//        account.setProducts(products);
+//        account.setItems(items);
+//        account.setServices(services);
+//
+//        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
+//        if(friendLevel != null) {
+//                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
+//        }
+    	
+    	result.put("retCode", 200);
+    	result.put("products", products);
+    	
+    	return JSONResult(request, result, loginAccount);
+    }
+    
+    private ModelAndView getAccountDetailItem(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result, boolean bShare) throws Exception {
+    	
+    	if(bShare) {
+    		String strShareUserId = this.getBlankParameter(request, "shareUserId", "");
+    		if(strShareUserId.isEmpty()) {
+    			result.put("retCode", 211);
+            	result.put("msg", "ShareUserId is empty!");
+            	
+            	return JSONResult(request, result, loginAccount);
+    		}
+    		loginAccount = accountDao.get(Integer.valueOf(strShareUserId));
+    	}
+    	
+    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
+    	
+    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
+    	
+    	if(account == null) {
+    		result.put("retCode", 201);
+        	result.put("msg", "That account doesn't exist");
+        	
+        	return JSONResult(request, result, loginAccount);
+    	}
+    	
+//    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
+//    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	
+//    	for(Estimate item : estimates) {
+//    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
+//    		item.setReplys(replys);
+//    	}
+    	
+//    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
+//    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
+//    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
+		
+//          account.setEstimates(estimates);
+//        account.setProducts(products);
+//        account.setItems(items);
+//        account.setServices(services);
+
+//        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
+//        if(friendLevel != null) {
+//                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
+//        }
+    	
+    	result.put("retCode", 200);
+    	result.put("items", items);
+    	
+    	return JSONResult(request, result, loginAccount);
+    }
+    
+    private ModelAndView getAccountDetailService(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result, boolean bShare) throws Exception {
+    	
+    	if(bShare) {
+    		String strShareUserId = this.getBlankParameter(request, "shareUserId", "");
+    		if(strShareUserId.isEmpty()) {
+    			result.put("retCode", 211);
+            	result.put("msg", "ShareUserId is empty!");
+            	
+            	return JSONResult(request, result, loginAccount);
+    		}
+    		loginAccount = accountDao.get(Integer.valueOf(strShareUserId));
+    	}
+    	
+    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
+    	
+    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
+    	
+    	if(account == null) {
+    		result.put("retCode", 201);
+        	result.put("msg", "That account doesn't exist");
+        	
+        	return JSONResult(request, result, loginAccount);
+    	}
+    	
+//    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
+//    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+//    	
+//    	for(Estimate item : estimates) {
+//    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
+//    		item.setReplys(replys);
+//    	}
+    	
+//    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
+//    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
+//    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
+		
+//          account.setEstimates(estimates);
+//        account.setProducts(products);
+//        account.setItems(items);
+//        account.setServices(services);
+
+//        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
+//        if(friendLevel != null) {
+//                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
+//        }
+    	
+    	result.put("retCode", 200);
+    	result.put("services", services);
     	
     	return JSONResult(request, result, loginAccount);
     }
@@ -3469,7 +3694,7 @@ public class ApiController extends BaseController {
     	filter.put("length", Integer.parseInt(strLength));
     	
     	String strWhere = "type=" + EstimateDAO.ESTIMATE_TYPE_HOT + " and (upper_id is null or upper_id=0) and hot_id=" + strHotId;
-    	List<Estimate> estimates = estimateDao.search(filter, strWhere, "elect_cnt desc, write_time desc");
+    	List<Estimate> estimates = estimateDao.search(filter, strWhere, "write_time desc");
     	int moreCnt = estimateDao.count(null, strWhere) - (Integer.valueOf(strStart) + estimates.size());
     	
     	for(Estimate item : estimates) {
