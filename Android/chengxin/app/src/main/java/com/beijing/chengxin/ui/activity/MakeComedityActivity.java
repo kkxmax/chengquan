@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -108,19 +110,22 @@ public class MakeComedityActivity extends ParentFragmentActivity {
         editNet = (EditText)findViewById(R.id.edit_net);
         editPlace = (EditText)findViewById(R.id.edit_place);
 
-        editComment.setOnKeyListener(new View.OnKeyListener() {
+        editComment.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String content = editComment.getText().toString();
                 int length = content.length();
                 txtLetterCount.setText(String.format("%d/%d", length, MAX_LETTER_COUNT));
-
-                if (length >= MAX_LETTER_COUNT) {
+                if (length > MAX_LETTER_COUNT) {
                     editComment.setText(content.substring(0, MAX_LETTER_COUNT));
-                    return true;
                 }
-                return false;
             }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
         });
 
         imageList = new ArrayList<Bitmap>();
@@ -344,7 +349,7 @@ public class MakeComedityActivity extends ParentFragmentActivity {
 
     private void doTakeGallaryAction() {
         photoIndex ++;
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
         intent.putExtra("outputX",  (int) getResources().getDimension(R.dimen.comedity_image_height));

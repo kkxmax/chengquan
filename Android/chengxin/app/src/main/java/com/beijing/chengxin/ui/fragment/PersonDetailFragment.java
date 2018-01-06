@@ -39,6 +39,7 @@ import com.beijing.chengxin.ui.view.TabEvalView;
 import com.beijing.chengxin.ui.view.TabItemView;
 import com.beijing.chengxin.ui.view.TabServeView;
 import com.beijing.chengxin.ui.widget.Utils;
+import com.beijing.chengxin.utils.AppUtils;
 import com.beijing.chengxin.utils.CommonUtils;
 import com.hy.chengxin.http.Api.HttpApi;
 import com.squareup.picasso.Picasso;
@@ -50,6 +51,7 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 
+import static android.app.Activity.RESULT_OK;
 import static com.beijing.chengxin.config.Constants.ACCOUNT_TYPE_PERSON;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
@@ -286,7 +288,6 @@ public class PersonDetailFragment extends Fragment implements OnViewSizeChangeLi
 
         oks.show(context);
     }
-
     View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -322,7 +323,10 @@ public class PersonDetailFragment extends Fragment implements OnViewSizeChangeLi
                     ((BaseFragmentActivity)getActivity()).showFragment(fragment, true);
                     break;
                 case R.id.btn_call:
-                    new OnContactAsync().execute(String.valueOf(accountDetail.getId()));
+                    //new OnContactAsync().execute(String.valueOf(accountDetail.getId()));
+                    if (accountDetail==null)
+                        return;
+                    AppUtils.openCall(getActivity(),accountDetail.getMobile());
                     break;
                 case R.id.btn_eval:
                     selectTabButton(0);
@@ -360,6 +364,14 @@ public class PersonDetailFragment extends Fragment implements OnViewSizeChangeLi
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK&&requestCode==0x2000&&accountDetail!=null){
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + accountDetail.getMobile())));
+        }
+    }
 
     private void selectTabButton(int position){
         resetTabBtn();

@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.config.Constants;
-import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.network.model.InviterModel;
 import com.beijing.chengxin.network.model.UserModel;
 import com.beijing.chengxin.ui.activity.ChengxinReportActivity;
@@ -142,7 +141,7 @@ public class ChengxinReportPersonView extends BaseView {
         txtRecommender.setText(recommenderName);
     }
 
-    private View.OnClickListener mClickListener = new OnClickListener() {
+    private OnClickListener mClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
             int id = v.getId();

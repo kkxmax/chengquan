@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 
 import com.beijing.chengxin.R;
-import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.ui.fragment.BaseFragmentActivity;
 import com.beijing.chengxin.ui.fragment.LoginFragment;
@@ -79,7 +77,7 @@ public class LoginActivity extends BaseFragmentActivity {
         // Check if we have write permission
         int currentAPIVersion = Build.VERSION.SDK_INT;
 
-        if (currentAPIVersion >= android.os.Build.VERSION_CODES.M) {
+        if (currentAPIVersion >= Build.VERSION_CODES.M) {
             int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             if (permission != PackageManager.PERMISSION_GRANTED) {
                 // We don't have permission so prompt the user

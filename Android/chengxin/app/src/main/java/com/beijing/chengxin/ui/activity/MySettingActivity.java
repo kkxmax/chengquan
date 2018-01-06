@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.config.AppConfig;
-import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.ui.fragment.BaseFragmentActivity;
 import com.beijing.chengxin.ui.fragment.SettingFragment;

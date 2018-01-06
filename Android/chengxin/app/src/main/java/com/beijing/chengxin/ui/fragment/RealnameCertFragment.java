@@ -999,7 +999,7 @@ public class RealnameCertFragment extends Fragment {
 
     private void doTakeGalleryAction(int selIndex) {
         //声明意图
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
         if (selIndex == PICK_FROM_GALLERY_PERSON_LOGO || selIndex == PICK_FROM_GALLERY_ENTER_LOGO) {

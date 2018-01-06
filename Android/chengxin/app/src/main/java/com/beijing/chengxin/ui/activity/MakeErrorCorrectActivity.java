@@ -3,8 +3,6 @@ package com.beijing.chengxin.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,8 +26,6 @@ import com.beijing.chengxin.R;
 import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.BaseModel;
-import com.beijing.chengxin.network.model.EvalModel;
-import com.beijing.chengxin.ui.dialog.SelectGalleryDialog;
 import com.beijing.chengxin.ui.widget.GridView;
 import com.beijing.chengxin.ui.widget.Utils;
 import com.beijing.chengxin.utils.ResUtils;
@@ -281,7 +276,7 @@ public class MakeErrorCorrectActivity extends ParentFragmentActivity {
 
     private void doTakeGallaryAction() {
         photoIndex ++;
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
         intent.putExtra("outputX",  (int) getResources().getDimension(R.dimen.comedity_image_height));

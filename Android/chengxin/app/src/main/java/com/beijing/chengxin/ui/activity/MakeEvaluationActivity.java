@@ -3,8 +3,6 @@ package com.beijing.chengxin.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +27,6 @@ import com.beijing.chengxin.R;
 import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.BaseModel;
-import com.beijing.chengxin.ui.dialog.SelectGalleryDialog;
 import com.beijing.chengxin.ui.widget.GridView;
 import com.beijing.chengxin.ui.widget.Utils;
 import com.beijing.chengxin.utils.ResUtils;
@@ -170,6 +166,8 @@ public class MakeEvaluationActivity extends ParentFragmentActivity {
                     layoutReason.setVisibility(View.GONE);
                     break;
                 case R.id.btn_publish:
+                    if (!ChengxinApplication.instance.mIsVisibleFlag)
+                        return;
                     String errMsg = "";
                     String reason = editReason.getText().toString().trim();
                     String content = editContent.getText().toString().trim();
@@ -318,7 +316,7 @@ public class MakeEvaluationActivity extends ParentFragmentActivity {
 
     private void doTakeGallaryAction() {
         photoIndex ++;
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
         intent.putExtra("outputX",  (int) getResources().getDimension(R.dimen.comedity_image_height));
@@ -439,7 +437,7 @@ public class MakeEvaluationActivity extends ParentFragmentActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Utils.displayProgressDialog(getBaseContext());
+            Utils.displayProgressDialog(MakeEvaluationActivity.this);
         }
         @Override
         protected BaseModel doInBackground(String... strs) {
@@ -450,7 +448,7 @@ public class MakeEvaluationActivity extends ParentFragmentActivity {
             super.onPostExecute(result);
             if (result .isValid()) {
                 if(result.getRetCode() == ERROR_OK) {
-                    Toast.makeText(getBaseContext(), "成功发布评价", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MakeEvaluationActivity.this, "成功发布评价", Toast.LENGTH_LONG).show();
                     setResult(RESULT_OK);
                     finish();
                 } else {

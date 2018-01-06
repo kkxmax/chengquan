@@ -1,7 +1,5 @@
 package com.beijing.chengxin.config;
 
-import java.security.PublicKey;
-
 public class Constants {
 
 //    public static final boolean DEBUG_MODE = true;

@@ -4,28 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.Parcelable;
-import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,22 +32,11 @@ import com.beijing.chengxin.network.model.HotModel;
 import com.beijing.chengxin.network.model.UserListModel;
 import com.beijing.chengxin.network.model.UserModel;
 import com.beijing.chengxin.ui.activity.HotEvalActivity;
-import com.beijing.chengxin.ui.listener.OnItemClickListener;
 import com.beijing.chengxin.ui.view.BaseView;
 import com.beijing.chengxin.ui.view.HotEvalListView;
 import com.beijing.chengxin.ui.view.PartnerListView;
-import com.beijing.chengxin.ui.view.TabComidityView;
-import com.beijing.chengxin.ui.view.TabEvalView;
-import com.beijing.chengxin.ui.view.TabItemView;
-import com.beijing.chengxin.ui.view.TabServeView;
-import com.beijing.chengxin.ui.widget.AutoScrollViewPager;
-import com.beijing.chengxin.ui.widget.ListViewNoScroll;
-import com.beijing.chengxin.ui.widget.PageIndicator;
-import com.beijing.chengxin.ui.widget.UrlImagePagerAdapter;
 import com.beijing.chengxin.ui.widget.Utils;
-import com.beijing.chengxin.utils.CommonUtils;
 import com.hy.chengxin.http.Api.HttpApi;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,7 +46,6 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 
-import static com.beijing.chengxin.config.Constants.ENTER_TYPE_PERSONAL;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
 public class HotDetailFragment extends Fragment {
@@ -322,7 +299,7 @@ public class HotDetailFragment extends Fragment {
         scrollView.fullScroll(ScrollView.FOCUS_UP);
         scrollView.smoothScrollTo(0,0);
 
-        if (evalList.size() < 1)
+//        if (evalList.size() < 1)
             new EvalListAsync().execute("0", "-1", String.valueOf(hotId));
     }
 

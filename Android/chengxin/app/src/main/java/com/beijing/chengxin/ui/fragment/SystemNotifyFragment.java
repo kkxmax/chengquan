@@ -1,6 +1,5 @@
 package com.beijing.chengxin.ui.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beijing.chengxin.ChengxinApplication;
 import com.beijing.chengxin.R;
-import com.beijing.chengxin.config.AppConfig;
 import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.network.SyncInfo;
@@ -24,10 +21,8 @@ import com.beijing.chengxin.network.model.ErrorDetailModel;
 import com.beijing.chengxin.network.model.ErrorModel;
 import com.beijing.chengxin.network.model.EvalDetailModel;
 import com.beijing.chengxin.network.model.EvalModel;
-import com.beijing.chengxin.network.model.NoticeCountModel;
 import com.beijing.chengxin.network.model.SystemNoticeListModel;
 import com.beijing.chengxin.network.model.SystemNoticeModel;
-import com.beijing.chengxin.ui.activity.ChengxinLogActivity;
 import com.beijing.chengxin.ui.activity.MyErrorCorrectDetailActivity;
 import com.beijing.chengxin.ui.activity.MyRealnameCertActivity;
 import com.beijing.chengxin.ui.widget.Utils;

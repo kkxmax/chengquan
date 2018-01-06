@@ -3,6 +3,7 @@ package com.beijing.chengxin.network;
 import android.content.Context;
 
 import com.beijing.chengxin.ChengxinApplication;
+import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.debug.Logger;
 import com.beijing.chengxin.network.model.AccountModel;
 import com.beijing.chengxin.network.model.BaseModel;
@@ -13,7 +14,6 @@ import com.beijing.chengxin.network.model.ErrorDetailModel;
 import com.beijing.chengxin.network.model.ErrorListModel;
 import com.beijing.chengxin.network.model.EvalDetailModel;
 import com.beijing.chengxin.network.model.EvalListModel;
-import com.beijing.chengxin.network.model.EvalModel;
 import com.beijing.chengxin.network.model.FavouriteListModel;
 import com.beijing.chengxin.network.model.FenleiListModel;
 import com.beijing.chengxin.network.model.HotDetailModel;
@@ -31,7 +31,6 @@ import com.beijing.chengxin.network.model.ServeListModel;
 import com.beijing.chengxin.network.model.SystemNoticeListModel;
 import com.beijing.chengxin.network.model.UserDetailModel;
 import com.beijing.chengxin.network.model.UserListModel;
-import com.beijing.chengxin.network.model.UserModel;
 import com.beijing.chengxin.network.model.VerifyCodeModel;
 import com.beijing.chengxin.network.model.XyleixingListModel;
 import com.google.gson.Gson;
@@ -42,7 +41,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.beijing.chengxin.config.Constants;
 
 /**
  * Created by star on 11/2/2017.

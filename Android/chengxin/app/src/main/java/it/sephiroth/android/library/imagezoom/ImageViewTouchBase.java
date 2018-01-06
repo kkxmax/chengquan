@@ -1,10 +1,5 @@
 package it.sephiroth.android.library.imagezoom;
 
-import it.sephiroth.android.library.easing.Cubic;
-import it.sephiroth.android.library.easing.Easing;
-import it.sephiroth.android.library.imagezoom.graphics.FastBitmapDrawable;
-import it.sephiroth.android.library.imagezoom.utils.IDisposable;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,6 +11,11 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
+
+import it.sephiroth.android.library.easing.Cubic;
+import it.sephiroth.android.library.easing.Easing;
+import it.sephiroth.android.library.imagezoom.graphics.FastBitmapDrawable;
+import it.sephiroth.android.library.imagezoom.utils.IDisposable;
 
 /**
  * Base View to manage image zoom/scrool/pinch operations
@@ -138,7 +138,7 @@ public abstract class ImageViewTouchBase extends ImageView implements IDisposabl
 	}
 
 	protected void init(Context context, AttributeSet attrs, int defStyle) {
-		setScaleType(ImageView.ScaleType.MATRIX);
+		setScaleType(ScaleType.MATRIX);
 	}
 
 	@Override

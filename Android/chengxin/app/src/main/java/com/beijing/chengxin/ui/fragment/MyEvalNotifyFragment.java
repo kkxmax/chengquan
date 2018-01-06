@@ -1,13 +1,9 @@
 package com.beijing.chengxin.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +23,6 @@ import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.BaseModel;
 import com.beijing.chengxin.network.model.EvalModel;
 import com.beijing.chengxin.network.model.MyEvalNoticeModel;
-import com.beijing.chengxin.network.model.SystemNoticeListModel;
-import com.beijing.chengxin.ui.activity.DetailActivity;
-import com.beijing.chengxin.ui.activity.MyEvalActivity;
 import com.beijing.chengxin.ui.listener.OnItemClickListener;
 import com.beijing.chengxin.ui.widget.Utils;
 import com.beijing.chengxin.utils.CommonUtils;

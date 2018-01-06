@@ -196,4 +196,13 @@
         <item name="android:minWidth">@dimen/row_height_tiny</item>
     </style>
 
+    <style name="BlueTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/color_main_blue</item>
+    </style>
+    <style name="GrayTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/txt_gray</item>
+    </style>
+
 </resources>

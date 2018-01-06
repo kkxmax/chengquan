@@ -3,12 +3,10 @@ package com.beijing.chengxin.ui.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,30 +15,24 @@ import com.beijing.chengxin.ChengxinApplication;
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.config.AppConfig;
 import com.beijing.chengxin.config.Constants;
-import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.ComedityListModel;
 import com.beijing.chengxin.network.model.ComedityModel;
 import com.beijing.chengxin.network.model.XyleixingListModel;
 import com.beijing.chengxin.ui.activity.DetailActivity;
 import com.beijing.chengxin.ui.activity.MainActivity;
-import com.beijing.chengxin.ui.activity.MakeComedityActivity;
 import com.beijing.chengxin.ui.fragment.MainHomeFragment;
 import com.beijing.chengxin.ui.listener.OnConditionClickListener;
 import com.beijing.chengxin.ui.listener.OnItemClickListener;
 import com.beijing.chengxin.ui.widget.GridView;
 import com.beijing.chengxin.ui.widget.Utils;
-import com.beijing.chengxin.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.beijing.chengxin.config.Constants.ACCOUNT_TYPE_ENTERPRISE;
-import static com.beijing.chengxin.config.Constants.ENTER_TYPE_PERSONAL;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 import static com.beijing.chengxin.config.Constants.PAGE_ITEM_COUNT;
-import static com.beijing.chengxin.config.Constants.TEST_STATUS_PASSED;
 
 public class HomeComedityView extends BaseView {
 
@@ -204,7 +196,7 @@ public class HomeComedityView extends BaseView {
             holder.txt_name.setText(item.getName());
             holder.txt_price.setText(String.format("¥%.02f", item.getPrice()));
 
-            convertView.setOnClickListener(new View.OnClickListener() {
+            convertView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (itemClickListener != null)

@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -33,6 +34,7 @@ public class SearchHistoryFragment extends Fragment {
     private View rootView;
 
     private EditText editSearch;
+
     private TagView tagView;
 //    private ListView listView;
 //    private HistoryListAdapter mAdapter;

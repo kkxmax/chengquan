@@ -49,4 +49,6 @@ public class WXEntryActivity extends WechatHandlerActivity {
 		}
 	}
 
+	
+
 }

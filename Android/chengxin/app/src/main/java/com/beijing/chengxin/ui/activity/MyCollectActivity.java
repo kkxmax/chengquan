@@ -2,8 +2,6 @@ package com.beijing.chengxin.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -15,24 +13,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.beijing.chengxin.ChengxinApplication;
 import com.beijing.chengxin.R;
-import com.beijing.chengxin.config.AppConfig;
 import com.beijing.chengxin.config.Constants;
-import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.BaseModel;
 import com.beijing.chengxin.network.model.FavouriteListModel;
 import com.beijing.chengxin.network.model.FavouriteModel;
-import com.beijing.chengxin.network.model.HotModel;
 import com.beijing.chengxin.ui.listener.OnCallbackListener;
 import com.beijing.chengxin.ui.widget.RefreshListView;
 import com.beijing.chengxin.ui.widget.Utils;
@@ -43,7 +36,6 @@ import java.util.ArrayList;
 
 import static com.beijing.chengxin.config.Constants.ERROR_DUPLICATE;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
-import static com.beijing.chengxin.config.Constants.TEST_STATUS_PASSED;
 
 public class MyCollectActivity extends ParentFragmentActivity {
 
@@ -326,7 +318,7 @@ public class MyCollectActivity extends ParentFragmentActivity {
                 holder.id = item.getId();
                 Picasso.with(mContext).load(Constants.FILE_ADDR + item.getProductImgPath1()).placeholder(R.drawable.no_image).into(holder.imgLogo);
                 holder.txtName.setText(item.getProductName());
-                holder.txtPrice.setText("￥ " + item.getProductPrice());
+                holder.txtPrice.setText("￥ " + String.format("%.2f",item.getProductPrice()));
 
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override

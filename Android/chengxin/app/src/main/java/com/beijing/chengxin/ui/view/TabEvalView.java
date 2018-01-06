@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.text.SpannableStringBuilder;
 import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -291,7 +292,7 @@ public class TabEvalView extends BaseView implements View.OnClickListener {
             for (int i = 0; i < imgList.size(); i++) {
                 ImageView imgView = new ImageView(mActivity);
                 imgView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-                LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(listImgWidth, listImgHeight);
+                LayoutParams lparams = new LayoutParams(listImgWidth, listImgHeight);
                 lparams.setMargins(0, 0, 8, 0);
                 imgView.setLayoutParams(lparams);
 
@@ -309,7 +310,16 @@ public class TabEvalView extends BaseView implements View.OnClickListener {
             layoutRemark.setVisibility(GONE);
         } else {
             layoutRemark.setVisibility(VISIBLE);
-            txtRemarkFirst.setText(replys.get(0).getContent());
+
+            String name = (replys.get(0).getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON)? replys.get(0).getOwnerRealname() : replys.get(0).getOwnerEnterName();
+            name += ": ";
+
+            SpannableStringBuilder builder = new SpannableStringBuilder()
+                    .append(CommonUtils.formatString(getContext(), name, R.style.BlueTextAppearance))
+                    .append(CommonUtils.formatString(getContext(), replys.get(0).getContent(), R.style.GrayTextAppearance));
+            CharSequence styledString = builder.subSequence(0, builder.length());
+            txtRemarkFirst.setText(styledString);
+
             if (replys.size() > 0) {
                 txtRemarkMore.setVisibility(View.VISIBLE);
                 viewRemarkBody.setVisibility(View.GONE);
@@ -353,9 +363,9 @@ public class TabEvalView extends BaseView implements View.OnClickListener {
             }
         });
 
-        txtEvalContent.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        txtEvalContent.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
         txtEvalContentViewList.add(txtEvalContent);
-        txtRemarkFirst.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        txtRemarkFirst.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
         txtRemarkFirstViewList.add(txtRemarkFirst);
 
         return itemView;

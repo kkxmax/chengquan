@@ -363,21 +363,21 @@
     <string name="chengxin_rule_header">尊敬的用户，您好!\n当您使用本网站及APP的时候，表示您接受所有服务条款。您可以对本平台内注册的个人或企业进行评价。评价分为“正面评价”和“负面评价”两类，每类评价针对不同的情况会有不同的加分。\n\n具体规则如下：</string>
     <string name="chengxin_rule_eval_title">评价人：</string>
     <string name="chengxin_rule_eval_content">
-        1、推荐好友注册，+2个正面评价。\n
-        2、写个完整评价，+5个正面评价。\n
-        3、写个快捷评价，+3个正面评价。
+        1、推荐好友注册，+2分正面评价。\n
+        2、写个完整评价，+5分正面评价。\n
+        3、写个快捷评价，+3分正面评价。
     </string>
     <string name="chengxin_rule_update_title">纠错：</string>
     <string name="chengxin_rule_update_content">
-        1、纠错成功，+6个正面评价。\n
+        1、纠错成功，+6分正面评价。\n
         2、纠错失败，不加正面评价不加负面评价。\n
-        3、被纠错为夸大评价，+4个负面评价。\n
-        4、被纠错为虚假评价，+7个负面评价。
+        3、被纠错为夸大评价，+4分负面评价。\n
+        4、被纠错为虚假评价，+7分负面评价。
     </string>
     <string name="chengxin_rule_receive_title">被评价人：</string>
     <string name="chengxin_rule_receive_content">
-        1、被正面评价，+4个正面评价。\n
-        2、被负面评价，+4个负面评价。
+        1、被正面评价，+4分正面评价。\n
+        2、被负面评价，+4分负面评价。
     </string>
     <string name="chengxin_rule_footer">计算方法：诚信度是以累计的正面评价数量除以总评价数量得出的百分比。\n请每个用户发布真实有效的评价，如果您有什么疑问或建议，可以通过“意见反馈”入口反馈给我们，我们将第一时间处理，感谢您为社会诚信系统做出的贡献。</string>
 

@@ -30,10 +30,9 @@ import com.beijing.chengxin.R;
 
 import handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import handmark.pulltorefresh.library.PullToRefreshBase.Orientation;
-import handmark.pulltorefresh.library.internal.*;
 
 @SuppressLint("ViewConstructor")
-public class FlipLoadingLayout extends handmark.pulltorefresh.library.internal.LoadingLayout {
+public class FlipLoadingLayout extends LoadingLayout {
 
 	static final int FLIP_ANIMATION_DURATION = 150;
 

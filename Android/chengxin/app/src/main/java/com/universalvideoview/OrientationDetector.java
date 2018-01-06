@@ -19,6 +19,7 @@ package com.universalvideoview;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.SensorManager;
+import android.support.compat.BuildConfig;
 import android.util.Log;
 import android.view.OrientationEventListener;
 
@@ -61,6 +62,9 @@ public class OrientationDetector {
                     if (currDirection != lastDirection) {
                         resetTime();
                         lastDirection = currDirection;
+                        if (BuildConfig.DEBUG) {
+                            Log.d(TAG, String.format("Change direction, start timing, the current direction is %s", currDirection));
+                        }
                     } else {
                         calcHoldingTime();
                         if (holdingTime > HOLDING_THRESHOLD) {

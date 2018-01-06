@@ -1,15 +1,12 @@
 package handmark.pulltorefresh.library;
 
-import java.util.HashSet;
-
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 
-import handmark.pulltorefresh.library.*;
-import handmark.pulltorefresh.library.PullToRefreshBase;
+import java.util.HashSet;
+
 import handmark.pulltorefresh.library.internal.LoadingLayout;
 
-public class LoadingLayoutProxy implements handmark.pulltorefresh.library.ILoadingLayout {
+public class LoadingLayoutProxy implements ILoadingLayout {
 
 	private final HashSet<LoadingLayout> mLoadingLayouts;
 

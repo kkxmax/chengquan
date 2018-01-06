@@ -1,17 +1,13 @@
 package com.beijing.chengxin.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,7 +20,6 @@ import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.EvalListModel;
 import com.beijing.chengxin.network.model.EvalModel;
-import com.beijing.chengxin.network.model.UserModel;
 import com.beijing.chengxin.ui.widget.RefreshListView;
 import com.beijing.chengxin.ui.widget.SimpleSortSpinnerEval;
 import com.beijing.chengxin.ui.widget.Utils;
@@ -218,7 +213,7 @@ public class MyEvalActivity extends ParentFragmentActivity {
             viewHolder.txtItemType.setText(item.getTargetAccountAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.string.str_person : R.string.str_enterprise);
             viewHolder.txtName.setText(item.getTargetAccountAkind() == 1 ? item.getTargetAccountRealname() : item.getTargetAccountEnterName());
             viewHolder.txtEvalType.setText(item.getKindName());
-            viewHolder.txtEvalContent.setText(getResources().getString(R.string.make_eval_content) + item.getContent());
+            viewHolder.txtEvalContent.setText(item.getContent());
             viewHolder.txtTime.setText(item.getWriteTimeString());
             viewHolder.txtLikeCount.setText("" + item.getTargetAccountElectCnt());
             viewHolder.txtEvalCount.setText("" + item.getTargetAccountFeedbackCnt());

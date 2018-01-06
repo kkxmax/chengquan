@@ -1,11 +1,8 @@
 package com.beijing.chengxin.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -209,12 +206,13 @@ public class EvalMeActivity extends ParentFragmentActivity {
             viewHolder.txtItemType.setText(item.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON ? R.string.str_person : R.string.str_enterprise);
             viewHolder.txtName.setText(item.getOwnerAkind() == 1 ? item.getOwnerRealname() : item.getOwnerEnterName());
             viewHolder.txtEvalType.setText(item.getKindName());
-            viewHolder.txtEvalContent.setText(getResources().getString(R.string.make_eval_content) + item.getContent());
+            viewHolder.txtEvalContent.setText(item.getContent());
             viewHolder.txtTime.setText(item.getWriteTimeString());
             viewHolder.txtLikeCount.setText("" + item.getElectCnt());
             viewHolder.txtEvalCount.setText("" + item.getTargetAccountFeedbackCnt());
 
             final List<String> imgList = item.getImgPaths();
+            viewHolder.hsView.setVisibility(View.VISIBLE);
             if (imgList != null && imgList.size() > 0) {
                 viewHolder.layoutImages.removeAllViews();
                 for (int i = 0; i < imgList.size(); i++) {

@@ -2,10 +2,9 @@ package com.beijing.chengxin.ui.view;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,13 +17,10 @@ import com.beijing.chengxin.network.model.BaseModel;
 import com.beijing.chengxin.network.model.EvalModel;
 import com.beijing.chengxin.ui.fragment.BaseFragmentActivity;
 import com.beijing.chengxin.ui.fragment.EvalDetailFragment;
-import com.beijing.chengxin.ui.listener.OnItemClickListener;
-import com.beijing.chengxin.ui.widget.ListViewNoScroll;
 import com.beijing.chengxin.ui.widget.Utils;
 import com.beijing.chengxin.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
@@ -112,7 +108,13 @@ public class HotEvalListView extends BaseView {
             txt_evaluate.setText(String.valueOf(replys.size()));
             EvalModel evalModel = replys.get(0);
             String name = (evalModel.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON)? evalModel.getOwnerRealname() : evalModel.getOwnerEnterName();
-            txt_comment.setText(name + " : " + evalModel.getContent());
+            name += ": ";
+
+            SpannableStringBuilder builder = new SpannableStringBuilder()
+                    .append(CommonUtils.formatString(getContext(), name, R.style.BlueTextAppearance))
+                    .append(CommonUtils.formatString(getContext(), evalModel.getContent(), R.style.GrayTextAppearance));
+            CharSequence styledString = builder.subSequence(0, builder.length());
+            txt_comment.setText(styledString);
             txt_comment_left.setText(String.format("查看全部%d条回复 >", replys.size()));
         } else {
             txt_evaluate.setText("0");

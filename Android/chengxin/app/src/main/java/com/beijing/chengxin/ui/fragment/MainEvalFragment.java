@@ -3,12 +3,9 @@ package com.beijing.chengxin.ui.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +13,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -34,7 +30,6 @@ import com.beijing.chengxin.ui.activity.MainActivity;
 import com.beijing.chengxin.ui.activity.MakeEvaluationActivity;
 import com.beijing.chengxin.ui.listener.OnItemClickListener;
 import com.beijing.chengxin.ui.view.HangyeListView;
-import com.beijing.chengxin.ui.view.HomeEnterpriseView;
 import com.beijing.chengxin.ui.widget.CustomToast;
 import com.beijing.chengxin.ui.widget.RefreshListView;
 import com.beijing.chengxin.ui.widget.Utils;
@@ -44,7 +39,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.beijing.chengxin.config.Constants.ACCOUNT_TYPE_PERSON;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 import static com.beijing.chengxin.config.Constants.PAGE_ITEM_COUNT;
 import static com.beijing.chengxin.config.Constants.TEST_STATUS_PASSED;
@@ -190,9 +184,9 @@ public class MainEvalFragment extends Fragment {
 
     public void reloadData(int get_index) {
         if (get_index == INDEX_GET_DATA_PERSON)
-            listPerson.clear();
+            listPerson = new ArrayList<>();
         if (get_index == INDEX_GET_DATA_COMPANY)
-            listEnterprise.clear();
+            listEnterprise = new ArrayList<>();
         loadData(get_index);
     }
 

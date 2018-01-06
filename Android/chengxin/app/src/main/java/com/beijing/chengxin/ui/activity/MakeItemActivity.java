@@ -34,7 +34,6 @@ import com.beijing.chengxin.network.model.BaseModel;
 import com.beijing.chengxin.network.model.CityModel;
 import com.beijing.chengxin.network.model.ItemModel;
 import com.beijing.chengxin.ui.dialog.SelectCityDialog;
-import com.beijing.chengxin.ui.dialog.SelectGalleryDialog;
 import com.beijing.chengxin.ui.listener.OnCancelListener;
 import com.beijing.chengxin.ui.view.FenleiGridView;
 import com.beijing.chengxin.ui.widget.Utils;
@@ -47,8 +46,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
-import static com.beijing.chengxin.config.Constants.PICK_FROM_CAMERA;
-import static com.beijing.chengxin.config.Constants.PICK_FROM_GALLARY;
 
 public class MakeItemActivity extends ParentFragmentActivity {
 

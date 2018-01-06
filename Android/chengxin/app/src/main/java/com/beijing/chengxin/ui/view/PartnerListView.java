@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,9 +17,6 @@ import com.beijing.chengxin.network.model.BaseModel;
 import com.beijing.chengxin.network.model.UserModel;
 import com.beijing.chengxin.ui.fragment.BaseFragmentActivity;
 import com.beijing.chengxin.ui.fragment.EnterpriseDetailFragment;
-import com.beijing.chengxin.ui.listener.OnItemClickListener;
-import com.beijing.chengxin.ui.widget.GridView;
-import com.beijing.chengxin.ui.widget.ListViewNoScroll;
 import com.beijing.chengxin.ui.widget.Utils;
 import com.beijing.chengxin.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
@@ -29,7 +24,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import static com.beijing.chengxin.config.Constants.ACCOUNT_TYPE_PERSON;
-import static com.beijing.chengxin.config.Constants.ENTER_TYPE_PERSONAL;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
 public class PartnerListView extends BaseView {

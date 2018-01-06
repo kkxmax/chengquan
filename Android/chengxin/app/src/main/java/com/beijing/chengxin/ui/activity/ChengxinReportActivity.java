@@ -6,9 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +31,6 @@ import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 
 import static com.beijing.chengxin.config.Constants.ERROR_DUPLICATE;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
-import static com.beijing.chengxin.config.Constants.RESULT_CODE_LOGIN_DUPLICATE;
 
 public class ChengxinReportActivity extends ParentFragmentActivity {
 

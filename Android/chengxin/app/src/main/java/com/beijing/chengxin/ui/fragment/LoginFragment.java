@@ -1,7 +1,5 @@
 package com.beijing.chengxin.ui.fragment;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +7,6 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,14 +15,12 @@ import android.widget.ToggleButton;
 import com.beijing.chengxin.ChengxinApplication;
 import com.beijing.chengxin.R;
 import com.beijing.chengxin.config.AppConfig;
-import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.LoginModel;
 import com.beijing.chengxin.ui.activity.LoginActivity;
 import com.beijing.chengxin.ui.widget.Utils;
 
-import static com.beijing.chengxin.config.Constants.DEBUG_MODE;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
 public class LoginFragment extends Fragment {

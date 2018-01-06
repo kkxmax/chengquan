@@ -3,8 +3,6 @@ package com.beijing.chengxin.ui.fragment;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beijing.chengxin.R;
-import com.beijing.chengxin.config.AppConfig;
 import com.beijing.chengxin.config.Constants;
 import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.network.SyncInfo;
@@ -34,9 +31,7 @@ import com.beijing.chengxin.ui.widget.Utils;
 import com.beijing.chengxin.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
-import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -267,7 +262,7 @@ public class EvalDetailFragment extends Fragment {
                 TextView txtDate= (TextView) convertView.findViewById(R.id.txt_date);
 
                 Picasso.with(getContext())
-                        .load(Constants.FILE_ADDR + evalInfo.getOwnerLogo())
+                        .load(Constants.FILE_ADDR + item.getOwnerLogo())
                         .placeholder(item.getOwnerAkind() == Constants.ACCOUNT_TYPE_PERSON  ? R.drawable.no_image_person_center : R.drawable.no_image_item)
                         .into(imgAvatar);
                 String name;
@@ -309,7 +304,7 @@ public class EvalDetailFragment extends Fragment {
                     reply.setOwnerRealname(me.getRealname());
                     reply.setContent(editMsg.getText().toString());
                     Calendar c = new GregorianCalendar();
-                    String time = String.format("%d-%02d-%02d %02d:%02d:%02d", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE),c.get(Calendar.HOUR) ,c.get(Calendar.MINUTE),c.get(Calendar.SECOND));
+                    String time = String.format("%d-%02d-%02d %02d:%02d:%02d", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DATE),c.get(Calendar.HOUR_OF_DAY) ,c.get(Calendar.MINUTE),c.get(Calendar.SECOND));
                     reply.setWriteTimeString(time);
                     editMsg.setText("");
 

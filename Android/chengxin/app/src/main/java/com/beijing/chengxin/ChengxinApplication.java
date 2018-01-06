@@ -1,14 +1,11 @@
 package com.beijing.chengxin;
 
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Environment;
-import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 import com.beijing.chengxin.config.AppConfig;
@@ -17,10 +14,13 @@ import com.beijing.chengxin.network.NetworkEngine;
 import com.beijing.chengxin.network.SessionInstance;
 import com.beijing.chengxin.ui.activity.LoginActivity;
 import com.beijing.chengxin.ui.widget.CustomToast;
+import com.crashlytics.android.Crashlytics;
 
 import java.io.File;
 import java.net.CookieHandler;
 import java.net.CookieManager;
+
+import io.fabric.sdk.android.Fabric;
 
 public class ChengxinApplication extends Application {
 
@@ -47,6 +47,7 @@ public class ChengxinApplication extends Application {
 
         instance = this;
         super.onCreate();
+
         Fabric.with(this, new Crashlytics());
     }
     @Override

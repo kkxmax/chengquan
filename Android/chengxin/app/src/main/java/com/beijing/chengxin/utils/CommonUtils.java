@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -252,6 +254,12 @@ public class CommonUtils {
         }
 
         return result;
+    }
+
+    public static SpannableString formatString(Context context, String text, int style) {
+        SpannableString spannableString = new SpannableString(text);
+        spannableString.setSpan(new TextAppearanceSpan(context, style), 0, text.length(), 0);
+        return spannableString;
     }
 
 }

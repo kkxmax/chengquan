@@ -26,11 +26,11 @@ import com.beijing.chengxin.network.SyncInfo;
 import com.beijing.chengxin.network.model.BaseModel;
 import com.beijing.chengxin.network.model.ComedityDetailModel;
 import com.beijing.chengxin.network.model.ComedityModel;
-import com.beijing.chengxin.ui.activity.MainActivity;
 import com.beijing.chengxin.ui.widget.AutoScrollViewPager;
 import com.beijing.chengxin.ui.widget.PageIndicator;
 import com.beijing.chengxin.ui.widget.UrlImagePagerAdapter;
 import com.beijing.chengxin.ui.widget.Utils;
+import com.beijing.chengxin.utils.AppUtils;
 import com.beijing.chengxin.utils.CommonUtils;
 import com.hy.chengxin.http.Api.HttpApi;
 import com.squareup.picasso.Picasso;
@@ -43,6 +43,7 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 
+import static android.app.Activity.RESULT_OK;
 import static com.beijing.chengxin.config.Constants.ERROR_OK;
 
 public class ComedityDetailFragment extends Fragment{
@@ -220,7 +221,10 @@ public class ComedityDetailFragment extends Fragment{
                     } catch (Exception e) {}
                     break;
                 case R.id.btn_call:
-                    new OnContactAsync().execute(String.valueOf(comedity.getAccountId()));
+                    //new OnContactAsync().execute(String.valueOf(comedity.getAccountId()));
+                    if (comedity==null)
+                        return;
+                    AppUtils.openCall(getActivity(),comedity.getAccountMobile());
                     break;
                 case R.id.btn_favorite:
                     String favorite = (comedity.getIsFavourite() == 1) ? "0" : "1";
@@ -232,6 +236,14 @@ public class ComedityDetailFragment extends Fragment{
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK&&requestCode==0x2000&&comedity!=null){
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + comedity.getAccountMobile())));
+        }
+    }
 
     class CommodityDetailAsync extends AsyncTask<String, String, ComedityDetailModel> {
         @Override

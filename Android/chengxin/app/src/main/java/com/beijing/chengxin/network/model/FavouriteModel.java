@@ -18,7 +18,7 @@ public class FavouriteModel {
     int productId;
     String productImgPath1;
     String productName;
-    int productPrice;
+    double productPrice;
     int serial;
     String writeTimeString;
     int productStatus;
@@ -160,11 +160,11 @@ public class FavouriteModel {
         this.productName = productName;
     }
 
-    public int getProductPrice() {
+    public double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(int productPrice) {
+    public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
 
