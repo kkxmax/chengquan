@@ -323,14 +323,6 @@ public class ApiController extends BaseController {
         	return this.getAccountInfo(request, response, session, loginAccount, result, bShare);
         } else if(strAction.equals("getAccountDetail")) {
         	return this.getAccountDetail(request, response, session, loginAccount, result, bShare);
-        } else if(strAction.equals("getAccountDetailEstimate")) {
-        	return this.getAccountDetailEstimate(request, response, session, loginAccount, result, bShare);     
-        } else if(strAction.equals("getAccountDetailProduct")) {
-        	return this.getAccountDetailProduct(request, response, session, loginAccount, result, bShare);             
-        } else if(strAction.equals("getAccountDetailItem")) {
-        	return this.getAccountDetailItem(request, response, session, loginAccount, result, bShare);
-        } else if(strAction.equals("getAccountDetailService")) {
-        	return this.getAccountDetailService(request, response, session, loginAccount, result, bShare);        
         } else if(strAction.equals("leaveEstimate")) {
         	return this.leaveEstimate(request, response, session, loginAccount, result);
         } else if(strAction.equals("leaveReply")) {
@@ -417,6 +409,14 @@ public class ApiController extends BaseController {
         	return this.getServiceDetail(request, response, session, result);
         } else if(strAction.equals("getItemDetail")) {
         	return this.getItemDetail(request, response, session, result);
+        } else if(strAction.equals("getEstimateListForAccount")) {
+        	return this.getEstimateListForAccount(request, response, session, loginAccount, result);
+        } else if(strAction.equals("getProductListForAccount")) {
+        	return this.getProductListForAccount(request, response, session, loginAccount, result);
+        } else if(strAction.equals("getItemListForAccount")) {
+        	return this.getItemListForAccount(request, response, session, loginAccount, result);
+        } else if(strAction.equals("getServiceListForAccount")) {
+        	return this.getServiceListForAccount(request, response, session, loginAccount, result);
         } else {
     		result.put("retCode", 290);
     		result.put("msg", "API doesn't exist");
@@ -833,12 +833,12 @@ public class ApiController extends BaseController {
         	if(strRealname.length() > 6) {
     			strRealname = strRealname.substring(0, 6);
     		}
-//        	if(strCertNum.length() != 20) {
-//        		result.put("retCode", 210);
-//        		result.put("msg", "身份证号码必须是20位数字或字母");
-//        		
-//        		return JSONResult(request, result, loginAccount);
-//        	}
+        	if(strCertNum.length() != 20) {
+        		result.put("retCode", 210);
+        		result.put("msg", "身份证号码必须是20位数字或字母");
+        		
+        		return JSONResult(request, result, loginAccount);
+        	}
         	if(strJob.length() > 10) {
         		strJob = strJob.substring(0, 10);
         	}
@@ -977,12 +977,12 @@ public class ApiController extends BaseController {
         	if(strRealname.length() > 6) {
     			strRealname = strRealname.substring(0, 6);
     		}
-//        	if(strCertNum.length() != 20) {
-//        		result.put("retCode", 210);
-//        		result.put("msg", "身份证号码必须是20位数字或字母");
-//        		
-//        		return JSONResult(request, result, loginAccount);
-//        	}
+        	if(strCertNum.length() != 20) {
+        		result.put("retCode", 210);
+        		result.put("msg", "身份证号码必须是20位数字或字母");
+        		
+        		return JSONResult(request, result, loginAccount);
+        	}
         	if(strJob.length() > 10) {
         		strJob = strJob.substring(0, 10);
         	}
@@ -2414,7 +2414,12 @@ public class ApiController extends BaseController {
     	filter.put("length", Integer.parseInt(strLength));
     	
     	if(!strAkind.equals("0")) {
-    		strWhere += " and target_account_akind=" + strAkind;
+    		if(type == 1) {
+    			strWhere += " and target_account_akind=" + strAkind;	
+    		}
+    		else if(type == 2) {
+    			strWhere += " and owner_akind=" + strAkind;
+    		}
     	}
     	if(!strKind.equals("0")) {
     		strWhere += " and kind=" + strKind;
@@ -2624,6 +2629,13 @@ public class ApiController extends BaseController {
         	return JSONResult(request, result, loginAccount);
     	}
     	
+    	Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
+		if(friendLevel != null) {
+			account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
+		}
+		
+		CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
+    	
     	result.put("retCode", 200);
     	result.put("account", account);
     	
@@ -2654,249 +2666,32 @@ public class ApiController extends BaseController {
         	return JSONResult(request, result, loginAccount);
     	}
     	
-//    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
-//    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	
-//    	for(Estimate item : estimates) {
-//    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
-//    		item.setReplys(replys);
-//    	}
-    	
-//    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
-//    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
-    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
-		
-//          account.setEstimates(estimates);
-//        account.setProducts(products);
-//        account.setItems(items);
-//        account.setServices(services);
-
-        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
-        if(friendLevel != null) {
-                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
-        }
-    	
-    	result.put("retCode", 200);
-    	result.put("account", account);
-    	
-    	return JSONResult(request, result, loginAccount);
-    }
-    
-    
-    private ModelAndView getAccountDetailEstimate(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result, boolean bShare) throws Exception {
-    	
-    	if(bShare) {
-    		String strShareUserId = this.getBlankParameter(request, "shareUserId", "");
-    		if(strShareUserId.isEmpty()) {
-    			result.put("retCode", 211);
-            	result.put("msg", "ShareUserId is empty!");
-            	
-            	return JSONResult(request, result, loginAccount);
-    		}
-    		loginAccount = accountDao.get(Integer.valueOf(strShareUserId));
-    	}
-    	
-    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
-    	
-//    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
-//    	
-//    	if(account == null) {
-//    		result.put("retCode", 201);
-//        	result.put("msg", "That account doesn't exist");
-//        	
-//        	return JSONResult(request, result, loginAccount);
-//    	}
-    	
     	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
-//    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	
+    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
+    	
     	for(Estimate item : estimates) {
     		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
     		item.setReplys(replys);
     	}
     	
-//    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
-    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
-//    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
-		
-//          account.setEstimates(estimates);
-//        account.setProducts(products);
-//        account.setItems(items);
-//        account.setServices(services);
-//
-//        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
-//        if(friendLevel != null) {
-//                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
-//        }
-    	
-    	result.put("retCode", 200);
-    	result.put("estimates", estimates);
-    	
-    	return JSONResult(request, result, loginAccount);
-    }
-    
-    private ModelAndView getAccountDetailProduct(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result, boolean bShare) throws Exception {
-    	
-    	if(bShare) {
-    		String strShareUserId = this.getBlankParameter(request, "shareUserId", "");
-    		if(strShareUserId.isEmpty()) {
-    			result.put("retCode", 211);
-            	result.put("msg", "ShareUserId is empty!");
-            	
-            	return JSONResult(request, result, loginAccount);
-    		}
-    		loginAccount = accountDao.get(Integer.valueOf(strShareUserId));
-    	}
-    	
-    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
-    	
-    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
-    	
-    	if(account == null) {
-    		result.put("retCode", 201);
-        	result.put("msg", "That account doesn't exist");
-        	
-        	return JSONResult(request, result, loginAccount);
-    	}
-    	
-//    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
-    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	
-//    	for(Estimate item : estimates) {
-//    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
-//    		item.setReplys(replys);
-//    	}
-    	
     	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
-//    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
-//    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
+    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
+    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
 		
-//          account.setEstimates(estimates);
-//        account.setProducts(products);
-//        account.setItems(items);
-//        account.setServices(services);
-//
-//        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
-//        if(friendLevel != null) {
-//                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
-//        }
+    	account.setEstimates(estimates);
+		account.setProducts(products);
+		account.setItems(items);
+		account.setServices(services);
+		
+		Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
+		if(friendLevel != null) {
+			account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
+		}
     	
     	result.put("retCode", 200);
-    	result.put("products", products);
-    	
-    	return JSONResult(request, result, loginAccount);
-    }
-    
-    private ModelAndView getAccountDetailItem(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result, boolean bShare) throws Exception {
-    	
-    	if(bShare) {
-    		String strShareUserId = this.getBlankParameter(request, "shareUserId", "");
-    		if(strShareUserId.isEmpty()) {
-    			result.put("retCode", 211);
-            	result.put("msg", "ShareUserId is empty!");
-            	
-            	return JSONResult(request, result, loginAccount);
-    		}
-    		loginAccount = accountDao.get(Integer.valueOf(strShareUserId));
-    	}
-    	
-    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
-    	
-    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
-    	
-    	if(account == null) {
-    		result.put("retCode", 201);
-        	result.put("msg", "That account doesn't exist");
-        	
-        	return JSONResult(request, result, loginAccount);
-    	}
-    	
-//    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
-//    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	
-//    	for(Estimate item : estimates) {
-//    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
-//    		item.setReplys(replys);
-//    	}
-    	
-//    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
-//    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
-//    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
-		
-//          account.setEstimates(estimates);
-//        account.setProducts(products);
-//        account.setItems(items);
-//        account.setServices(services);
-
-//        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
-//        if(friendLevel != null) {
-//                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
-//        }
-    	
-    	result.put("retCode", 200);
-    	result.put("items", items);
-    	
-    	return JSONResult(request, result, loginAccount);
-    }
-    
-    private ModelAndView getAccountDetailService(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result, boolean bShare) throws Exception {
-    	
-    	if(bShare) {
-    		String strShareUserId = this.getBlankParameter(request, "shareUserId", "");
-    		if(strShareUserId.isEmpty()) {
-    			result.put("retCode", 211);
-            	result.put("msg", "ShareUserId is empty!");
-            	
-            	return JSONResult(request, result, loginAccount);
-    		}
-    		loginAccount = accountDao.get(Integer.valueOf(strShareUserId));
-    	}
-    	
-    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
-    	
-    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
-    	
-    	if(account == null) {
-    		result.put("retCode", 201);
-        	result.put("msg", "That account doesn't exist");
-        	
-        	return JSONResult(request, result, loginAccount);
-    	}
-    	
-//    	List<Estimate> estimates = estimateDao.search(null, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
-//    	List<Product> products = productDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	List<Item> items = itemDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-    	List<Service> services = serviceDao.search(null, "account_id=" + account.getId(), "account_view_cnt desc");
-//    	
-//    	for(Estimate item : estimates) {
-//    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
-//    		item.setReplys(replys);
-//    	}
-    	
-//    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
-//    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
-//    	CommonUtil.setInterestStatus(interestDao, loginAccount.getId(), account);
-		
-//          account.setEstimates(estimates);
-//        account.setProducts(products);
-//        account.setItems(items);
-//        account.setServices(services);
-
-//        Integer friendLevel = CommonUtil.getFriendLevel(account.getReqCodeSenderId(), loginAccount);
-//        if(friendLevel != null) {
-//                account.setInviterFriendLevel(String.valueOf(friendLevel) + "度好友");
-//        }
-    	
-    	result.put("retCode", 200);
-    	result.put("services", services);
+    	result.put("account", account);
     	
     	return JSONResult(request, result, loginAccount);
     }
@@ -4830,5 +4625,122 @@ public class ApiController extends BaseController {
     	result.put("item", item);
     	
     	return JSONResult(request, result);
+    }
+    
+    private ModelAndView getEstimateListForAccount(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result) throws Exception {
+    	
+    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
+    	String strStart = this.getBlankParameter(request, "start", "0");
+    	String strLength = this.getBlankParameter(request, "length", "-1");
+    	
+    	JSONObject filter = new JSONObject();
+    	filter.put("start", Integer.parseInt(strStart));
+    	filter.put("length", Integer.parseInt(strLength));
+    	
+    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
+    	
+    	if(account == null) {
+    		result.put("retCode", 201);
+        	result.put("msg", "该账号不存在");
+        	
+        	return JSONResult(request, result, loginAccount);
+    	}
+    	
+    	List<Estimate> estimates = estimateDao.search(filter, "type=" + EstimateDAO.ESTIMATE_TYPE_PERSONAL_OR_ENTER + " and (upper_id is null or upper_id=0) and account_id=" + strAccountId, "write_time desc, elect_cnt desc");
+    	
+    	for(Estimate item : estimates) {
+    		List<Estimate> replys = estimateDao.search(null, "upper_id=" + item.getId(), "write_time desc");
+    		item.setReplys(replys);
+    	}
+    	
+    	CommonUtil.setEstimateElectStatus(electDao, loginAccount.getId(), estimates);
+    	
+    	result.put("retCode", 200);
+    	result.put("data", estimates);
+    	
+    	return JSONResult(request, result, loginAccount);
+    }
+    
+    private ModelAndView getProductListForAccount(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result) throws Exception {
+    	
+    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
+    	String strStart = this.getBlankParameter(request, "start", "0");
+    	String strLength = this.getBlankParameter(request, "length", "-1");
+    	
+    	JSONObject filter = new JSONObject();
+    	filter.put("start", Integer.parseInt(strStart));
+    	filter.put("length", Integer.parseInt(strLength));
+    	
+    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
+    	
+    	if(account == null) {
+    		result.put("retCode", 201);
+        	result.put("msg", "该账号不存在");
+        	
+        	return JSONResult(request, result, loginAccount);
+    	}
+    	
+    	List<Product> products = productDao.search(filter, "account_id=" + strAccountId, "write_time desc");
+    	
+    	CommonUtil.setProductFavouriteStatus(favouriteDao, loginAccount.getId(), products);
+    	
+    	result.put("retCode", 200);
+    	result.put("data", products);
+    	
+    	return JSONResult(request, result, loginAccount);
+    }
+    
+    private ModelAndView getItemListForAccount(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result) throws Exception {
+    	
+    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
+    	String strStart = this.getBlankParameter(request, "start", "0");
+    	String strLength = this.getBlankParameter(request, "length", "-1");
+    	
+    	JSONObject filter = new JSONObject();
+    	filter.put("start", Integer.parseInt(strStart));
+    	filter.put("length", Integer.parseInt(strLength));
+    	
+    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
+    	
+    	if(account == null) {
+    		result.put("retCode", 201);
+        	result.put("msg", "该账号不存在");
+        	
+        	return JSONResult(request, result, loginAccount);
+    	}
+    	
+    	List<Item> items = itemDao.search(filter, "account_id=" + strAccountId, "write_time desc");
+    	
+    	result.put("retCode", 200);
+    	result.put("data", items);
+    	
+    	return JSONResult(request, result, loginAccount);
+    }
+    
+    private ModelAndView getServiceListForAccount(HttpServletRequest request, HttpServletResponse response, HttpSession session, Account loginAccount, JSONObject result) throws Exception {
+    	
+    	String strAccountId = this.getBlankParameter(request, "accountId", String.valueOf(loginAccount.getId()));
+    	String strStart = this.getBlankParameter(request, "start", "0");
+    	String strLength = this.getBlankParameter(request, "length", "-1");
+    	
+    	JSONObject filter = new JSONObject();
+    	filter.put("start", Integer.parseInt(strStart));
+    	filter.put("length", Integer.parseInt(strLength));
+    	
+    	Account account = accountDao.getDetail(Integer.valueOf(strAccountId));
+    	
+    	if(account == null) {
+    		result.put("retCode", 201);
+        	result.put("msg", "该账号不存在");
+        	
+        	return JSONResult(request, result, loginAccount);
+    	}
+    	
+    	List<Service> services = serviceDao.search(filter, "account_id=" + strAccountId, "write_time desc");
+    	
+    	result.put("retCode", 200);
+    	result.put("data", services);
+    	
+    	return JSONResult(request, result, loginAccount);
     }
 }

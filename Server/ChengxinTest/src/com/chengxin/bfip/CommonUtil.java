@@ -210,7 +210,7 @@ public class CommonUtil {
 				+ (String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)).length() == 1 ? "0" + calendar.get(Calendar.DAY_OF_MONTH) : calendar.get(Calendar.DAY_OF_MONTH));
 		
 		String strCode = "001";
-		List<Account> lastMatchCodes = accountDao.search(null, "substr(code from 6 for 4) = '" + strDate + "'", "substr(code from 10) desc");
+		List<Account> lastMatchCodes = accountDao.search(null, "substr(code from 4 for 6) = '" + city.getCode() + strDate + "'", "substr(code from 10) desc");
 		if(lastMatchCodes.size() > 0) {
 			strCode = String.valueOf(Integer.valueOf(lastMatchCodes.get(0).getCode().substring(9)) + 1);
 		}
