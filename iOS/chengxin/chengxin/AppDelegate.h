@@ -27,5 +27,8 @@
 
 @property (nonatomic, retain) UINavigationController* navController;
 @property (nonatomic) BOOL isAccountDuplicated;
+
+- (void)setRootVC;
+- (void)setLoginVC;
 @end
 

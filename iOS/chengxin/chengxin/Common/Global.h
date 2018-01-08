@@ -22,6 +22,12 @@
 #define appDelegate ((AppDelegate *)[[UIApplication sharedApplication]delegate])
 #define APP_NAME                @"ChengXin"
 
+#define XCODE_8_VERSION   0
+
+//wenxx modify
+#define ShowErrorMessageTime    1.5
+#define HEXCOLOR(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 // SUB HOME SCREEN
 #define SUB_HOME_PERSONAL   0
 #define SUB_HOME_ENTERPRISE     1
@@ -64,10 +70,8 @@
 #define TEST_STATUS_REJECT  3
 
 // WEB API
-//#define BASE_URL                                @"http://10.70.3.61:8080/BFIP/api.html?"
-//#define BASE_WEB_URL                            @"http://10.70.3.61:8080/BFIP"
-//#define BASE_URL                                @"http://180.76.183.131/ChengxinTest/api.html?"
-//#define BASE_WEB_URL                            @"http://180.76.183.131/ChengxinTest"
+//#define BASE_URL                                @"http://180.76.183.131/BFIP/api.html?"
+//#define BASE_WEB_URL                            @"http://180.76.183.131/BFIP"
 //#define BASE_URL                                @"http://cqegz.com/BFIP/api.html?"
 //#define BASE_WEB_URL                            @"http://cqegz.com/BFIP"
 #define BASE_URL                                @"http://cqegz.com/ChengxinTest/api.html?"

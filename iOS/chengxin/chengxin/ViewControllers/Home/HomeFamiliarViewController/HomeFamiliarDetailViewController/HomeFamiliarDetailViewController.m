@@ -24,6 +24,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
 #import "MOBShareSDKHelper.h"
+#import "MSBrowseImageView.h"
 
 @interface HomeFamiliarDetailViewController ()
 {
@@ -46,6 +47,8 @@
     CGFloat fScrollViewContentHeight;
     BOOL hideCompaynInfoFlag;
 }
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomHeight;
+@property (nonatomic, retain) MSBrowseImageView             *browseImageView;
 @end
 
 enum {
@@ -87,7 +90,7 @@ enum {
     hideCompaynInfoFlag = NO;
     
     height = scrollContentView.frame.size.height;
-    tblEvaluateView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+    tblEvaluateView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 244)];
     [tblEvaluateView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     tblEvaluateView.dataSource = self;
     tblEvaluateView.delegate = self;
@@ -291,8 +294,10 @@ enum {
     long mineID = [[CommonData sharedInstance].userInfo[@"id"] longValue];
     if(accountID == mineID) {
         self.favoriteEvaluateView.hidden = YES;
+        self.bottomHeight.constant = 0;
     }else{
         self.favoriteEvaluateView.hidden = NO;
+        self.bottomHeight.constant = 49;
     }
     [self.imgAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed:aKind == 1 ? @"no_image_person.png" : @"no_image_enter.png"]];
     if (aKind == PERSONAL_KIND) {
@@ -310,7 +315,6 @@ enum {
         self.viewOfficeDetail.hidden = YES;
         self.officeContentView.hidden = YES;
         fScrollViewContentHeight = 550;
-
     }else {
         self.navTitleLabel.text = @"企业信息";
         self.officeMarkLabel.text = @"企业";//friendDictionary[@"enterKindName"];
@@ -605,6 +609,14 @@ enum {
                 [imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, [evaluateImageArray objectAtIndex:i]]] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
                 [imgView setFrame:CGRectMake(i * 90, 0, 80, 80)];
                 [cell.scrollThumb addSubview:imgView];
+                UIButton *actionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [actionBtn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+                [actionBtn setTitleColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+                NSString *index = [NSString stringWithFormat:@"%ld_%d",indexPath.row,i];
+                [actionBtn setTitle:index forState:UIControlStateNormal];
+                [actionBtn addTarget:self action:@selector(touchImage:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.scrollThumb addSubview:actionBtn];
+                actionBtn.frame = imgView.frame;
             }
             [cell.scrollThumb setContentSize:CGSizeMake(evaluateImageArray.count * 90 - 10, 80)];
             
@@ -636,7 +648,7 @@ enum {
                 }else{
                     cell.moreReplyView.hidden = YES;
                 }
-                NSString *totalContent = @"";
+                NSMutableAttributedString *totalContent = [[NSMutableAttributedString alloc] initWithString:@""];
                 for(int i = 0; i < replyArray.count; i++) {
                     NSDictionary *replyDic = (NSDictionary *)[replyArray objectAtIndex:0];
                     NSInteger ownerAkind = [replyDic[@"ownerAkind"] integerValue];
@@ -647,14 +659,21 @@ enum {
                         ownerName = replyDic[@"ownerEnterName"];
                     }
                     NSString *replyContent = replyDic[@"content"];
-                    NSString *replyText = [NSString stringWithFormat:@"%@ : %@", ownerName, replyContent];
-                    totalContent = [NSString stringWithFormat:@"%@%@\n\n", totalContent, replyText];
+                    
+                    NSMutableAttributedString *replyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@: ", ownerName] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12], NSForegroundColorAttributeName:RGB_COLOR(23, 133, 229)}];
+                    
+                    //stringWithFormat:@"%@ : %@", ownerName, replyContent];
+                    [replyText appendAttributedString:[[NSAttributedString alloc]  initWithString:[NSString stringWithFormat:@"%@\n\n", replyContent] attributes:@{NSForegroundColorAttributeName:RGB_COLOR(102, 102, 102), NSFontAttributeName:[UIFont systemFontOfSize:12]} ]];
+                    totalContent = replyText;
+                    
+                    //NSString *replyText = [NSString stringWithFormat:@"%@ : %@", ownerName, replyContent];
+                    //totalContent = [NSString stringWithFormat:@"%@%@\n\n", totalContent, replyText];
                     if(!cell.moreReplyButton.selected)
                         break;
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tblEvaluateView beginUpdates];
-                    cell.replyContentLabel.text = totalContent;
+                    cell.replyContentLabel.attributedText = totalContent;
                     [cell.replyContentLabel sizeToFit];
                     NSString *strReplyHeight = [NSString stringWithFormat:@"%f", cell.replyContentLabel.frame.size.height];
                     [evaluateHeightArray replaceObjectAtIndex:indexPath.row withObject:strReplyHeight];
@@ -708,7 +727,7 @@ enum {
                 [cell.fenleiButton setFrame:CGRectMake(nameLabelFrame.origin.x + nameLabelFrame.size.width + 6, nameLabelFrame.origin.y, bw, 16)];
             });
             NSString *logoImageName = serviceDic[@"logo"];
-            [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed:@"no_image_item.png"]];
+            [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, logoImageName]] placeholderImage:[UIImage imageNamed:@"no_image_item"]];
             
 
             
@@ -1102,6 +1121,7 @@ enum {
             }else{
                 self.blankView.hidden = NO;
             }
+            self.tblEvaluateView.frame = CGRectMake(0, 0, SCREEN_WIDTH, fEvaluateTableViewHeight);
             break;
         case SELECT_PROD:
             if(fProductTableViewHeight > 244) {
@@ -1116,6 +1136,7 @@ enum {
                     self.scrollViewContentHeight.constant = fScrollViewContentHeight + fProductTableViewHeight - 244;
                 }
             }
+            self.collectProductView.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, fProductTableViewHeight);
             if(productArray.count > 0) {
                 self.blankView.hidden = YES;
             }else{
@@ -1135,6 +1156,8 @@ enum {
                     self.scrollViewContentHeight.constant = fScrollViewContentHeight + fItemTableViewHeight - 244;
                 }
             }
+            
+            self.tblItemView.frame = CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, fItemTableViewHeight);
             if(itemArray.count > 0) {
                 self.blankView.hidden = YES;
             }else{
@@ -1154,6 +1177,7 @@ enum {
                     self.scrollViewContentHeight.constant = fScrollViewContentHeight + fServiceTableViewHeight - 244;
                 }
             }
+            self.tblServiceView.frame = CGRectMake(SCREEN_WIDTH * 3, 0, SCREEN_WIDTH, fServiceTableViewHeight);
             if(serviceArray.count > 0) {
                 self.blankView.hidden = YES;
             }else{
@@ -1292,4 +1316,34 @@ enum {
     }];
 }
 
+#pragma mark - 查看大图
+- (void)touchImage:(UIButton *)sender
+{
+    NSString *title = sender.currentTitle;
+    NSArray *index = [title componentsSeparatedByString:@"_"];
+    NSInteger row = ((NSString *)index.firstObject).integerValue;
+    NSInteger inx = ((NSString *)index.lastObject).integerValue;
+    NSDictionary *evaluateDic = (NSDictionary *)[evaluateArray objectAtIndex:row];
+    NSArray *evaluateImageArray = evaluateDic[@"imgPaths"];
+    NSMutableArray *imageURL = [NSMutableArray arrayWithCapacity:evaluateImageArray.count];
+    
+    for (NSString *absoulteURL in evaluateImageArray) {
+        NSString *url = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, absoulteURL];
+        [imageURL addObject:url];
+    }
+    
+    if (self.browseImageView) {
+        [self.browseImageView setBigImageArray:imageURL withCurrentIndex:inx];
+        return;
+    }
+    self.browseImageView = [[MSBrowseImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:self.browseImageView];
+    __weak typeof(self) weakSelf = self;
+    [self.browseImageView setRemoveView:^{
+        [weakSelf.browseImageView removeFromSuperview];
+        weakSelf.browseImageView = nil;
+    }];
+    [self.browseImageView setBigImageArray:imageURL withCurrentIndex:inx];
+}
 @end

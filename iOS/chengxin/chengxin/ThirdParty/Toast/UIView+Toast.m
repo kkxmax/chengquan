@@ -76,12 +76,19 @@ static const NSString * CSToastQueueKey             = @"CSToastQueueKey";
 
 - (void)makeToast:(NSString *)message duration:(NSTimeInterval)duration position:(id)position style:(CSToastStyle *)style {
     UIView *toast = [self toastViewForMessage:message title:nil image:nil style:style];
-    [self showToast:toast duration:duration position:position completion:nil];
+    
+    if (toast) {
+        [self showToast:toast duration:duration position:position completion:nil];
+    }
+    
 }
 
 - (void)makeToast:(NSString *)message duration:(NSTimeInterval)duration position:(id)position title:(NSString *)title image:(UIImage *)image style:(CSToastStyle *)style completion:(void(^)(BOOL didTap))completion {
     UIView *toast = [self toastViewForMessage:message title:title image:image style:style];
-    [self showToast:toast duration:duration position:position completion:completion];
+    
+    if (toast) {
+        [self showToast:toast duration:duration position:position completion:completion];
+    }
 }
 
 #pragma mark - Show Toast Methods
@@ -190,10 +197,15 @@ static const NSString * CSToastQueueKey             = @"CSToastQueueKey";
     UILabel *messageLabel = nil;
     UILabel *titleLabel = nil;
     UIImageView *imageView = nil;
+    UIView *tagView = [[UIApplication sharedApplication].keyWindow viewWithTag:101010];
+    if (tagView) {
+        return nil;
+    }
     
     UIView *wrapperView = [[UIView alloc] init];
     wrapperView.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
     wrapperView.layer.cornerRadius = style.cornerRadius;
+    wrapperView.tag = 101010;
     
     if (style.displayShadow) {
         wrapperView.layer.shadowColor = style.shadowColor.CGColor;

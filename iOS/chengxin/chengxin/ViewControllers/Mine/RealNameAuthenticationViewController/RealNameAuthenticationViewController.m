@@ -853,34 +853,35 @@
         [dicParams setObject:self.txtPosition.text forKey:@"job"];
         if(self.txtWeixinNumber.text.length == 0)
         {
-            [appDelegate.window makeToast:@"微信号不能为空"
-                        duration:3.0
-                        position:CSToastPositionCenter
-                           style:nil];
-            return;
+//            [appDelegate.window makeToast:@"微信号不能为空"
+//                        duration:3.0
+//                        position:CSToastPositionCenter
+//                           style:nil];
+//            return;
+            self.txtWeixinNumber.text = @"";
         }
         [dicParams setObject:self.txtWeixinNumber.text forKey:@"weixin"];
         if(self.txtExperience.text.length == 0)
         {
-            [appDelegate.window makeToast:@"工作经验不能为空"
-                        duration:3.0
-                        position:CSToastPositionCenter
-                           style:nil];
-            return;
+//            [appDelegate.window makeToast:@"工作经验不能为空"
+//                        duration:3.0
+//                        position:CSToastPositionCenter
+//                           style:nil];
+//            return;
+            self.txtExperience.text = @"";
         }
         [dicParams setObject:self.txtExperience.text forKey:@"experience"];
         if(self.txtHistory.text.length == 0)
         {
-            [appDelegate.window makeToast:@"个人经历不能为空"
-                        duration:3.0
-                        position:CSToastPositionCenter
-                           style:nil];
-            return;
+//            [appDelegate.window makeToast:@"个人经历不能为空"
+//                        duration:3.0
+//                        position:CSToastPositionCenter
+//                           style:nil];
+//            return;
+            self.txtHistory.text = @"";
         }
         [dicParams setObject:self.txtHistory.text forKey:@"history"];
         
-        
-
         NSString *xywatch = @"";
         NSString *xywatched = @"";
         for(int i = 0; i < aryCategory.count; i++)
@@ -1012,22 +1013,24 @@
         
         if(self.txtCompayWebURL.text.length == 0)
         {
-            [appDelegate.window makeToast:@"公司官网不能为空"
-                        duration:3.0
-                        position:CSToastPositionCenter
-                           style:nil];
-            return;
+//            [appDelegate.window makeToast:@"公司官网不能为空"
+//                        duration:3.0
+//                        position:CSToastPositionCenter
+//                           style:nil];
+//            return;
+            self.txtCompayWebURL.text = @"";
         }
         
         [dicParams setObject:self.txtCompayWebURL.text forKey:@"webUrl"];
         
         if(self.txtWeiXinPublicNumber.text.length == 0)
         {
-            [appDelegate.window makeToast:@"微信公众号不能为空"
-                        duration:3.0
-                        position:CSToastPositionCenter
-                           style:nil];
-            return;
+//            [appDelegate.window makeToast:@"微信公众号不能为空"
+//                        duration:3.0
+//                        position:CSToastPositionCenter
+//                           style:nil];
+//            return;
+            self.txtWeiXinPublicNumber.text = @"";
         }
         
         [dicParams setObject:self.txtWeiXinPublicNumber.text forKey:@"weixin"];
@@ -1045,7 +1048,7 @@
         
         if(self.txtBusinessNumber.text.length == 0)
         {
-            [appDelegate.window makeToast:@"营业热招编号不能为空"
+            [appDelegate.window makeToast:@"营业执照编号不能为空"
                         duration:3.0
                         position:CSToastPositionCenter
                            style:nil];
@@ -1128,11 +1131,12 @@
         
         if(self.txtDutierWeixinNumber.text.length == 0)
         {
-            [appDelegate.window makeToast:@"负责人微信号不能为空"
-                        duration:3.0
-                        position:CSToastPositionCenter
-                           style:nil];
-            return;
+//            [appDelegate.window makeToast:@"负责人微信号不能为空"
+//                        duration:3.0
+//                        position:CSToastPositionCenter
+//                           style:nil];
+//            return;
+            self.txtDutierWeixinNumber.text = @"";
         }
         [dicParams setObject:self.txtDutierWeixinNumber.text forKey:@"bossWeixin"];
         
@@ -1211,6 +1215,7 @@
                        style:nil];
         return;
     }
+    
     if(vc == logoPicker)
     {
         [self.logoImageView setImage:image];
@@ -1468,9 +1473,9 @@
         (textField == self.txtDutierWeixinNumber && range.location >= 20) ||
         (textField == self.txtPosition && range.location >= 10) ||
         (textField == self.txtWeixinNumber && range.location >= 20) ||
-        (textField == self.txtCertNumber && range.location >= 20) ||
+        (textField == self.txtCertNumber && range.location >= 18) ||
         (textField == self.txtCompanyName && range.location >= 30) ||
-        (textField == self.txtBusinessNumber && range.location >= 20) ||
+        (textField == self.txtBusinessNumber && range.location >= 25) ||
         (textField == self.txtCompayWebURL && range.location >= 300))
     {
         return NO;

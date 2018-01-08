@@ -51,7 +51,7 @@
         UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
         [imagePicker setDelegate:self];
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
+        imagePicker.editing = self.notEdit;
         [self presentViewController:imagePicker animated:YES completion:nil];
         self.view.hidden = YES;
     }
@@ -121,6 +121,12 @@
             [self.delegate chooseViewController:self shownImage:nil];
         }else{
             UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
+            
+            if (self.notEdit) {
+                [self.delegate chooseViewController:self shownImage:image];
+                return;
+            }
+            
             TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:self.croppingStyle image:image];
             cropController.delegate = self;
             cropController.aspectRatioLockEnabled = YES;
@@ -130,8 +136,8 @@
             } else {
                 cropController.aspectRatioPreset = TOCropViewControllerAspectRatioPreset8x5;
             }
-            [self presentViewController:cropController animated:YES completion:nil];
-            //            [self.delegate chooseViewController:self shownImage:[self scaleAndRotateImage:image]];
+            [self presentViewController:cropController animated:NO completion:nil];
+//            [self.delegate chooseViewController:self shownImage:[self scaleAndRotateImage:image]];
         }
     } failureBlock:^(NSError *err) {
         NSLog(@"Error: %@",[err localizedDescription]);

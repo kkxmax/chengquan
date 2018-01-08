@@ -171,6 +171,30 @@
 }
 
 - (IBAction)onClickPublishButton:(id)sender {
+    if (mMethod == 1 && txtViewReason.text.length == 0) {
+        [appDelegate.window makeToast:@"请输入评价原因"
+                             duration:ShowErrorMessageTime
+                             position:CSToastPositionCenter
+                                style:nil];
+        return;
+    }
+    
+    if (txtViewContent.text.length == 0) {
+        [appDelegate.window makeToast:@"请输入评价内容"
+                             duration:ShowErrorMessageTime
+                             position:CSToastPositionCenter
+                                style:nil];
+        return;
+    }
+    
+    if (aryEvalPicture.count == 0) {
+        [appDelegate.window makeToast:@"请选择图片"
+                             duration:ShowErrorMessageTime
+                             position:CSToastPositionCenter
+                                style:nil];
+        return;
+    }
+    
     [self addEvaluateToServer];
 }
 
@@ -204,12 +228,19 @@
     
     NSMutableDictionary *imageDictionary = [NSMutableDictionary dictionary];
     NSMutableArray *imageDataArray = [NSMutableArray array];
-    for (int i = 0; i < aryEvalPicture.count; i++) {
-        NSData* image = UIImagePNGRepresentation(aryEvalPicture[i]);
-        [imageDataArray addObject:image];
-    }
     
-    [imageDictionary setObject:imageDataArray forKey:@"images"];
+    if (aryEvalPicture.count > 0) {
+        for (int i = 0; i < aryEvalPicture.count; i++) {
+            NSData* image = UIImagePNGRepresentation(aryEvalPicture[i]);
+            
+            if (image == nil) {
+                image = UIImageJPEGRepresentation(aryEvalPicture[i], 0.7);
+            }
+            [imageDataArray addObject:image];
+        }
+        
+        [imageDictionary setObject:imageDataArray forKey:@"images"];
+    }
 
     [[WebAPI sharedInstance] sendPostRequestWithUpload:ACTION_LEAVEESTIMATE Parameters:dicParams UploadImages: imageDictionary :^(NSObject *resObj) {
         NSDictionary *dicRes = (NSDictionary *)resObj;

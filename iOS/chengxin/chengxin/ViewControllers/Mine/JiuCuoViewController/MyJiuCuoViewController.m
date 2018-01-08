@@ -254,7 +254,7 @@ enum {
             cell.backgroundColor = [UIColor clearColor];
             NSMutableDictionary* dic = [aryErrorsInConsideration objectAtIndex:indexPath.row];
             cell.lblName.text = dic[@"estimaterName"];
-            cell.lblCause.text = [NSString stringWithFormat:@"纠错依据: %@", dic[@"reason"]];
+            cell.lblCause.text = [NSString stringWithFormat:@"纠错依据: %@", dic[@"whyis"]];
 
             cell.lblTime.text = [GeneralUtil getDateHourMinFrom:dic[@"writeTimeString"]];
             cell.lblEstimationMarks.hidden = YES;

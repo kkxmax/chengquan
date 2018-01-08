@@ -20,6 +20,7 @@
 @property (nonatomic, weak) id<ImageChooseViewControllerDelegate> delegate;
 @property (nonatomic, weak) UINavigationController* navController;
 @property (nonatomic) BOOL isSquareCrop;
+@property (nonatomic, assign) BOOL      notEdit;//是否不裁剪 默认裁剪
 
 -(IBAction)onCamera:(id)sender;
 -(IBAction)onGallery:(id)sender;

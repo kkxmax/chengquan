@@ -597,10 +597,10 @@
         
         if (aKind == PERSONAL_KIND) {
             cell.lblTitle.text = dic[@"realname"];
-            [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"no_image_person.png"]];
+            [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"no_image_person"]];
         }else {
             cell.lblTitle.text = dic[@"enterName"];
-            [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"no_image_enter.png"]];
+            [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"no_image_enter"]];
         }
         if([cell.lblTitle.text isEqualToString:@""])
             cell.lblTitle.text = dic[@"mobile"];
@@ -671,7 +671,8 @@
             cell.lblName.text = dic[@"targetAccountMobile"];
         
         cell.lblEstimationType.text = dic[@"kindName"];
-        cell.lblContent.text = [NSString stringWithFormat:@"评价内容: %@", dic[@"content"]];
+        cell.lblContent.text = [NSString stringWithFormat:@"%@", dic[@"content"]];
+//        cell.lblContent.text = [NSString stringWithFormat:@"评价内容: %@", dic[@"content"]];
         cell.lblWriteTime = dic[@"writeTimeString"];
         cell.lblElectCnt.text = [NSString stringWithFormat:@"点赞:%d", [dic[@"targetAccountElectCnt"] intValue]];
         cell.lblEstimationCnt.text = [NSString stringWithFormat:@"评价:%d", [dic[@"targetAccountFeedbackCnt"] intValue]];
@@ -727,7 +728,8 @@
             cell.lblName.text = dic[@"ownerMobile"];
         
         cell.lblEstimationType.text = dic[@"kindName"];
-        cell.lblContent.text = [NSString stringWithFormat:@"评价内容: %@", dic[@"content"]];
+        cell.lblContent.text = [NSString stringWithFormat:@"%@", dic[@"content"]];
+//        cell.lblContent.text = [NSString stringWithFormat:@"评价内容: %@", dic[@"content"]];
         cell.lblWriteTime = dic[@"writeTimeString"];
         cell.lblElectCnt.text = [NSString stringWithFormat:@"点赞:%d", [dic[@"ownerElectCnt"] intValue]];
         cell.lblEstimationCnt.text = [NSString stringWithFormat:@"评价:%d", [dic[@"ownerFeedbackCnt"] intValue]];
@@ -754,7 +756,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(self.estimationType != em_MyEstimation)
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(self.estimationType == em_Estimation)
     {
         NSDictionary *dic = bPersonal ? aryPersoanlData[indexPath.row] : aryEnterData[indexPath.row];
         

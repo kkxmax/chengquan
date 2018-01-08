@@ -13,6 +13,7 @@
 #import "Global.h"
 #import "HomeFamiliarDetailViewController.h"
 #import "ReformViewController.h"
+#import "MSBrowseImageView.h"
 
 @interface EvaluateDetailViewController ()
 {
@@ -20,6 +21,7 @@
     CGFloat basicCellHeight;
     NSMutableArray *evaluateHeightArray;
 }
+@property (nonatomic, retain) MSBrowseImageView             *browseImageView;
 @end
 
 @implementation EvaluateDetailViewController
@@ -100,7 +102,7 @@
         NSInteger ownerAkind = [dicEvalData[@"ownerAkind"] integerValue];
         
         NSString *logoPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, dicEvalData[@"ownerLogo"]];
-        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person1.png" : @"no_image_enter.png"]];
+        [cell.imgPhoto sd_setImageWithURL:[NSURL URLWithString:logoPath] placeholderImage:[UIImage imageNamed:ownerAkind == 1 ? @"no_image_person.png" : @"no_image_enter.png"]];
         
         if(ownerAkind == PERSONAL_KIND) {
             cell.lblTitle.text = dicEvalData[@"ownerRealname"];
@@ -110,12 +112,14 @@
 
         cell.lblEval.text = dicEvalData[@"kindName"];
         if([dicEvalData[@"content"] length] > 0) {
-            cell.lblContent.text = [NSString stringWithFormat:@"评价内容：%@", dicEvalData[@"content"]];
+            cell.lblContent.text = [NSString stringWithFormat:@"%@", dicEvalData[@"content"]];
+//            cell.lblContent.text = [NSString stringWithFormat:@"评价内容：%@", dicEvalData[@"content"]];
         }else{
             cell.lblContent.text = @"";
         }
         if([dicEvalData[@"reason"] length] > 0) {
-            cell.lblMore.text = [NSString stringWithFormat:@"评价原因：%@", dicEvalData[@"reason"]];
+            cell.lblMore.text = [NSString stringWithFormat:@"%@", dicEvalData[@"reason"]];
+//            cell.lblMore.text = [NSString stringWithFormat:@"评价原因：%@", dicEvalData[@"reason"]];
         }else{
             cell.lblMore.text = @"";
         }
@@ -157,6 +161,14 @@
                 NSString *imgPath = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, aryPath[i]];
                 [imgView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"no_image.png"]];
                 [cell.scrollThumb addSubview:imgView];
+                UIButton *actionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [actionBtn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+                [actionBtn setTitleColor:[UIColor clearColor] forState:UIControlStateHighlighted];
+                NSString *index = [NSString stringWithFormat:@"%ld_%d",indexPath.row,i];
+                [actionBtn setTitle:index forState:UIControlStateNormal];
+                [actionBtn addTarget:self action:@selector(touchImage:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.scrollThumb addSubview:actionBtn];
+                actionBtn.frame = imgView.frame;
             }
             [cell.scrollThumb setContentSize:CGSizeMake(aryPath.count * 90 - 10, 80)];
         }
@@ -196,7 +208,7 @@
         }
 
         NSString *strDate = [GeneralUtil getDateHourMinFrom:dic[@"writeTimeString"]];
-        cell.lblDate.text = strDate;
+        cell.lblDate.text = [strDate substringWithRange:NSMakeRange(0, strDate.length-3)];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tblEvalView beginUpdates];
             [cell.lblReply sizeToFit];
@@ -269,6 +281,36 @@
                            style:nil];
         }
     }];
+}
+
+#pragma mark - 查看大图
+- (void)touchImage:(UIButton *)sender
+{
+    NSString *title = sender.currentTitle;
+    NSArray *index = [title componentsSeparatedByString:@"_"];
+    NSInteger inx = ((NSString *)index.lastObject).integerValue;
+    NSDictionary *evaluateDic = dicEvalData;
+    NSArray *evaluateImageArray = evaluateDic[@"imgPaths"];
+    NSMutableArray *imageURL = [NSMutableArray arrayWithCapacity:evaluateImageArray.count];
+    
+    for (NSString *absoulteURL in evaluateImageArray) {
+        NSString *url = [NSString stringWithFormat:@"%@%@", BASE_WEB_URL, absoulteURL];
+        [imageURL addObject:url];
+    }
+    
+    if (self.browseImageView) {
+        [self.browseImageView setBigImageArray:imageURL withCurrentIndex:inx];
+        return;
+    }
+    self.browseImageView = [[MSBrowseImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:self.browseImageView];
+    __weak typeof(self) weakSelf = self;
+    [self.browseImageView setRemoveView:^{
+        [weakSelf.browseImageView removeFromSuperview];
+        weakSelf.browseImageView = nil;
+    }];
+    [self.browseImageView setBigImageArray:imageURL withCurrentIndex:inx];
 }
 
 @end

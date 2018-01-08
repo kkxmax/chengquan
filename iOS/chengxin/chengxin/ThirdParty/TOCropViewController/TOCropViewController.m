@@ -25,6 +25,7 @@
 #import "TOActivityCroppedImageProvider.h"
 #import "UIImage+CropRotate.h"
 #import "TOCroppedImageAttributes.h"
+#import "Global.h"
 
 static const CGFloat kTOCropViewControllerTitleTopPadding = 14.0f;
 static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
@@ -338,10 +339,12 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     // Adjust for landscape layout
     if (!verticalLayout) {
         x = kTOCropViewControllerTitleTopPadding;
+#if XCODE_8_VERSION
+#else
         if (@available(iOS 11.0, *)) {
             x += self.view.safeAreaInsets.left;
         }
-
+#endif
         viewWidth -= x;
     }
 
@@ -385,7 +388,11 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 - (void)adjustToolbarInsets
 {
     UIEdgeInsets insets = UIEdgeInsetsZero;
-
+#if XCODE_8_VERSION
+    if (!self.statusBarHidden && self.toolbarPosition == TOCropViewControllerToolbarPositionTop) {
+        insets.top = self.statusBarHeight;
+    }
+#else
     if (@available(iOS 11.0, *)) {
         // Add padding to the left in landscape mode
         if (!self.verticalLayout) {
@@ -406,20 +413,22 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
             insets.top = self.statusBarHeight;
         }
     }
-
+#endif
     // Update the toolbar with these properties
     self.toolbar.backgroundViewOutsets = insets;
     self.toolbar.statusBarHeightInset = self.statusBarHeight;
     [self.toolbar setNeedsLayout];
 }
 
+#if XCODE_8_VERSION
+#else
 - (void)viewSafeAreaInsetsDidChange
 {
     [super viewSafeAreaInsetsDidChange];
     [self adjustCropViewInsets];
     [self adjustToolbarInsets];
 }
-
+#endif
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -1234,19 +1243,25 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     }
 
     CGFloat statusBarHeight = 0.0f;
+#if XCODE_8_VERSION
+    statusBarHeight = self.topLayoutGuide.length;
+#else
     if (@available(iOS 11.0, *)) {
         statusBarHeight = self.view.safeAreaInsets.top;
     }
     else {
         statusBarHeight = self.topLayoutGuide.length;
     }
-    
+#endif
     return statusBarHeight;
 }
 
 - (UIEdgeInsets)statusBarSafeInsets
 {
     UIEdgeInsets insets = UIEdgeInsetsZero;
+#if XCODE_8_VERSION
+    insets.top = self.statusBarHeight;
+#else
     if (@available(iOS 11.0, *)) {
         insets = self.view.safeAreaInsets;
 
@@ -1259,7 +1274,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     else {
         insets.top = self.statusBarHeight;
     }
-
+#endif
     return insets;
 }
 

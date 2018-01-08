@@ -56,7 +56,11 @@
     [GeneralUtil setUserPreference:@"password" value:@""];
     [GeneralUtil setUserPreference:@"phone" value:@""];
     [GeneralUtil setUserPreference:@"phoneNumber" value:@""];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    [app setLoginVC];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 
 - (IBAction)onChangePassword:(id)sender

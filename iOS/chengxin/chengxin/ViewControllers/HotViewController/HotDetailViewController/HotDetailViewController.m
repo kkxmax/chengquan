@@ -47,7 +47,7 @@
 @synthesize scrollInfoView, tblEvalView, tblOfficeView, tblHeight, pageControl;
 @synthesize btnPersonal, btnOffice, personalSeparator, officeSeparator;
 @synthesize hotData;
-@synthesize scrollDataViewHeight, scrollinfoviewHeight,lblContentHeight;
+@synthesize scrollDataViewHeight, scrollinfoviewHeight,tableContentHeight;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,7 +63,7 @@
         [contentWebView loadData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, hotData.strContent]]] MIMEType:@"text/html" textEncodingName:@"UTF-8" baseURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_WEB_URL, hotData.strContent]]];
     }
     
-    
+    contentWebView.scrollView.scrollEnabled = NO;
     
     lblRead.text = [NSString stringWithFormat:@"%ld", (long)(hotData.mVisitCnt + 1) ];
     lblDate.text = [hotData.strWriteTimeString substringToIndex:hotData.strWriteTimeString.length-3];
@@ -168,10 +168,10 @@
 {
     // You will get here when the reloadData finished
     if(tblEvalView == object) {
-        tblEvalView.frame = CGRectMake(tblEvalView.frame.origin.x, tblEvalView.frame.origin.y, tblEvalView.frame.size.width, tblEvalView.contentSize.height);
+        tblEvalView.frame = CGRectMake(tblEvalView.frame.origin.x, 0, tblEvalView.frame.size.width, tblEvalView.contentSize.height);
         fEvalTableContentSizeHeight = tblEvalView.frame.size.height;
     }else if(tblOfficeView == object) {
-        tblOfficeView.frame = CGRectMake(tblOfficeView.frame.origin.x, tblOfficeView.frame.origin.y, tblOfficeView.frame.size.width, tblOfficeView.contentSize.height);
+        tblOfficeView.frame = CGRectMake(tblOfficeView.frame.origin.x, 0, tblOfficeView.frame.size.width, tblOfficeView.contentSize.height);
         fOfficeTableContentSizeHeight = tblOfficeView.frame.size.height;
     }
    // [self setScrollContentSize];
@@ -342,6 +342,10 @@
                         [evaluateHeightArray addObject:@"0"];
                     }
                     [self.tblEvalView reloadData];
+                    [self.tblEvalView layoutIfNeeded];
+                    fEvalTableContentSizeHeight = self.tblEvalView.contentSize.height;
+                    self.tblEvalView.frame = CGRectMake(self.tblEvalView.frame.origin.x, self.tblEvalView.frame.origin.y, self.tblEvalView.frame.size.width, fEvalTableContentSizeHeight);
+                    [self setScrollInfoContentSize];
                 }
                 
             }else{
@@ -386,9 +390,10 @@
                 }
                 
                 [self.tblOfficeView reloadData];
-//                fOfficeTableContentSizeHeight = self.tblOfficeView.contentSize.height;
-//                self.tblOfficeView.frame = CGRectMake(self.tblOfficeView.frame.origin.x, self.tblOfficeView.frame.origin.y, self.tblOfficeView.frame.size.width, fOfficeTableContentSizeHeight);
-//                [self setScrollInfoContentSize];
+                [self.tblOfficeView layoutIfNeeded];
+                fOfficeTableContentSizeHeight = self.tblOfficeView.contentSize.height;
+                self.tblOfficeView.frame = CGRectMake(self.tblOfficeView.frame.origin.x, self.tblOfficeView.frame.origin.y, self.tblOfficeView.frame.size.width, fOfficeTableContentSizeHeight);
+                [self setScrollInfoContentSize];
             }else{
                 [appDelegate.window makeToast:dicRes[@"msg"]
                             duration:3.0
@@ -469,7 +474,6 @@
 
 //    [self updateTableScrollHeight];
     if ( tableView == tblEvalView) {
-
         if(aryEvalData.count <= indexPath.row)
             return 173.f;
 
@@ -522,7 +526,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
     if ( tableView == tblEvalView)
     {
         NSString *simpleTableIdentifier = @"HotDetailPersonalCellIdentifier";
@@ -587,7 +590,7 @@
             }
             cell.moreReplyView.hidden = NO;
             //cell.separatorLine.hidden = NO;
-            NSString *totalContent = @"";
+            NSMutableAttributedString *totalContent = [[NSMutableAttributedString alloc] initWithString:@""];
 //            for(int i = 0; i < replyArray.count; i++) {
             if(replyArray.count > 0) {
                 NSDictionary *replyDic = (NSDictionary *)[replyArray objectAtIndex:0];
@@ -599,19 +602,21 @@
                     ownerName = replyDic[@"ownerEnterName"];
                 }
                 NSString *replyContent = replyDic[@"content"];
-                NSString *replyText = [NSString stringWithFormat:@"%@ : %@", ownerName, replyContent];
-                totalContent = [NSString stringWithFormat:@"%@%@", totalContent, replyText];
+                NSMutableAttributedString *replyText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@: ", ownerName] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12], NSForegroundColorAttributeName:RGB_COLOR(23, 133, 229)}];
+
+                                                 //stringWithFormat:@"%@ : %@", ownerName, replyContent];
+                [replyText appendAttributedString:[[NSAttributedString alloc]  initWithString:replyContent attributes:@{NSForegroundColorAttributeName:RGB_COLOR(102, 102, 102), NSFontAttributeName:[UIFont systemFontOfSize:12]} ]];
+                totalContent = replyText;
 //                if(!cell.moreReplyButton.selected)
 //                    break;
             }
-            cell.lblReply.text = totalContent;
+            cell.lblReply.attributedText = totalContent;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tblEvalView beginUpdates];
                 [cell.lblReply sizeToFit];
                 NSString *strReplyHeight = [NSString stringWithFormat:@"%f", cell.lblReply.frame.size.height];
                 [evaluateHeightArray replaceObjectAtIndex:indexPath.row withObject:strReplyHeight];
                 [self.tblEvalView endUpdates];
-                
             });
         }
         return cell;
@@ -759,9 +764,8 @@
         cell.cellIndex = indexPath.row;
         cell.cellType = SUB_HOME_PERSONAL;
         return cell;
-
     }
-    return cell;
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -898,22 +902,39 @@
 }
 
 - (void)setScrollInfoContentSize {
+    CGFloat fWebViewIncreaseHeight = 0;
+    if(contentWebView.scrollView.contentSize.height > 193) {
+        [contentWebView.scrollView setFrame:CGRectMake(contentWebView.scrollView.frame.origin.x, contentWebView.scrollView.frame.origin.y, contentWebView.scrollView.frame.size.width, contentWebView.scrollView.contentSize.height)];
+        [contentWebView setFrame:CGRectMake(contentWebView.frame.origin.x, contentWebView.frame.origin.y, contentWebView.frame.size.width, contentWebView.scrollView.contentSize.height)];
+        if(self.tableContentHeight.constant == 275.f){
+            fWebViewIncreaseHeight = contentWebView.scrollView.contentSize.height - 193;
+            self.tableContentHeight.constant += fWebViewIncreaseHeight;
+        }
+    }else{
+        [contentWebView.scrollView setFrame:CGRectMake(contentWebView.scrollView.frame.origin.x, contentWebView.scrollView.frame.origin.y, contentWebView.scrollView.frame.size.width, 193)];
+        [contentWebView setFrame:CGRectMake(contentWebView.frame.origin.x, contentWebView.frame.origin.y, contentWebView.frame.size.width, 193)];
+        self.tableContentHeight.constant = 275.f;
+    }
     if(bClickPersonal) {
         if(fEvalTableContentSizeHeight == 0) {
             self.blankView.hidden = NO;
+            [self.scrollDataView setContentSize:CGSizeMake(self.scrollDataView.frame.size.width, self.tableContentHeight.constant + self.tableContentView.frame.size.height + 238 + fWebViewIncreaseHeight)];
+            self.scrollinfoviewHeight.constant = 238;
         }else{
             self.blankView.hidden = YES;
+            [self.scrollDataView setContentSize:CGSizeMake(self.scrollDataView.frame.size.width, self.tableContentHeight.constant + self.tableContentView.frame.size.height + fEvalTableContentSizeHeight + fWebViewIncreaseHeight)];
+            self.scrollinfoviewHeight.constant = fEvalTableContentSizeHeight;
         }
-        [self.scrollDataView setContentSize:CGSizeMake(self.scrollDataView.frame.size.width, self.tableContentView.frame.origin.y + self.tableContentView.frame.size.height + fEvalTableContentSizeHeight)];
-        self.scrollinfoviewHeight.constant = fEvalTableContentSizeHeight;
     }else{
         if(fOfficeTableContentSizeHeight == 0) {
             self.blankView.hidden = NO;
+            [self.scrollDataView setContentSize:CGSizeMake(self.scrollDataView.frame.size.width, self.tableContentHeight.constant + self.tableContentView.frame.size.height + 238 + fWebViewIncreaseHeight)];
+            self.scrollinfoviewHeight.constant = 238;
         }else{
             self.blankView.hidden = YES;
+            [self.scrollDataView setContentSize:CGSizeMake(self.scrollDataView.frame.size.width, self.tableContentHeight.constant + self.tableContentView.frame.size.height + fOfficeTableContentSizeHeight + fWebViewIncreaseHeight)];
+            self.scrollinfoviewHeight.constant = fOfficeTableContentSizeHeight;
         }
-        [self.scrollDataView setContentSize:CGSizeMake(self.scrollDataView.frame.size.width, self.tableContentView.frame.origin.y + self.tableContentView.frame.size.height + fOfficeTableContentSizeHeight)];
-        self.scrollinfoviewHeight.constant = fOfficeTableContentSizeHeight;
     }
     self.scrollDataViewHeight.constant = self.scrollDataView.contentSize.height;
 }

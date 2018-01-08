@@ -113,6 +113,9 @@ enum {
     _sectionView = [[LPIndexSectionView alloc] initWithFrame:CGRectMake(self.tblInterView.frame.size.width - 25, 104, 30, self.tblInterView.frame.size.height) titles:aryKeys titleHeight:self.tblInterView.frame.size.height / aryKeys.count];
     [self.view addSubview:_sectionView];
     [_sectionView handleSelectTitle:^(NSString *title, NSInteger index) {
+        if (aryInterData.count == 0) {
+            return ;
+        }
         NSUInteger ind = 0;
         if(bPersonal)
         {

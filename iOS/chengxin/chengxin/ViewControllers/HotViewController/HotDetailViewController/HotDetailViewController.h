@@ -32,7 +32,7 @@
 @property (retain, nonatomic) UITableView *tblEvalView;
 @property (retain, nonatomic) UITableView *tblOfficeView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollDataViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lblContentHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableContentHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollinfoviewHeight;
 
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
